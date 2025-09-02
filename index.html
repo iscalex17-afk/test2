@@ -9,8 +9,7 @@
   <meta property="og:title" content="Rivo — Prompts & Digital Goods" />
   <meta property="og:description" content="Magazin digital pentru creatori: prompts, template-uri și kit-uri AI." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://images.unsplash.com/photo-1607082349566-187342de44d0?auto=format&fit=crop&w=1200&q=80" />
-  <link rel="icon" href="assets/favicon.svg">
+  <meta property="og:image.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -119,7 +118,7 @@
             <div class="swiper product-swiper relative w-full h-full">
               <div class="swiper-wrapper">
                 <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1581090700227-4c4c82d55a30?auto=format&fit=crop&w=1200&q=80" alt="Preview 1" class="w-full h-full object-cover"/></div>
-                <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1606761568499-6b6d90c9aaf1?auto=format&fit=crop&w=1200&q=80" alt="Preview 2" class="w-full h-full object-cover"/></div>
+                <div class="swiper-slide"><img src="" alt="Preview lipsă" class="w-full h-full object-cover"/></div>
                 <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1607083209263-b64d4f50ae00?auto=format&fit=crop&w=1200&q=80" alt="Preview 3" class="w-full h-full object-cover"/></div>
               </div>
               <div class="swiper-pagination"></div>
@@ -307,34 +306,56 @@
 
   <!-- Scripts -->
   <script>
-    // ===== Fundal tech (particule + linii) — ANIMAT =====
+    // ===== Fundal tech (particule + linii) — ANIMAT & DRIFT =====
     const canvas = document.getElementById('tech-bg');
     const ctx = canvas.getContext('2d');
-    let w, h, particles;
+    let w, h, particles, t = 0;
     function resize(){ w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; init(); }
     function init(){
-      particles = Array.from({length: Math.min(180, Math.floor(w*h/9000))}, () => ({
+      particles = Array.from({length: Math.min(200, Math.floor(w*h/8000))}, () => ({
         x: Math.random()*w,
         y: Math.random()*h,
-        vx: (Math.random()-0.5)*1.2,
-        vy: (Math.random()-0.5)*1.2,
-        r: Math.random()*2+0.5
+        vx: (Math.random()-0.5)*1.0,
+        vy: (Math.random()-0.5)*1.0,
+        r: Math.random()*1.8+0.6,
+        tw: Math.random()*Math.PI*2
       }));
     }
     function tick(){
+      t += 0.005;
       ctx.clearRect(0,0,w,h);
-      ctx.fillStyle = 'rgba(148,163,184,0.6)';
-      ctx.strokeStyle = 'rgba(99,102,241,0.14)';
+      // subtle moving gradient background glow
+      const grad = ctx.createRadialGradient(
+        w*0.2 + Math.sin(t)*50, h*0.15 + Math.cos(t*0.8)*40, 100,
+        w*0.8 + Math.cos(t*0.6)*60, h*0.25 + Math.sin(t*0.9)*50, Math.max(w,h)
+      );
+      grad.addColorStop(0, 'rgba(59,130,246,0.05)');
+      grad.addColorStop(1, 'rgba(2,6,23,0)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0,0,w,h);
+
+      ctx.fillStyle = 'rgba(148,163,184,0.7)';
+      ctx.strokeStyle = 'rgba(99,102,241,0.12)';
       for(const p of particles){
+        // drift field for extra motion
+        p.vx += Math.sin((p.y+t*40)/12000)*0.02;
+        p.vy += Math.cos((p.x-t*40)/12000)*0.02;
         p.x += p.vx; p.y += p.vy;
-        if(p.x<0||p.x>w) p.vx*=-1; if(p.y<0||p.y>h) p.vy*=-1;
-        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+        if(p.x<0||p.x>w) p.vx*=-1, p.x=Math.max(0, Math.min(w,p.x));
+        if(p.y<0||p.y>h) p.vy*=-1, p.y=Math.max(0, Math.min(h,p.y));
+        // twinkle
+        const r = p.r + Math.sin(p.tw + t*6)*0.3;
+        ctx.beginPath(); ctx.arc(p.x,p.y,Math.max(0.4,r),0,Math.PI*2); ctx.fill();
       }
       for(let i=0;i<particles.length;i++){
         for(let j=i+1;j<particles.length;j++){
           const a=particles[i], b=particles[j];
           const dx=a.x-b.x, dy=a.y-b.y, d=Math.hypot(dx,dy);
-          if(d<120){ ctx.globalAlpha = 1 - d/120; ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke(); ctx.globalAlpha=1; }
+          if(d<120){
+            ctx.globalAlpha = 1 - d/120;
+            ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+            ctx.globalAlpha=1;
+          }
         }
       }
       requestAnimationFrame(tick);
@@ -354,14 +375,11 @@
       total(){ return this.items.reduce((s,i)=> s + i.price*i.qty, 0) }
     };
     function formatEUR(n){ return new Intl.NumberFormat('ro-RO',{style:'currency', currency:'EUR'}).format(n) }
-
     const product = { id:'prompts20', title:'20 Prompts pentru ChatGPT', price: 9.90, image:'', description:'Colecție PDF + TXT', download:'<ADAUGĂ_LINK_DOWNLOAD>' };
-
     document.addEventListener('DOMContentLoaded', ()=>{
       const addBtn = document.querySelector('[data-add-to-cart]');
       if(addBtn){ addBtn.addEventListener('click', ()=>{ cart.add({ id: product.id, title: product.title, price: product.price }); openCart(); }); }
     });
-
     // Drawer coș
     const cartDrawer = document.getElementById('cartDrawer');
     const cartButton = document.getElementById('cartButton');
@@ -370,7 +388,6 @@
     closeCartBtn.addEventListener('click', closeCart);
     function openCart(){ cartDrawer.classList.remove('translate-x-full') }
     function closeCart(){ cartDrawer.classList.add('translate-x-full') }
-
     function updateCartUI(){
       document.getElementById('cartCount').textContent = cart.items.reduce((s,i)=>s+i.qty,0);
       const container = document.getElementById('cartItems');
@@ -406,26 +423,45 @@
         if(hidden){ hidden.value = JSON.stringify(cart.items); }
       }
     }
-
     // Init
     cart.load();
-
     // Link către checkout închide coșul
     document.getElementById('gotoCheckout').addEventListener('click', ()=>{ closeCart(); setTimeout(()=>document.getElementById('checkout').scrollIntoView({behavior:'smooth'}), 50); });
-
     // Anul curent
     document.getElementById('year').textContent = new Date().getFullYear();
-
     // La submit — salvează snapshot coș
     document.getElementById('checkout-form').addEventListener('submit', ()=>{
       document.getElementById('cart_json').value = JSON.stringify(cart.items);
     });
-
     // ===== Swiper init (slider produs) =====
     window.addEventListener('load', ()=>{
       const sw = document.querySelector('.product-swiper');
       if(sw){ new Swiper(sw, { loop: true, pagination: { el: sw.querySelector('.swiper-pagination'), clickable: true }, autoplay: { delay: 2500, disableOnInteraction: false } }); }
     });
+    // ===== Fallback pentru imagini lipsă: 'COMING SOON' =====
+    (function(){
+      const PLACEHOLDER = "data:image/svg+xml;utf8,<?xml version='1.0'?><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'>  <defs>    <linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>      <stop stop-color='%230F172A'/>      <stop offset='1' stop-color='%230A0F1F'/>    </linearGradient>  </defs>  <rect width='1200' height='800' fill='url(%23g)'/>  <g opacity='0.35' stroke='%235eead4'>    <circle cx='200' cy='200' r='120' fill='none'/>    <circle cx='1000' cy='600' r='160' fill='none'/>    <path d='M0 400 Q 300 300 600 400 T 1200 400' fill='none'/>  </g>  <text x='50%' y='52%' text-anchor='middle' font-family='Inter, Arial, sans-serif' font-size='72' fill='%2399f6e4' font-weight='700'>    COMING SOON  </text></svg>";
+      function applyFallback(img){
+        if(img.dataset.fallbackApplied) return;
+        img.dataset.fallbackApplied = '1';
+        img.src = PLACEHOLDER;
+        img.loading = 'lazy';
+        img.style.objectFit = 'contain';
+        img.style.background = 'rgba(255,255,255,0.04)';
+        img.style.padding = '24px';
+        img.alt = (img.alt||'') + ' (coming soon)';
+      }
+      function watchImages(){
+        document.querySelectorAll('img').forEach(img => {
+          img.loading = 'lazy';
+          img.addEventListener('error', ()=>applyFallback(img), { once: true });
+          if(!img.getAttribute('src')) applyFallback(img);
+        });
+      }
+      if(document.readyState === 'complete' || document.readyState === 'interactive') watchImages();
+      else document.addEventListener('DOMContentLoaded', watchImages);
+    })();
   </script>
 </body>
 </html>
+
