@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rivo — Prompts & Digital Goods</title>
+  <meta name="description" content="Rivo — magazin digital cu prompts și resurse pentru AI. Gata pentru Netlify." />
+  <meta name="theme-color" content="#0b1220" />
+  <meta property="og:title" content="Rivo — Prompts & Digital Goods" />
+  <meta property="og:description" content="Magazin digital pentru creatori: prompts, template-uri și kit-uri AI." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1607082349566-187342de44d0?auto=format&fit=crop&w=1200&q=80" />
+  <link rel="icon" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- TailwindCSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Swiper (pentru sliderul de imagini) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui'] },
+          colors: {
+            brand: {
+              50: '#EFF6FF', 100:'#DBEAFE', 200:'#BFDBFE', 300:'#93C5FD', 400:'#60A5FA', 500:'#3B82F6', 600:'#2563EB', 700:'#1D4ED8', 800:'#1E40AF', 900:'#1E3A8A'
+            }
+          },
+          boxShadow: { soft: '0 10px 30px rgba(0,0,0,0.15)' }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Fundal tech animat (NU static) — Gigi style */
+    #tech-bg { position: fixed; inset: 0; z-index: -2; background: #020617; }
+    .gradient-overlay { position: fixed; inset:0; background: radial-gradient(1200px 800px at 20% 10%, rgba(59,130,246,0.18), transparent 60%), radial-gradient(1000px 700px at 80% 20%, rgba(16,185,129,0.16), transparent 60%), linear-gradient(180deg, rgba(2,6,23,0.95) 0%, rgba(2,6,23,0.88) 40%, rgba(2,6,23,0.98) 100%); z-index:-1; }
+    ::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:#334155;border-radius:8px}::-webkit-scrollbar-track{background:#0b1220}
+    .swiper-pagination-bullet{ background:#94a3b8; opacity:.6 }
+    .swiper-pagination-bullet-active{ background:#3B82F6; opacity:1 }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans selection:bg-brand-400/30 selection:text-white">
+  <canvas id="tech-bg" aria-hidden="true"></canvas>
+  <div class="gradient-overlay" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 backdrop-blur bg-slate-950/50 border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="#" class="flex items-center gap-2" aria-label="Rivo acasă">
+          <div class="h-8 w-8 rounded-xl bg-gradient-to-tr from-brand-500 to-emerald-400 shadow-soft"></div>
+          <span class="text-xl font-extrabold tracking-tight">Rivo</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-8 text-sm text-slate-300" aria-label="Navigație principală">
+          <a href="#shop" class="hover:text-white">Magazin</a>
+          <a href="#cum-functioneaza" class="hover:text-white">Cum funcționează</a>
+          <a href="#faq" class="hover:text-white">Întrebări</a>
+          <a href="#contact" class="hover:text-white">Contact</a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <button id="cartButton" class="relative inline-flex items-center gap-2 rounded-xl bg-white/10 py-2 px-3 hover:bg-white/15 transition" aria-haspopup="dialog" aria-controls="cartDrawer">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25h9.563c.966 0 1.793-.684 1.97-1.635l1.2-6.43a1.125 1.125 0 0 0-1.106-1.335H5.309m2.191 9.4L5.25 5.25M7.5 14.25l-2.25 9m12-9 2.25 9M9 22.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm9 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>
+            <span>Coș</span>
+            <span id="cartCount" class="absolute -top-2 -right-2 text-xs bg-brand-500 rounded-full h-5 min-w-[1.25rem] px-1 flex items-center justify-center font-semibold">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
+            Lansări mai <span class="bg-gradient-to-r from-brand-400 to-emerald-300 bg-clip-text text-transparent">smart</span> cu Rivo
+          </h1>
+          <p class="mt-5 text-lg text-slate-300 max-w-xl">Magazin digital pentru creatori și team-uri: prompts, templates și kit-uri care accelerează munca. Gata de import pe Netlify în <em>2 minute</em>.</p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="#shop" class="inline-flex items-center rounded-xl bg-brand-600 hover:bg-brand-500 px-5 py-3 font-semibold shadow-soft">Vezi produsul</a>
+            <a href="#cum-functioneaza" class="inline-flex items-center rounded-xl bg-white/10 hover:bg-white/15 px-5 py-3 font-semibold">Cum funcționează</a>
+          </div>
+          <div class="mt-8 flex items-center gap-6 text-sm text-slate-400">
+            <div class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-emerald-400"></span> Fără backend</div>
+            <div class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-brand-400"></span> Coș local persistent</div>
+            <div class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-fuchsia-400"></span> Netlify Forms</div>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft backdrop-blur">
+            <img src="https://images.unsplash.com/photo-1607082349566-187342de44d0?auto=format&fit=crop&w=1000&q=80" alt="Tech background" class="rounded-2xl shadow-soft"/>
+            <p class="text-center text-sm text-slate-300 mt-4">UI techy + animație particule</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Shop -->
+  <section id="shop" class="relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="flex items-end justify-between flex-wrap gap-4">
+        <div>
+          <h2 class="text-3xl font-extrabold">Magazin</h2>
+          <p class="text-slate-300 mt-2">Produse digitale create de Rivo.</p>
+        </div>
+      </div>
+
+      <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- CARD PRODUS -->
+        <article class="group rounded-3xl border border-white/10 bg-white/5 p-5 hover:bg-white/10 transition shadow-soft">
+          <div class="aspect-[4/3] rounded-2xl overflow-hidden relative">
+            <div class="swiper product-swiper relative w-full h-full">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1581090700227-4c4c82d55a30?auto=format&fit=crop&w=1200&q=80" alt="Preview 1" class="w-full h-full object-cover"/></div>
+                <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1606761568499-6b6d90c9aaf1?auto=format&fit=crop&w=1200&q=80" alt="Preview 2" class="w-full h-full object-cover"/></div>
+                <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1607083209263-b64d4f50ae00?auto=format&fit=crop&w=1200&q=80" alt="Preview 3" class="w-full h-full object-cover"/></div>
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+          <div class="mt-4">
+            <h3 class="text-2xl font-extrabold">20 Prompts pentru ChatGPT</h3>
+            <p class="mt-2 text-sm text-slate-200">Colecție pentru marketing, coding și productivitate. PDF (16 pag) + TXT.</p>
+          </div>
+          <ul class="mt-3 text-xs text-slate-300 grid grid-cols-2 gap-2">
+            <li class="rounded-lg bg-white/5 px-3 py-2">✔ 5x Marketing</li>
+            <li class="rounded-lg bg-white/5 px-3 py-2">✔ 5x Coding</li>
+            <li class="rounded-lg bg-white/5 px-3 py-2">✔ 5x Productivitate</li>
+            <li class="rounded-lg bg-white/5 px-3 py-2">✔ 5x Ideation</li>
+          </ul>
+          <div class="mt-4 flex items-center justify-between">
+            <div>
+              <div class="text-lg font-bold">€9.90</div>
+              <div class="text-xs text-slate-400">Licență personală • download instant</div>
+            </div>
+            <button data-add-to-cart class="inline-flex items-center gap-2 rounded-xl bg-brand-600 hover:bg-brand-500 px-4 py-2 font-semibold">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+              Adaugă în coș
+            </button>
+          </div>
+          <details class="mt-4 rounded-2xl bg-white/5 p-4 border border-white/10 open:shadow-soft">
+            <summary class="cursor-pointer font-semibold">Detalii produs</summary>
+            <div class="mt-3 text-sm text-slate-300 space-y-2">
+              <p>Primești un <strong>PDF de 16 pagini</strong> cu explicații + un fișier <strong>TXT</strong> cu prompts ușor de copiat.</p>
+              <p>Compatibil cu ChatGPT, Claude, Gemini, Llama și alte LLM‑uri.</p>
+            </div>
+          </details>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cum funcționează -->
+  <section id="cum-functioneaza" class="relative border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <h2 class="text-3xl font-extrabold">Cum funcționează</h2>
+      <div class="grid md:grid-cols-3 gap-6 mt-8">
+        <div class="rounded-3xl bg-white/5 p-6 border border-white/10">
+          <div class="text-2xl">1</div>
+          <h3 class="mt-2 font-bold text-xl">Adaugi în coș</h3>
+          <p class="mt-1 text-slate-300">Coșul se salvează local și rămâne la următoarea vizită.</p>
+        </div>
+        <div class="rounded-3xl bg-white/5 p-6 border border-white/10">
+          <div class="text-2xl">2</div>
+          <h3 class="mt-2 font-bold text-xl">Finalizezi comanda</h3>
+          <p class="mt-1 text-slate-300">Completezi emailul pentru livrare. Formularul folosește Netlify Forms.</p>
+        </div>
+        <div class="rounded-3xl bg-white/5 p-6 border border-white/10">
+          <div class="text-2xl">3</div>
+          <h3 class="mt-2 font-bold text-xl">Primești linkul</h3>
+          <p class="mt-1 text-slate-300">După submit vei primi un email cu link de download (configurat din Netlify).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Checkout -->
+  <section id="checkout" class="relative border-t border-white/5">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <h2 class="text-3xl font-extrabold">Checkout</h2>
+      <p class="text-slate-300 mt-2">Completează datele și trimite comanda. Vei primi instrucțiuni pe email.</p>
+      <div class="mt-8 grid md:grid-cols-5 gap-8">
+        <div class="md:col-span-3 rounded-3xl bg-white/5 p-6 border border-white/10">
+          <form name="checkout" method="POST" data-netlify="true" class="grid gap-4" id="checkout-form">
+            <input type="hidden" name="form-name" value="checkout">
+            <input type="hidden" name="cart_json" id="cart_json">
+            <p class="hidden" aria-hidden="true">
+              <label>Nu completa: <input name="bot-field" /></label>
+            </p>
+            <label class="grid gap-1">
+              <span class="text-sm text-slate-300">Nume</span>
+              <input required name="nume" type="text" class="rounded-xl bg-slate-900 border border-white/10 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="Numele tău" />
+            </label>
+            <label class="grid gap-1">
+              <span class="text-sm text-slate-300">Email pentru livrare</span>
+              <input required name="email" type="email" class="rounded-xl bg-slate-900 border border-white/10 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="tu@exemplu.com" />
+            </label>
+            <label class="grid gap-1">
+              <span class="text-sm text-slate-300">Observații (opțional)</span>
+              <textarea name="note" class="rounded-xl bg-slate-900 border border-white/10 px-4 py-2 min-h-[120px] focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="Ce ai vrea să personalizăm?"></textarea>
+            </label>
+            <button class="mt-2 inline-flex items-center justify-center rounded-xl bg-emerald-600 hover:bg-emerald-500 px-5 py-3 font-semibold">Trimite comanda</button>
+            <p class="text-xs text-slate-400">Prin trimitere ești de acord cu <a href="#termeni" class="underline">Termeni</a> & <a href="#confidentialitate" class="underline">Politica de confidențialitate</a>.</p>
+          </form>
+        </div>
+        <aside class="md:col-span-2 rounded-3xl bg-white/5 p-6 border border-white/10">
+          <h3 class="font-bold text-xl">Rezumat comandă</h3>
+          <div id="checkoutCart" class="mt-4 grid gap-3 text-sm"></div>
+          <div class="mt-4 flex items-center justify-between text-lg">
+            <span>Total</span>
+            <span id="checkoutTotal" class="font-extrabold">€0.00</span>
+          </div>
+          <p class="text-xs text-slate-400 mt-3">Plata: poți conecta Stripe/PayPal sau vinde pe bază de factură. Acest template nu colectează plăți.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="relative border-t border-white/5">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <h2 class="text-3xl font-extrabold">Întrebări frecvente</h2>
+      <div class="mt-6 grid md:grid-cols-2 gap-4">
+        <details class="rounded-2xl bg-white/5 p-5 border border-white/10"><summary class="font-semibold cursor-pointer">Cum primesc fișierele?</summary><p class="mt-2 text-slate-300 text-sm">După trimiterea formularului de checkout, noi îți trimitem pe email un link de download.</p></details>
+        <details class="rounded-2xl bg-white/5 p-5 border border-white/10"><summary class="font-semibold cursor-pointer">Pot folosi cu alte modele decât ChatGPT?</summary><p class="mt-2 text-slate-300 text-sm">Da, prompts-urile funcționează cu majoritatea LLM-urilor (Claude, Gemini, Llama, etc.).</p></details>
+        <details class="rounded-2xl bg-white/5 p-5 border border-white/10"><summary class="font-semibold cursor-pointer">Politica de retur</summary><p class="mt-2 text-slate-300 text-sm">Pentru produse digitale, oferim retur în 14 zile dacă nu ești mulțumit.</p></details>
+        <details class="rounded-2xl bg-white/5 p-5 border border-white/10"><summary class="font-semibold cursor-pointer">Licențiere</summary><p class="mt-2 text-slate-300 text-sm">Licență personală: poți folosi prompts-urile în proiectele tale, dar nu le poți redistribui.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="relative border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid md:grid-cols-2 gap-8 items-center">
+        <div>
+          <h2 class="text-3xl font-extrabold">Ai idei pentru Rivo?</h2>
+          <p class="text-slate-300 mt-2">Scrie-ne și construim împreună produse digitale utile.</p>
+          <ul class="mt-4 space-y-2 text-slate-300 text-sm">
+            <li>• Roadmap public</li>
+            <li>• Update-uri lunare</li>
+            <li>• Reduceri pentru membri</li>
+          </ul>
+        </div>
+        <form name="contact" method="POST" data-netlify="true" class="rounded-3xl bg-white/5 p-6 border border-white/10 grid gap-3">
+          <input type="hidden" name="form-name" value="contact">
+          <p class="hidden" aria-hidden="true">
+            <label>Nu completa: <input name="bot-field" /></label>
+          </p>
+          <label class="grid gap-1">
+            <span class="text-sm text-slate-300">Email</span>
+            <input required name="email" type="email" class="rounded-xl bg-slate-900 border border-white/10 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="tu@exemplu.com" />
+          </label>
+          <label class="grid gap-1">
+            <span class="text-sm text-slate-300">Mesaj</span>
+            <textarea required name="mesaj" class="rounded-xl bg-slate-900 border border-white/10 px-4 py-2 min-h-[120px] focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="Salut Rivo, ..."></textarea>
+          </label>
+          <button class="inline-flex items-center justify-center rounded-xl bg-brand-600 hover:bg-brand-500 px-5 py-3 font-semibold">Trimite</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Termeni & Confidențialitate (ancore simple) -->
+  <section id="termeni" class="relative border-t border-white/5">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-sm text-slate-300">
+      <h3 class="text-xl font-bold text-white">Termeni</h3>
+      <p class="mt-2">Acesta este un template. Completează aici termenii tăi comerciali (drepturi, livrare, retur, etc.).</p>
+      <h3 id="confidentialitate" class="text-xl font-bold text-white mt-8">Politica de confidențialitate</h3>
+      <p class="mt-2">Descrie ce date colectezi prin formulare Netlify și cum sunt folosite. Adaugă date de contact pentru ștergerea datelor.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 text-sm text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p>© <span id="year"></span> Rivo. Toate drepturile rezervate.</p>
+      <div class="flex items-center gap-6">
+        <a href="#termeni" class="hover:text-white">Termeni</a>
+        <a href="#confidentialitate" class="hover:text-white">Confidențialitate</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cart Drawer -->
+  <div id="cartDrawer" class="fixed inset-y-0 right-0 w-full sm:max-w-md bg-slate-900/95 backdrop-blur border-l border-white/10 transform translate-x-full transition-transform z-[60] flex flex-col" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+    <div class="p-4 flex items-center justify-between border-b border-white/10">
+      <h3 id="cartTitle" class="text-xl font-bold">Coș</h3>
+      <button id="closeCart" class="p-2 rounded-lg bg-white/10 hover:bg-white/15" aria-label="Închide coșul">Închide</button>
+    </div>
+    <div id="cartItems" class="p-4 flex-1 overflow-y-auto grid gap-3 text-sm"></div>
+    <div class="p-4 border-t border-white/10">
+      <div class="flex items-center justify-between text-lg">
+        <span>Total</span>
+        <span id="cartTotal" class="font-extrabold">€0.00</span>
+      </div>
+      <a href="#checkout" id="gotoCheckout" class="mt-4 block text-center rounded-xl bg-emerald-600 hover:bg-emerald-500 px-5 py-3 font-semibold">Finalizează</a>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // ===== Fundal tech (particule + linii) — ANIMAT =====
+    const canvas = document.getElementById('tech-bg');
+    const ctx = canvas.getContext('2d');
+    let w, h, particles;
+    function resize(){ w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; init(); }
+    function init(){
+      particles = Array.from({length: Math.min(180, Math.floor(w*h/9000))}, () => ({
+        x: Math.random()*w,
+        y: Math.random()*h,
+        vx: (Math.random()-0.5)*1.2,
+        vy: (Math.random()-0.5)*1.2,
+        r: Math.random()*2+0.5
+      }));
+    }
+    function tick(){
+      ctx.clearRect(0,0,w,h);
+      ctx.fillStyle = 'rgba(148,163,184,0.6)';
+      ctx.strokeStyle = 'rgba(99,102,241,0.14)';
+      for(const p of particles){
+        p.x += p.vx; p.y += p.vy;
+        if(p.x<0||p.x>w) p.vx*=-1; if(p.y<0||p.y>h) p.vy*=-1;
+        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+      }
+      for(let i=0;i<particles.length;i++){
+        for(let j=i+1;j<particles.length;j++){
+          const a=particles[i], b=particles[j];
+          const dx=a.x-b.x, dy=a.y-b.y, d=Math.hypot(dx,dy);
+          if(d<120){ ctx.globalAlpha = 1 - d/120; ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke(); ctx.globalAlpha=1; }
+        }
+      }
+      requestAnimationFrame(tick);
+    }
+    window.addEventListener('resize', resize); resize(); tick();
+
+    // ===== Coș simplu (localStorage) =====
+    const CART_KEY = 'rivo_cart_v1';
+    const cart = {
+      items: [],
+      load(){ try{ this.items = JSON.parse(localStorage.getItem(CART_KEY))||[] }catch(e){ this.items=[] } this.sync() },
+      save(){ localStorage.setItem(CART_KEY, JSON.stringify(this.items)); this.sync() },
+      sync(){ updateCartUI() },
+      add(product){ const existing = this.items.find(i=>i.id===product.id); if(existing){ existing.qty += product.qty||1 } else { this.items.push({...product, qty: product.qty||1}) } this.save() },
+      remove(id){ this.items = this.items.filter(i=>i.id!==id); this.save() },
+      setQty(id, qty){ const item=this.items.find(i=>i.id===id); if(item){ item.qty=Math.max(1, qty); this.save() } },
+      total(){ return this.items.reduce((s,i)=> s + i.price*i.qty, 0) }
+    };
+    function formatEUR(n){ return new Intl.NumberFormat('ro-RO',{style:'currency', currency:'EUR'}).format(n) }
+
+    const product = { id:'prompts20', title:'20 Prompts pentru ChatGPT', price: 9.90, image:'', description:'Colecție PDF + TXT', download:'<ADAUGĂ_LINK_DOWNLOAD>' };
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const addBtn = document.querySelector('[data-add-to-cart]');
+      if(addBtn){ addBtn.addEventListener('click', ()=>{ cart.add({ id: product.id, title: product.title, price: product.price }); openCart(); }); }
+    });
+
+    // Drawer coș
+    const cartDrawer = document.getElementById('cartDrawer');
+    const cartButton = document.getElementById('cartButton');
+    const closeCartBtn = document.getElementById('closeCart');
+    cartButton.addEventListener('click', openCart);
+    closeCartBtn.addEventListener('click', closeCart);
+    function openCart(){ cartDrawer.classList.remove('translate-x-full') }
+    function closeCart(){ cartDrawer.classList.add('translate-x-full') }
+
+    function updateCartUI(){
+      document.getElementById('cartCount').textContent = cart.items.reduce((s,i)=>s+i.qty,0);
+      const container = document.getElementById('cartItems');
+      container.innerHTML = '';
+      if(cart.items.length===0){ container.innerHTML = '<p class="text-slate-400">Coșul este gol.</p>'; }
+      cart.items.forEach(i=>{
+        const row = document.createElement('div');
+        row.className = 'flex items-center justify-between gap-3 rounded-xl bg-white/5 p-3 border border-white/10';
+        row.innerHTML = `
+          <div>
+            <div class="font-semibold">${i.title}</div>
+            <div class="text-slate-400 text-xs">${formatEUR(i.price)}</div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button class="px-2 py-1 bg-white/10 rounded" data-dec>-</button>
+            <input class="w-10 text-center bg-slate-900 border border-white/10 rounded" value="${i.qty}" aria-label="Cantitate" />
+            <button class="px-2 py-1 bg-white/10 rounded" data-inc>+</button>
+            <button class="ml-2 px-2 py-1 bg-red-500/80 hover:bg-red-500 rounded text-white" data-remove>×</button>
+          </div>`;
+        container.appendChild(row);
+        const input = row.querySelector('input');
+        row.querySelector('[data-inc]').onclick = ()=>{ cart.setQty(i.id, i.qty+1) };
+        row.querySelector('[data-dec]').onclick = ()=>{ cart.setQty(i.id, i.qty-1) };
+        row.querySelector('[data-remove]').onclick = ()=>{ cart.remove(i.id) };
+        input.addEventListener('change', ()=>{ const v = parseInt(input.value||'1',10); cart.setQty(i.id, isNaN(v)?1:v) });
+      });
+      document.getElementById('cartTotal').textContent = formatEUR(cart.total());
+      const checkoutList = document.getElementById('checkoutCart');
+      if(checkoutList){
+        checkoutList.innerHTML = cart.items.map(i=>`<div class='flex items-center justify-between'><span>${i.title} × ${i.qty}</span><span>${formatEUR(i.price*i.qty)}</span></div>`).join('') || '<p class="text-slate-400">Niciun produs în coș.</p>';
+        document.getElementById('checkoutTotal').textContent = formatEUR(cart.total());
+        const hidden = document.getElementById('cart_json');
+        if(hidden){ hidden.value = JSON.stringify(cart.items); }
+      }
+    }
+
+    // Init
+    cart.load();
+
+    // Link către checkout închide coșul
+    document.getElementById('gotoCheckout').addEventListener('click', ()=>{ closeCart(); setTimeout(()=>document.getElementById('checkout').scrollIntoView({behavior:'smooth'}), 50); });
+
+    // Anul curent
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // La submit — salvează snapshot coș
+    document.getElementById('checkout-form').addEventListener('submit', ()=>{
+      document.getElementById('cart_json').value = JSON.stringify(cart.items);
+    });
+
+    // ===== Swiper init (slider produs) =====
+    window.addEventListener('load', ()=>{
+      const sw = document.querySelector('.product-swiper');
+      if(sw){ new Swiper(sw, { loop: true, pagination: { el: sw.querySelector('.swiper-pagination'), clickable: true }, autoplay: { delay: 2500, disableOnInteraction: false } }); }
+    });
+  </script>
+</body>
+</html>
