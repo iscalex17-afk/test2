@@ -9,7 +9,8 @@
   <meta property="og:title" content="Rivo — Prompts & Digital Goods" />
   <meta property="og:description" content="Magazin digital pentru creatori: prompts, template-uri și kit-uri AI." />
   <meta property="og:type" content="website" />
-  <meta property="og:image.svg">
+  <!-- (opțional) setează o imagine OG validă: -->
+  <meta property="og:image" content="https://images.unsplash.com/photo-1607082349566-187342de44d0?auto=format&fit=crop&w=1200&q=80">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -35,7 +36,7 @@
     }
   </script>
   <style>
-    /* Fundal tech animat (NU static) — Gigi style */
+    /* Fundal tech animat — particule + linii diagonale */
     #tech-bg { position: fixed; inset: 0; z-index: -2; background: #020617; }
     .gradient-overlay { position: fixed; inset:0; background: radial-gradient(1200px 800px at 20% 10%, rgba(59,130,246,0.18), transparent 60%), radial-gradient(1000px 700px at 80% 20%, rgba(16,185,129,0.16), transparent 60%), linear-gradient(180deg, rgba(2,6,23,0.95) 0%, rgba(2,6,23,0.88) 40%, rgba(2,6,23,0.98) 100%); z-index:-1; }
     ::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:#334155;border-radius:8px}::-webkit-scrollbar-track{background:#0b1220}
@@ -93,7 +94,7 @@
         </div>
         <div class="relative">
           <div class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft backdrop-blur">
-            <img src="https://images.unsplash.com/OIP.webp?auto=format&fit=crop&w=1000&q=80" alt="Tech background" class="rounded-2xl shadow-soft"/>
+            <img src="https://images.unsplash.com/photo-1607082349566-187342de44d0?auto=format&fit=crop&w=1000&q=80" alt="Tech background" class="rounded-2xl shadow-soft"/>
             <p class="text-center text-sm text-slate-300 mt-4">UI techy + animație particule</p>
           </div>
         </div>
@@ -148,7 +149,7 @@
             <summary class="cursor-pointer font-semibold">Detalii produs</summary>
             <div class="mt-3 text-sm text-slate-300 space-y-2">
               <p>Primești un <strong>PDF de 16 pagini</strong> cu explicații + un fișier <strong>TXT</strong> cu prompts ușor de copiat.</p>
-              <p>Compatibil cu ChatGPT, Claude, Gemini, Llama și alte LLM‑uri.</p>
+              <p>Compatibil cu ChatGPT, Claude, Gemini, Llama și alte LLM-uri.</p>
             </div>
           </details>
         </article>
@@ -306,10 +307,11 @@
 
   <!-- Scripts -->
   <script>
-    // ===== Fundal tech (particule + linii) — ANIMAT & DRIFT =====
+    // ===== Fundal tech (particule + linii diagonale) — ANIMAT & DRIFT =====
     const canvas = document.getElementById('tech-bg');
     const ctx = canvas.getContext('2d');
     let w, h, particles, t = 0;
+
     function resize(){ w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; init(); }
     function init(){
       particles = Array.from({length: Math.min(200, Math.floor(w*h/8000))}, () => ({
@@ -321,10 +323,49 @@
         tw: Math.random()*Math.PI*2
       }));
     }
+
+    function drawMovingTechLines(time){
+      // grilă diagonală ↘︎ și ↗︎ cu offset animat
+      const spacing = 80;                 // distanța dintre linii
+      const speed1 = 18;                  // viteză strat 1
+      const speed2 = -10;                 // viteză strat 2 (paralax)
+      const offset1 = (time*speed1) % spacing;
+      const offset2 = (time*speed2) % spacing;
+
+      ctx.save();
+      // glow subtil
+      ctx.shadowBlur = 6;
+      ctx.shadowColor = 'rgba(59,130,246,0.25)';
+
+      // Strat 1 — linii ↘︎ (stânga sus → dreapta jos)
+      ctx.globalAlpha = 0.12;
+      ctx.strokeStyle = 'rgba(99,102,241,0.7)';
+      ctx.lineWidth = 1;
+      for(let x = -w; x < w*2; x += spacing){
+        ctx.beginPath();
+        ctx.moveTo(x + offset1, 0);
+        ctx.lineTo(x + offset1 - h, h);
+        ctx.stroke();
+      }
+
+      // Strat 2 — linii ↗︎ (stânga jos → dreapta sus)
+      ctx.globalAlpha = 0.08;
+      ctx.strokeStyle = 'rgba(16,185,129,0.7)';
+      for(let x = -w; x < w*2; x += spacing){
+        ctx.beginPath();
+        ctx.moveTo(x + offset2, h);
+        ctx.lineTo(x + offset2 + h, 0);
+        ctx.stroke();
+      }
+
+      ctx.restore();
+    }
+
     function tick(){
       t += 0.005;
       ctx.clearRect(0,0,w,h);
-      // subtle moving gradient background glow
+
+      // glow de fundal ușor animat
       const grad = ctx.createRadialGradient(
         w*0.2 + Math.sin(t)*50, h*0.15 + Math.cos(t*0.8)*40, 100,
         w*0.8 + Math.cos(t*0.6)*60, h*0.25 + Math.sin(t*0.9)*50, Math.max(w,h)
@@ -334,10 +375,14 @@
       ctx.fillStyle = grad;
       ctx.fillRect(0,0,w,h);
 
+      // ——— LINIILE TECH CARE SE MIȘCĂ ———
+      drawMovingTechLines(performance.now()/1000);
+
+      // particule + legături
       ctx.fillStyle = 'rgba(148,163,184,0.7)';
       ctx.strokeStyle = 'rgba(99,102,241,0.12)';
       for(const p of particles){
-        // drift field for extra motion
+        // drift field fin
         p.vx += Math.sin((p.y+t*40)/12000)*0.02;
         p.vy += Math.cos((p.x-t*40)/12000)*0.02;
         p.x += p.vx; p.y += p.vy;
