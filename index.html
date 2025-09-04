@@ -3,228 +3,393 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rivo — Prompts & Digital Goods</title>
-  <meta name="description" content="Rivo — magazin digital cu prompts și resurse pentru AI. Gata pentru Netlify." />
+  <title>Rivo — Magazin Digital</title>
+  <meta name="description" content="Vinde resurse digitale: prompts, template-uri și kit-uri pentru AI & business." />
   <meta name="theme-color" content="#0b1220" />
-  <meta property="og:title" content="Rivo — Prompts & Digital Goods" />
-  <meta property="og:description" content="Magazin digital pentru creatori: prompts, template-uri și kit-uri AI." />
+  <meta property="og:title" content="Rivo — Magazin Digital" />
+  <meta property="og:description" content="Site de vânzări, gata de lansare: hero, beneficii, pachete, testimoniale." />
   <meta property="og:type" content="website" />
-  <!-- OG image: ține același fișier ca pe fundal, dacă vrei să fie coerent când se share-uiește. -->
-  <meta property="og:image" content="assets/fundal-chip.jpg" />
+  <!-- OG image = aceeași imagine ca fundalul -->
+  <meta property="og:image" content="assets/fundal.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <style>
-    html,body{margin:0;padding:0;height:100%;overflow-x:hidden}
-    /* Canvas-ul este sub tot conținutul */
-    #tech-bg{position:fixed;inset:0;z-index:-2;background:#020617}
-    .gradient-overlay{position:fixed;inset:0;z-index:-1;
-      background: radial-gradient(1200px 800px at 20% 10%,rgba(59,130,246,.14),transparent 60%),
-                  radial-gradient(1000px 700px at 80% 20%,rgba(16,185,129,.12),transparent 60%),
-                  linear-gradient(180deg,rgba(2,6,23,.94) 0%,rgba(2,6,23,.88) 40%,rgba(2,6,23,.97) 100%);
-    }
-    /* Badge debug mic (îl poți șterge) */
-    #bg-debug{font-family:Inter,system-ui,Arial;font-size:12px;position:fixed;left:12px;bottom:12px;z-index:70;color:#e5e7eb;background:rgba(0,0,0,.44);border:1px solid rgba(255,255,255,.1);padding:4px 8px;border-radius:8px;pointer-events:none}
-  .page-hero-bg{position:fixed;inset:0;z-index:-3;background:#0b1220 center/cover no-repeat;filter:saturate(1.05) contrast(1.05)}
-</style>
-</head>
-
-<!-- IMPORTANT: schimbă data-bg-url cu calea EXACTĂ a fișierului tău. -->
-<body class="bg-slate-950 text-slate-100 font-sans" data-bg-url="assets/fundal-chip.jpg">
-  <div id="pageHeroBg" class="page-hero-bg" aria-hidden="true"></div>
-  <canvas id="tech-bg" aria-hidden="true"></canvas>
-  <div class="gradient-overlay" aria-hidden="true"></div>
-  <div id="bg-debug" aria-hidden="true">loading…</div>
-
-  <main class="relative z-10 min-h-screen flex items-center justify-center">
-    <div class="text-center px-6">
-      <h1 class="text-4xl md:text-6xl font-extrabold mb-6">Rivo Digital Shop</h1>
-      <p class="text-lg text-slate-300 max-w-xl mx-auto mb-10">Fundal = fotografia ta (cover) + linii high‑tech animate. Totul e retina‑sharp & performant.</p>
-      <a href="#shop" class="inline-flex items-center rounded-xl bg-blue-600 hover:bg-blue-500 px-6 py-3 font-semibold shadow">Intră în Magazin</a>
-    </div>
-  </main>
-
   <script>
-    // ======= FUNDAL: imagine + linii high‑tech (cu DPI corect) =======
-    const canvas = document.getElementById('tech-bg');
-    const ctx = canvas.getContext('2d', { alpha: true });
-    const dbg = document.getElementById('bg-debug');
-    let W = 0, H = 0, T = 0, DPR = 1;
-
-    // Loader robust: încearcă mai multe variante de cale + extensii + cu/ fără „/”.
-    const hinted = (document.body.dataset.bgUrl || '').trim();
-    function buildCandidates(hint){
-      const base = hint || 'assets/fundal-chip.jpg';
-      const exts = ['.webp','.jpg','.jpeg','.png'];
-      const variants = new Set();
-      const add = p => { if(p) variants.add(p.replace(/\\s/g, '%20')); };
-      const roots = [ '', '/' ];
-      const stems = base.replace(/\.(webp|jpe?g|png)$/i,'');
-      // ex: assets/fundal-chip, /assets/fundal-chip + exts
-      roots.forEach(r => exts.forEach(e => add(r + stems + e)));
-      // și varianta exactă furnizată (dacă avea extensie deja)
-      add(base); add(base.startsWith('/') ? base.slice(1) : '/' + base);
-      return Array.from(variants);
-    }
-    const CANDIDATES = buildCandidates(hinted);
-    const FALLBACK = 'https://images.unsplash.com/photo-1607082349566-187342de44d0?auto=format&fit=crop&w=1600&q=80';
-
-    function logStatus(msg){ if(dbg) dbg.textContent = msg; console.log('[BG]', msg); }
-
-    function loadFirstWorking(urls){
-      return new Promise(resolve => {
-        const next = (i) => {
-          if(i >= urls.length){
-            const f = new Image(); f.crossOrigin = 'anonymous';
-            f.onload = ()=> resolve(f);
-            f.onerror = ()=> resolve(null);
-            f.src = FALLBACK; logStatus('fallback Unsplash');
-            return;
-          }
-          const im = new Image();
-          im.onload = ()=> { logStatus('ok: ' + urls[i]); resolve(im); };
-          im.onerror = ()=> { logStatus('miss: ' + urls[i]); next(i+1); };
-          im.src = urls[i];
-        };
-        next(0);
-      });
-    }
-
-    // DPI‑aware canvas size
-    function fit(){
-      DPR = Math.min(window.devicePixelRatio || 1, 2);
-      W = Math.floor(window.innerWidth);
-      H = Math.floor(window.innerHeight);
-      canvas.style.width = W + 'px';
-      canvas.style.height = H + 'px';
-      canvas.width = Math.floor(W * DPR);
-      canvas.height = Math.floor(H * DPR);
-      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-      lineCanvas.width = Math.floor(W * DPR);
-      lineCanvas.height = Math.floor(H * DPR);
-      lineCtx.setTransform(DPR, 0, 0, DPR, 0, 0);
-      setupParticles();
-    }
-    window.addEventListener('resize', fit);
-
-    // Linii animate (două straturi + highlight)
-    const lineCanvas = document.createElement('canvas');
-    const lineCtx = lineCanvas.getContext('2d');
-    function drawLines(time){
-      const spacing = 84, speed = 60, offset = time * speed;
-      lineCtx.clearRect(0,0,W,H);
-      lineCtx.save(); lineCtx.lineWidth = 1.25;
-      lineCtx.strokeStyle = 'rgba(56,189,248,0.55)';
-      lineCtx.setLineDash([14,18]);
-      lineCtx.globalAlpha = 0.28;
-      for(let x=-W; x<W*2; x+=spacing){
-        lineCtx.lineDashOffset = -offset + x*0.1;
-        lineCtx.beginPath(); lineCtx.moveTo(x,0); lineCtx.lineTo(x-H,H); lineCtx.stroke();
-      }
-      lineCtx.strokeStyle = 'rgba(16,185,129,0.45)';
-      lineCtx.globalAlpha = 0.22;
-      for(let x=-W; x<W*2; x+=spacing){
-        lineCtx.lineDashOffset = offset*0.7 + x*0.08;
-        lineCtx.beginPath(); lineCtx.moveTo(x,H); lineCtx.lineTo(x+H,0); lineCtx.stroke();
-      }
-      // Highlight subtil
-      lineCtx.globalCompositeOperation = 'lighter';
-      lineCtx.setLineDash([4,22]);
-      lineCtx.strokeStyle = 'rgba(99,102,241,0.35)';
-      lineCtx.globalAlpha = 0.35;
-      for(let x=-W; x<W*2; x+=spacing*0.5){
-        lineCtx.lineDashOffset = -offset*1.2;
-        lineCtx.beginPath(); lineCtx.moveTo(x,H); lineCtx.lineTo(x+H,0); lineCtx.stroke();
-      }
-      lineCtx.restore();
-    }
-
-    // Particule pentru vibe
-    let particles = [];
-    function setupParticles(){
-      particles = Array.from({length: Math.min(220, Math.floor(W*H/7000))}, () => ({
-        x: Math.random()*W, y: Math.random()*H,
-        vx: (Math.random()-0.5)*0.8, vy: (Math.random()-0.5)*0.8,
-        r: Math.random()*1.8+0.6, tw: Math.random()*Math.PI*2
-      }));
-    }
-    function drawParticles(){
-      ctx.save();
-      ctx.fillStyle = 'rgba(148,163,184,0.7)';
-      ctx.strokeStyle = 'rgba(99,102,241,0.12)';
-      for(const p of particles){
-        p.vx += Math.sin((p.y+T*40)/12000)*0.02;
-        p.vy += Math.cos((p.x-T*40)/12000)*0.02;
-        p.x += p.vx; p.y += p.vy;
-        if(p.x<0||p.x>W) p.vx*=-1; if(p.y<0||p.y>H) p.vy*=-1;
-        const r = p.r + Math.sin(p.tw + T*6)*0.3;
-        ctx.beginPath(); ctx.arc(p.x,p.y,Math.max(0.4,r),0,Math.PI*2); ctx.fill();
-      }
-      for(let i=0;i<particles.length;i++){
-        for(let j=i+1;j<particles.length;j++){
-          const a=particles[i], b=particles[j];
-          const dx=a.x-b.x, dy=a.y-b.y, d=Math.hypot(dx,dy);
-          if(d<120){ ctx.globalAlpha = 1 - d/120; ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke(); ctx.globalAlpha = 1; }
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter','ui-sans-serif','system-ui'] },
+          colors: { brand: { 50:'#eff6ff',100:'#dbeafe',200:'#bfdbfe',300:'#93c5fd',400:'#60a5fa',500:'#3b82f6',600:'#2563eb',700:'#1d4ed8',800:'#1e40af',900:'#1e3a8a' } },
+          boxShadow: { soft:'0 10px 30px rgba(0,0,0,.15)' }
         }
       }
-      ctx.restore();
     }
-
-    let BG = null;
-    async function start(){
-      fit();
-      BG = await loadFirstWorking(CANDIDATES);
-      if(BG){ logStatus('fundal: ' + BG.src); } else { logStatus('fără fundal'); }
-      loop();
-    }
-
-    function loop(){
-      T += 0.005; ctx.clearRect(0,0,W,H);
-      if(BG){
-        // cover + pan ușor
-        const cover = Math.max(W/BG.naturalWidth, H/BG.naturalHeight) * 1.06;
-        const iw = BG.naturalWidth * cover;
-        const ih = BG.naturalHeight * cover;
-        const panX = Math.sin(T*0.6) * 18;
-        const panY = Math.cos(T*0.5) * 14;
-        const x = (W - iw)/2 + panX;
-        const y = (H - ih)/2 + panY;
-        ctx.globalAlpha = 0.7; ctx.imageSmoothingEnabled = true; ctx.drawImage(BG, x, y, iw, ih); ctx.globalAlpha = 1;
-        // glow subtil
-        const grad = ctx.createRadialGradient(
-          W*0.2 + Math.sin(T)*50, H*0.15 + Math.cos(T*0.8)*40, 100,
-          W*0.8 + Math.cos(T*0.6)*60, H*0.25 + Math.sin(T*0.9)*50, Math.max(W,H)
-        );
-        grad.addColorStop(0, 'rgba(59,130,246,0.08)'); grad.addColorStop(1, 'rgba(2,6,23,0)');
-        ctx.fillStyle = grad; ctx.fillRect(0,0,W,H);
-      }
-      drawLines(performance.now()/1000);
-      ctx.drawImage(lineCanvas, 0, 0);
-      drawParticles();
-      requestAnimationFrame(loop);
-    }
-
-    start();
   </script>
-<script>(function(){
-  const bg = document.getElementById('pageHeroBg');
-  const fallback = document.body.dataset.hero || document.body.dataset.bgUrl || 'assets/fundal.jpg';
-  function apply(url){
-    if(bg){ bg.style.backgroundImage = `url("${url}")`; }
-    const og = document.querySelector('meta[property="og:image"]');
-    if(og){ og.setAttribute('content', url); }
-  }
-  const hero = document.getElementById('heroImg');
-  if(hero){
-    if(hero.complete && hero.naturalWidth) apply(hero.currentSrc || hero.src);
-    hero.addEventListener('load', ()=> apply(hero.currentSrc || hero.src), { once:true });
-    hero.addEventListener('error', ()=> apply(fallback), { once:true });
-  } else {
-    apply(fallback);
-  }
-})();</script>
+  <style>
+    html,body{height:100%}
+    /* Straturi de fundal (toate sub conținut) */
+    #bg-photo{position:fixed;inset:0;z-index:-4;background:#0b1220 center/cover no-repeat;backdrop-filter:none;transform:translateZ(0)}
+    .grad-overlay{position:fixed;inset:0;z-index:-2;background:
+      radial-gradient(1200px 800px at 20% 10%, rgba(59,130,246,.14), transparent 60%),
+      radial-gradient(1000px 700px at 80% 20%, rgba(16,185,129,.12), transparent 60%),
+      linear-gradient(180deg, rgba(2,6,23,.94) 0%, rgba(2,6,23,.88) 40%, rgba(2,6,23,.97) 100%)}
+    /* Canvas cu linii animate peste poză */
+    #bg-lines{position:fixed;inset:0;z-index:-3;pointer-events:none}
+    .container-pad{max-width:1200px}
+  </style>
+</head>
+
+<!-- Forțăm imaginea principală: assets/fundal.png -->
+<body class="bg-slate-950 text-slate-100 font-sans" data-hero="assets/fundal.png">
+  <!-- Fundal foto (se setează din JS, cu fallback) -->
+  <div id="bg-photo" aria-hidden="true"></div>
+  <!-- Linii high-tech animate -->
+  <canvas id="bg-lines" aria-hidden="true"></canvas>
+  <!-- Overlay grade -->
+  <div class="grad-overlay" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 backdrop-blur bg-slate-950/60 border-b border-white/5">
+    <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8">
+      <div class="h-16 flex items-center justify-between">
+        <a class="flex items-center gap-2" href="#" aria-label="Rivo acasă">
+          <span class="h-8 w-8 rounded-xl bg-gradient-to-tr from-brand-500 to-emerald-400 shadow-soft"></span>
+          <span class="text-xl font-extrabold">Rivo</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-8 text-sm text-slate-300">
+          <a href="#beneficii" class="hover:text-white">Beneficii</a>
+          <a href="#pachete" class="hover:text-white">Pachete</a>
+          <a href="#produse" class="hover:text-white">Produse</a>
+          <a href="#contact" class="hover:text-white">Contact</a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <a href="#pachete" class="hidden sm:inline-flex rounded-xl bg-brand-600 hover:bg-brand-500 px-4 py-2 font-semibold">Cumpără acum</a>
+          <button id="menuBtn" class="md:hidden inline-flex items-center gap-2 rounded-xl bg-white/10 px-3 py-2 hover:bg-white/15">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-width="1.5" d="M4 7h16M4 12h16M4 17h16"/></svg>
+            Meniu
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="mobileMenu" class="md:hidden hidden border-t border-white/10">
+      <nav class="mx-auto container-pad px-4 sm:px-6 lg:px-8 py-3 grid gap-2 text-slate-200">
+        <a class="py-2" href="#beneficii">Beneficii</a>
+        <a class="py-2" href="#pachete">Pachete</a>
+        <a class="py-2" href="#produse">Produse</a>
+        <a class="py-2" href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero (imagine dreapta) -->
+  <section class="relative overflow-hidden">
+    <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
+            Lansează-ți <span class="bg-gradient-to-r from-brand-400 to-emerald-300 bg-clip-text text-transparent">magazinul digital</span> în ore, nu zile
+          </h1>
+          <p class="mt-5 text-lg text-slate-300 max-w-xl">
+            Template complet pentru vânzări online: pagini, secțiuni de conversie, formulare și design modern. Ideal pentru prompts, template-uri, cursuri și licențe.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="#pachete" class="inline-flex items-center rounded-xl bg-brand-600 hover:bg-brand-500 px-5 py-3 font-semibold shadow-soft">Vezi pachetele</a>
+            <a href="#beneficii" class="inline-flex items-center rounded-xl bg-white/10 hover:bg-white/15 px-5 py-3 font-semibold">Cum te ajută</a>
+          </div>
+          <div class="mt-8 flex items-center gap-6 text-sm text-slate-400">
+            <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-emerald-400"></span> Fără backend</span>
+            <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-brand-400"></span> Gata de Netlify</span>
+            <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-fuchsia-400"></span> SEO + OG tags</span>
+          </div>
+        </div>
+
+        <!-- Imagine hero = aceeași imagine ca fundalul -->
+        <div class="relative">
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-4 shadow-soft backdrop-blur">
+            <img id="heroImg" src="assets/fundal.png" alt="Hero vizual" class="rounded-2xl w-full aspect-[4/3] object-cover"/>
+          </div>
+          <p class="text-center text-sm text-slate-400 mt-3">Poza eroului este aceeași cu fundalul (assets/fundal.png).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTIUNEA 1: Beneficii -->
+  <section id="beneficii" class="border-t border-white/5">
+    <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8 py-14">
+      <h2 class="text-3xl font-extrabold">De ce clienții aleg Rivo</h2>
+      <p class="text-slate-300 mt-2 max-w-2xl">Focus pe vânzări, nu pe setup. Tot ce îți trebuie e într-un singur fișier.</p>
+
+      <div class="mt-10 grid md:grid-cols-3 gap-6">
+        <div class="rounded-3xl bg-white/5 p-6 border border-white/10">
+          <div class="text-xl font-bold mb-1">1. Conversie crescută</div>
+          <p class="text-slate-300">Hero clar + dovezi sociale + secțiuni de beneficii optimizate.</p>
+        </div>
+        <div class="rounded-3xl bg-white/5 p-6 border border-white/10">
+          <div class="text-xl font-bold mb-1">2. Ușor de editat</div>
+          <p class="text-slate-300">Tailwind via CDN, componente predefinite, fără build tools.</p>
+        </div>
+        <div class="rounded-3xl bg-white/5 p-6 border border-white/10">
+          <div class="text-xl font-bold mb-1">3. Integrare simplă</div>
+          <p class="text-slate-300">Formulare Netlify / linkuri Stripe/PayPal gata de atașat.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTIUNEA 2: Pachete -->
+  <section id="pachete" class="border-t border-white/5">
+    <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8 py-14">
+      <div class="flex items-end justify-between flex-wrap gap-4">
+        <div>
+          <h2 class="text-3xl font-extrabold">Alege pachetul</h2>
+          <p class="text-slate-300 mt-2">Plătești o singură dată. Primești update-uri gratuite.</p>
+        </div>
+      </div>
+
+      <div class="mt-8 grid md:grid-cols-3 gap-6">
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft">
+          <h3 class="text-xl font-bold">Starter</h3>
+          <p class="text-slate-300 mt-1">Pentru lansări rapide.</p>
+          <div class="text-3xl font-extrabold mt-4">€19</div>
+          <ul class="mt-5 grid gap-2 text-sm text-slate-300">
+            <li>✔ Pagina de vânzare</li>
+            <li>✔ Secțiuni optimizate</li>
+            <li>✔ Form contact Netlify</li>
+          </ul>
+          <a href="#" class="mt-6 block text-center rounded-xl bg-brand-600 hover:bg-brand-500 px-5 py-3 font-semibold">Cumpără</a>
+        </div>
+
+        <div class="rounded-3xl border border-brand-500/30 bg-brand-500/5 p-6 ring-1 ring-brand-500/20 shadow-soft relative">
+          <div class="absolute -top-3 right-6 text-xs bg-emerald-500 text-white px-2 py-1 rounded-md">Popular</div>
+          <h3 class="text-xl font-bold">Pro</h3>
+          <p class="text-slate-300 mt-1">Totul pentru creștere.</p>
+          <div class="text-3xl font-extrabold mt-4">€49</div>
+          <ul class="mt-5 grid gap-2 text-sm text-slate-300">
+            <li>✔ Tot din Starter</li>
+            <li>✔ 3 layout-uri de produs</li>
+            <li>✔ Testimoniale & logo bar</li>
+            <li>✔ Ghid SEO de bază</li>
+          </ul>
+          <a href="#" class="mt-6 block text-center rounded-xl bg-brand-600 hover:bg-brand-500 px-5 py-3 font-semibold">Cumpără Pro</a>
+        </div>
+
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft">
+          <h3 class="text-xl font-bold">Agency</h3>
+          <p class="text-slate-300 mt-1">Pentru echipe / freelanceri.</p>
+          <div class="text-3xl font-extrabold mt-4">€99</div>
+          <ul class="mt-5 grid gap-2 text-sm text-slate-300">
+            <li>✔ Licență comercială</li>
+            <li>✔ 5 pagini bonus</li>
+            <li>✔ Suport prioritizat</li>
+          </ul>
+          <a href="#" class="mt-6 block text-center rounded-xl bg-brand-600 hover:bg-brand-500 px-5 py-3 font-semibold">Ia Agency</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTIUNEA 3: Social proof + Produse -->
+  <section class="border-t border-white/5">
+    <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8 py-14">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold">Peste 1.000+ clienți mulțumiți</h2>
+        <p class="text-slate-300 mt-2">Creatorii folosesc Rivo pentru a lansa mai repede și a vinde mai mult.</p>
+      </div>
+
+      <!-- Logo bar fake -->
+      <div class="mt-8 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-6 opacity-80">
+        <div class="h-10 bg-white/5 border border-white/10 rounded-lg"></div>
+        <div class="h-10 bg-white/5 border border-white/10 rounded-lg"></div>
+        <div class="h-10 bg-white/5 border border-white/10 rounded-lg"></div>
+        <div class="h-10 bg-white/5 border border-white/10 rounded-lg"></div>
+        <div class="h-10 bg-white/5 border border-white/10 rounded-lg"></div>
+        <div class="h-10 bg-white/5 border border-white/10 rounded-lg"></div>
+      </div>
+
+      <!-- Produse -->
+      <div id="produse" class="mt-12">
+        <h3 class="text-2xl font-bold">Produse populare</h3>
+        <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <article class="group rounded-3xl border border-white/10 bg-white/5 p-5 hover:bg-white/10 transition shadow-soft">
+            <div class="aspect-[4/3] rounded-2xl overflow-hidden">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1581090700227-4c4c82d55a30?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover" alt="Preview produs 1">
+            </div>
+            <div class="mt-4">
+              <h4 class="text-xl font-extrabold">Set Prompts Pro</h4>
+              <p class="mt-1 text-sm text-slate-300">Colecție completă pentru marketing & coding.</p>
+            </div>
+            <div class="mt-4 flex items-center justify-between">
+              <span class="text-lg font-bold">€29</span>
+              <a href="#pachete" class="inline-flex items-center rounded-xl bg-brand-600 hover:bg-brand-500 px-4 py-2 font-semibold">Cumpără</a>
+            </div>
+          </article>
+
+          <article class="group rounded-3xl border border-white/10 bg-white/5 p-5 hover:bg-white/10 transition shadow-soft">
+            <div class="aspect-[4/3] rounded-2xl overflow-hidden">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1607083209263-b64d4f50ae00?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover" alt="Preview produs 2">
+            </div>
+            <div class="mt-4">
+              <h4 class="text-xl font-extrabold">Template Landing</h4>
+              <p class="mt-1 text-sm text-slate-300">Pagini rapide pentru lansare și ad-uri.</p>
+            </div>
+            <div class="mt-4 flex items-center justify-between">
+              <span class="text-lg font-bold">€19</span>
+              <a href="#pachete" class="inline-flex items-center rounded-xl bg-brand-600 hover:bg-brand-500 px-4 py-2 font-semibold">Cumpără</a>
+            </div>
+          </article>
+
+          <article class="group rounded-3xl border border-white/10 bg-white/5 p-5 hover:bg-white/10 transition shadow-soft">
+            <div class="aspect-[4/3] rounded-2xl overflow-hidden">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1551281044-8b89f37a2c53?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover" alt="Preview produs 3">
+            </div>
+            <div class="mt-4">
+              <h4 class="text-xl font-extrabold">Kit Creator</h4>
+              <p class="mt-1 text-sm text-slate-300">Sisteme de conținut & workflows.</p>
+            </div>
+            <div class="mt-4 flex items-center justify-between">
+              <span class="text-lg font-bold">€39</span>
+              <a href="#pachete" class="inline-flex items-center rounded-xl bg-brand-600 hover:bg-brand-500 px-4 py-2 font-semibold">Cumpără</a>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Testimoniale -->
+      <div class="mt-12 grid md:grid-cols-3 gap-6">
+        <blockquote class="rounded-3xl bg-white/5 p-6 border border-white/10 text-sm text-slate-300">“Am lansat în aceeași zi. Arată premium și convertește.” <span class="block mt-3 text-slate-400">— Alex, marketer</span></blockquote>
+        <blockquote class="rounded-3xl bg-white/5 p-6 border border-white/10 text-sm text-slate-300">“Cel mai rapid setup de până acum. Super ușor de schimbat.” <span class="block mt-3 text-slate-400">— Andra, creator</span></blockquote>
+        <blockquote class="rounded-3xl bg-white/5 p-6 border border-white/10 text-sm text-slate-300">“Design curat, viteza excelentă. Recomand.” <span class="block mt-3 text-slate-400">— Mihai, dev</span></blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA final -->
+  <section class="border-t border-white/5">
+    <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8 py-14 text-center">
+      <h2 class="text-3xl font-extrabold">Ești gata să vinzi?</h2>
+      <p class="text-slate-300 mt-2">Ia pachetul Pro și pornește azi.</p>
+      <a href="#pachete" class="mt-6 inline-flex items-center rounded-xl bg-emerald-600 hover:bg-emerald-500 px-6 py-3 font-semibold shadow-soft">Alege pachetul Pro</a>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="border-t border-white/5">
+    <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8 py-14">
+      <div class="grid md:grid-cols-2 gap-8 items-center">
+        <div>
+          <h3 class="text-2xl font-extrabold">Întrebări? Scrie-ne 👋</h3>
+          <p class="text-slate-300 mt-2">Răspundem în 24h. Pentru personalizări, menționează detalii în mesaj.</p>
+        </div>
+        <form name="contact" method="POST" data-netlify="true" class="rounded-3xl bg-white/5 p-6 border border-white/10 grid gap-3">
+          <input type="hidden" name="form-name" value="contact">
+          <p class="hidden" aria-hidden="true"><label>Nu completa: <input name="bot-field" /></label></p>
+          <label class="grid gap-1">
+            <span class="text-sm text-slate-300">Email</span>
+            <input required name="email" type="email" class="rounded-xl bg-slate-900 border border-white/10 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="tu@exemplu.com" />
+          </label>
+          <label class="grid gap-1">
+            <span class="text-sm text-slate-300">Mesaj</span>
+            <textarea required name="mesaj" class="rounded-xl bg-slate-900 border border-white/10 px-4 py-2 min-h-[120px] focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="Salut, aș vrea..."></textarea>
+          </label>
+          <button class="inline-flex items-center justify-center rounded-xl bg-brand-600 hover:bg-brand-500 px-5 py-3 font-semibold">Trimite</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/5">
+    <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8 py-10 text-sm text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p>© <span id="year"></span> Rivo. Toate drepturile rezervate.</p>
+      <div class="flex items-center gap-6">
+        <a class="hover:text-white" href="#">Termeni</a>
+        <a class="hover:text-white" href="#">Confidențialitate</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS: fundal foto fix + linii animate + meniu mobil -->
+  <script>
+    // 1) Setăm fundalul foto din assets/fundal.png (fallback Unsplash dacă lipsește)
+    (function applyBackground(){
+      const target = document.getElementById('bg-photo');
+      const heroImg = document.getElementById('heroImg');
+      const PRIMARY = 'assets/fundal.png';
+      const FALLBACK = 'https://images.unsplash.com/photo-1607082349566-187342de44d0?auto=format&fit=crop&w=1600&q=80';
+
+      const test = src => new Promise(res => {
+        const im = new Image();
+        im.onload = () => res(src);
+        im.onerror = () => res(null);
+        im.src = src;
+      });
+
+      (async () => {
+        const ok = await test(PRIMARY) || FALLBACK;
+        target.style.backgroundImage = `url('${ok}')`;
+        // ne asigurăm că și hero are aceeași poză (doar dacă nu s-a încărcat deja)
+        if (!heroImg.getAttribute('src') || heroImg.getAttribute('src') === '') {
+          heroImg.src = ok;
+        }
+      })();
+    })();
+
+    // 2) Linii high-tech animate (canvas)
+    (function lines(){
+      const c = document.getElementById('bg-lines');
+      const g = c.getContext('2d');
+      let W=0,H=0,t=0,DPR=1;
+      function fit(){
+        DPR = Math.min(window.devicePixelRatio||1, 2);
+        W = innerWidth; H = innerHeight;
+        c.width = Math.floor(W*DPR); c.height = Math.floor(H*DPR);
+        c.style.width=W+'px'; c.style.height=H+'px';
+        g.setTransform(DPR,0,0,DPR,0,0);
+      }
+      addEventListener('resize', fit); fit();
+
+      function draw(ms){
+        t = ms/1000;
+        g.clearRect(0,0,W,H);
+        g.save();
+        g.lineWidth = 1.1;
+
+        // strat ↘︎
+        g.globalAlpha = .22; g.strokeStyle = 'rgba(56,189,248,.9)';
+        const spacing = 84, off = (t*50)%spacing;
+        g.setLineDash([14,18]);
+        for(let x=-W; x<W*2; x+=spacing){
+          g.lineDashOffset = -off + x*0.1;
+          g.beginPath(); g.moveTo(x,0); g.lineTo(x-H,H); g.stroke();
+        }
+        // strat ↗︎
+        g.globalAlpha = .16; g.strokeStyle = 'rgba(16,185,129,.9)';
+        for(let x=-W; x<W*2; x+=spacing){
+          g.lineDashOffset = off*0.7 + x*0.08;
+          g.beginPath(); g.moveTo(x,H); g.lineTo(x+H,0); g.stroke();
+        }
+        // highlight
+        g.globalCompositeOperation = 'lighter';
+        g.globalAlpha = .2; g.strokeStyle = 'rgba(99,102,241,.9)';
+        g.setLineDash([4,22]);
+        for(let x=-W; x<W*2; x+=spacing*0.5){
+          g.lineDashOffset = -off*1.2;
+          g.beginPath(); g.moveTo(x,H); g.lineTo(x+H,0); g.stroke();
+        }
+        g.restore();
+        requestAnimationFrame(draw);
+      }
+      requestAnimationFrame(draw);
+    })();
+
+    // 3) Meniu mobil + anul curent
+    document.getElementById('menuBtn').addEventListener('click', ()=>{
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
