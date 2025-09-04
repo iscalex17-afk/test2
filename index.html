@@ -1,126 +1,189 @@
 <script>
-  // ===== Fundal tech: imagine + linii animate PCB + particule =====
+  // ===== FUNDAL: FOTO + EDGE-MASK + LINII CURGĂTOARE + PARTICULE =====
   const canvas = document.getElementById('tech-bg');
   const ctx = canvas.getContext('2d', { alpha: true });
-  let w, h, particles, t = 0;
+  let W, H, T = 0;
 
-  // imaginea chip pe fundal
-  const chipImg = new Image();
-  chipImg.src = 'assets/chip-bg.webp'; // <-- schimbă dacă ai alt nume/loc
+  // ---- imaginea de fundal
+  const img = new Image();
+  img.src = 'assets/chip-bg.webp'; // schimbă dacă ai alt nume
   let imgReady = false;
-  chipImg.onload = () => imgReady = true;
+  img.onload = () => { imgReady = true; buildEdgeMask(); };
 
-  function resize(){ 
-    w = canvas.width = window.innerWidth; 
-    h = canvas.height = window.innerHeight; 
-    init(); 
-  }
+  // ---- măști offscreen (edge mask + buffer linii)
+  const maskCanvas = document.createElement('canvas');
+  const maskCtx = maskCanvas.getContext('2d');
+  const lineCanvas = document.createElement('canvas');
+  const lineCtx = lineCanvas.getContext('2d');
 
-  function init(){
-    particles = Array.from({length: Math.min(220, Math.floor(w*h/7000))}, () => ({
-      x: Math.random()*w,
-      y: Math.random()*h,
-      vx: (Math.random()-0.5)*0.8,
-      vy: (Math.random()-0.5)*0.8,
-      r: Math.random()*1.8+0.6,
-      tw: Math.random()*Math.PI*2
+  // particule
+  let particles = [];
+  function setupParticles(){
+    particles = Array.from({length: Math.min(220, Math.floor(W*H/7000))}, () => ({
+      x: Math.random()*W, y: Math.random()*H,
+      vx: (Math.random()-0.5)*0.8, vy: (Math.random()-0.5)*0.8,
+      r: Math.random()*1.8+0.6, tw: Math.random()*Math.PI*2
     }));
   }
 
-  // trasee „PCB” care se mișcă (dash animat + paralax)
-  function drawMovingPCBLines(time){
-    const spacing = 80;
-    const dash = [14, 18];
-    const speed = 60; // viteza dungi (mai mare = mai rapid)
-    const offset = (time * speed);
+  function fit(){
+    W = canvas.width = innerWidth;
+    H = canvas.height = innerHeight;
+    lineCanvas.width = W; lineCanvas.height = H;
+    // edgeCanvas rămâne la dimensiunea nativă a imaginii; îl scalăm la desen
+    setupParticles();
+  }
+  addEventListener('resize', fit); fit();
 
-    ctx.save();
-    ctx.lineWidth = 1.25;
+  // ====== EDGE MASK (Sobel) ======
+  // Construim o mască albă pe contururile fotografiei (transp. în rest)
+  function buildEdgeMask(){
+    if(!imgReady) return;
+    maskCanvas.width = img.naturalWidth;
+    maskCanvas.height = img.naturalHeight;
+    const mW = maskCanvas.width, mH = maskCanvas.height;
 
-    // strat 1 — înclinat ↘︎ (albastru)
-    ctx.strokeStyle = 'rgba(56,189,248,0.55)';
-    ctx.setLineDash(dash);
-    ctx.globalAlpha = 0.28;
-    for(let x = -w; x < w*2; x += spacing){
-      ctx.lineDashOffset = -offset + x*0.1;
-      ctx.beginPath();
-      ctx.moveTo(x, 0);
-      ctx.lineTo(x - h, h);
-      ctx.stroke();
+    // 1) desenăm foto pe mască și convertim la gri
+    maskCtx.clearRect(0,0,mW,mH);
+    maskCtx.drawImage(img, 0, 0, mW, mH);
+    let imageData = maskCtx.getImageData(0,0,mW,mH);
+    const src = imageData.data;
+
+    // 2) grayscale
+    for(let i=0;i<src.length;i+=4){
+      const r=src[i], g=src[i+1], b=src[i+2];
+      const y = 0.2126*r + 0.7152*g + 0.0722*b;
+      src[i]=src[i+1]=src[i+2]=y;
     }
 
-    // strat 2 — înclinat ↗︎ (verde), ușor mai lent (parallax)
-    ctx.strokeStyle = 'rgba(16,185,129,0.45)';
-    ctx.globalAlpha = 0.22;
-    for(let x = -w; x < w*2; x += spacing){
-      ctx.lineDashOffset = offset*0.7 + x*0.08;
-      ctx.beginPath();
-      ctx.moveTo(x, h);
-      ctx.lineTo(x + h, 0);
-      ctx.stroke();
+    // 3) Sobel (edge detect)
+    // kernel
+    const gx = [-1,0,1,-2,0,2,-1,0,1];
+    const gy = [-1,-2,-1,0,0,0,1,2,1];
+    const mag = new Uint8ClampedArray(mW*mH);
+    const get = (x,y) => {
+      x=Math.max(0,Math.min(mW-1,x));
+      y=Math.max(0,Math.min(mH-1,y));
+      return src[(y*mW+x)*4]; // deja e grayscale
+    };
+    for(let y=0;y<mH;y++){
+      for(let x=0;x<mW;x++){
+        let sx=0, sy=0, k=0;
+        for(let j=-1;j<=1;j++){
+          for(let i=-1;i<=1;i++){
+            const v = get(x+i,y+j);
+            sx += v*gx[k]; sy += v*gy[k]; k++;
+          }
+        }
+        const m = Math.sqrt(sx*sx + sy*sy);
+        mag[y*mW+x] = m>255 ? 255 : m;
+      }
     }
 
-    // highlight care „curge” ca un flux de energie
-    ctx.globalCompositeOperation = 'lighter';
-    ctx.setLineDash([4, 22]);
-    ctx.strokeStyle = 'rgba(99,102,241,0.35)';
-    ctx.globalAlpha = 0.35;
-    for(let x = -w; x < w*2; x += spacing*0.5){
-      ctx.lineDashOffset = -offset*1.2;
-      ctx.beginPath();
-      ctx.moveTo(x, h);
-      ctx.lineTo(x + h, 0);
-      ctx.stroke();
+    // 4) threshold + dilatare mică → linii mai groase
+    const threshold = 90; // ← sensibilitate; mai mic = mai multe contururi
+    const out = maskCtx.createImageData(mW,mH);
+    const dst = out.data;
+    for(let i=0;i<mag.length;i++){
+      const v = mag[i] > threshold ? 255 : 0;
+      dst[i*4+0]=255; dst[i*4+1]=255; dst[i*4+2]=255; dst[i*4+3]=v;
     }
-    ctx.restore();
-    ctx.setLineDash([]);
-    ctx.globalCompositeOperation = 'source-over';
+    // dilatare 1px
+    const dil = new Uint8ClampedArray(dst.length);
+    dil.set(dst);
+    const off = [[1,0],[-1,0],[0,1],[0,-1]];
+    const idx = (x,y)=> (y*mW+x)*4+3;
+    for(let y=1;y<mH-1;y++){
+      for(let x=1;x<mW-1;x++){
+        let a = dst[idx(x,y)];
+        if(a===0){
+          for(const [dx,dy] of off){ if(dst[idx(x+dx,y+dy)]>0){ a=140; break; } }
+          dil[idx(x,y)] = a;
+        }
+      }
+    }
+    out.data.set(dil);
+    maskCtx.putImageData(out,0,0);
   }
 
-  function tick(){
-    t += 0.005;
-    ctx.clearRect(0,0,w,h);
+  // ====== LINII ANIMATE (se vor tăia cu masca)
+  function drawLines(time){
+    const spacing = 80;          // densitate linii
+    const dash = [14, 18];
+    const speed = 60;            // viteză flux
+    const offset = (time * speed);
 
-    // 1) desenăm imaginea chip cu un mic pan/zoom subtil (să pară „vie”)
-    if(imgReady){
-      const cover = Math.max(w/chipImg.width, h/chipImg.height) * 1.08; // zoom mic
-      const iw = chipImg.width * cover;
-      const ih = chipImg.height * cover;
-      const panX = Math.sin(t*0.6) * 18; // pan ușor
-      const panY = Math.cos(t*0.5) * 14;
-      const x = (w - iw)/2 + panX;
-      const y = (h - ih)/2 + panY;
+    lineCtx.clearRect(0,0,W,H);
+    lineCtx.save();
+    lineCtx.lineWidth = 1.25;
 
-      ctx.globalAlpha = 0.55; // amestec cu UI
-      ctx.drawImage(chipImg, x, y, iw, ih);
-      ctx.globalAlpha = 1;
+    // strat ↘︎
+    lineCtx.strokeStyle = 'rgba(56,189,248,0.55)';
+    lineCtx.setLineDash(dash);
+    lineCtx.globalAlpha = 0.28;
+    for(let x=-W; x<W*2; x+=spacing){
+      lineCtx.lineDashOffset = -offset + x*0.1;
+      lineCtx.beginPath();
+      lineCtx.moveTo(x,0);
+      lineCtx.lineTo(x-H,H);
+      lineCtx.stroke();
     }
+    // strat ↗︎
+    lineCtx.strokeStyle = 'rgba(16,185,129,0.45)';
+    lineCtx.globalAlpha = 0.22;
+    for(let x=-W; x<W*2; x+=spacing){
+      lineCtx.lineDashOffset = offset*0.7 + x*0.08;
+      lineCtx.beginPath();
+      lineCtx.moveTo(x,H);
+      lineCtx.lineTo(x+H,0);
+      lineCtx.stroke();
+    }
+    // highlight
+    lineCtx.globalCompositeOperation = 'lighter';
+    lineCtx.setLineDash([4, 22]);
+    lineCtx.strokeStyle = 'rgba(99,102,241,0.35)';
+    lineCtx.globalAlpha = 0.35;
+    for(let x=-W; x<W*2; x+=spacing*0.5){
+      lineCtx.lineDashOffset = -offset*1.2;
+      lineCtx.beginPath();
+      lineCtx.moveTo(x,H);
+      lineCtx.lineTo(x+H,0);
+      lineCtx.stroke();
+    }
+    lineCtx.restore();
 
-    // 2) glow moale peste fundal
-    const grad = ctx.createRadialGradient(
-      w*0.2 + Math.sin(t)*50, h*0.15 + Math.cos(t*0.8)*40, 100,
-      w*0.8 + Math.cos(t*0.6)*60, h*0.25 + Math.sin(t*0.9)*50, Math.max(w,h)
-    );
-    grad.addColorStop(0, 'rgba(59,130,246,0.08)');
-    grad.addColorStop(1, 'rgba(2,6,23,0)');
-    ctx.fillStyle = grad;
-    ctx.fillRect(0,0,w,h);
+    // — aplica masca contururilor imaginii (aliniată cu pan/zoom-ul foto) —
+    if(imgReady){
+      const cover = Math.max(W/img.naturalWidth, H/img.naturalHeight) * 1.08;
+      const iw = img.naturalWidth * cover;
+      const ih = img.naturalHeight * cover;
+      const panX = Math.sin(T*0.6) * 18;
+      const panY = Math.cos(T*0.5) * 14;
+      const x = (W - iw)/2 + panX;
+      const y = (H - ih)/2 + panY;
 
-    // 3) linii „din poză” care curg constant
-    drawMovingPCBLines(performance.now()/1000);
+      lineCtx.save();
+      lineCtx.globalCompositeOperation = 'destination-in';
+      lineCtx.imageSmoothingEnabled = true;
+      lineCtx.drawImage(maskCanvas, x, y, iw, ih);
+      lineCtx.restore();
+    }
+  }
 
-    // 4) particule + legături (păstrate din versiunea ta)
+  function drawParticles(){
+    ctx.save();
     ctx.fillStyle = 'rgba(148,163,184,0.7)';
     ctx.strokeStyle = 'rgba(99,102,241,0.12)';
     for(const p of particles){
-      p.vx += Math.sin((p.y+t*40)/12000)*0.02;
-      p.vy += Math.cos((p.x-t*40)/12000)*0.02;
+      p.vx += Math.sin((p.y+T*40)/12000)*0.02;
+      p.vy += Math.cos((p.x-T*40)/12000)*0.02;
       p.x += p.vx; p.y += p.vy;
-      if(p.x<0||p.x>w) p.vx*=-1, p.x=Math.max(0, Math.min(w,p.x));
-      if(p.y<0||p.y>h) p.vy*=-1, p.y=Math.max(0, Math.min(h,p.y));
-      const r = p.r + Math.sin(p.tw + t*6)*0.3;
+      if(p.x<0||p.x>W) p.vx*=-1;
+      if(p.y<0||p.y>H) p.vy*=-1;
+      const r = p.r + Math.sin(p.tw + T*6)*0.3;
       ctx.beginPath(); ctx.arc(p.x,p.y,Math.max(0.4,r),0,Math.PI*2); ctx.fill();
     }
+    // legături
     for(let i=0;i<particles.length;i++){
       for(let j=i+1;j<particles.length;j++){
         const a=particles[i], b=particles[j];
@@ -132,14 +195,50 @@
         }
       }
     }
-
-    requestAnimationFrame(tick);
+    ctx.restore();
   }
 
-  window.addEventListener('resize', resize);
-  resize(); init(); tick();
+  function loop(){
+    T += 0.005;
+    ctx.clearRect(0,0,W,H);
 
-  // ===== Coș simplu (localStorage) – rămâne neschimbat mai jos =====
+    // 1) imaginea de fundal cu pan/zoom subtil
+    if(imgReady){
+      const cover = Math.max(W/img.naturalWidth, H/img.naturalHeight) * 1.08;
+      const iw = img.naturalWidth * cover;
+      const ih = img.naturalHeight * cover;
+      const panX = Math.sin(T*0.6) * 18;
+      const panY = Math.cos(T*0.5) * 14;
+      const x = (W - iw)/2 + panX;
+      const y = (H - ih)/2 + panY;
+
+      ctx.globalAlpha = 0.55;
+      ctx.drawImage(img, x, y, iw, ih);
+      ctx.globalAlpha = 1;
+
+      // glow delicat
+      const grad = ctx.createRadialGradient(
+        W*0.2 + Math.sin(T)*50, H*0.15 + Math.cos(T*0.8)*40, 100,
+        W*0.8 + Math.cos(T*0.6)*60, H*0.25 + Math.sin(T*0.9)*50, Math.max(W,H)
+      );
+      grad.addColorStop(0, 'rgba(59,130,246,0.08)');
+      grad.addColorStop(1, 'rgba(2,6,23,0)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0,0,W,H);
+    }
+
+    // 2) linii + mască contururi
+    drawLines(performance.now()/1000);
+    ctx.drawImage(lineCanvas, 0, 0);
+
+    // 3) particule
+    drawParticles();
+
+    requestAnimationFrame(loop);
+  }
+  setupParticles(); loop();
+
+  // ===== Coș + Swiper + Fallback imagini (restul rămâne la fel) =====
   const CART_KEY = 'rivo_cart_v1';
   const cart = {
     items: [],
@@ -204,7 +303,6 @@
   document.getElementById('year').textContent = new Date().getFullYear();
   document.getElementById('checkout-form').addEventListener('submit', ()=>{ document.getElementById('cart_json').value = JSON.stringify(cart.items); });
 
-  // Swiper + fallback imagini (la fel ca înainte)
   window.addEventListener('load', ()=>{
     const sw = document.querySelector('.product-swiper');
     if(sw){ new Swiper(sw, { loop:true, pagination:{ el: sw.querySelector('.swiper-pagination'), clickable:true }, autoplay:{ delay:2500, disableOnInteraction:false } }); }
@@ -214,11 +312,8 @@
     function applyFallback(img){
       if(img.dataset.fallbackApplied) return;
       img.dataset.fallbackApplied='1';
-      img.src = PLACEHOLDER;
-      img.loading = 'lazy';
-      img.style.objectFit='contain';
-      img.style.background='rgba(255,255,255,0.04)';
-      img.style.padding='24px';
+      img.src = PLACEHOLDER; img.loading='lazy';
+      img.style.objectFit='contain'; img.style.background='rgba(255,255,255,0.04)'; img.style.padding='24px';
       img.alt = (img.alt||'') + ' (coming soon)';
     }
     function watchImages(){
