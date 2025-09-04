@@ -9,28 +9,34 @@
   <meta property="og:title" content="Rivo — Prompts & Digital Goods" />
   <meta property="og:description" content="Magazin digital pentru creatori: prompts, template-uri și kit-uri AI." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://images.unsplash.com/photo-1607082349566-187342de44d0?auto=format&fit=crop&w=1200&q=80" />
+  <!-- OG image se va corela cu fundalul dacă îl ții în assets/ -->
+  <meta property="og:image" content="assets/chip-bg.webp" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Swiper (slider produs) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
   <script defer src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: { sans: ['Inter','ui-sans-serif','system-ui'] },
-          colors: {
-            brand: {50:'#EFF6FF',100:'#DBEAFE',200:'#BFDBFE',300:'#93C5FD',400:'#60A5FA',500:'#3B82F6',600:'#2563EB',700:'#1D4ED8',800:'#1E40AF',900:'#1E3A8A'}
-          },
-          boxShadow:{ soft:'0 10px 30px rgba(0,0,0,0.15)'}
+          colors: { brand:{50:'#EFF6FF',100:'#DBEAFE',200:'#BFDBFE',300:'#93C5FD',400:'#60A5FA',500:'#3B82F6',600:'#2563EB',700:'#1D4ED8',800:'#1E40AF',900:'#1E3A8A'} },
+          boxShadow:{ soft:'0 10px 30px rgba(0,0,0,0.15)' }
         }
       }
     }
   </script>
+
   <style>
-    /* Canvas fundal high-tech */
+    /* Fundal pe canvas (sub conținut) */
     #tech-bg{position:fixed;inset:0;z-index:-2;background:#020617}
     .gradient-overlay{position:fixed;inset:0;background:
       radial-gradient(1200px 800px at 20% 10%,rgba(59,130,246,.18),transparent 60%),
@@ -44,7 +50,9 @@
     .swiper-pagination-bullet-active{background:#3B82F6;opacity:1}
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans selection:bg-brand-400/30 selection:text-white">
+
+<!-- >>> Schimbă data-bg-url cu calea pozei tale. Implicit: assets/chip-bg.webp <<< -->
+<body class="bg-slate-950 text-slate-100 font-sans selection:bg-brand-400/30 selection:text-white" data-bg-url="assets/chip-bg.webp">
   <canvas id="tech-bg" aria-hidden="true"></canvas>
   <div class="gradient-overlay" aria-hidden="true"></div>
 
@@ -64,7 +72,7 @@
         </nav>
         <div class="flex items-center gap-3">
           <button id="cartButton" class="relative inline-flex items-center gap-2 rounded-xl bg-white/10 py-2 px-3 hover:bg-white/15 transition" aria-haspopup="dialog" aria-controls="cartDrawer">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25h9.563c.966 0 1.793-.684 1.97-1.635l1.2-6.43a1.125 1.125 0 0 0-1.106-1.335H5.309m2.191 9.4L5.25 5.25M7.5 14.25l-2.25 9m12-9 2.25 9M9 22.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm9 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25h9.563c.966 0 1.793-.684 1.97-1.635l1.2-6.43a1.125 1.125 0 0 0-1.106-1.335H5.309m2.191 9.4L5.25 5.25M7.5 14.25l-2.25 9M9 22.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm9 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>
             <span>Coș</span>
             <span id="cartCount" class="absolute -top-2 -right-2 text-xs bg-brand-500 rounded-full h-5 min-w-[1.25rem] px-1 flex items-center justify-center font-semibold">0</span>
           </button>
@@ -95,7 +103,7 @@
         <div class="relative">
           <div class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft backdrop-blur">
             <img src="https://images.unsplash.com/photo-1607082349566-187342de44d0?auto=format&fit=crop&w=1000&q=80" alt="Tech background" class="rounded-2xl shadow-soft"/>
-            <p class="text-center text-sm text-slate-300 mt-4">UI techy + animație (fundalul real e pe canvas)</p>
+            <p class="text-center text-sm text-slate-300 mt-4">UI techy + fundal animat pe canvas</p>
           </div>
         </div>
       </div>
@@ -274,22 +282,23 @@
   <!-- ===== SCRIPTS ===== -->
   <script>
     /* =======================
-       FUNDAL: FOTO + EDGE-MASK + LINII CURGĂTOARE + PARTICULE
+       FUNDAL: FOTO + EDGE MASK + LINII CURGĂTOARE + PARTICULE
        ======================= */
     const canvas = document.getElementById('tech-bg');
     const ctx = canvas.getContext('2d', { alpha: true });
     let W, H, T = 0;
 
-    // imaginea de fundal – pune fișierul tău la assets/chip-bg.webp
+    // 1) Sursa imaginii din atributul data-bg-url (fallback Unsplash).
+    const BG_SRC = document.body.dataset.bgUrl || 'assets/chip-bg.webp';
     const img = new Image();
-    img.src = 'assets/chip-bg.webp';
-    img.onerror = () => { // fallback dacă fișierul lipsește
+    img.src = BG_SRC;
+    img.onerror = () => { // fallback dacă nu găsește fișierul
       img.src = 'https://images.unsplash.com/photo-1607082349566-187342de44d0?auto=format&fit=crop&w=1600&q=80';
-    }
+    };
     let imgReady = false;
     img.onload = () => { imgReady = true; buildEdgeMask(); };
 
-    // măști offscreen (edge mask + buffer linii)
+    // pânze offscreen: mască contur + buffer linii
     const maskCanvas = document.createElement('canvas');
     const maskCtx = maskCanvas.getContext('2d');
     const lineCanvas = document.createElement('canvas');
@@ -313,7 +322,7 @@
     }
     addEventListener('resize', fit); fit();
 
-    // ===== Edge mask (Sobel) — contururi din poză =====
+    // Edge mask (Sobel) peste fotografia ta – ca linii să „urmeze” traseele
     function buildEdgeMask(){
       if(!imgReady) return;
       maskCanvas.width = img.naturalWidth;
@@ -322,125 +331,108 @@
 
       maskCtx.clearRect(0,0,mW,mH);
       maskCtx.drawImage(img, 0, 0, mW, mH);
-      let imageData = maskCtx.getImageData(0,0,mW,mH);
-      const src = imageData.data;
+      const data = maskCtx.getImageData(0,0,mW,mH);
+      const src = data.data;
 
       // grayscale
-      for(let i=0;i<src.length;i+=4){
+      for (let i=0;i<src.length;i+=4){
         const r=src[i], g=src[i+1], b=src[i+2];
-        const y = 0.2126*r + 0.7152*g + 0.0722*b;
+        const y=0.2126*r+0.7152*g+0.0722*b;
         src[i]=src[i+1]=src[i+2]=y;
       }
 
       // Sobel
-      const gx = [-1,0,1,-2,0,2,-1,0,1];
-      const gy = [-1,-2,-1,0,0,0,1,2,1];
-      const mag = new Uint8ClampedArray(mW*mH);
-      const get = (x,y) => {
-        x=Math.max(0,Math.min(mW-1,x));
-        y=Math.max(0,Math.min(mH-1,y));
-        return src[(y*mW+x)*4];
-      };
+      const gx=[-1,0,1,-2,0,2,-1,0,1];
+      const gy=[-1,-2,-1,0,0,0,1,2,1];
+      const mag=new Uint8ClampedArray(mW*mH);
+      const get=(x,y)=>src[(y*mW+x)*4];
       for(let y=0;y<mH;y++){
         for(let x=0;x<mW;x++){
           let sx=0, sy=0, k=0;
-          for(let j=-1;j<=1;j++) for(let i=-1;i<=1;i++){
-            const v = get(x+i,y+j);
-            sx += v*gx[k]; sy += v*gy[k]; k++;
+          for(let j=-1;j<=1;j++){
+            for(let i=-1;i<=1;i++){
+              const xx=Math.max(0,Math.min(mW-1,x+i));
+              const yy=Math.max(0,Math.min(mH-1,y+j));
+              const v=get(xx,yy);
+              sx+=v*gx[k]; sy+=v*gy[k]; k++;
+            }
           }
-          const m = Math.sqrt(sx*sx + sy*sy);
-          mag[y*mW+x] = m>255 ? 255 : m;
+          const m=Math.sqrt(sx*sx+sy*sy);
+          mag[y*mW+x]=m>255?255:m;
         }
       }
 
-      // threshold + „îngroșare” 1px
-      const threshold = 90; // mai mic = mai multe contururi
-      const out = maskCtx.createImageData(mW,mH);
-      const dst = out.data;
+      const threshold=90; // mai mic = mai multe contururi
+      const out=maskCtx.createImageData(mW,mH);
+      const dst=out.data;
       for(let i=0;i<mag.length;i++){
         const v = mag[i] > threshold ? 255 : 0;
         dst[i*4+0]=255; dst[i*4+1]=255; dst[i*4+2]=255; dst[i*4+3]=v;
       }
-      const dil = new Uint8ClampedArray(dst.length);
-      dil.set(dst);
-      const off = [[1,0],[-1,0],[0,1],[0,-1]];
-      const idx = (x,y)=> (y*mW+x)*4+3;
-      for(let y=1;y<mH-1;y++){
-        for(let x=1;x<mW-1;x++){
-          let a = dst[idx(x,y)];
-          if(a===0){ for(const [dx,dy] of off){ if(dst[idx(x+dx,y+dy)]>0){ a=140; break; } } }
-          dil[idx(x,y)] = a;
-        }
-      }
-      out.data.set(dil);
       maskCtx.putImageData(out,0,0);
     }
 
-    // ===== Linii PCB animate (se taie cu masca contururilor) =====
+    // Linii PCB animate + „tăiere” la contururile pozei
     function drawLines(time){
-      const spacing = 80;        // densitate (60 = mai des)
-      const dash = [14, 18];
-      const speed = 60;          // viteză flux
-      const offset = time * speed;
+      const spacing=80, speed=60, dash=[14,18];
+      const offset=time*speed;
 
       lineCtx.clearRect(0,0,W,H);
       lineCtx.save();
-      lineCtx.lineWidth = 1.25;
+      lineCtx.lineWidth=1.25;
 
-      // ↘︎ strat
-      lineCtx.strokeStyle = 'rgba(56,189,248,0.55)';
+      // strat ↘︎
+      lineCtx.strokeStyle='rgba(56,189,248,0.55)';
       lineCtx.setLineDash(dash);
-      lineCtx.globalAlpha = 0.28;
-      for(let x=-W; x<W*2; x+=spacing){
-        lineCtx.lineDashOffset = -offset + x*0.1;
+      lineCtx.globalAlpha=0.28;
+      for(let x=-W;x<W*2;x+=spacing){
+        lineCtx.lineDashOffset=-offset + x*0.1;
         lineCtx.beginPath(); lineCtx.moveTo(x,0); lineCtx.lineTo(x-H,H); lineCtx.stroke();
       }
-      // ↗︎ strat
-      lineCtx.strokeStyle = 'rgba(16,185,129,0.45)';
-      lineCtx.globalAlpha = 0.22;
-      for(let x=-W; x<W*2; x+=spacing){
-        lineCtx.lineDashOffset = offset*0.7 + x*0.08;
+
+      // strat ↗︎ (paralax)
+      lineCtx.strokeStyle='rgba(16,185,129,0.45)';
+      lineCtx.globalAlpha=0.22;
+      for(let x=-W;x<W*2;x+=spacing){
+        lineCtx.lineDashOffset=offset*0.7 + x*0.08;
         lineCtx.beginPath(); lineCtx.moveTo(x,H); lineCtx.lineTo(x+H,0); lineCtx.stroke();
       }
+
       // highlight
-      lineCtx.globalCompositeOperation = 'lighter';
+      lineCtx.globalCompositeOperation='lighter';
       lineCtx.setLineDash([4,22]);
-      lineCtx.strokeStyle = 'rgba(99,102,241,0.35)';
-      lineCtx.globalAlpha = 0.35;
-      for(let x=-W; x<W*2; x+=spacing*0.5){
-        lineCtx.lineDashOffset = -offset*1.2;
+      lineCtx.strokeStyle='rgba(99,102,241,0.35)';
+      lineCtx.globalAlpha=0.35;
+      for(let x=-W;x<W*2;x+=spacing*0.5){
+        lineCtx.lineDashOffset=-offset*1.2;
         lineCtx.beginPath(); lineCtx.moveTo(x,H); lineCtx.lineTo(x+H,0); lineCtx.stroke();
       }
       lineCtx.restore();
 
-      // aplică masca aliniată cu pan/zoom-ul imaginii
+      // mascare cu contururile imaginii (aliniere cover + mic „pan”)
       if(imgReady){
-        const cover = Math.max(W/img.naturalWidth, H/img.naturalHeight) * 1.08;
-        const iw = img.naturalWidth * cover;
-        const ih = img.naturalHeight * cover;
-        const panX = Math.sin(T*0.6) * 18;
-        const panY = Math.cos(T*0.5) * 14;
-        const x = (W - iw)/2 + panX;
-        const y = (H - ih)/2 + panY;
+        const cover=Math.max(W/img.naturalWidth, H/img.naturalHeight)*1.08;
+        const iw=img.naturalWidth*cover, ih=img.naturalHeight*cover;
+        const panX=Math.sin(T*0.6)*18, panY=Math.cos(T*0.5)*14;
+        const x=(W-iw)/2+panX, y=(H-ih)/2+panY;
         lineCtx.save();
-        lineCtx.globalCompositeOperation = 'destination-in';
-        lineCtx.imageSmoothingEnabled = true;
-        lineCtx.drawImage(maskCanvas, x, y, iw, ih);
+        lineCtx.globalCompositeOperation='destination-in';
+        lineCtx.drawImage(maskCanvas,x,y,iw,ih);
         lineCtx.restore();
       }
     }
 
     function drawParticles(){
       ctx.save();
-      ctx.fillStyle = 'rgba(148,163,184,0.7)';
-      ctx.strokeStyle = 'rgba(99,102,241,0.12)';
+      ctx.fillStyle='rgba(148,163,184,0.7)';
+      ctx.strokeStyle='rgba(99,102,241,0.12)';
       for(const p of particles){
-        p.vx += Math.sin((p.y+T*40)/12000)*0.02;
-        p.vy += Math.cos((p.x-T*40)/12000)*0.02;
-        p.x += p.vx; p.y += p.vy;
+        p.vx+=Math.sin((p.y+T*40)/12000)*0.02;
+        p.vy+=Math.cos((p.x-T*40)/12000)*0.02;
+        p.x+=p.vx; p.y+=p.vy;
         if(p.x<0||p.x>W) p.vx*=-1;
         if(p.y<0||p.y>H) p.vy*=-1;
-        const r = p.r + Math.sin(p.tw + T*6)*0.3;
+        const r=p.r+Math.sin(p.tw+T*6)*0.3;
         ctx.beginPath(); ctx.arc(p.x,p.y,Math.max(0.4,r),0,Math.PI*2); ctx.fill();
       }
       for(let i=0;i<particles.length;i++){
@@ -448,7 +440,7 @@
           const a=particles[i], b=particles[j];
           const dx=a.x-b.x, dy=a.y-b.y, d=Math.hypot(dx,dy);
           if(d<120){
-            ctx.globalAlpha = 1 - d/120;
+            ctx.globalAlpha=1-d/120;
             ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
             ctx.globalAlpha=1;
           }
@@ -458,76 +450,76 @@
     }
 
     function loop(){
-      T += 0.005;
+      T+=0.005;
       ctx.clearRect(0,0,W,H);
 
       if(imgReady){
-        const cover = Math.max(W/img.naturalWidth, H/img.naturalHeight) * 1.08;
-        const iw = img.naturalWidth * cover;
-        const ih = img.naturalHeight * cover;
-        const panX = Math.sin(T*0.6) * 18;
-        const panY = Math.cos(T*0.5) * 14;
-        const x = (W - iw)/2 + panX;
-        const y = (H - ih)/2 + panY;
+        const cover=Math.max(W/img.naturalWidth, H/img.naturalHeight)*1.08;
+        const iw=img.naturalWidth*cover, ih=img.naturalHeight*cover;
+        const panX=Math.sin(T*0.6)*18, panY=Math.cos(T*0.5)*14;
+        const x=(W-iw)/2+panX, y=(H-ih)/2+panY;
 
-        ctx.globalAlpha = 0.55;
-        ctx.drawImage(img, x, y, iw, ih);
-        ctx.globalAlpha = 1;
+        ctx.globalAlpha=0.55;
+        ctx.drawImage(img,x,y,iw,ih);
+        ctx.globalAlpha=1;
 
-        const grad = ctx.createRadialGradient(
-          W*0.2 + Math.sin(T)*50, H*0.15 + Math.cos(T*0.8)*40, 100,
-          W*0.8 + Math.cos(T*0.6)*60, H*0.25 + Math.sin(T*0.9)*50, Math.max(W,H)
+        // glow subtil peste imagine
+        const grad=ctx.createRadialGradient(
+          W*0.2+Math.sin(T)*50, H*0.15+Math.cos(T*0.8)*40, 100,
+          W*0.8+Math.cos(T*0.6)*60, H*0.25+Math.sin(T*0.9)*50, Math.max(W,H)
         );
-        grad.addColorStop(0, 'rgba(59,130,246,0.08)');
-        grad.addColorStop(1, 'rgba(2,6,23,0)');
-        ctx.fillStyle = grad;
-        ctx.fillRect(0,0,W,H);
+        grad.addColorStop(0,'rgba(59,130,246,0.08)');
+        grad.addColorStop(1,'rgba(2,6,23,0)');
+        ctx.fillStyle=grad; ctx.fillRect(0,0,W,H);
       }
 
       drawLines(performance.now()/1000);
-      ctx.drawImage(lineCanvas, 0, 0);
+      ctx.drawImage(lineCanvas,0,0);
 
       drawParticles();
       requestAnimationFrame(loop);
     }
-    setupParticles(); loop();
+
+    // init
+    function init(){ W=canvas.width=innerWidth; H=canvas.height=innerHeight; setupParticles(); }
+    addEventListener('resize', init); init(); loop();
 
     /* =======================
-       COȘ + CHECKOUT + SWIPER + FALLBACK IMAGINI
+       Coș + Checkout + Swiper + Fallback imagini
        ======================= */
-    const CART_KEY = 'rivo_cart_v1';
-    const cart = {
-      items: [],
-      load(){ try{ this.items = JSON.parse(localStorage.getItem(CART_KEY))||[] }catch(e){ this.items=[] } this.sync() },
-      save(){ localStorage.setItem(CART_KEY, JSON.stringify(this.items)); this.sync() },
+    const CART_KEY='rivo_cart_v1';
+    const cart={
+      items:[],
+      load(){ try{ this.items=JSON.parse(localStorage.getItem(CART_KEY))||[] }catch(e){ this.items=[] } this.sync() },
+      save(){ localStorage.setItem(CART_KEY,JSON.stringify(this.items)); this.sync() },
       sync(){ updateCartUI() },
-      add(product){ const existing = this.items.find(i=>i.id===product.id); if(existing){ existing.qty += product.qty||1 } else { this.items.push({...product, qty: product.qty||1}) } this.save() },
-      remove(id){ this.items = this.items.filter(i=>i.id!==id); this.save() },
-      setQty(id, qty){ const item=this.items.find(i=>i.id===id); if(item){ item.qty=Math.max(1, qty); this.save() } },
-      total(){ return this.items.reduce((s,i)=> s + i.price*i.qty, 0) }
+      add(p){ const e=this.items.find(i=>i.id===p.id); if(e){ e.qty+=p.qty||1 } else { this.items.push({...p,qty:p.qty||1}) } this.save() },
+      remove(id){ this.items=this.items.filter(i=>i.id!==id); this.save() },
+      setQty(id,q){ const it=this.items.find(i=>i.id===id); if(it){ it.qty=Math.max(1,q); this.save() } },
+      total(){ return this.items.reduce((s,i)=>s+i.price*i.qty,0) }
     };
-    function formatEUR(n){ return new Intl.NumberFormat('ro-RO',{style:'currency', currency:'EUR'}).format(n) }
-    const product = { id:'prompts20', title:'20 Prompts pentru ChatGPT', price: 9.90, image:'', description:'Colecție PDF + TXT', download:'<ADAUGĂ_LINK_DOWNLOAD>' };
+    function formatEUR(n){ return new Intl.NumberFormat('ro-RO',{style:'currency',currency:'EUR'}).format(n) }
+    const product={ id:'prompts20', title:'20 Prompts pentru ChatGPT', price:9.90, image:'', description:'Colecție PDF + TXT', download:'<ADAUGĂ_LINK_DOWNLOAD>' };
     document.addEventListener('DOMContentLoaded', ()=>{
-      const addBtn = document.querySelector('[data-add-to-cart]');
-      if(addBtn){ addBtn.addEventListener('click', ()=>{ cart.add({ id: product.id, title: product.title, price: product.price }); openCart(); }); }
+      const addBtn=document.querySelector('[data-add-to-cart]');
+      if(addBtn){ addBtn.addEventListener('click', ()=>{ cart.add({id:product.id,title:product.title,price:product.price}); openCart(); }); }
     });
-    const cartDrawer = document.getElementById('cartDrawer');
-    const cartButton = document.getElementById('cartButton');
-    const closeCartBtn = document.getElementById('closeCart');
+    const cartDrawer=document.getElementById('cartDrawer');
+    const cartButton=document.getElementById('cartButton');
+    const closeCartBtn=document.getElementById('closeCart');
     cartButton.addEventListener('click', openCart);
     closeCartBtn.addEventListener('click', closeCart);
     function openCart(){ cartDrawer.classList.remove('translate-x-full') }
     function closeCart(){ cartDrawer.classList.add('translate-x-full') }
     function updateCartUI(){
       document.getElementById('cartCount').textContent = cart.items.reduce((s,i)=>s+i.qty,0);
-      const container = document.getElementById('cartItems');
-      container.innerHTML = '';
-      if(cart.items.length===0){ container.innerHTML = '<p class="text-slate-400">Coșul este gol.</p>'; }
+      const container=document.getElementById('cartItems');
+      container.innerHTML='';
+      if(cart.items.length===0){ container.innerHTML='<p class="text-slate-400">Coșul este gol.</p>'; }
       cart.items.forEach(i=>{
-        const row = document.createElement('div');
-        row.className = 'flex items-center justify-between gap-3 rounded-xl bg-white/5 p-3 border border-white/10';
-        row.innerHTML = `
+        const row=document.createElement('div');
+        row.className='flex items-center justify-between gap-3 rounded-xl bg-white/5 p-3 border border-white/10';
+        row.innerHTML=`
           <div>
             <div class="font-semibold">${i.title}</div>
             <div class="text-slate-400 text-xs">${formatEUR(i.price)}</div>
@@ -539,51 +531,50 @@
             <button class="ml-2 px-2 py-1 bg-red-500/80 hover:bg-red-500 rounded text-white" data-remove>×</button>
           </div>`;
         container.appendChild(row);
-        const input = row.querySelector('input');
-        row.querySelector('[data-inc]').onclick = ()=>{ cart.setQty(i.id, i.qty+1) };
-        row.querySelector('[data-dec]').onclick = ()=>{ cart.setQty(i.id, i.qty-1) };
-        row.querySelector('[data-remove]').onclick = ()=>{ cart.remove(i.id) };
-        input.addEventListener('change', ()=>{ const v = parseInt(input.value||'1',10); cart.setQty(i.id, isNaN(v)?1:v) });
+        const input=row.querySelector('input');
+        row.querySelector('[data-inc]').onclick=()=>cart.setQty(i.id,i.qty+1);
+        row.querySelector('[data-dec]').onclick=()=>cart.setQty(i.id,i.qty-1);
+        row.querySelector('[data-remove]').onclick=()=>cart.remove(i.id);
+        input.addEventListener('change',()=>{ const v=parseInt(input.value||'1',10); cart.setQty(i.id,isNaN(v)?1:v) });
       });
-      document.getElementById('cartTotal').textContent = formatEUR(cart.total());
-      const checkoutList = document.getElementById('checkoutCart');
+      document.getElementById('cartTotal').textContent=formatEUR(cart.total());
+      const checkoutList=document.getElementById('checkoutCart');
       if(checkoutList){
         checkoutList.innerHTML = cart.items.map(i=>`<div class='flex items-center justify-between'><span>${i.title} × ${i.qty}</span><span>${formatEUR(i.price*i.qty)}</span></div>`).join('') || '<p class="text-slate-400">Niciun produs în coș.</p>';
-        document.getElementById('checkoutTotal').textContent = formatEUR(cart.total());
-        const hidden = document.getElementById('cart_json');
-        if(hidden){ hidden.value = JSON.stringify(cart.items); }
+        document.getElementById('checkoutTotal').textContent=formatEUR(cart.total());
+        const hidden=document.getElementById('cart_json'); if(hidden){ hidden.value=JSON.stringify(cart.items); }
       }
     }
     cart.load();
     document.getElementById('gotoCheckout').addEventListener('click', ()=>{ closeCart(); setTimeout(()=>document.getElementById('checkout').scrollIntoView({behavior:'smooth'}), 50); });
-    document.getElementById('year').textContent = new Date().getFullYear();
-    document.getElementById('checkout-form').addEventListener('submit', ()=>{ document.getElementById('cart_json').value = JSON.stringify(cart.items); });
+    document.getElementById('year').textContent=new Date().getFullYear();
+    document.getElementById('checkout-form').addEventListener('submit', ()=>{ document.getElementById('cart_json').value=JSON.stringify(cart.items); });
 
-    // Swiper init
+    // Swiper
     window.addEventListener('load', ()=>{
-      const sw = document.querySelector('.product-swiper');
-      if(sw){ new Swiper(sw, { loop:true, pagination:{ el: sw.querySelector('.swiper-pagination'), clickable:true }, autoplay:{ delay:2500, disableOnInteraction:false } }); }
+      const sw=document.querySelector('.product-swiper');
+      if(sw){ new Swiper(sw,{ loop:true, pagination:{ el:sw.querySelector('.swiper-pagination'), clickable:true }, autoplay:{ delay:2500, disableOnInteraction:false } }); }
     });
 
-    // Fallback pentru imagini lipsă
+    // Fallback „COMING SOON” pentru imagini lipsă
     (function(){
-      const PLACEHOLDER = "data:image/svg+xml;utf8,<?xml version='1.0'?><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop stop-color='%230F172A'/><stop offset='1' stop-color='%230A0F1F'/></linearGradient></defs><rect width='1200' height='800' fill='url(%23g)'/><g opacity='0.35' stroke='%235eead4'><circle cx='200' cy='200' r='120' fill='none'/><circle cx='1000' cy='600' r='160' fill='none'/><path d='M0 400 Q 300 300 600 400 T 1200 400' fill='none'/></g><text x='50%' y='52%' text-anchor='middle' font-family='Inter, Arial, sans-serif' font-size='72' fill='%2399f6e4' font-weight='700'>COMING SOON</text></svg>";
+      const PLACEHOLDER="data:image/svg+xml;utf8,<?xml version='1.0'?><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop stop-color='%230F172A'/><stop offset='1' stop-color='%230A0F1F'/></linearGradient></defs><rect width='1200' height='800' fill='url(%23g)'/><g opacity='0.35' stroke='%235eead4'><circle cx='200' cy='200' r='120' fill='none'/><circle cx='1000' cy='600' r='160' fill='none'/><path d='M0 400 Q 300 300 600 400 T 1200 400' fill='none'/></g><text x='50%' y='52%' text-anchor='middle' font-family='Inter, Arial, sans-serif' font-size='72' fill='%2399f6e4' font-weight='700'>COMING SOON</text></svg>";
       function applyFallback(img){
         if(img.dataset.fallbackApplied) return;
         img.dataset.fallbackApplied='1';
-        img.src = PLACEHOLDER; img.loading='lazy';
+        img.src=PLACEHOLDER; img.loading='lazy';
         img.style.objectFit='contain'; img.style.background='rgba(255,255,255,0.04)'; img.style.padding='24px';
-        img.alt = (img.alt||'') + ' (coming soon)';
+        img.alt=(img.alt||'')+' (coming soon)';
       }
       function watchImages(){
-        document.querySelectorAll('img').forEach(img => {
+        document.querySelectorAll('img').forEach(img=>{
           img.loading='lazy';
-          img.addEventListener('error', ()=>applyFallback(img), { once:true });
+          img.addEventListener('error',()=>applyFallback(img),{once:true});
           if(!img.getAttribute('src')) applyFallback(img);
         });
       }
-      if(document.readyState === 'complete' || document.readyState === 'interactive') watchImages();
-      else document.addEventListener('DOMContentLoaded', watchImages);
+      if(document.readyState==='complete'||document.readyState==='interactive') watchImages();
+      else document.addEventListener('DOMContentLoaded',watchImages);
     })();
   </script>
 </body>
