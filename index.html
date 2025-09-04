@@ -9,573 +9,155 @@
   <meta property="og:title" content="Rivo — Prompts & Digital Goods" />
   <meta property="og:description" content="Magazin digital pentru creatori: prompts, template-uri și kit-uri AI." />
   <meta property="og:type" content="website" />
-  <!-- OG image se va corela cu fundalul dacă îl ții în assets/ -->
   <meta property="og:image" content="assets/chip-bg.webp" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Tailwind via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Swiper (slider produs) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
   <script defer src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { sans: ['Inter','ui-sans-serif','system-ui'] },
-          colors: { brand:{50:'#EFF6FF',100:'#DBEAFE',200:'#BFDBFE',300:'#93C5FD',400:'#60A5FA',500:'#3B82F6',600:'#2563EB',700:'#1D4ED8',800:'#1E40AF',900:'#1E3A8A'} },
-          boxShadow:{ soft:'0 10px 30px rgba(0,0,0,0.15)' }
-        }
-      }
-    }
-  </script>
-
   <style>
-    /* Fundal pe canvas (sub conținut) */
     #tech-bg{position:fixed;inset:0;z-index:-2;background:#020617}
     .gradient-overlay{position:fixed;inset:0;background:
       radial-gradient(1200px 800px at 20% 10%,rgba(59,130,246,.18),transparent 60%),
       radial-gradient(1000px 700px at 80% 20%,rgba(16,185,129,.16),transparent 60%),
       linear-gradient(180deg,rgba(2,6,23,.95) 0%,rgba(2,6,23,.88) 40%,rgba(2,6,23,.98) 100%);
       z-index:-1}
-    ::-webkit-scrollbar{width:10px;height:10px}
-    ::-webkit-scrollbar-thumb{background:#334155;border-radius:8px}
-    ::-webkit-scrollbar-track{background:#0b1220}
+    img{display:block;max-width:100%;height:auto}
     .swiper-pagination-bullet{background:#94a3b8;opacity:.6}
     .swiper-pagination-bullet-active{background:#3B82F6;opacity:1}
   </style>
 </head>
 
-<!-- >>> Schimbă data-bg-url cu calea pozei tale. Implicit: assets/chip-bg.webp <<< -->
 <body class="bg-slate-950 text-slate-100 font-sans selection:bg-brand-400/30 selection:text-white" data-bg-url="assets/chip-bg.webp">
   <canvas id="tech-bg" aria-hidden="true"></canvas>
   <div class="gradient-overlay" aria-hidden="true"></div>
 
-  <!-- Header -->
-  <header class="sticky top-0 z-50 backdrop-blur bg-slate-950/50 border-b border-white/5">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <a href="#" class="flex items-center gap-2" aria-label="Rivo acasă">
-          <div class="h-8 w-8 rounded-xl bg-gradient-to-tr from-brand-500 to-emerald-400 shadow-soft"></div>
-          <span class="text-xl font-extrabold tracking-tight">Rivo</span>
-        </a>
-        <nav class="hidden md:flex items-center gap-8 text-sm text-slate-300" aria-label="Navigație principală">
-          <a href="#shop" class="hover:text-white">Magazin</a>
-          <a href="#cum-functioneaza" class="hover:text-white">Cum funcționează</a>
-          <a href="#faq" class="hover:text-white">Întrebări</a>
-          <a href="#contact" class="hover:text-white">Contact</a>
-        </nav>
-        <div class="flex items-center gap-3">
-          <button id="cartButton" class="relative inline-flex items-center gap-2 rounded-xl bg-white/10 py-2 px-3 hover:bg-white/15 transition" aria-haspopup="dialog" aria-controls="cartDrawer">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25h9.563c.966 0 1.793-.684 1.97-1.635l1.2-6.43a1.125 1.125 0 0 0-1.106-1.335H5.309m2.191 9.4L5.25 5.25M7.5 14.25l-2.25 9M9 22.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm9 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>
-            <span>Coș</span>
-            <span id="cartCount" class="absolute -top-2 -right-2 text-xs bg-brand-500 rounded-full h-5 min-w-[1.25rem] px-1 flex items-center justify-center font-semibold">0</span>
-          </button>
-        </div>
+  <!-- Hero simplu cu o imagine vizibilă -->
+  <section class="relative overflow-hidden py-20">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="text-4xl font-extrabold">Test Poze</h1>
+      <p class="mt-4 text-slate-300">Imaginea de mai jos trebuie să apară corect.</p>
+      <div class="mt-8">
+        <!-- Imagine din assets -->
+        <img src="assets/chip-bg.webp" alt="Chip test" class="rounded-xl shadow-soft mx-auto">
       </div>
-    </div>
-  </header>
-
-  <!-- Hero -->
-  <section class="relative overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
-      <div class="grid lg:grid-cols-2 gap-10 items-center">
-        <div>
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
-            Lansări mai <span class="bg-gradient-to-r from-brand-400 to-emerald-300 bg-clip-text text-transparent">smart</span> cu Rivo
-          </h1>
-          <p class="mt-5 text-lg text-slate-300 max-w-xl">Magazin digital pentru creatori și team-uri: prompts, templates și kit-uri care accelerează munca. Gata de import pe Netlify în <em>2 minute</em>.</p>
-          <div class="mt-8 flex flex-wrap gap-3">
-            <a href="#shop" class="inline-flex items-center rounded-xl bg-brand-600 hover:bg-brand-500 px-5 py-3 font-semibold shadow-soft">Vezi produsul</a>
-            <a href="#cum-functioneaza" class="inline-flex items-center rounded-xl bg-white/10 hover:bg-white/15 px-5 py-3 font-semibold">Cum funcționează</a>
-          </div>
-          <div class="mt-8 flex items-center gap-6 text-sm text-slate-400">
-            <div class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-emerald-400"></span> Fără backend</div>
-            <div class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-brand-400"></span> Coș local persistent</div>
-            <div class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-fuchsia-400"></span> Netlify Forms</div>
-          </div>
-        </div>
-        <div class="relative">
-          <div class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft backdrop-blur">
-            <img src="https://images.unsplash.com/photo-1607082349566-187342de44d0?auto=format&fit=crop&w=1000&q=80" alt="Tech background" class="rounded-2xl shadow-soft"/>
-            <p class="text-center text-sm text-slate-300 mt-4">UI techy + fundal animat pe canvas</p>
-          </div>
-        </div>
+      <div class="mt-8">
+        <!-- Imagine externă pentru test -->
+        <img src="https://images.unsplash.com/photo-1607082349566-187342de44d0?auto=format&fit=crop&w=800" alt="Unsplash Test" class="rounded-xl shadow-soft mx-auto">
       </div>
     </div>
   </section>
 
-  <!-- Shop -->
-  <section id="shop" class="relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <div class="flex items-end justify-between flex-wrap gap-4">
-        <div>
-          <h2 class="text-3xl font-extrabold">Magazin</h2>
-          <p class="text-slate-300 mt-2">Produse digitale create de Rivo.</p>
-        </div>
-      </div>
-
-      <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- CARD PRODUS -->
-        <article class="group rounded-3xl border border-white/10 bg-white/5 p-5 hover:bg-white/10 transition shadow-soft">
-          <div class="aspect-[4/3] rounded-2xl overflow-hidden relative">
-            <div class="swiper product-swiper relative w-full h-full">
-              <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1581090700227-4c4c82d55a30?auto=format&fit=crop&w=1200&q=80" alt="Preview 1" class="w-full h-full object-cover"/></div>
-                <div class="swiper-slide"><img src="" alt="Preview lipsă" class="w-full h-full object-cover"/></div>
-                <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1607083209263-b64d4f50ae00?auto=format&fit=crop&w=1200&q=80" alt="Preview 3" class="w-full h-full object-cover"/></div>
-              </div>
-              <div class="swiper-pagination"></div>
-            </div>
-          </div>
-          <div class="mt-4">
-            <h3 class="text-2xl font-extrabold">20 Prompts pentru ChatGPT</h3>
-            <p class="mt-2 text-sm text-slate-200">Colecție pentru marketing, coding și productivitate. PDF (16 pag) + TXT.</p>
-          </div>
-          <ul class="mt-3 text-xs text-slate-300 grid grid-cols-2 gap-2">
-            <li class="rounded-lg bg-white/5 px-3 py-2">✔ 5x Marketing</li>
-            <li class="rounded-lg bg-white/5 px-3 py-2">✔ 5x Coding</li>
-            <li class="rounded-lg bg-white/5 px-3 py-2">✔ 5x Productivitate</li>
-            <li class="rounded-lg bg-white/5 px-3 py-2">✔ 5x Ideation</li>
-          </ul>
-          <div class="mt-4 flex items-center justify-between">
-            <div>
-              <div class="text-lg font-bold">€9.90</div>
-              <div class="text-xs text-slate-400">Licență personală • download instant</div>
-            </div>
-            <button data-add-to-cart class="inline-flex items-center gap-2 rounded-xl bg-brand-600 hover:bg-brand-500 px-4 py-2 font-semibold">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.5v15m7.5-7.5h-15"/></svg>
-              Adaugă în coș
-            </button>
-          </div>
-          <details class="mt-4 rounded-2xl bg-white/5 p-4 border border-white/10 open:shadow-soft">
-            <summary class="cursor-pointer font-semibold">Detalii produs</summary>
-            <div class="mt-3 text-sm text-slate-300 space-y-2">
-              <p>Primești un <strong>PDF de 16 pagini</strong> cu explicații + un fișier <strong>TXT</strong> cu prompts ușor de copiat.</p>
-              <p>Compatibil cu ChatGPT, Claude, Gemini, Llama și alte LLM-uri.</p>
-            </div>
-          </details>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Cum funcționează -->
-  <section id="cum-functioneaza" class="relative border-t border-white/5">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <h2 class="text-3xl font-extrabold">Cum funcționează</h2>
-      <div class="grid md:grid-cols-3 gap-6 mt-8">
-        <div class="rounded-3xl bg-white/5 p-6 border border-white/10">
-          <div class="text-2xl">1</div>
-          <h3 class="mt-2 font-bold text-xl">Adaugi în coș</h3>
-          <p class="mt-1 text-slate-300">Coșul se salvează local și rămâne la următoarea vizită.</p>
-        </div>
-        <div class="rounded-3xl bg-white/5 p-6 border border-white/10">
-          <div class="text-2xl">2</div>
-          <h3 class="mt-2 font-bold text-xl">Finalizezi comanda</h3>
-          <p class="mt-1 text-slate-300">Completezi emailul pentru livrare. Formularul folosește Netlify Forms.</p>
-        </div>
-        <div class="rounded-3xl bg-white/5 p-6 border border-white/10">
-          <div class="text-2xl">3</div>
-          <h3 class="mt-2 font-bold text-xl">Primești linkul</h3>
-          <p class="mt-1 text-slate-300">După submit vei primi un email cu link de download (configurat din Netlify).</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Checkout -->
-  <section id="checkout" class="relative border-t border-white/5">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <h2 class="text-3xl font-extrabold">Checkout</h2>
-      <p class="text-slate-300 mt-2">Completează datele și trimite comanda. Vei primi instrucțiuni pe email.</p>
-      <div class="mt-8 grid md:grid-cols-5 gap-8">
-        <div class="md:col-span-3 rounded-3xl bg-white/5 p-6 border border-white/10">
-          <form name="checkout" method="POST" data-netlify="true" class="grid gap-4" id="checkout-form">
-            <input type="hidden" name="form-name" value="checkout">
-            <input type="hidden" name="cart_json" id="cart_json">
-            <p class="hidden" aria-hidden="true"><label>Nu completa: <input name="bot-field" /></label></p>
-            <label class="grid gap-1">
-              <span class="text-sm text-slate-300">Nume</span>
-              <input required name="nume" type="text" class="rounded-xl bg-slate-900 border border-white/10 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="Numele tău" />
-            </label>
-            <label class="grid gap-1">
-              <span class="text-sm text-slate-300">Email pentru livrare</span>
-              <input required name="email" type="email" class="rounded-xl bg-slate-900 border border-white/10 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="tu@exemplu.com" />
-            </label>
-            <label class="grid gap-1">
-              <span class="text-sm text-slate-300">Observații (opțional)</span>
-              <textarea name="note" class="rounded-xl bg-slate-900 border border-white/10 px-4 py-2 min-h-[120px] focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="Ce ai vrea să personalizăm?"></textarea>
-            </label>
-            <button class="mt-2 inline-flex items-center justify-center rounded-xl bg-emerald-600 hover:bg-emerald-500 px-5 py-3 font-semibold">Trimite comanda</button>
-            <p class="text-xs text-slate-400">Prin trimitere ești de acord cu <a href="#termeni" class="underline">Termeni</a> & <a href="#confidentialitate" class="underline">Politica de confidențialitate</a>.</p>
-          </form>
-        </div>
-        <aside class="md:col-span-2 rounded-3xl bg-white/5 p-6 border border-white/10">
-          <h3 class="font-bold text-xl">Rezumat comandă</h3>
-          <div id="checkoutCart" class="mt-4 grid gap-3 text-sm"></div>
-          <div class="mt-4 flex items-center justify-between text-lg">
-            <span>Total</span>
-            <span id="checkoutTotal" class="font-extrabold">€0.00</span>
-          </div>
-          <p class="text-xs text-slate-400 mt-3">Plata: poți conecta Stripe/PayPal sau vinde pe bază de factură. Acest template nu colectează plăți.</p>
-        </aside>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq" class="relative border-t border-white/5">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <h2 class="text-3xl font-extrabold">Întrebări frecvente</h2>
-      <div class="mt-6 grid md:grid-cols-2 gap-4">
-        <details class="rounded-2xl bg-white/5 p-5 border border-white/10"><summary class="font-semibold cursor-pointer">Cum primesc fișierele?</summary><p class="mt-2 text-slate-300 text-sm">După trimiterea formularului de checkout, noi îți trimitem pe email un link de download.</p></details>
-        <details class="rounded-2xl bg-white/5 p-5 border border-white/10"><summary class="font-semibold cursor-pointer">Pot folosi cu alte modele decât ChatGPT?</summary><p class="mt-2 text-slate-300 text-sm">Da, prompts-urile funcționează cu majoritatea LLM-urilor (Claude, Gemini, Llama, etc.).</p></details>
-        <details class="rounded-2xl bg-white/5 p-5 border border-white/10"><summary class="font-semibold cursor-pointer">Politica de retur</summary><p class="mt-2 text-slate-300 text-sm">Pentru produse digitale, oferim retur în 14 zile dacă nu ești mulțumit.</p></details>
-        <details class="rounded-2xl bg-white/5 p-5 border border-white/10"><summary class="font-semibold cursor-pointer">Licențiere</summary><p class="mt-2 text-slate-300 text-sm">Licență personală: poți folosi prompts-urile în proiectele tale, dar nu le poți redistribui.</p></details>
-      </div>
-    </div>
-  </section>
-
-  <!-- Termeni & Confidențialitate -->
-  <section id="termeni" class="relative border-t border-white/5">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-sm text-slate-300">
-      <h3 class="text-xl font-bold text-white">Termeni</h3>
-      <p class="mt-2">Acesta este un template. Completează aici termenii tăi comerciali (drepturi, livrare, retur, etc.).</p>
-      <h3 id="confidentialitate" class="text-xl font-bold text-white mt-8">Politica de confidențialitate</h3>
-      <p class="mt-2">Descrie ce date colectezi prin formulare Netlify și cum sunt folosite. Adaugă date de contact pentru ștergerea datelor.</p>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="border-t border-white/5">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 text-sm text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <p>© <span id="year"></span> Rivo. Toate drepturile rezervate.</p>
-      <div class="flex items-center gap-6">
-        <a href="#termeni" class="hover:text-white">Termeni</a>
-        <a href="#confidentialitate" class="hover:text-white">Confidențialitate</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Cart Drawer -->
-  <div id="cartDrawer" class="fixed inset-y-0 right-0 w-full sm:max-w-md bg-slate-900/95 backdrop-blur border-l border-white/10 transform translate-x-full transition-transform z-[60] flex flex-col" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
-    <div class="p-4 flex items-center justify-between border-b border-white/10">
-      <h3 id="cartTitle" class="text-xl font-bold">Coș</h3>
-      <button id="closeCart" class="p-2 rounded-lg bg-white/10 hover:bg-white/15" aria-label="Închide coșul">Închide</button>
-    </div>
-    <div id="cartItems" class="p-4 flex-1 overflow-y-auto grid gap-3 text-sm"></div>
-    <div class="p-4 border-t border-white/10">
-      <div class="flex items-center justify-between text-lg">
-        <span>Total</span>
-        <span id="cartTotal" class="font-extrabold">€0.00</span>
-      </div>
-      <a href="#checkout" id="gotoCheckout" class="mt-4 block text-center rounded-xl bg-emerald-600 hover:bg-emerald-500 px-5 py-3 font-semibold">Finalizează</a>
-    </div>
-  </div>
-
-  <!-- ===== SCRIPTS ===== -->
   <script>
-    /* =======================
-       FUNDAL: FOTO + EDGE MASK + LINII CURGĂTOARE + PARTICULE
-       ======================= */
+    // ==== Fundal: foto din data-bg-url + linii animate (cu fallback-uri) ====
     const canvas = document.getElementById('tech-bg');
     const ctx = canvas.getContext('2d', { alpha: true });
-    let W, H, T = 0;
+    let W, H, T = 0, imgReady = false;
 
-    // 1) Sursa imaginii din atributul data-bg-url (fallback Unsplash).
-    const BG_SRC = document.body.dataset.bgUrl || 'assets/chip-bg.webp';
-    const img = new Image();
-    img.src = BG_SRC;
-    img.onerror = () => { // fallback dacă nu găsește fișierul
-      img.src = 'https://images.unsplash.com/photo-1607082349566-187342de44d0?auto=format&fit=crop&w=1600&q=80';
-    };
-    let imgReady = false;
-    img.onload = () => { imgReady = true; buildEdgeMask(); };
-
-    // pânze offscreen: mască contur + buffer linii
-    const maskCanvas = document.createElement('canvas');
-    const maskCtx = maskCanvas.getContext('2d');
-    const lineCanvas = document.createElement('canvas');
-    const lineCtx = lineCanvas.getContext('2d');
-
-    // particule
-    let particles = [];
-    function setupParticles(){
-      particles = Array.from({length: Math.min(220, Math.floor(W*H/7000))}, () => ({
-        x: Math.random()*W, y: Math.random()*H,
-        vx: (Math.random()-0.5)*0.8, vy: (Math.random()-0.5)*0.8,
-        r: Math.random()*1.8+0.6, tw: Math.random()*Math.PI*2
-      }));
-    }
-
-    function fit(){
-      W = canvas.width = innerWidth;
-      H = canvas.height = innerHeight;
-      lineCanvas.width = W; lineCanvas.height = H;
-      setupParticles();
-    }
+    function fit(){ W = canvas.width = innerWidth; H = canvas.height = innerHeight; }
     addEventListener('resize', fit); fit();
 
-    // Edge mask (Sobel) peste fotografia ta – ca linii să „urmeze” traseele
-    function buildEdgeMask(){
-      if(!imgReady) return;
-      maskCanvas.width = img.naturalWidth;
-      maskCanvas.height = img.naturalHeight;
-      const mW = maskCanvas.width, mH = maskCanvas.height;
+    // 1) Încarcă imaginea de fundal din <body data-bg-url="..."> cu fallback-uri
+    const bgAttr = (document.body.getAttribute('data-bg-url')||'').trim();
+    const fallbacks = [
+      bgAttr,
+      bgAttr.replace(/\.webp$/i, '.jpg'),
+      'assets/chip-bg.jpg',
+      'assets/chip-bg.png',
+      'https://images.unsplash.com/photo-1607082349566-187342de44d0?auto=format&fit=crop&w=1600&q=80'
+    ].filter(Boolean);
 
-      maskCtx.clearRect(0,0,mW,mH);
-      maskCtx.drawImage(img, 0, 0, mW, mH);
-      const data = maskCtx.getImageData(0,0,mW,mH);
-      const src = data.data;
-
-      // grayscale
-      for (let i=0;i<src.length;i+=4){
-        const r=src[i], g=src[i+1], b=src[i+2];
-        const y=0.2126*r+0.7152*g+0.0722*b;
-        src[i]=src[i+1]=src[i+2]=y;
-      }
-
-      // Sobel
-      const gx=[-1,0,1,-2,0,2,-1,0,1];
-      const gy=[-1,-2,-1,0,0,0,1,2,1];
-      const mag=new Uint8ClampedArray(mW*mH);
-      const get=(x,y)=>src[(y*mW+x)*4];
-      for(let y=0;y<mH;y++){
-        for(let x=0;x<mW;x++){
-          let sx=0, sy=0, k=0;
-          for(let j=-1;j<=1;j++){
-            for(let i=-1;i<=1;i++){
-              const xx=Math.max(0,Math.min(mW-1,x+i));
-              const yy=Math.max(0,Math.min(mH-1,y+j));
-              const v=get(xx,yy);
-              sx+=v*gx[k]; sy+=v*gy[k]; k++;
-            }
-          }
-          const m=Math.sqrt(sx*sx+sy*sy);
-          mag[y*mW+x]=m>255?255:m;
-        }
-      }
-
-      const threshold=90; // mai mic = mai multe contururi
-      const out=maskCtx.createImageData(mW,mH);
-      const dst=out.data;
-      for(let i=0;i<mag.length;i++){
-        const v = mag[i] > threshold ? 255 : 0;
-        dst[i*4+0]=255; dst[i*4+1]=255; dst[i*4+2]=255; dst[i*4+3]=v;
-      }
-      maskCtx.putImageData(out,0,0);
+    let bgIndex = 0; let BG = new Image();
+    function tryLoad(){
+      if(bgIndex >= fallbacks.length){ console.warn('[Rivo] Nu s-a putut încărca niciun fundal.'); return; }
+      BG = new Image();
+      BG.onload = () => { imgReady = true; console.info('[Rivo] Fundal încărcat:', fallbacks[bgIndex]); };
+      BG.onerror = () => { console.warn('[Rivo] Eroare la fundal:', fallbacks[bgIndex]); bgIndex++; tryLoad(); };
+      // adaugă cache-buster în dev ca să vezi imediat schimbarea
+      BG.src = fallbacks[bgIndex] + (location.hostname === 'localhost' ? ('?v=' + Date.now()) : '');
     }
+    tryLoad();
 
-    // Linii PCB animate + „tăiere” la contururile pozei
+    // 2) Linii diagonale animate (tech vibe)
+    const lineCanvas = document.createElement('canvas');
+    const lineCtx = lineCanvas.getContext('2d');
     function drawLines(time){
-      const spacing=80, speed=60, dash=[14,18];
-      const offset=time*speed;
-
+      lineCanvas.width = W; lineCanvas.height = H;
       lineCtx.clearRect(0,0,W,H);
-      lineCtx.save();
-      lineCtx.lineWidth=1.25;
 
-      // strat ↘︎
-      lineCtx.strokeStyle='rgba(56,189,248,0.55)';
+      const spacing = 80;            // densitate linii
+      const dash = [14, 18];         // pattern întreruperi
+      const speed = 60;              // viteză
+      const offset = time * speed;
+
+      lineCtx.save();
+      lineCtx.lineWidth = 1.25;
+
+      // ↘ strat albastru
+      lineCtx.strokeStyle = 'rgba(56,189,248,0.55)';
       lineCtx.setLineDash(dash);
-      lineCtx.globalAlpha=0.28;
-      for(let x=-W;x<W*2;x+=spacing){
-        lineCtx.lineDashOffset=-offset + x*0.1;
+      lineCtx.globalAlpha = 0.28;
+      for(let x=-W; x<W*2; x+=spacing){
+        lineCtx.lineDashOffset = -offset + x*0.1;
         lineCtx.beginPath(); lineCtx.moveTo(x,0); lineCtx.lineTo(x-H,H); lineCtx.stroke();
       }
-
-      // strat ↗︎ (paralax)
-      lineCtx.strokeStyle='rgba(16,185,129,0.45)';
-      lineCtx.globalAlpha=0.22;
-      for(let x=-W;x<W*2;x+=spacing){
-        lineCtx.lineDashOffset=offset*0.7 + x*0.08;
+      // ↗ strat verde
+      lineCtx.strokeStyle = 'rgba(16,185,129,0.45)';
+      lineCtx.globalAlpha = 0.22;
+      for(let x=-W; x<W*2; x+=spacing){
+        lineCtx.lineDashOffset = offset*0.7 + x*0.08;
         lineCtx.beginPath(); lineCtx.moveTo(x,H); lineCtx.lineTo(x+H,0); lineCtx.stroke();
       }
-
-      // highlight
-      lineCtx.globalCompositeOperation='lighter';
+      // highlight mov
+      lineCtx.globalCompositeOperation = 'lighter';
       lineCtx.setLineDash([4,22]);
-      lineCtx.strokeStyle='rgba(99,102,241,0.35)';
-      lineCtx.globalAlpha=0.35;
-      for(let x=-W;x<W*2;x+=spacing*0.5){
-        lineCtx.lineDashOffset=-offset*1.2;
+      lineCtx.strokeStyle = 'rgba(99,102,241,0.35)';
+      lineCtx.globalAlpha = 0.35;
+      for(let x=-W; x<W*2; x+=spacing*0.5){
+        lineCtx.lineDashOffset = -offset*1.2;
         lineCtx.beginPath(); lineCtx.moveTo(x,H); lineCtx.lineTo(x+H,0); lineCtx.stroke();
       }
       lineCtx.restore();
-
-      // mascare cu contururile imaginii (aliniere cover + mic „pan”)
-      if(imgReady){
-        const cover=Math.max(W/img.naturalWidth, H/img.naturalHeight)*1.08;
-        const iw=img.naturalWidth*cover, ih=img.naturalHeight*cover;
-        const panX=Math.sin(T*0.6)*18, panY=Math.cos(T*0.5)*14;
-        const x=(W-iw)/2+panX, y=(H-ih)/2+panY;
-        lineCtx.save();
-        lineCtx.globalCompositeOperation='destination-in';
-        lineCtx.drawImage(maskCanvas,x,y,iw,ih);
-        lineCtx.restore();
-      }
     }
 
-    function drawParticles(){
-      ctx.save();
-      ctx.fillStyle='rgba(148,163,184,0.7)';
-      ctx.strokeStyle='rgba(99,102,241,0.12)';
-      for(const p of particles){
-        p.vx+=Math.sin((p.y+T*40)/12000)*0.02;
-        p.vy+=Math.cos((p.x-T*40)/12000)*0.02;
-        p.x+=p.vx; p.y+=p.vy;
-        if(p.x<0||p.x>W) p.vx*=-1;
-        if(p.y<0||p.y>H) p.vy*=-1;
-        const r=p.r+Math.sin(p.tw+T*6)*0.3;
-        ctx.beginPath(); ctx.arc(p.x,p.y,Math.max(0.4,r),0,Math.PI*2); ctx.fill();
-      }
-      for(let i=0;i<particles.length;i++){
-        for(let j=i+1;j<particles.length;j++){
-          const a=particles[i], b=particles[j];
-          const dx=a.x-b.x, dy=a.y-b.y, d=Math.hypot(dx,dy);
-          if(d<120){
-            ctx.globalAlpha=1-d/120;
-            ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
-            ctx.globalAlpha=1;
-          }
-        }
-      }
-      ctx.restore();
-    }
-
-    function loop(){
-      T+=0.005;
+    // 3) Randare frame: imagine + glow + linii
+    function draw(){
+      T += 0.005;
       ctx.clearRect(0,0,W,H);
 
       if(imgReady){
-        const cover=Math.max(W/img.naturalWidth, H/img.naturalHeight)*1.08;
-        const iw=img.naturalWidth*cover, ih=img.naturalHeight*cover;
-        const panX=Math.sin(T*0.6)*18, panY=Math.cos(T*0.5)*14;
-        const x=(W-iw)/2+panX, y=(H-ih)/2+panY;
+        // acoperă ecranul (cover) + mic „pan” ca să prindă viață
+        const cover = Math.max(W / BG.naturalWidth, H / BG.naturalHeight) * 1.06;
+        const iw = BG.naturalWidth * cover;
+        const ih = BG.naturalHeight * cover;
+        const panX = Math.sin(T*0.6) * 18;
+        const panY = Math.cos(T*0.5) * 14;
+        const x = (W - iw)/2 + panX;
+        const y = (H - ih)/2 + panY;
+        ctx.globalAlpha = 0.65; // lasă conținutul să respire
+        ctx.drawImage(BG, x, y, iw, ih);
+        ctx.globalAlpha = 1;
 
-        ctx.globalAlpha=0.55;
-        ctx.drawImage(img,x,y,iw,ih);
-        ctx.globalAlpha=1;
-
-        // glow subtil peste imagine
-        const grad=ctx.createRadialGradient(
-          W*0.2+Math.sin(T)*50, H*0.15+Math.cos(T*0.8)*40, 100,
-          W*0.8+Math.cos(T*0.6)*60, H*0.25+Math.sin(T*0.9)*50, Math.max(W,H)
+        // glow subtil peste foto
+        const grad = ctx.createRadialGradient(
+          W*0.2 + Math.sin(T)*50, H*0.15 + Math.cos(T*0.8)*40, 100,
+          W*0.8 + Math.cos(T*0.6)*60, H*0.25 + Math.sin(T*0.9)*50, Math.max(W,H)
         );
-        grad.addColorStop(0,'rgba(59,130,246,0.08)');
-        grad.addColorStop(1,'rgba(2,6,23,0)');
-        ctx.fillStyle=grad; ctx.fillRect(0,0,W,H);
+        grad.addColorStop(0, 'rgba(59,130,246,0.08)');
+        grad.addColorStop(1, 'rgba(2,6,23,0)');
+        ctx.fillStyle = grad; ctx.fillRect(0,0,W,H);
       }
 
       drawLines(performance.now()/1000);
-      ctx.drawImage(lineCanvas,0,0);
+      ctx.drawImage(lineCanvas, 0, 0);
 
-      drawParticles();
-      requestAnimationFrame(loop);
+      requestAnimationFrame(draw);
     }
-
-    // init
-    function init(){ W=canvas.width=innerWidth; H=canvas.height=innerHeight; setupParticles(); }
-    addEventListener('resize', init); init(); loop();
-
-    /* =======================
-       Coș + Checkout + Swiper + Fallback imagini
-       ======================= */
-    const CART_KEY='rivo_cart_v1';
-    const cart={
-      items:[],
-      load(){ try{ this.items=JSON.parse(localStorage.getItem(CART_KEY))||[] }catch(e){ this.items=[] } this.sync() },
-      save(){ localStorage.setItem(CART_KEY,JSON.stringify(this.items)); this.sync() },
-      sync(){ updateCartUI() },
-      add(p){ const e=this.items.find(i=>i.id===p.id); if(e){ e.qty+=p.qty||1 } else { this.items.push({...p,qty:p.qty||1}) } this.save() },
-      remove(id){ this.items=this.items.filter(i=>i.id!==id); this.save() },
-      setQty(id,q){ const it=this.items.find(i=>i.id===id); if(it){ it.qty=Math.max(1,q); this.save() } },
-      total(){ return this.items.reduce((s,i)=>s+i.price*i.qty,0) }
-    };
-    function formatEUR(n){ return new Intl.NumberFormat('ro-RO',{style:'currency',currency:'EUR'}).format(n) }
-    const product={ id:'prompts20', title:'20 Prompts pentru ChatGPT', price:9.90, image:'', description:'Colecție PDF + TXT', download:'<ADAUGĂ_LINK_DOWNLOAD>' };
-    document.addEventListener('DOMContentLoaded', ()=>{
-      const addBtn=document.querySelector('[data-add-to-cart]');
-      if(addBtn){ addBtn.addEventListener('click', ()=>{ cart.add({id:product.id,title:product.title,price:product.price}); openCart(); }); }
-    });
-    const cartDrawer=document.getElementById('cartDrawer');
-    const cartButton=document.getElementById('cartButton');
-    const closeCartBtn=document.getElementById('closeCart');
-    cartButton.addEventListener('click', openCart);
-    closeCartBtn.addEventListener('click', closeCart);
-    function openCart(){ cartDrawer.classList.remove('translate-x-full') }
-    function closeCart(){ cartDrawer.classList.add('translate-x-full') }
-    function updateCartUI(){
-      document.getElementById('cartCount').textContent = cart.items.reduce((s,i)=>s+i.qty,0);
-      const container=document.getElementById('cartItems');
-      container.innerHTML='';
-      if(cart.items.length===0){ container.innerHTML='<p class="text-slate-400">Coșul este gol.</p>'; }
-      cart.items.forEach(i=>{
-        const row=document.createElement('div');
-        row.className='flex items-center justify-between gap-3 rounded-xl bg-white/5 p-3 border border-white/10';
-        row.innerHTML=`
-          <div>
-            <div class="font-semibold">${i.title}</div>
-            <div class="text-slate-400 text-xs">${formatEUR(i.price)}</div>
-          </div>
-          <div class="flex items-center gap-2">
-            <button class="px-2 py-1 bg-white/10 rounded" data-dec>-</button>
-            <input class="w-10 text-center bg-slate-900 border border-white/10 rounded" value="${i.qty}" aria-label="Cantitate" />
-            <button class="px-2 py-1 bg-white/10 rounded" data-inc>+</button>
-            <button class="ml-2 px-2 py-1 bg-red-500/80 hover:bg-red-500 rounded text-white" data-remove>×</button>
-          </div>`;
-        container.appendChild(row);
-        const input=row.querySelector('input');
-        row.querySelector('[data-inc]').onclick=()=>cart.setQty(i.id,i.qty+1);
-        row.querySelector('[data-dec]').onclick=()=>cart.setQty(i.id,i.qty-1);
-        row.querySelector('[data-remove]').onclick=()=>cart.remove(i.id);
-        input.addEventListener('change',()=>{ const v=parseInt(input.value||'1',10); cart.setQty(i.id,isNaN(v)?1:v) });
-      });
-      document.getElementById('cartTotal').textContent=formatEUR(cart.total());
-      const checkoutList=document.getElementById('checkoutCart');
-      if(checkoutList){
-        checkoutList.innerHTML = cart.items.map(i=>`<div class='flex items-center justify-between'><span>${i.title} × ${i.qty}</span><span>${formatEUR(i.price*i.qty)}</span></div>`).join('') || '<p class="text-slate-400">Niciun produs în coș.</p>';
-        document.getElementById('checkoutTotal').textContent=formatEUR(cart.total());
-        const hidden=document.getElementById('cart_json'); if(hidden){ hidden.value=JSON.stringify(cart.items); }
-      }
-    }
-    cart.load();
-    document.getElementById('gotoCheckout').addEventListener('click', ()=>{ closeCart(); setTimeout(()=>document.getElementById('checkout').scrollIntoView({behavior:'smooth'}), 50); });
-    document.getElementById('year').textContent=new Date().getFullYear();
-    document.getElementById('checkout-form').addEventListener('submit', ()=>{ document.getElementById('cart_json').value=JSON.stringify(cart.items); });
-
-    // Swiper
-    window.addEventListener('load', ()=>{
-      const sw=document.querySelector('.product-swiper');
-      if(sw){ new Swiper(sw,{ loop:true, pagination:{ el:sw.querySelector('.swiper-pagination'), clickable:true }, autoplay:{ delay:2500, disableOnInteraction:false } }); }
-    });
-
-    // Fallback „COMING SOON” pentru imagini lipsă
-    (function(){
-      const PLACEHOLDER="data:image/svg+xml;utf8,<?xml version='1.0'?><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop stop-color='%230F172A'/><stop offset='1' stop-color='%230A0F1F'/></linearGradient></defs><rect width='1200' height='800' fill='url(%23g)'/><g opacity='0.35' stroke='%235eead4'><circle cx='200' cy='200' r='120' fill='none'/><circle cx='1000' cy='600' r='160' fill='none'/><path d='M0 400 Q 300 300 600 400 T 1200 400' fill='none'/></g><text x='50%' y='52%' text-anchor='middle' font-family='Inter, Arial, sans-serif' font-size='72' fill='%2399f6e4' font-weight='700'>COMING SOON</text></svg>";
-      function applyFallback(img){
-        if(img.dataset.fallbackApplied) return;
-        img.dataset.fallbackApplied='1';
-        img.src=PLACEHOLDER; img.loading='lazy';
-        img.style.objectFit='contain'; img.style.background='rgba(255,255,255,0.04)'; img.style.padding='24px';
-        img.alt=(img.alt||'')+' (coming soon)';
-      }
-      function watchImages(){
-        document.querySelectorAll('img').forEach(img=>{
-          img.loading='lazy';
-          img.addEventListener('error',()=>applyFallback(img),{once:true});
-          if(!img.getAttribute('src')) applyFallback(img);
-        });
-      }
-      if(document.readyState==='complete'||document.readyState==='interactive') watchImages();
-      else document.addEventListener('DOMContentLoaded',watchImages);
-    })();
+    draw();
   </script>
 </body>
 </html>
