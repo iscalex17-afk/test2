@@ -9,141 +9,148 @@
   <meta property="og:title" content="Rivo — Prompts & Digital Goods" />
   <meta property="og:description" content="Magazin digital pentru creatori: prompts, template-uri și kit-uri AI." />
   <meta property="og:type" content="website" />
-  <!-- OG image: ține același fișier ca pe fundal, dacă vrei să fie coerent când se share-uiește. -->
-  <meta property="og:image" content="assets/fundal-chip.jpg" />
-
+  <meta property="og:image" content="assets/fundal.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-
   <style>
     html,body{margin:0;padding:0;height:100%;overflow-x:hidden}
-    /* Canvas-ul este sub tot conținutul */
+    /* Canvas-ul este sub conținut */
     #tech-bg{position:fixed;inset:0;z-index:-2;background:#020617}
     .gradient-overlay{position:fixed;inset:0;z-index:-1;
       background: radial-gradient(1200px 800px at 20% 10%,rgba(59,130,246,.14),transparent 60%),
                   radial-gradient(1000px 700px at 80% 20%,rgba(16,185,129,.12),transparent 60%),
                   linear-gradient(180deg,rgba(2,6,23,.94) 0%,rgba(2,6,23,.88) 40%,rgba(2,6,23,.97) 100%);
     }
-    /* Badge debug mic (îl poți șterge) */
     #bg-debug{font-family:Inter,system-ui,Arial;font-size:12px;position:fixed;left:12px;bottom:12px;z-index:70;color:#e5e7eb;background:rgba(0,0,0,.44);border:1px solid rgba(255,255,255,.1);padding:4px 8px;border-radius:8px;pointer-events:none}
   </style>
 </head>
 
-<!-- IMPORTANT: schimbă data-bg-url cu calea EXACTĂ a fișierului tău. -->
-<body class="bg-slate-950 text-slate-100 font-sans" data-bg-url="assets/fundal-chip.jpg">
+<body class="bg-slate-950 text-slate-100 font-sans" data-bg-url="assets/fundal.jpg">
   <canvas id="tech-bg" aria-hidden="true"></canvas>
   <div class="gradient-overlay" aria-hidden="true"></div>
   <div id="bg-debug" aria-hidden="true">loading…</div>
 
+  <!-- Hero minimal (păstrează ce aveai tu în pagină) -->
   <main class="relative z-10 min-h-screen flex items-center justify-center">
     <div class="text-center px-6">
       <h1 class="text-4xl md:text-6xl font-extrabold mb-6">Rivo Digital Shop</h1>
-      <p class="text-lg text-slate-300 max-w-xl mx-auto mb-10">Fundal = fotografia ta (cover) + linii high‑tech animate. Totul e retina‑sharp & performant.</p>
+      <p class="text-lg text-slate-300 max-w-xl mx-auto mb-10">Fundal = fotografia ta (cover) + linii high-tech animate.</p>
       <a href="#shop" class="inline-flex items-center rounded-xl bg-blue-600 hover:bg-blue-500 px-6 py-3 font-semibold shadow">Intră în Magazin</a>
     </div>
   </main>
 
   <script>
-    // ======= FUNDAL: imagine + linii high‑tech (cu DPI corect) =======
+    /* ===== FUNDAL FOTO + Linii high-tech + DPI (Retina) ===== */
     const canvas = document.getElementById('tech-bg');
     const ctx = canvas.getContext('2d', { alpha: true });
     const dbg = document.getElementById('bg-debug');
-    let W = 0, H = 0, T = 0, DPR = 1;
+    let W=0,H=0,T=0,DPR=1;
 
-    // Loader robust: încearcă mai multe variante de cale + extensii + cu/ fără „/”.
-    const hinted = (document.body.dataset.bgUrl || '').trim();
+    /* 1) Loader robust pentru fișierul tău */
+    const hintedRaw = (document.body.dataset.bgUrl || '').trim(); // ex: "assets/fundal.jpg"
+    function norm(s){ return s.replace(/\s/g,'%20'); }
     function buildCandidates(hint){
-      const base = hint || 'assets/fundal-chip.jpg';
-      const exts = ['.webp','.jpg','.jpeg','.png'];
-      const variants = new Set();
-      const add = p => { if(p) variants.add(p.replace(/\\s/g, '%20')); };
-      const roots = [ '', '/' ];
-      const stems = base.replace(/\.(webp|jpe?g|png)$/i,'');
-      // ex: assets/fundal-chip, /assets/fundal-chip + exts
-      roots.forEach(r => exts.forEach(e => add(r + stems + e)));
-      // și varianta exactă furnizată (dacă avea extensie deja)
-      add(base); add(base.startsWith('/') ? base.slice(1) : '/' + base);
-      return Array.from(variants);
+      // Acceptă și greșeala "asset/..." + variante cu/ fără "/"
+      const input = hint || 'assets/fundal.jpg';
+      const stems = [
+        input.replace(/^\/+/,''),
+        input.replace(/^\/+/,'').replace(/^assets\//,'asset/'),
+        input.replace(/^\/+/,'').replace(/^asset\//,'assets/')
+      ];
+      const roots = ['', '/'];
+      const out = new Set();
+      for(const st of stems){
+        for(const r of roots){
+          out.add(norm(r+st));
+        }
+      }
+      // dacă nu are extensie sau e greșită, încearcă și altele
+      const baseNoExt = input.replace(/\.(webp|jpe?g|png)$/i,'');
+      ['.jpg','.jpeg','.png','.webp'].forEach(ext=>{
+        for(const r of roots){
+          out.add(norm(r+baseNoExt+ext));
+          out.add(norm(r+baseNoExt.replace(/^assets\//,'asset/')+ext));
+          out.add(norm(r+baseNoExt.replace(/^asset\//,'assets/')+ext));
+        }
+      });
+      return Array.from(out);
     }
-    const CANDIDATES = buildCandidates(hinted);
+    const CANDIDATES = buildCandidates(hintedRaw);
     const FALLBACK = 'https://images.unsplash.com/photo-1607082349566-187342de44d0?auto=format&fit=crop&w=1600&q=80';
+    function logStatus(m){ if(dbg) dbg.textContent=m; console.log('[BG]',m); }
 
-    function logStatus(msg){ if(dbg) dbg.textContent = msg; console.log('[BG]', msg); }
-
-    function loadFirstWorking(urls){
-      return new Promise(resolve => {
-        const next = (i) => {
-          if(i >= urls.length){
-            const f = new Image(); f.crossOrigin = 'anonymous';
-            f.onload = ()=> resolve(f);
-            f.onerror = ()=> resolve(null);
-            f.src = FALLBACK; logStatus('fallback Unsplash');
+    function loadFirstWorking(list){
+      return new Promise(resolve=>{
+        const tryAt = (i)=>{
+          if(i>=list.length){
+            const f=new Image(); f.crossOrigin='anonymous';
+            f.onload=()=>resolve(f); f.onerror=()=>resolve(null);
+            f.src=FALLBACK; logStatus('fallback Unsplash');
             return;
           }
-          const im = new Image();
-          im.onload = ()=> { logStatus('ok: ' + urls[i]); resolve(im); };
-          im.onerror = ()=> { logStatus('miss: ' + urls[i]); next(i+1); };
-          im.src = urls[i];
+          const im=new Image();
+          im.onload=()=>{ logStatus('ok: '+list[i]); resolve(im); };
+          im.onerror=()=>{ logStatus('miss: '+list[i]); tryAt(i+1); };
+          im.src=list[i];
         };
-        next(0);
+        tryAt(0);
       });
     }
 
-    // DPI‑aware canvas size
+    /* 2) DPI-aware sizing */
     function fit(){
       DPR = Math.min(window.devicePixelRatio || 1, 2);
       W = Math.floor(window.innerWidth);
       H = Math.floor(window.innerHeight);
-      canvas.style.width = W + 'px';
-      canvas.style.height = H + 'px';
-      canvas.width = Math.floor(W * DPR);
-      canvas.height = Math.floor(H * DPR);
-      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-      lineCanvas.width = Math.floor(W * DPR);
-      lineCanvas.height = Math.floor(H * DPR);
-      lineCtx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      canvas.style.width = W+'px';
+      canvas.style.height = H+'px';
+      canvas.width = Math.floor(W*DPR);
+      canvas.height = Math.floor(H*DPR);
+      ctx.setTransform(DPR,0,0,DPR,0,0);
+      lineCanvas.width = Math.floor(W*DPR);
+      lineCanvas.height = Math.floor(H*DPR);
+      lineCtx.setTransform(DPR,0,0,DPR,0,0);
       setupParticles();
     }
-    window.addEventListener('resize', fit);
+    addEventListener('resize', fit);
 
-    // Linii animate (două straturi + highlight)
+    /* 3) Linii animate (două straturi + highlight) */
     const lineCanvas = document.createElement('canvas');
     const lineCtx = lineCanvas.getContext('2d');
     function drawLines(time){
-      const spacing = 84, speed = 60, offset = time * speed;
+      const spacing=84, speed=60, offset=time*speed;
       lineCtx.clearRect(0,0,W,H);
-      lineCtx.save(); lineCtx.lineWidth = 1.25;
-      lineCtx.strokeStyle = 'rgba(56,189,248,0.55)';
-      lineCtx.setLineDash([14,18]);
-      lineCtx.globalAlpha = 0.28;
-      for(let x=-W; x<W*2; x+=spacing){
-        lineCtx.lineDashOffset = -offset + x*0.1;
+      lineCtx.save(); lineCtx.lineWidth=1.25;
+
+      lineCtx.strokeStyle='rgba(56,189,248,0.55)';
+      lineCtx.setLineDash([14,18]); lineCtx.globalAlpha=0.28;
+      for(let x=-W;x<W*2;x+=spacing){
+        lineCtx.lineDashOffset=-offset + x*0.1;
         lineCtx.beginPath(); lineCtx.moveTo(x,0); lineCtx.lineTo(x-H,H); lineCtx.stroke();
       }
-      lineCtx.strokeStyle = 'rgba(16,185,129,0.45)';
-      lineCtx.globalAlpha = 0.22;
-      for(let x=-W; x<W*2; x+=spacing){
-        lineCtx.lineDashOffset = offset*0.7 + x*0.08;
+      lineCtx.strokeStyle='rgba(16,185,129,0.45)';
+      lineCtx.globalAlpha=0.22;
+      for(let x=-W;x<W*2;x+=spacing){
+        lineCtx.lineDashOffset=offset*0.7 + x*0.08;
         lineCtx.beginPath(); lineCtx.moveTo(x,H); lineCtx.lineTo(x+H,0); lineCtx.stroke();
       }
-      // Highlight subtil
-      lineCtx.globalCompositeOperation = 'lighter';
+      // highlight subtil
+      lineCtx.globalCompositeOperation='lighter';
       lineCtx.setLineDash([4,22]);
-      lineCtx.strokeStyle = 'rgba(99,102,241,0.35)';
-      lineCtx.globalAlpha = 0.35;
-      for(let x=-W; x<W*2; x+=spacing*0.5){
-        lineCtx.lineDashOffset = -offset*1.2;
+      lineCtx.strokeStyle='rgba(99,102,241,0.35)'; lineCtx.globalAlpha=0.35;
+      for(let x=-W;x<W*2;x+=spacing*0.5){
+        lineCtx.lineDashOffset=-offset*1.2;
         lineCtx.beginPath(); lineCtx.moveTo(x,H); lineCtx.lineTo(x+H,0); lineCtx.stroke();
       }
       lineCtx.restore();
     }
 
-    // Particule pentru vibe
-    let particles = [];
+    /* 4) Particule fine */
+    let particles=[];
     function setupParticles(){
-      particles = Array.from({length: Math.min(220, Math.floor(W*H/7000))}, () => ({
+      particles = Array.from({length: Math.min(220, Math.floor(W*H/7000))}, ()=>({
         x: Math.random()*W, y: Math.random()*H,
         vx: (Math.random()-0.5)*0.8, vy: (Math.random()-0.5)*0.8,
         r: Math.random()*1.8+0.6, tw: Math.random()*Math.PI*2
@@ -151,60 +158,55 @@
     }
     function drawParticles(){
       ctx.save();
-      ctx.fillStyle = 'rgba(148,163,184,0.7)';
-      ctx.strokeStyle = 'rgba(99,102,241,0.12)';
+      ctx.fillStyle='rgba(148,163,184,0.7)';
+      ctx.strokeStyle='rgba(99,102,241,0.12)';
       for(const p of particles){
-        p.vx += Math.sin((p.y+T*40)/12000)*0.02;
-        p.vy += Math.cos((p.x-T*40)/12000)*0.02;
-        p.x += p.vx; p.y += p.vy;
+        p.vx+=Math.sin((p.y+T*40)/12000)*0.02;
+        p.vy+=Math.cos((p.x-T*40)/12000)*0.02;
+        p.x+=p.vx; p.y+=p.vy;
         if(p.x<0||p.x>W) p.vx*=-1; if(p.y<0||p.y>H) p.vy*=-1;
-        const r = p.r + Math.sin(p.tw + T*6)*0.3;
+        const r=p.r+Math.sin(p.tw+T*6)*0.3;
         ctx.beginPath(); ctx.arc(p.x,p.y,Math.max(0.4,r),0,Math.PI*2); ctx.fill();
       }
       for(let i=0;i<particles.length;i++){
         for(let j=i+1;j<particles.length;j++){
           const a=particles[i], b=particles[j];
           const dx=a.x-b.x, dy=a.y-b.y, d=Math.hypot(dx,dy);
-          if(d<120){ ctx.globalAlpha = 1 - d/120; ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke(); ctx.globalAlpha = 1; }
+          if(d<120){ ctx.globalAlpha=1-d/120; ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke(); ctx.globalAlpha=1; }
         }
       }
       ctx.restore();
     }
 
-    let BG = null;
+    /* 5) Start */
+    let BG=null;
     async function start(){
       fit();
       BG = await loadFirstWorking(CANDIDATES);
-      if(BG){ logStatus('fundal: ' + BG.src); } else { logStatus('fără fundal'); }
+      if(BG){ logStatus('fundal: '+BG.src); } else { logStatus('fără fundal'); }
       loop();
     }
-
     function loop(){
-      T += 0.005; ctx.clearRect(0,0,W,H);
+      T+=0.005; ctx.clearRect(0,0,W,H);
       if(BG){
-        // cover + pan ușor
-        const cover = Math.max(W/BG.naturalWidth, H/BG.naturalHeight) * 1.06;
-        const iw = BG.naturalWidth * cover;
-        const ih = BG.naturalHeight * cover;
-        const panX = Math.sin(T*0.6) * 18;
-        const panY = Math.cos(T*0.5) * 14;
-        const x = (W - iw)/2 + panX;
-        const y = (H - ih)/2 + panY;
-        ctx.globalAlpha = 0.7; ctx.imageSmoothingEnabled = true; ctx.drawImage(BG, x, y, iw, ih); ctx.globalAlpha = 1;
-        // glow subtil
-        const grad = ctx.createRadialGradient(
-          W*0.2 + Math.sin(T)*50, H*0.15 + Math.cos(T*0.8)*40, 100,
-          W*0.8 + Math.cos(T*0.6)*60, H*0.25 + Math.sin(T*0.9)*50, Math.max(W,H)
+        const cover=Math.max(W/BG.naturalWidth, H/BG.naturalHeight)*1.06;
+        const iw=BG.naturalWidth*cover, ih=BG.naturalHeight*cover;
+        const panX=Math.sin(T*0.6)*18, panY=Math.cos(T*0.5)*14;
+        const x=(W-iw)/2+panX, y=(H-ih)/2+panY;
+        ctx.globalAlpha=0.72; ctx.imageSmoothingEnabled=true; ctx.drawImage(BG,x,y,iw,ih); ctx.globalAlpha=1;
+
+        const grad=ctx.createRadialGradient(
+          W*0.2+Math.sin(T)*50, H*0.15+Math.cos(T*0.8)*40, 100,
+          W*0.8+Math.cos(T*0.6)*60, H*0.25+Math.sin(T*0.9)*50, Math.max(W,H)
         );
-        grad.addColorStop(0, 'rgba(59,130,246,0.08)'); grad.addColorStop(1, 'rgba(2,6,23,0)');
-        ctx.fillStyle = grad; ctx.fillRect(0,0,W,H);
+        grad.addColorStop(0,'rgba(59,130,246,0.08)'); grad.addColorStop(1,'rgba(2,6,23,0)');
+        ctx.fillStyle=grad; ctx.fillRect(0,0,W,H);
       }
       drawLines(performance.now()/1000);
-      ctx.drawImage(lineCanvas, 0, 0);
+      ctx.drawImage(lineCanvas,0,0);
       drawParticles();
       requestAnimationFrame(loop);
     }
-
     start();
   </script>
 </body>
