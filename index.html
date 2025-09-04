@@ -9,38 +9,39 @@
   <meta property="og:title" content="Rivo — Prompts & Digital Goods" />
   <meta property="og:description" content="Magazin digital pentru creatori: prompts, template-uri și kit-uri AI." />
   <meta property="og:type" content="website" />
-  <meta property="og:image.svg">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1607082349566-187342de44d0?auto=format&fit=crop&w=1200&q=80" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <!-- TailwindCSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Swiper (pentru sliderul de imagini) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
   <script defer src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui'] },
+          fontFamily: { sans: ['Inter','ui-sans-serif','system-ui'] },
           colors: {
-            brand: {
-              50: '#EFF6FF', 100:'#DBEAFE', 200:'#BFDBFE', 300:'#93C5FD', 400:'#60A5FA', 500:'#3B82F6', 600:'#2563EB', 700:'#1D4ED8', 800:'#1E40AF', 900:'#1E3A8A'
-            }
+            brand: {50:'#EFF6FF',100:'#DBEAFE',200:'#BFDBFE',300:'#93C5FD',400:'#60A5FA',500:'#3B82F6',600:'#2563EB',700:'#1D4ED8',800:'#1E40AF',900:'#1E3A8A'}
           },
-          boxShadow: { soft: '0 10px 30px rgba(0,0,0,0.15)' }
+          boxShadow:{ soft:'0 10px 30px rgba(0,0,0,0.15)'}
         }
       }
     }
   </script>
   <style>
-    /* Fundal tech animat (NU static) — Gigi style */
-    #tech-bg { position: fixed; inset: 0; z-index: -2; background: #020617; }
-    .gradient-overlay { position: fixed; inset:0; background: radial-gradient(1200px 800px at 20% 10%, rgba(59,130,246,0.18), transparent 60%), radial-gradient(1000px 700px at 80% 20%, rgba(16,185,129,0.16), transparent 60%), linear-gradient(180deg, rgba(2,6,23,0.95) 0%, rgba(2,6,23,0.88) 40%, rgba(2,6,23,0.98) 100%); z-index:-1; }
-    ::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:#334155;border-radius:8px}::-webkit-scrollbar-track{background:#0b1220}
-    .swiper-pagination-bullet{ background:#94a3b8; opacity:.6 }
-    .swiper-pagination-bullet-active{ background:#3B82F6; opacity:1 }
+    /* Canvas fundal high-tech */
+    #tech-bg{position:fixed;inset:0;z-index:-2;background:#020617}
+    .gradient-overlay{position:fixed;inset:0;background:
+      radial-gradient(1200px 800px at 20% 10%,rgba(59,130,246,.18),transparent 60%),
+      radial-gradient(1000px 700px at 80% 20%,rgba(16,185,129,.16),transparent 60%),
+      linear-gradient(180deg,rgba(2,6,23,.95) 0%,rgba(2,6,23,.88) 40%,rgba(2,6,23,.98) 100%);
+      z-index:-1}
+    ::-webkit-scrollbar{width:10px;height:10px}
+    ::-webkit-scrollbar-thumb{background:#334155;border-radius:8px}
+    ::-webkit-scrollbar-track{background:#0b1220}
+    .swiper-pagination-bullet{background:#94a3b8;opacity:.6}
+    .swiper-pagination-bullet-active{background:#3B82F6;opacity:1}
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans selection:bg-brand-400/30 selection:text-white">
@@ -63,7 +64,7 @@
         </nav>
         <div class="flex items-center gap-3">
           <button id="cartButton" class="relative inline-flex items-center gap-2 rounded-xl bg-white/10 py-2 px-3 hover:bg-white/15 transition" aria-haspopup="dialog" aria-controls="cartDrawer">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25h9.563c.966 0 1.793-.684 1.97-1.635l1.2-6.43a1.125 1.125 0 0 0-1.106-1.335H5.309m2.191 9.4L5.25 5.25M7.5 14.25l-2.25 9m12-9 2.25 9M9 22.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm9 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25h9.563c.966 0 1.793-.684 1.97-1.635l1.2-6.43a1.125 1.125 0 0 0-1.106-1.335H5.309m2.191 9.4L5.25 5.25M7.5 14.25l-2.25 9m12-9 2.25 9M9 22.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm9 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>
             <span>Coș</span>
             <span id="cartCount" class="absolute -top-2 -right-2 text-xs bg-brand-500 rounded-full h-5 min-w-[1.25rem] px-1 flex items-center justify-center font-semibold">0</span>
           </button>
@@ -94,7 +95,7 @@
         <div class="relative">
           <div class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft backdrop-blur">
             <img src="https://images.unsplash.com/photo-1607082349566-187342de44d0?auto=format&fit=crop&w=1000&q=80" alt="Tech background" class="rounded-2xl shadow-soft"/>
-            <p class="text-center text-sm text-slate-300 mt-4">UI techy + animație particule</p>
+            <p class="text-center text-sm text-slate-300 mt-4">UI techy + animație (fundalul real e pe canvas)</p>
           </div>
         </div>
       </div>
@@ -148,7 +149,7 @@
             <summary class="cursor-pointer font-semibold">Detalii produs</summary>
             <div class="mt-3 text-sm text-slate-300 space-y-2">
               <p>Primești un <strong>PDF de 16 pagini</strong> cu explicații + un fișier <strong>TXT</strong> cu prompts ușor de copiat.</p>
-              <p>Compatibil cu ChatGPT, Claude, Gemini, Llama și alte LLM‑uri.</p>
+              <p>Compatibil cu ChatGPT, Claude, Gemini, Llama și alte LLM-uri.</p>
             </div>
           </details>
         </article>
@@ -190,9 +191,7 @@
           <form name="checkout" method="POST" data-netlify="true" class="grid gap-4" id="checkout-form">
             <input type="hidden" name="form-name" value="checkout">
             <input type="hidden" name="cart_json" id="cart_json">
-            <p class="hidden" aria-hidden="true">
-              <label>Nu completa: <input name="bot-field" /></label>
-            </p>
+            <p class="hidden" aria-hidden="true"><label>Nu completa: <input name="bot-field" /></label></p>
             <label class="grid gap-1">
               <span class="text-sm text-slate-300">Nume</span>
               <input required name="nume" type="text" class="rounded-xl bg-slate-900 border border-white/10 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="Numele tău" />
@@ -235,39 +234,7 @@
     </div>
   </section>
 
-  <!-- Contact -->
-  <section id="contact" class="relative border-t border-white/5">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <div class="grid md:grid-cols-2 gap-8 items-center">
-        <div>
-          <h2 class="text-3xl font-extrabold">Ai idei pentru Rivo?</h2>
-          <p class="text-slate-300 mt-2">Scrie-ne și construim împreună produse digitale utile.</p>
-          <ul class="mt-4 space-y-2 text-slate-300 text-sm">
-            <li>• Roadmap public</li>
-            <li>• Update-uri lunare</li>
-            <li>• Reduceri pentru membri</li>
-          </ul>
-        </div>
-        <form name="contact" method="POST" data-netlify="true" class="rounded-3xl bg-white/5 p-6 border border-white/10 grid gap-3">
-          <input type="hidden" name="form-name" value="contact">
-          <p class="hidden" aria-hidden="true">
-            <label>Nu completa: <input name="bot-field" /></label>
-          </p>
-          <label class="grid gap-1">
-            <span class="text-sm text-slate-300">Email</span>
-            <input required name="email" type="email" class="rounded-xl bg-slate-900 border border-white/10 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="tu@exemplu.com" />
-          </label>
-          <label class="grid gap-1">
-            <span class="text-sm text-slate-300">Mesaj</span>
-            <textarea required name="mesaj" class="rounded-xl bg-slate-900 border border-white/10 px-4 py-2 min-h-[120px] focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="Salut Rivo, ..."></textarea>
-          </label>
-          <button class="inline-flex items-center justify-center rounded-xl bg-brand-600 hover:bg-brand-500 px-5 py-3 font-semibold">Trimite</button>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- Termeni & Confidențialitate (ancore simple) -->
+  <!-- Termeni & Confidențialitate -->
   <section id="termeni" class="relative border-t border-white/5">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-sm text-slate-300">
       <h3 class="text-xl font-bold text-white">Termeni</h3>
@@ -304,47 +271,176 @@
     </div>
   </div>
 
-  <!-- Scripts -->
+  <!-- ===== SCRIPTS ===== -->
   <script>
-    // ===== Fundal tech (particule + linii) — ANIMAT & DRIFT =====
+    /* =======================
+       FUNDAL: FOTO + EDGE-MASK + LINII CURGĂTOARE + PARTICULE
+       ======================= */
     const canvas = document.getElementById('tech-bg');
-    const ctx = canvas.getContext('2d');
-    let w, h, particles, t = 0;
-    function resize(){ w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; init(); }
-    function init(){
-      particles = Array.from({length: Math.min(200, Math.floor(w*h/8000))}, () => ({
-        x: Math.random()*w,
-        y: Math.random()*h,
-        vx: (Math.random()-0.5)*1.0,
-        vy: (Math.random()-0.5)*1.0,
-        r: Math.random()*1.8+0.6,
-        tw: Math.random()*Math.PI*2
+    const ctx = canvas.getContext('2d', { alpha: true });
+    let W, H, T = 0;
+
+    // imaginea de fundal – pune fișierul tău la assets/chip-bg.webp
+    const img = new Image();
+    img.src = 'assets/chip-bg.webp';
+    img.onerror = () => { // fallback dacă fișierul lipsește
+      img.src = 'https://images.unsplash.com/photo-1607082349566-187342de44d0?auto=format&fit=crop&w=1600&q=80';
+    }
+    let imgReady = false;
+    img.onload = () => { imgReady = true; buildEdgeMask(); };
+
+    // măști offscreen (edge mask + buffer linii)
+    const maskCanvas = document.createElement('canvas');
+    const maskCtx = maskCanvas.getContext('2d');
+    const lineCanvas = document.createElement('canvas');
+    const lineCtx = lineCanvas.getContext('2d');
+
+    // particule
+    let particles = [];
+    function setupParticles(){
+      particles = Array.from({length: Math.min(220, Math.floor(W*H/7000))}, () => ({
+        x: Math.random()*W, y: Math.random()*H,
+        vx: (Math.random()-0.5)*0.8, vy: (Math.random()-0.5)*0.8,
+        r: Math.random()*1.8+0.6, tw: Math.random()*Math.PI*2
       }));
     }
-    function tick(){
-      t += 0.005;
-      ctx.clearRect(0,0,w,h);
-      // subtle moving gradient background glow
-      const grad = ctx.createRadialGradient(
-        w*0.2 + Math.sin(t)*50, h*0.15 + Math.cos(t*0.8)*40, 100,
-        w*0.8 + Math.cos(t*0.6)*60, h*0.25 + Math.sin(t*0.9)*50, Math.max(w,h)
-      );
-      grad.addColorStop(0, 'rgba(59,130,246,0.05)');
-      grad.addColorStop(1, 'rgba(2,6,23,0)');
-      ctx.fillStyle = grad;
-      ctx.fillRect(0,0,w,h);
 
+    function fit(){
+      W = canvas.width = innerWidth;
+      H = canvas.height = innerHeight;
+      lineCanvas.width = W; lineCanvas.height = H;
+      setupParticles();
+    }
+    addEventListener('resize', fit); fit();
+
+    // ===== Edge mask (Sobel) — contururi din poză =====
+    function buildEdgeMask(){
+      if(!imgReady) return;
+      maskCanvas.width = img.naturalWidth;
+      maskCanvas.height = img.naturalHeight;
+      const mW = maskCanvas.width, mH = maskCanvas.height;
+
+      maskCtx.clearRect(0,0,mW,mH);
+      maskCtx.drawImage(img, 0, 0, mW, mH);
+      let imageData = maskCtx.getImageData(0,0,mW,mH);
+      const src = imageData.data;
+
+      // grayscale
+      for(let i=0;i<src.length;i+=4){
+        const r=src[i], g=src[i+1], b=src[i+2];
+        const y = 0.2126*r + 0.7152*g + 0.0722*b;
+        src[i]=src[i+1]=src[i+2]=y;
+      }
+
+      // Sobel
+      const gx = [-1,0,1,-2,0,2,-1,0,1];
+      const gy = [-1,-2,-1,0,0,0,1,2,1];
+      const mag = new Uint8ClampedArray(mW*mH);
+      const get = (x,y) => {
+        x=Math.max(0,Math.min(mW-1,x));
+        y=Math.max(0,Math.min(mH-1,y));
+        return src[(y*mW+x)*4];
+      };
+      for(let y=0;y<mH;y++){
+        for(let x=0;x<mW;x++){
+          let sx=0, sy=0, k=0;
+          for(let j=-1;j<=1;j++) for(let i=-1;i<=1;i++){
+            const v = get(x+i,y+j);
+            sx += v*gx[k]; sy += v*gy[k]; k++;
+          }
+          const m = Math.sqrt(sx*sx + sy*sy);
+          mag[y*mW+x] = m>255 ? 255 : m;
+        }
+      }
+
+      // threshold + „îngroșare” 1px
+      const threshold = 90; // mai mic = mai multe contururi
+      const out = maskCtx.createImageData(mW,mH);
+      const dst = out.data;
+      for(let i=0;i<mag.length;i++){
+        const v = mag[i] > threshold ? 255 : 0;
+        dst[i*4+0]=255; dst[i*4+1]=255; dst[i*4+2]=255; dst[i*4+3]=v;
+      }
+      const dil = new Uint8ClampedArray(dst.length);
+      dil.set(dst);
+      const off = [[1,0],[-1,0],[0,1],[0,-1]];
+      const idx = (x,y)=> (y*mW+x)*4+3;
+      for(let y=1;y<mH-1;y++){
+        for(let x=1;x<mW-1;x++){
+          let a = dst[idx(x,y)];
+          if(a===0){ for(const [dx,dy] of off){ if(dst[idx(x+dx,y+dy)]>0){ a=140; break; } } }
+          dil[idx(x,y)] = a;
+        }
+      }
+      out.data.set(dil);
+      maskCtx.putImageData(out,0,0);
+    }
+
+    // ===== Linii PCB animate (se taie cu masca contururilor) =====
+    function drawLines(time){
+      const spacing = 80;        // densitate (60 = mai des)
+      const dash = [14, 18];
+      const speed = 60;          // viteză flux
+      const offset = time * speed;
+
+      lineCtx.clearRect(0,0,W,H);
+      lineCtx.save();
+      lineCtx.lineWidth = 1.25;
+
+      // ↘︎ strat
+      lineCtx.strokeStyle = 'rgba(56,189,248,0.55)';
+      lineCtx.setLineDash(dash);
+      lineCtx.globalAlpha = 0.28;
+      for(let x=-W; x<W*2; x+=spacing){
+        lineCtx.lineDashOffset = -offset + x*0.1;
+        lineCtx.beginPath(); lineCtx.moveTo(x,0); lineCtx.lineTo(x-H,H); lineCtx.stroke();
+      }
+      // ↗︎ strat
+      lineCtx.strokeStyle = 'rgba(16,185,129,0.45)';
+      lineCtx.globalAlpha = 0.22;
+      for(let x=-W; x<W*2; x+=spacing){
+        lineCtx.lineDashOffset = offset*0.7 + x*0.08;
+        lineCtx.beginPath(); lineCtx.moveTo(x,H); lineCtx.lineTo(x+H,0); lineCtx.stroke();
+      }
+      // highlight
+      lineCtx.globalCompositeOperation = 'lighter';
+      lineCtx.setLineDash([4,22]);
+      lineCtx.strokeStyle = 'rgba(99,102,241,0.35)';
+      lineCtx.globalAlpha = 0.35;
+      for(let x=-W; x<W*2; x+=spacing*0.5){
+        lineCtx.lineDashOffset = -offset*1.2;
+        lineCtx.beginPath(); lineCtx.moveTo(x,H); lineCtx.lineTo(x+H,0); lineCtx.stroke();
+      }
+      lineCtx.restore();
+
+      // aplică masca aliniată cu pan/zoom-ul imaginii
+      if(imgReady){
+        const cover = Math.max(W/img.naturalWidth, H/img.naturalHeight) * 1.08;
+        const iw = img.naturalWidth * cover;
+        const ih = img.naturalHeight * cover;
+        const panX = Math.sin(T*0.6) * 18;
+        const panY = Math.cos(T*0.5) * 14;
+        const x = (W - iw)/2 + panX;
+        const y = (H - ih)/2 + panY;
+        lineCtx.save();
+        lineCtx.globalCompositeOperation = 'destination-in';
+        lineCtx.imageSmoothingEnabled = true;
+        lineCtx.drawImage(maskCanvas, x, y, iw, ih);
+        lineCtx.restore();
+      }
+    }
+
+    function drawParticles(){
+      ctx.save();
       ctx.fillStyle = 'rgba(148,163,184,0.7)';
       ctx.strokeStyle = 'rgba(99,102,241,0.12)';
       for(const p of particles){
-        // drift field for extra motion
-        p.vx += Math.sin((p.y+t*40)/12000)*0.02;
-        p.vy += Math.cos((p.x-t*40)/12000)*0.02;
+        p.vx += Math.sin((p.y+T*40)/12000)*0.02;
+        p.vy += Math.cos((p.x-T*40)/12000)*0.02;
         p.x += p.vx; p.y += p.vy;
-        if(p.x<0||p.x>w) p.vx*=-1, p.x=Math.max(0, Math.min(w,p.x));
-        if(p.y<0||p.y>h) p.vy*=-1, p.y=Math.max(0, Math.min(h,p.y));
-        // twinkle
-        const r = p.r + Math.sin(p.tw + t*6)*0.3;
+        if(p.x<0||p.x>W) p.vx*=-1;
+        if(p.y<0||p.y>H) p.vy*=-1;
+        const r = p.r + Math.sin(p.tw + T*6)*0.3;
         ctx.beginPath(); ctx.arc(p.x,p.y,Math.max(0.4,r),0,Math.PI*2); ctx.fill();
       }
       for(let i=0;i<particles.length;i++){
@@ -358,11 +454,47 @@
           }
         }
       }
-      requestAnimationFrame(tick);
+      ctx.restore();
     }
-    window.addEventListener('resize', resize); resize(); tick();
 
-    // ===== Coș simplu (localStorage) =====
+    function loop(){
+      T += 0.005;
+      ctx.clearRect(0,0,W,H);
+
+      if(imgReady){
+        const cover = Math.max(W/img.naturalWidth, H/img.naturalHeight) * 1.08;
+        const iw = img.naturalWidth * cover;
+        const ih = img.naturalHeight * cover;
+        const panX = Math.sin(T*0.6) * 18;
+        const panY = Math.cos(T*0.5) * 14;
+        const x = (W - iw)/2 + panX;
+        const y = (H - ih)/2 + panY;
+
+        ctx.globalAlpha = 0.55;
+        ctx.drawImage(img, x, y, iw, ih);
+        ctx.globalAlpha = 1;
+
+        const grad = ctx.createRadialGradient(
+          W*0.2 + Math.sin(T)*50, H*0.15 + Math.cos(T*0.8)*40, 100,
+          W*0.8 + Math.cos(T*0.6)*60, H*0.25 + Math.sin(T*0.9)*50, Math.max(W,H)
+        );
+        grad.addColorStop(0, 'rgba(59,130,246,0.08)');
+        grad.addColorStop(1, 'rgba(2,6,23,0)');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0,0,W,H);
+      }
+
+      drawLines(performance.now()/1000);
+      ctx.drawImage(lineCanvas, 0, 0);
+
+      drawParticles();
+      requestAnimationFrame(loop);
+    }
+    setupParticles(); loop();
+
+    /* =======================
+       COȘ + CHECKOUT + SWIPER + FALLBACK IMAGINI
+       ======================= */
     const CART_KEY = 'rivo_cart_v1';
     const cart = {
       items: [],
@@ -380,7 +512,6 @@
       const addBtn = document.querySelector('[data-add-to-cart]');
       if(addBtn){ addBtn.addEventListener('click', ()=>{ cart.add({ id: product.id, title: product.title, price: product.price }); openCart(); }); }
     });
-    // Drawer coș
     const cartDrawer = document.getElementById('cartDrawer');
     const cartButton = document.getElementById('cartButton');
     const closeCartBtn = document.getElementById('closeCart');
@@ -423,38 +554,31 @@
         if(hidden){ hidden.value = JSON.stringify(cart.items); }
       }
     }
-    // Init
     cart.load();
-    // Link către checkout închide coșul
     document.getElementById('gotoCheckout').addEventListener('click', ()=>{ closeCart(); setTimeout(()=>document.getElementById('checkout').scrollIntoView({behavior:'smooth'}), 50); });
-    // Anul curent
     document.getElementById('year').textContent = new Date().getFullYear();
-    // La submit — salvează snapshot coș
-    document.getElementById('checkout-form').addEventListener('submit', ()=>{
-      document.getElementById('cart_json').value = JSON.stringify(cart.items);
-    });
-    // ===== Swiper init (slider produs) =====
+    document.getElementById('checkout-form').addEventListener('submit', ()=>{ document.getElementById('cart_json').value = JSON.stringify(cart.items); });
+
+    // Swiper init
     window.addEventListener('load', ()=>{
       const sw = document.querySelector('.product-swiper');
-      if(sw){ new Swiper(sw, { loop: true, pagination: { el: sw.querySelector('.swiper-pagination'), clickable: true }, autoplay: { delay: 2500, disableOnInteraction: false } }); }
+      if(sw){ new Swiper(sw, { loop:true, pagination:{ el: sw.querySelector('.swiper-pagination'), clickable:true }, autoplay:{ delay:2500, disableOnInteraction:false } }); }
     });
-    // ===== Fallback pentru imagini lipsă: 'COMING SOON' =====
+
+    // Fallback pentru imagini lipsă
     (function(){
-      const PLACEHOLDER = "data:image/svg+xml;utf8,<?xml version='1.0'?><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'>  <defs>    <linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>      <stop stop-color='%230F172A'/>      <stop offset='1' stop-color='%230A0F1F'/>    </linearGradient>  </defs>  <rect width='1200' height='800' fill='url(%23g)'/>  <g opacity='0.35' stroke='%235eead4'>    <circle cx='200' cy='200' r='120' fill='none'/>    <circle cx='1000' cy='600' r='160' fill='none'/>    <path d='M0 400 Q 300 300 600 400 T 1200 400' fill='none'/>  </g>  <text x='50%' y='52%' text-anchor='middle' font-family='Inter, Arial, sans-serif' font-size='72' fill='%2399f6e4' font-weight='700'>    COMING SOON  </text></svg>";
+      const PLACEHOLDER = "data:image/svg+xml;utf8,<?xml version='1.0'?><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop stop-color='%230F172A'/><stop offset='1' stop-color='%230A0F1F'/></linearGradient></defs><rect width='1200' height='800' fill='url(%23g)'/><g opacity='0.35' stroke='%235eead4'><circle cx='200' cy='200' r='120' fill='none'/><circle cx='1000' cy='600' r='160' fill='none'/><path d='M0 400 Q 300 300 600 400 T 1200 400' fill='none'/></g><text x='50%' y='52%' text-anchor='middle' font-family='Inter, Arial, sans-serif' font-size='72' fill='%2399f6e4' font-weight='700'>COMING SOON</text></svg>";
       function applyFallback(img){
         if(img.dataset.fallbackApplied) return;
-        img.dataset.fallbackApplied = '1';
-        img.src = PLACEHOLDER;
-        img.loading = 'lazy';
-        img.style.objectFit = 'contain';
-        img.style.background = 'rgba(255,255,255,0.04)';
-        img.style.padding = '24px';
+        img.dataset.fallbackApplied='1';
+        img.src = PLACEHOLDER; img.loading='lazy';
+        img.style.objectFit='contain'; img.style.background='rgba(255,255,255,0.04)'; img.style.padding='24px';
         img.alt = (img.alt||'') + ' (coming soon)';
       }
       function watchImages(){
         document.querySelectorAll('img').forEach(img => {
-          img.loading = 'lazy';
-          img.addEventListener('error', ()=>applyFallback(img), { once: true });
+          img.loading='lazy';
+          img.addEventListener('error', ()=>applyFallback(img), { once:true });
           if(!img.getAttribute('src')) applyFallback(img);
         });
       }
