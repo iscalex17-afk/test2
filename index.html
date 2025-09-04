@@ -28,31 +28,19 @@
   </script>
   <style>
     html,body{height:100%}
-    #bg-lines{position:fixed;inset:0;z-index:-2;pointer-events:none}
-    #tech-grid{position:fixed;inset:0;z-index:-3;pointer-events:none;opacity:.16;mix-blend-mode:overlay;
-      background:
-        linear-gradient(transparent 31px, rgba(148,163,184,.22) 32px),
-        linear-gradient(90deg, transparent 31px, rgba(148,163,184,.22) 32px),
-        radial-gradient(1000px 700px at 80% 20%, rgba(16,185,129,.10), transparent 60%),
-        radial-gradient(1200px 800px at 20% 10%, rgba(59,130,246,.12), transparent 60%);
-      background-size: 32px 32px, 32px 32px, 100% 100%, 100% 100%;
-      animation: grid-pan 18s linear infinite;
-    }
-    @keyframes grid-pan { 
-      0%{background-position:0 0,0 0, 0 0, 0 0} 
-      100%{background-position:64px 64px,64px 64px, 0 0, 0 0}
-    }
-    .grad-overlay{position:fixed;inset:0;z-index:-1;background:
-      linear-gradient(180deg, rgba(2,6,23,.94) 0%, rgba(2,6,23,.88) 45%, rgba(2,6,23,.97) 100%)}
+    #bg-lines{position:fixed;inset:0;z-index:-3;pointer-events:none}
+    .grad-overlay{position:fixed;inset:0;z-index:-2;background:
+      radial-gradient(1200px 800px at 20% 10%, rgba(59,130,246,.14), transparent 60%),
+      radial-gradient(1000px 700px at 80% 20%, rgba(16,185,129,.12), transparent 60%),
+      linear-gradient(180deg, rgba(2,6,23,.94) 0%, rgba(2,6,23,.88) 40%, rgba(2,6,23,.97) 100%)}
     .container-pad{max-width:1200px}
   </style>
 </head>
-
-<body class="bg-slate-950 text-slate-100 font-sans" data-hero="assets/fundal.png">
-  <div id="tech-grid" aria-hidden="true"></div>
+<body class="bg-slate-950 text-slate-100 font-sans">
   <canvas id="bg-lines" aria-hidden="true"></canvas>
   <div class="grad-overlay" aria-hidden="true"></div>
 
+  <!-- Header -->
   <header class="sticky top-0 z-50 backdrop-blur bg-slate-950/60 border-b border-white/5">
     <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8">
       <div class="h-16 flex items-center justify-between">
@@ -85,7 +73,7 @@
     </div>
   </header>
 
-  <!-- Hero cu imagine assets/fundal.png (loader robust) -->
+  <!-- Hero -->
   <section class="relative overflow-hidden">
     <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
       <div class="grid lg:grid-cols-2 gap-12 items-start">
@@ -100,53 +88,96 @@
             <a href="#pachete" class="inline-flex items-center rounded-xl bg-brand-600 hover:bg-brand-500 px-5 py-3 font-semibold shadow-soft">Vezi pachetele</a>
             <a href="#beneficii" class="inline-flex items-center rounded-xl bg-white/10 hover:bg-white/15 px-5 py-3 font-semibold">Cum te ajută</a>
           </div>
-          <div class="mt-8 flex items-center gap-6 text-sm text-slate-400">
-            <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-emerald-400"></span> Fără backend</span>
-            <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-brand-400"></span> Gata de Netlify</span>
-            <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-fuchsia-400"></span> SEO + OG tags</span>
-          </div>
         </div>
 
         <div class="relative flex justify-end">
           <div class="w-full sm:w-[480px] lg:w-[520px]">
             <div class="rounded-3xl border border-white/10 bg-white/5 p-4 shadow-soft backdrop-blur">
-              <!-- IMPORTANT: pune poza în assets/fundal.png sau schimbă data-hero-path mai jos -->
-              <img id="heroImg" data-hero-path="assets/fundal.png" src="" alt="Hero vizual" class="rounded-2xl w-full aspect-[4/3] object-cover"/>
+              <img id="heroImg" src="assets/fundal.png" alt="Hero vizual" class="rounded-2xl w-full aspect-[4/3] object-cover"/>
             </div>
-            <p id="heroDebug" class="select-all text-center text-xs text-slate-400 mt-2">Imagine din <code>assets/fundal.png</code></p>
+            <p class="text-center text-xs text-slate-400 mt-2">Imagine din <code>assets/fundal.png</code></p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <script>
-    // === HERO LOADER: caută automat imaginea în mai multe locații şi setează src ===
-    (function loadHero(){
-      const hero = document.getElementById('heroImg');
-      const cap = document.getElementById('heroCaption');
-      const hint = (document.body.dataset.hero||'').trim();
-      const fall = 'https://images.unsplash.com/photo-1607082349566-187342de44d0?auto=format&fit=crop&w=1400&q=80';
-      const candidates = Array.from(new Set([
-        hint,
-        hint.replace(/^\/+/, ''),
-        '/' + hint.replace(/^\/+/, ''),
-        './' + hint.replace(/^\/+/, ''),
-        'assets/fundal.png',
-        'assets/fundal.png',
-        'images/fundal.png'
-      ].filter(Boolean)));
+  <!-- Sectiune imagine1 -->
+  <section id="imagine1" class="border-t border-white/5">
+    <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8 py-14">
+      <h2 class="text-3xl font-extrabold mb-6">Imaginea 1</h2>
+      <div class="rounded-3xl border border-white/10 bg-white/5 p-4 shadow-soft">
+        <img src="assets/imagine1.png" alt="Imagine 1" class="rounded-2xl w-full object-cover"/>
+      </div>
+    </div>
+  </section>
 
-      function tryNext(i){
-        if(i>=candidates.length){ hero.src = fall; if(cap) cap.innerHTML = 'Fallback Unsplash (nu s-a găsit <code>'+hint+'</code>)'; return; }
-        const src = candidates[i];
-        const test = new Image();
-        test.onload = ()=>{ hero.src = src; if(cap) cap.innerHTML = 'Imagine din <code>'+src+'</code>'; };
-        test.onerror = ()=> tryNext(i+1);
-        test.src = src;
-      }
-      tryNext(0);
-    })();
+  <!-- Sectiune imagine2 -->
+  <section id="imagine2" class="border-t border-white/5">
+    <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8 py-14">
+      <h2 class="text-3xl font-extrabold mb-6">Imaginea 2</h2>
+      <div class="rounded-3xl border border-white/10 bg-white/5 p-4 shadow-soft">
+        <img src="assets/imagine2.png" alt="Imagine 2" class="rounded-2xl w-full object-cover"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- Beneficii -->
+  <section id="beneficii" class="border-t border-white/5">
+    <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8 py-14">
+      <h2 class="text-3xl font-extrabold">De ce clienții aleg Rivo</h2>
+      <p class="text-slate-300 mt-2 max-w-2xl">Focus pe vânzări, nu pe setup. Tot ce îți trebuie e într-un singur fișier.</p>
+      <div class="mt-10 grid md:grid-cols-3 gap-6">
+        <div class="rounded-3xl bg-white/5 p-6 border border-white/10">
+          <div class="text-xl font-bold mb-1">1. Conversie crescută</div>
+          <p class="text-slate-300">Hero clar + dovezi sociale + secțiuni de beneficii optimizate.</p>
+        </div>
+        <div class="rounded-3xl bg-white/5 p-6 border border-white/10">
+          <div class="text-xl font-bold mb-1">2. Ușor de editat</div>
+          <p class="text-slate-300">Tailwind via CDN, componente predefinite, fără build tools.</p>
+        </div>
+        <div class="rounded-3xl bg-white/5 p-6 border border-white/10">
+          <div class="text-xl font-bold mb-1">3. Integrare simplă</div>
+          <p class="text-slate-300">Formulare Netlify / linkuri Stripe/PayPal gata de atașat.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pachete -->
+  <section id="pachete" class="border-t border-white/5">
+    <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8 py-14">
+      <h2 class="text-3xl font-extrabold">Alege pachetul</h2>
+      <div class="mt-8 grid md:grid-cols-3 gap-6">
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft">
+          <h3 class="text-xl font-bold">Starter</h3>
+          <div class="text-3xl font-extrabold mt-4">€19</div>
+        </div>
+        <div class="rounded-3xl border border-brand-500/30 bg-brand-500/5 p-6 ring-1 ring-brand-500/20 shadow-soft">
+          <h3 class="text-xl font-bold">Pro</h3>
+          <div class="text-3xl font-extrabold mt-4">€49</div>
+        </div>
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft">
+          <h3 class="text-xl font-bold">Agency</h3>
+          <div class="text-3xl font-extrabold mt-4">€99</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/5">
+    <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8 py-10 text-sm text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p>© <span id="year"></span> Rivo. Toate drepturile rezervate.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Meniu mobil
+    document.getElementById('menuBtn').addEventListener('click', ()=>{
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
 
     // Linii high-tech animate
     (function lines(){
@@ -190,31 +221,6 @@
       }
       requestAnimationFrame(draw);
     })();
-
-    // Loader robust pentru poza de hero — încearcă mai multe căi
-    (function loadHero(){
-      const img = document.getElementById('heroImg');
-      const debug = document.getElementById('heroDebug');
-      const hint = (img.getAttribute('data-hero-path')||'').trim();
-      const exts = ['', '.png', '.jpg', '.jpeg', '.webp'];
-      const bases = [hint, hint.replace(/^\/+/,''), '/'+hint.replace(/^\/+/,''), hint.replace(/^assets\//,'asset/'), hint.replace(/^asset\//,'assets/')];
-      const candidates = Array.from(new Set(bases.flatMap(b=> exts.map(e=> b.endsWith(e)? b : b+e)))).filter(Boolean);
-      const fallback = 'https://images.unsplash.com/photo-1607082349566-187342de44d0?auto=format&fit=crop&w=1400&q=80';
-      function tryAt(i){
-        if(i>=candidates.length){ img.src = fallback; if(debug) debug.textContent = '⚠️ Nu am găsit '+hint+' — afișez fallback'; return; }
-        const test = new Image();
-        test.onload = ()=>{ img.src=test.src; if(debug) debug.textContent = 'Imagine: '+test.src; };
-        test.onerror = ()=> tryAt(i+1);
-        test.src = candidates[i];
-      }
-      tryAt(0);
-    })();
-
-    // Meniu mobil + anul curent
-    document.getElementById('menuBtn').addEventListener('click', ()=>{
-      document.getElementById('mobileMenu').classList.toggle('hidden');
-    });
-    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
