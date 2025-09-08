@@ -40,7 +40,7 @@
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans">
   <!-- Stratul cu IMAGINE DE BACKGROUND: fundal.png1 -->
-  <div class="pointer-events-none fixed inset-0 -z-40 bg-[url('assets/fundal.png1')] bg-center bg-cover bg-fixed opacity-25"></div>
+  <div class="pointer-events-none fixed inset-0 -z-40 bg-[url('assets/fundal.png')] bg-center bg-cover bg-fixed opacity-25"></div>
 
   <canvas id="bg-lines" aria-hidden="true"></canvas>
   <div class="grad-overlay" aria-hidden="true"></div>
@@ -50,7 +50,9 @@
     <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8">
       <div class="h-16 flex items-center justify-between">
         <a class="flex items-center gap-2" href="#" aria-label="Rivo acasă">
-          <span class="h-8 w-8 rounded-xl bg-gradient-to-tr from-brand-500 to-emerald-400 shadow-soft"></span>
+          <span class="relative inline-flex items-center justify-center h-8 w-8 rounded-full bg-slate-900/60 border border-white/15 backdrop-blur glow ring-1 ring-brand-500/30">
+            <span class="text-sm font-extrabold tracking-tight bg-gradient-to-br from-brand-400 to-emerald-300 bg-clip-text text-transparent">R</span>
+          </span>
           <span class="text-xl font-extrabold tracking-tight">Rivo</span>
         </a>
         <nav class="hidden md:flex items-center gap-8 text-sm text-slate-300">
@@ -90,8 +92,8 @@
             Template complet pentru vânzări online: pagini, secțiuni de conversie, formulare și design modern. Ideal pentru prompts, template-uri, cursuri și licențe.
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
-            <a href="#pachete" class="inline-flex items-center rounded-xl bg-brand-600 hover:bg-brand-500 px-5 py-3 font-semibold shadow-soft">Vezi pachetele</a>
-            <a href="#beneficii" class="inline-flex items-center rounded-xl bg-white/10 hover:bg-white/15 px-5 py-3 font-semibold">Cum te ajută</a>
+            <a href="#pachete" class="inline-flex items-center rounded-xl bg-brand-600 hover:bg-brand-500 px-5 py-3 font-semibold shadow-soft transition duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-brand-500/50">Vezi pachetele</a>
+            <a href="#beneficii" class="inline-flex items-center rounded-xl bg-white/10 hover:bg-white/15 px-5 py-3 font-semibold transition duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-white/30">Cum te ajută</a>
           </div>
         </div>
 
@@ -101,34 +103,6 @@
               <img id="heroImg" src="assets/fundal.png" alt="Hero vizual" class="rounded-2xl w-full aspect-[4/3] object-cover"/>
             </div>
             <p class="text-center text-xs text-slate-400 mt-2">Imagine din <code>assets/fundal.png</code></p>
-
-            <!-- Badge R TECH rotativ (dreapta sus) -->
-            <div class="absolute -right-8 -top-8 sm:-right-10 sm:-top-10 select-none" aria-hidden="true">
-              <div class="relative glow">
-                <div class="h-28 w-28 sm:h-32 sm:w-32 rounded-full bg-slate-900/70 border border-white/20 backdrop-blur-md flex items-center justify-center shadow-soft ring-1 ring-brand-500/30">
-                  <div class="relative flex items-center justify-center">
-                    <span class="text-4xl sm:text-5xl font-black tracking-tight bg-gradient-to-br from-brand-400 to-emerald-300 bg-clip-text text-transparent drop-shadow">R</span>
-                  </div>
-                </div>
-                <!-- inel exterior rotativ -->
-                <div class="absolute inset-[-10px] rounded-full border border-white/10">
-                  <div class="absolute inset-0 rounded-full ring-2 ring-brand-500/40 animate-[spin_12s_linear_infinite]"></div>
-                  <div class="absolute inset-3 rounded-full border-dashed border-2 border-emerald-400/30 animate-[spin_20s_linear_infinite]"></div>
-                </div>
-                <!-- text TECH pe orbită -->
-                <div class="absolute inset-0 grid place-items-center pointer-events-none">
-                  <svg class="h-[140px] w-[140px] sm:h-[164px] sm:w-[164px] animate-[spin_16s_linear_infinite]" viewBox="0 0 100 100" fill="none">
-                    <defs>
-                      <path id="circlePath" d="M50,50 m-35,0 a35,35 0 1,1 70,0 a35,35 0 1,1 -70,0"/>
-                    </defs>
-                    <text font-size="8" letter-spacing="2" fill="rgba(226,232,240,.8)">
-                      <textPath href="#circlePath">• T E C H  •  R I V O  •  T E C H  •  R I V O  •</textPath>
-                    </text>
-                  </svg>
-                </div>
-              </div>
-            </div>
-            <!-- /Badge R TECH -->
 
           </div>
         </div>
@@ -162,15 +136,15 @@
       <h2 class="text-3xl font-extrabold">De ce clienții aleg Rivo</h2>
       <p class="text-slate-300 mt-2 max-w-2xl">Focus pe vânzări, nu pe setup. Tot ce îți trebuie e într-un singur fișier.</p>
       <div class="mt-10 grid md:grid-cols-3 gap-6">
-        <div class="rounded-3xl bg-white/5 p-6 border border-white/10">
+        <div class="rounded-3xl bg-white/5 p-6 border border-white/10 transition duration-300 hover:bg-white/10 hover:-translate-y-0.5 hover:shadow-soft">
           <div class="text-xl font-bold mb-1">1. Conversie crescută</div>
           <p class="text-slate-300">Hero clar + dovezi sociale + secțiuni de beneficii optimizate.</p>
         </div>
-        <div class="rounded-3xl bg-white/5 p-6 border border-white/10">
+        <div class="rounded-3xl bg-white/5 p-6 border border-white/10 transition duration-300 hover:bg-white/10 hover:-translate-y-0.5 hover:shadow-soft">
           <div class="text-xl font-bold mb-1">2. Ușor de editat</div>
           <p class="text-slate-300">Tailwind via CDN, componente predefinite, fără build tools.</p>
         </div>
-        <div class="rounded-3xl bg-white/5 p-6 border border-white/10">
+        <div class="rounded-3xl bg-white/5 p-6 border border-white/10 transition duration-300 hover:bg-white/10 hover:-translate-y-0.5 hover:shadow-soft">
           <div class="text-xl font-bold mb-1">3. Integrare simplă</div>
           <p class="text-slate-300">Formulare Netlify / linkuri Stripe/PayPal gata de atașat.</p>
         </div>
@@ -183,15 +157,15 @@
     <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8 py-14">
       <h2 class="text-3xl font-extrabold">Alege pachetul</h2>
       <div class="mt-8 grid md:grid-cols-3 gap-6">
-        <div class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft">
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft transition duration-300 hover:-translate-y-0.5 hover:bg-white/10">
           <h3 class="text-xl font-bold">Starter</h3>
           <div class="text-3xl font-extrabold mt-4">€19</div>
         </div>
-        <div class="rounded-3xl border border-brand-500/30 bg-brand-500/5 p-6 ring-1 ring-brand-500/20 shadow-soft">
+        <div class="rounded-3xl border border-brand-500/30 bg-brand-500/5 p-6 ring-1 ring-brand-500/20 shadow-soft transition duration-300 hover:-translate-y-0.5 hover:bg-brand-500/10">
           <h3 class="text-xl font-bold">Pro</h3>
           <div class="text-3xl font-extrabold mt-4">€49</div>
         </div>
-        <div class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft">
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft transition duration-300 hover:-translate-y-0.5 hover:bg-white/10">
           <h3 class="text-xl font-bold">Agency</h3>
           <div class="text-3xl font-extrabold mt-4">€99</div>
         </div>
