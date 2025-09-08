@@ -9,7 +9,7 @@
   <meta property="og:title" content="Rivo — Magazin Digital" />
   <meta property="og:description" content="Site de vânzări, gata de lansare: hero, beneficii, pachete, testimoniale." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/fundal.png" />
+  <meta property="og:image" content="assets/fundal site.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,20 +33,18 @@
       radial-gradient(1200px 800px at 20% 10%, rgba(59,130,246,.14), transparent 60%),
       radial-gradient(1000px 700px at 80% 20%, rgba(16,185,129,.12), transparent 60%),
       linear-gradient(180deg, rgba(2,6,23,.94) 0%, rgba(2,6,23,.88) 40%, rgba(2,6,23,.97) 100%)}
-    .container-pad{max-width:1200px}
-    /* badge tech glow */
+    .container-pad{max-width:1280px}
     .glow:before{content:"";position:absolute;inset:-2px;border-radius:9999px;background:conic-gradient(from 0deg, rgba(59,130,246,.5), rgba(16,185,129,.5), rgba(99,102,241,.5), rgba(59,130,246,.5));filter:blur(14px);opacity:.6;z-index:-1}
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans">
-  <!-- Stratul cu IMAGINE DE BACKGROUND: fundal.png1 -->
-  <div class="pointer-events-none fixed inset-0 -z-40 bg-[url('assets/fundal.png')] bg-center bg-cover bg-fixed opacity-25"></div>
+  <div class="pointer-events-none fixed inset-0 -z-40 bg-[url('assets/fundal site.png')] bg-center bg-cover bg-fixed opacity-25"></div>
 
   <canvas id="bg-lines" aria-hidden="true"></canvas>
   <div class="grad-overlay" aria-hidden="true"></div>
 
   <!-- Header -->
-  <header class="sticky top-0 z-50 backdrop-blur bg-slate-950/60 border-b border-white/5">
+  <header class="sticky top-0 z-50 backdrop-blur bg-slate-950/70 border-b border-white/5">
     <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8">
       <div class="h-16 flex items-center justify-between">
         <a class="flex items-center gap-2" href="#" aria-label="Rivo acasă">
@@ -59,11 +57,12 @@
           <a href="#beneficii" class="hover:text-white">Beneficii</a>
           <a href="#pachete" class="hover:text-white">Pachete</a>
           <a href="#produse" class="hover:text-white">Produse</a>
+          <a href="#testimoniale" class="hover:text-white">Testimoniale</a>
           <a href="#contact" class="hover:text-white">Contact</a>
         </nav>
         <div class="flex items-center gap-3">
-          <a href="#pachete" class="hidden sm:inline-flex rounded-xl bg-brand-600 hover:bg-brand-500 px-4 py-2 font-semibold">Cumpără acum</a>
-          <button id="menuBtn" class="md:hidden inline-flex items-center gap-2 rounded-xl bg-white/10 px-3 py-2 hover:bg-white/15">
+          <a href="#pachete" class="hidden sm:inline-flex rounded-xl bg-brand-600 hover:bg-brand-500 px-4 py-2 font-semibold transition">Cumpără acum</a>
+          <button id="menuBtn" class="md:hidden inline-flex items-center gap-2 rounded-xl bg-white/10 px-3 py-2 hover:bg-white/15 transition">
             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-width="1.5" d="M4 7h16M4 12h16M4 17h16"/></svg>
             Meniu
           </button>
@@ -82,70 +81,45 @@
 
   <!-- Hero -->
   <section class="relative overflow-hidden">
-    <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-      <div class="grid lg:grid-cols-2 gap-12 items-start">
-        <div>
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
-            Lansează-ți <span class="bg-gradient-to-r from-brand-400 to-emerald-300 bg-clip-text text-transparent">magazinul digital</span> în ore, nu zile
-          </h1>
-          <p class="mt-5 text-lg text-slate-300 max-w-xl">
-            Template complet pentru vânzări online: pagini, secțiuni de conversie, formulare și design modern. Ideal pentru prompts, template-uri, cursuri și licențe.
-          </p>
-          <div class="mt-8 flex flex-wrap gap-3">
-            <a href="#pachete" class="inline-flex items-center rounded-xl bg-brand-600 hover:bg-brand-500 px-5 py-3 font-semibold shadow-soft transition duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-brand-500/50">Vezi pachetele</a>
-            <a href="#beneficii" class="inline-flex items-center rounded-xl bg-white/10 hover:bg-white/15 px-5 py-3 font-semibold transition duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-white/30">Cum te ajută</a>
-          </div>
-        </div>
-
-        <div class="relative flex justify-end">
-          <div class="w-full sm:w-[480px] lg:w-[520px] relative">
-            <div class="rounded-3xl border border-white/10 bg-white/5 p-4 shadow-soft backdrop-blur">
-              <img id="heroImg" src="assets/fundal site.png" alt="Hero vizual — Planeta RIVO" class="rounded-2xl w-full aspect-[4/3] object-cover" loading="eager" decoding="async"/>
-            </div>
-            <p class="text-center text-xs text-slate-400 mt-2">Imagine din <code>assets/fundal site.png
-
-          </div>
+    <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8 py-20 lg:py-32 grid lg:grid-cols-2 gap-12 items-center">
+      <div class="space-y-6">
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
+          Lansează-ți <span class="bg-gradient-to-r from-brand-400 to-emerald-300 bg-clip-text text-transparent">magazinul digital</span> în ore, nu zile
+        </h1>
+        <p class="text-lg text-slate-300 max-w-xl">
+          Template complet pentru vânzări online: pagini, secțiuni de conversie, formulare și design modern. Ideal pentru prompts, template-uri, cursuri și licențe.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="#pachete" class="inline-flex items-center rounded-xl bg-brand-600 hover:bg-brand-500 px-6 py-3 font-semibold shadow-soft transition transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-brand-500/50">Vezi pachetele</a>
+          <a href="#beneficii" class="inline-flex items-center rounded-xl bg-white/10 hover:bg-white/15 px-6 py-3 font-semibold transition transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-white/30">Cum te ajută</a>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- Sectiune imagine1 -->
-  <section id="imagine1" class="border-t border-white/5">
-    <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8 py-14">
-      <h2 class="text-3xl font-extrabold mb-6">Imaginea 1</h2>
-      <div class="rounded-3xl border border-white/10 bg-white/5 p-4 shadow-soft">
-        <img src="assets/imagine1.png" alt="Imagine 1" class="rounded-2xl w-full object-cover"/>
-      </div>
-    </div>
-  </section>
-
-  <!-- Sectiune imagine2 -->
-  <section id="imagine2" class="border-t border-white/5">
-    <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8 py-14">
-      <h2 class="text-3xl font-extrabold mb-6">Imaginea 2</h2>
-      <div class="rounded-3xl border border-white/10 bg-white/5 p-4 shadow-soft">
-        <img src="assets/imagine2.png" alt="Imagine 2" class="rounded-2xl w-full object-cover"/>
+      <div class="relative flex justify-center lg:justify-end">
+        <div class="relative rounded-3xl overflow-hidden shadow-soft border border-white/10 w-full sm:w-[480px] lg:w-[560px]">
+          <img src="assets/fundal site.png" alt="Hero vizual — Planeta RIVO" class="w-full h-full object-cover"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-slate-950/20"></div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Beneficii -->
   <section id="beneficii" class="border-t border-white/5">
-    <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8 py-14">
-      <h2 class="text-3xl font-extrabold">De ce clienții aleg Rivo</h2>
-      <p class="text-slate-300 mt-2 max-w-2xl">Focus pe vânzări, nu pe setup. Tot ce îți trebuie e într-un singur fișier.</p>
-      <div class="mt-10 grid md:grid-cols-3 gap-6">
-        <div class="rounded-3xl bg-white/5 p-6 border border-white/10 transition duration-300 hover:bg-white/10 hover:-translate-y-0.5 hover:shadow-soft">
-          <div class="text-xl font-bold mb-1">1. Conversie crescută</div>
+    <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8 py-20">
+      <h2 class="text-4xl font-extrabold mb-6 text-center">De ce clienții aleg Rivo</h2>
+      <p class="text-slate-300 text-center max-w-2xl mx-auto">Focus pe vânzări, nu pe setup. Tot ce îți trebuie e într-un singur fișier.</p>
+      <div class="mt-12 grid md:grid-cols-3 gap-8">
+        <div class="rounded-3xl bg-white/5 p-8 border border-white/10 transition hover:bg-white/10 hover:-translate-y-0.5 hover:shadow-soft">
+          <div class="text-2xl font-bold mb-2">Conversie crescută</div>
           <p class="text-slate-300">Hero clar + dovezi sociale + secțiuni de beneficii optimizate.</p>
         </div>
-        <div class="rounded-3xl bg-white/5 p-6 border border-white/10 transition duration-300 hover:bg-white/10 hover:-translate-y-0.5 hover:shadow-soft">
-          <div class="text-xl font-bold mb-1">2. Ușor de editat</div>
+        <div class="rounded-3xl bg-white/5 p-8 border border-white/10 transition hover:bg-white/10 hover:-translate-y-0.5 hover:shadow-soft">
+          <div class="text-2xl font-bold mb-2">Ușor de editat</div>
           <p class="text-slate-300">Tailwind via CDN, componente predefinite, fără build tools.</p>
         </div>
-        <div class="rounded-3xl bg-white/5 p-6 border border-white/10 transition duration-300 hover:bg-white/10 hover:-translate-y-0.5 hover:shadow-soft">
-          <div class="text-xl font-bold mb-1">3. Integrare simplă</div>
+        <div class="rounded-3xl bg-white/5 p-8 border border-white/10 transition hover:bg-white/10 hover:-translate-y-0.5 hover:shadow-soft">
+          <div class="text-2xl font-bold mb-2">Integrare simplă</div>
           <p class="text-slate-300">Formulare Netlify / linkuri Stripe/PayPal gata de atașat.</p>
         </div>
       </div>
@@ -153,41 +127,148 @@
   </section>
 
   <!-- Pachete -->
-  <section id="pachete" class="border-t border-white/5">
-    <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8 py-14">
-      <h2 class="text-3xl font-extrabold">Alege pachetul</h2>
-      <div class="mt-8 grid md:grid-cols-3 gap-6">
-        <div class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft transition duration-300 hover:-translate-y-0.5 hover:bg-white/10">
-          <h3 class="text-xl font-bold">Starter</h3>
-          <div class="text-3xl font-extrabold mt-4">€19</div>
+  <section id="pachete" class="border-t border-white/5 bg-white/5">
+    <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8 py-20">
+      <h2 class="text-4xl font-extrabold text-center">Alege pachetul</h2>
+      <div class="mt-12 grid md:grid-cols-3 gap-8">
+        <div class="rounded-3xl border border-white/10 bg-slate-950/40 p-8 shadow-soft transition hover:-translate-y-0.5 hover:bg-slate-950/60">
+          <h3 class="text-2xl font-bold">Starter</h3>
+          <div class="text-4xl font-extrabold mt-4">€19</div>
         </div>
-        <div class="rounded-3xl border border-brand-500/30 bg-brand-500/5 p-6 ring-1 ring-brand-500/20 shadow-soft transition duration-300 hover:-translate-y-0.5 hover:bg-brand-500/10">
-          <h3 class="text-xl font-bold">Pro</h3>
-          <div class="text-3xl font-extrabold mt-4">€49</div>
+        <div class="rounded-3xl border border-brand-500/30 bg-brand-500/10 p-8 ring-1 ring-brand-500/30 shadow-soft transition hover:-translate-y-0.5 hover:bg-brand-500/20">
+          <h3 class="text-2xl font-bold">Pro</h3>
+          <div class="text-4xl font-extrabold mt-4">€49</div>
         </div>
-        <div class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft transition duration-300 hover:-translate-y-0.5 hover:bg-white/10">
-          <h3 class="text-xl font-bold">Agency</h3>
-          <div class="text-3xl font-extrabold mt-4">€99</div>
+        <div class="rounded-3xl border border-white/10 bg-slate-950/40 p-8 shadow-soft transition hover:-translate-y-0.5 hover:bg-slate-950/60">
+          <h3 class="text-2xl font-bold">Agency</h3>
+          <div class="text-4xl font-extrabold mt-4">€99</div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Contact -->
+  <section id="contact" class="border-t border-white/5">
+    <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8 py-20 grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <h2 class="text-4xl font-extrabold mb-4">Contactează-ne</h2>
+        <p class="text-slate-300 mb-6">Ai întrebări sau vrei o ofertă personalizată? Completează formularul și revenim rapid.</p>
+        <form class="space-y-4">
+          <input type="text" placeholder="Nume" class="w-full rounded-xl bg-white/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-500/50"/>
+          <input type="email" placeholder="Email" class="w-full rounded-xl bg-white/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-500/50"/>
+          <textarea placeholder="Mesaj" rows="4" class="w-full rounded-xl bg-white/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-500/50"></textarea>
+          <button class="rounded-xl bg-brand-600 hover:bg-brand-500 px-6 py-3 font-semibold shadow-soft transition">Trimite mesaj</button>
+        </form>
+      </div>
+      <div class="rounded-3xl overflow-hidden shadow-soft border border-white/10">
+        <img src="assets/imagine2.png" alt="Contact vizual" class="w-full h-full object-cover"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- Produse -->
+  <section id="produse" class="border-t border-white/5">
+    <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8 py-14">
+      <div class="flex items-end justify-between gap-4">
+        <h2 class="text-3xl font-extrabold">Produse recomandate</h2>
+        <a href="#pachete" class="hidden sm:inline-flex rounded-xl bg-white/10 hover:bg-white/15 px-4 py-2 text-sm font-semibold transition">Vezi toate</a>
+      </div>
+      <div class="mt-8 grid md:grid-cols-3 gap-6">
+        <article class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft hover:-translate-y-0.5 transition">
+          <h3 class="text-lg font-bold">Kit Prompts AI</h3>
+          <p class="mt-2 text-slate-300 text-sm">200+ prompturi testate pentru marketing & vânzări.</p>
+          <div class="mt-4 flex items-center justify-between">
+            <span class="text-xl font-extrabold">€29</span>
+            <a href="#" class="rounded-lg bg-brand-600 hover:bg-brand-500 px-3 py-2 text-sm font-semibold">Cumpără</a>
+          </div>
+        </article>
+        <article class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft hover:-translate-y-0.5 transition">
+          <h3 class="text-lg font-bold">Template Landing</h3>
+          <p class="mt-2 text-slate-300 text-sm">Structură gata de conversie cu secțiuni UX.</p>
+          <div class="mt-4 flex items-center justify-between">
+            <span class="text-xl font-extrabold">€39</span>
+            <a href="#" class="rounded-lg bg-brand-600 hover:bg-brand-500 px-3 py-2 text-sm font-semibold">Cumpără</a>
+          </div>
+        </article>
+        <article class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft hover:-translate-y-0.5 transition">
+          <h3 class="text-lg font-bold">Licență Agency</h3>
+          <p class="mt-2 text-slate-300 text-sm">Drept de folosire pe proiecte multiple.</p>
+          <div class="mt-4 flex items-center justify-between">
+            <span class="text-xl font-extrabold">€99</span>
+            <a href="#" class="rounded-lg bg-brand-600 hover:bg-brand-500 px-3 py-2 text-sm font-semibold">Cumpără</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimoniale -->
+  <section id="testimoniale" class="border-t border-white/5">
+    <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8 py-14">
+      <h2 class="text-3xl font-extrabold">Ce spun clienții</h2>
+      <div class="mt-8 grid md:grid-cols-3 gap-6">
+        <blockquote class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft">
+          <p class="text-slate-200">„Am lansat în aceeași zi. Conversiile au crescut cu 32%.”</p>
+          <footer class="mt-4 text-sm text-slate-400">— Andrei, fondator SaaS</footer>
+        </blockquote>
+        <blockquote class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft">
+          <p class="text-slate-200">„Super ușor de editat și integrat cu Stripe.”</p>
+          <footer class="mt-4 text-sm text-slate-400">— Ioana, creator</footer>
+        </blockquote>
+        <blockquote class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft">
+          <p class="text-slate-200">„Design modern, viteza excelentă. Recomand!”</p>
+          <footer class="mt-4 text-sm text-slate-400">— Vlad, agenție</footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-white/5">
+    <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8 py-14">
+      <div class="rounded-3xl p-8 md:p-10 bg-gradient-to-r from-brand-600/30 via-emerald-500/20 to-transparent border border-white/10 shadow-soft flex flex-col md:flex-row items-center justify-between gap-6">
+        <div>
+          <h3 class="text-2xl md:text-3xl font-extrabold">Gata să lansezi mai repede?</h3>
+          <p class="text-slate-200/80 mt-2">Alege pachetul potrivit și pornește astăzi.</p>
+        </div>
+        <a href="#pachete" class="rounded-xl bg-brand-600 hover:bg-brand-500 px-5 py-3 font-semibold">Alege pachetul</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="border-t border-white/5">
+    <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8 py-14">
+      <h2 class="text-3xl font-extrabold">Contact</h2>
+      <form class="mt-8 grid gap-4 md:grid-cols-2" onsubmit="event.preventDefault(); alert('Mulțumim! Te contactăm în curând.');">
+        <input class="rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:ring-2 focus:ring-brand-500/50" placeholder="Nume" required>
+        <input type="email" class="rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:ring-2 focus:ring-brand-500/50" placeholder="Email" required>
+        <textarea class="md:col-span-2 rounded-xl bg-white/5 border border-white/10 px-4 py-3 h-32 outline-none focus:ring-2 focus:ring-brand-500/50" placeholder="Mesaj"></textarea>
+        <div class="md:col-span-2">
+          <button class="rounded-xl bg-brand-600 hover:bg-brand-500 px-5 py-3 font-semibold">Trimite</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
   <!-- Footer -->
-  <footer class="border-t border-white/5">
+  <footer class="border-t border-white/5 bg-slate-950/80">
     <div class="mx-auto container-pad px-4 sm:px-6 lg:px-8 py-10 text-sm text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-4">
       <p>© <span id="year"></span> Rivo. Toate drepturile rezervate.</p>
+      <nav class="flex gap-4">
+        <a href="#beneficii" class="hover:text-white transition">Beneficii</a>
+        <a href="#pachete" class="hover:text-white transition">Pachete</a>
+        <a href="#contact" class="hover:text-white transition">Contact</a>
+      </nav>
     </div>
   </footer>
 
   <script>
-    // Meniu mobil
     document.getElementById('menuBtn').addEventListener('click', ()=>{
       document.getElementById('mobileMenu').classList.toggle('hidden');
     });
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Linii high-tech animate
     (function lines(){
       const c = document.getElementById('bg-lines');
       const g = c.getContext('2d');
@@ -227,8 +308,4 @@
         g.restore();
         requestAnimationFrame(draw);
       }
-      requestAnimationFrame(draw);
-    })();
-  </script>
-</body>
-</html>
+      requestAnimation
