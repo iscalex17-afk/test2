@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rivo — Magazin Digital</title>
+  <title>Rivo — Magazin Digital (Tech)</title>
   <meta name="description" content="Vinde resurse digitale: prompts, template-uri și kit-uri pentru AI & business." />
   <meta name="theme-color" content="#0b1220" />
   <meta property="og:title" content="Rivo — Magazin Digital" />
@@ -34,9 +34,14 @@
       radial-gradient(1000px 700px at 80% 20%, rgba(16,185,129,.12), transparent 60%),
       linear-gradient(180deg, rgba(2,6,23,.94) 0%, rgba(2,6,23,.88) 40%, rgba(2,6,23,.97) 100%)}
     .container-pad{max-width:1200px}
+    /* badge tech glow */
+    .glow:before{content:"";position:absolute;inset:-2px;border-radius:9999px;background:conic-gradient(from 0deg, rgba(59,130,246,.5), rgba(16,185,129,.5), rgba(99,102,241,.5), rgba(59,130,246,.5));filter:blur(14px);opacity:.6;z-index:-1}
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans">
+  <!-- Stratul cu IMAGINE DE BACKGROUND: fundal.png1 -->
+  <div class="pointer-events-none fixed inset-0 -z-40 bg-[url('assets/fundal.png1')] bg-center bg-cover bg-fixed opacity-25"></div>
+
   <canvas id="bg-lines" aria-hidden="true"></canvas>
   <div class="grad-overlay" aria-hidden="true"></div>
 
@@ -46,7 +51,7 @@
       <div class="h-16 flex items-center justify-between">
         <a class="flex items-center gap-2" href="#" aria-label="Rivo acasă">
           <span class="h-8 w-8 rounded-xl bg-gradient-to-tr from-brand-500 to-emerald-400 shadow-soft"></span>
-          <span class="text-xl font-extrabold">Rivo</span>
+          <span class="text-xl font-extrabold tracking-tight">Rivo</span>
         </a>
         <nav class="hidden md:flex items-center gap-8 text-sm text-slate-300">
           <a href="#beneficii" class="hover:text-white">Beneficii</a>
@@ -91,11 +96,40 @@
         </div>
 
         <div class="relative flex justify-end">
-          <div class="w-full sm:w-[480px] lg:w-[520px]">
+          <div class="w-full sm:w-[480px] lg:w-[520px] relative">
             <div class="rounded-3xl border border-white/10 bg-white/5 p-4 shadow-soft backdrop-blur">
               <img id="heroImg" src="assets/fundal.png" alt="Hero vizual" class="rounded-2xl w-full aspect-[4/3] object-cover"/>
             </div>
             <p class="text-center text-xs text-slate-400 mt-2">Imagine din <code>assets/fundal.png</code></p>
+
+            <!-- Badge R TECH rotativ (dreapta sus) -->
+            <div class="absolute -right-8 -top-8 sm:-right-10 sm:-top-10 select-none" aria-hidden="true">
+              <div class="relative glow">
+                <div class="h-28 w-28 sm:h-32 sm:w-32 rounded-full bg-slate-900/70 border border-white/20 backdrop-blur-md flex items-center justify-center shadow-soft ring-1 ring-brand-500/30">
+                  <div class="relative flex items-center justify-center">
+                    <span class="text-4xl sm:text-5xl font-black tracking-tight bg-gradient-to-br from-brand-400 to-emerald-300 bg-clip-text text-transparent drop-shadow">R</span>
+                  </div>
+                </div>
+                <!-- inel exterior rotativ -->
+                <div class="absolute inset-[-10px] rounded-full border border-white/10">
+                  <div class="absolute inset-0 rounded-full ring-2 ring-brand-500/40 animate-[spin_12s_linear_infinite]"></div>
+                  <div class="absolute inset-3 rounded-full border-dashed border-2 border-emerald-400/30 animate-[spin_20s_linear_infinite]"></div>
+                </div>
+                <!-- text TECH pe orbită -->
+                <div class="absolute inset-0 grid place-items-center pointer-events-none">
+                  <svg class="h-[140px] w-[140px] sm:h-[164px] sm:w-[164px] animate-[spin_16s_linear_infinite]" viewBox="0 0 100 100" fill="none">
+                    <defs>
+                      <path id="circlePath" d="M50,50 m-35,0 a35,35 0 1,1 70,0 a35,35 0 1,1 -70,0"/>
+                    </defs>
+                    <text font-size="8" letter-spacing="2" fill="rgba(226,232,240,.8)">
+                      <textPath href="#circlePath">• T E C H  •  R I V O  •  T E C H  •  R I V O  •</textPath>
+                    </text>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <!-- /Badge R TECH -->
+
           </div>
         </div>
       </div>
