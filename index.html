@@ -9,7 +9,7 @@
   <meta property="og:title" content="Rivo — Magazin Digital" />
   <meta property="og:description" content="Site de vânzări, gata de lansare: hero, beneficii, pachete, testimoniale." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/rivo-hero.png" />
+  <meta property="og:image" content="assets/poza-mea-hero.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +21,21 @@
         extend: {
           fontFamily: { sans: ['Inter','ui-sans-serif','system-ui'] },
           colors: { brand: { 50:'#eff6ff',100:'#dbeafe',200:'#bfdbfe',300:'#93c5fd',400:'#60a5fa',500:'#3b82f6',600:'#2563eb',700:'#1d4ed8',800:'#1e40af',900:'#1e3a8a' } },
-          boxShadow: { soft:'0 10px 30px rgba(0,0,0,.15)' }
+          boxShadow: { soft:'0 10px 30px rgba(0,0,0,.15)' },
+          keyframes: {
+            glow: {
+              '0%,100%': { boxShadow: '0 0 0 rgba(59,130,246,0), 0 0 0 rgba(16,185,129,0)' },
+              '50%': { boxShadow: '0 0 32px rgba(59,130,246,.45), 0 0 64px rgba(16,185,129,.35)' }
+            },
+            shine: {
+              '0%':   { transform: 'translateX(-100%)' },
+              '100%': { transform: 'translateX(100%)' }
+            }
+          },
+          animation: {
+            glow: 'glow 3.2s ease-in-out infinite',
+            shine: 'shine 3s linear infinite'
+          }
         }
       }
     }
@@ -104,10 +118,16 @@
           <div class="w-full sm:w-[520px] lg:w-[560px] relative">
             <figure class="group rounded-3xl border border-white/10 bg-white/5 p-4 shadow-soft backdrop-blur overflow-hidden">
               <div class="relative rounded-2xl overflow-hidden aspect-[4/3]">
-                <img id="heroImg" src="assets/rivo-hero.png" alt="Hero vizual — Planeta RIVO" class="absolute inset-0 h-full w-full object-cover" loading="eager" decoding="async" />
+                <!-- cadru neon animat -->
+                <div class="pointer-events-none absolute -inset-[2px] rounded-[1.2rem] bg-[conic-gradient(from_0deg,rgba(59,130,246,.45),rgba(16,185,129,.35),rgba(99,102,241,.4),rgba(59,130,246,.45))] blur-md opacity-70 animate-glow"></div>
+                <img id="heroImg" src="assets/poza-mea-hero.png" alt="Poza mea — Hero vizual" class="absolute inset-0 h-full w-full object-cover" loading="eager" decoding="async" />
+                <!-- efect de shine care traversează fotografia -->
+                <div class="pointer-events-none absolute inset-y-0 -left-1 w-[30%] bg-gradient-to-r from-white/0 via-white/35 to-white/0 skew-x-12 animate-shine"></div>
+                <!-- overlay de contrast pentru text -->
                 <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-slate-950/50 via-slate-900/10 to-transparent"></div>
               </div>
-              <figcaption class="mt-2 text-center text-xs text-slate-400">Imagine creată de noi: <code>assets/rivo-hero.png</code></figcaption>
+              </div>
+              <figcaption class="mt-2 text-center text-xs text-slate-400">Poza mea: <code>assets/poza-mea-hero.png</code></figcaption>
             </figure>
           </div>
         </div>
