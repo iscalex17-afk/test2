@@ -1,9 +1,9 @@
-# netlify.toml — opțional (nu e necesar pentru formulare simple)
 [build]
   publish = "."
 
-# Exemplu de redirecționare pentru SPA (dacă adaugi rute client-side)
-# [[redirects]]
-#   from = "/*"
-#   to = "/index.html"
-#   status = 200
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
