@@ -1,0 +1,164 @@
+/* Rivo Netlify site */
+/* Reset + base */
+:root{
+  --bg-1:#071a2c;
+  --bg-2:#0c2742;
+  --txt:#d9e7ff;
+  --muted:#9bb5d6;
+  --accent:#3ce6ff;
+  --accent-2:#7df8ff;
+  --card:#0b2138cc;
+  --border:#1e3b5c;
+  --glow: 0 0 40px rgba(60,230,255,.25), 0 0 80px rgba(60,230,255,.15);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;
+  color:var(--txt);
+  background: radial-gradient(1200px 700px at 20% 10%, #0b2e4d, var(--bg-1)) no-repeat,
+              linear-gradient(180deg, var(--bg-2), var(--bg-1));
+  overflow-x:hidden;
+}
+
+/* Canvas full-bleed background */
+#bg-canvas{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  z-index:-1;
+  background: radial-gradient(1000px 600px at 80% 20%, rgba(60,230,255,.06), transparent),
+              radial-gradient(800px 500px at 20% 80%, rgba(60,180,255,.05), transparent);
+}
+
+/* Layout */
+.container{
+  max-width:1100px;
+  margin:0 auto;
+  padding:20px clamp(16px, 4vw, 32px);
+}
+header{
+  position:sticky;
+  top:0;
+  backdrop-filter:saturate(140%) blur(10px);
+  background:linear-gradient(180deg, rgba(3,16,29,0.8), rgba(3,16,29,0));
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  z-index:5;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:800;
+  letter-spacing:.3px;
+  text-decoration:none;
+  color:var(--txt);
+}
+nav a{
+  color:var(--muted);
+  text-decoration:none;
+  margin-left:20px;
+  font-weight:600;
+}
+nav a:hover{ color:var(--txt) }
+
+/* Hero */
+.hero{
+  min-height:72vh;
+  display:grid;
+  place-items:center;
+  text-align:center;
+}
+.hero h1{
+  margin:0 0 12px;
+  font-size:clamp(32px, 5vw, 56px);
+  line-height:1.05;
+  text-shadow:0 2px 20px rgba(0,0,0,.3);
+}
+.hero .lead{
+  color:var(--muted);
+  font-size:clamp(16px, 2.2vw, 18px);
+  max-width:720px;
+  margin-inline:auto;
+}
+.accent{ color:var(--accent-2); text-shadow: var(--glow); }
+.cta{ display:flex; gap:12px; justify-content:center; margin-top:24px; }
+
+.btn{
+  display:inline-block;
+  padding:12px 18px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  color:var(--txt);
+  text-decoration:none;
+  font-weight:700;
+  letter-spacing:.2px;
+  outline-offset:2px;
+}
+.btn.primary{
+  background:linear-gradient(180deg, #1cb8d4, #0ea3b8);
+  border-color:transparent;
+  box-shadow: var(--glow);
+}
+.btn.ghost{ background:transparent; }
+.btn.small{ padding:10px 14px; font-size:14px; }
+
+.section{ padding:48px 0; }
+.section h2{ margin:4px 0 20px; font-size:clamp(22px,3vw,28px); }
+.grid{
+  display:grid;
+  gap:18px;
+}
+.grid.two{ grid-template-columns: repeat( auto-fit, minmax(260px, 1fr) ); }
+.grid.three{ grid-template-columns: repeat( auto-fit, minmax(220px, 1fr) ); }
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:18px 16px;
+  box-shadow:0 10px 40px rgba(0,0,0,.18);
+}
+.card h3{ margin-top:6px; }
+.card p{ color:var(--muted); }
+
+ul.check{ list-style:none; padding-left:0; margin:12px 0 0;}
+ul.check li{ padding:6px 0 6px 26px; position:relative; }
+ul.check li::before{
+  content:"✓";
+  position:absolute; left:0; top:6px;
+  font-weight:800;
+  color:var(--accent-2);
+}
+
+.price.card{ text-align:center; }
+.price .money{ font-size:32px; margin:6px 0 8px; font-weight:800; }
+.price.featured{ outline:1px solid var(--accent); box-shadow: var(--glow); }
+
+.form{
+  display:grid; gap:12px;
+  max-width:520px;
+}
+label{ display:grid; gap:6px; font-weight:600; color:var(--txt) }
+input, textarea{
+  background:#061525;
+  border:1px solid var(--border);
+  color:var(--txt);
+  border-radius:12px;
+  padding:12px;
+  font:inherit;
+}
+
+.footer{ color:var(--muted); text-align:center; border-top:1px solid var(--border); margin-top:24px; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  #bg-canvas { display:none; }
+}
