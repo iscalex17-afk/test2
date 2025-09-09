@@ -12,112 +12,101 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
   <style>
-    :root{
-      /* Brand */
-      --bg:#F8FAFC;            /* fundal foarte deschis */
-      --text:#0F172A;          /* slate-900 */
-      --muted:#475569;         /* slate-600 */
-      --primary:#2563EB;       /* albastru (alternativ: #0EA5E9) */
-      --accent:#14B8A6;        /* teal */
-      --surface:#FFFFFF;       /* card surface */
-      --ring:rgba(37,99,235,.45);
-      --border:#E2E8F0;        /* slate-200 */
-      --shadow:0 6px 24px rgba(15,23,42,.08);
-      --radius:18px;
+  /* ==== Tema furnizată + layout 12 coloane & carduri foto ==== */
+  :root{
+    --bg:#0b1220; --text:#e6eefc; --muted:#8aa0bf; --card:#111a2b;
+    --accent:#60a5fa; --accent2:#34d399; --line:rgba(96,165,250,.08);
+    --ring: rgba(96,165,250,.45);
+    --radius:18px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+  #bg{position:fixed;inset:0;z-index:0;background:radial-gradient(1200px 800px at 10% -10%, #1b274266 0%, transparent 45%)}
 
-      /* Grid */
-      --container: min(1280px, 96vw);
-      --gutter: 20px; /* gutters aerisite */
-    }
-    *,*::before,*::after{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; background:var(--bg); color:var(--text);
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, Helvetica, sans-serif;
-      line-height:1.65; font-size:16px;
-    }
-    h1,h2,h3{font-family:Poppins, Inter, system-ui, sans-serif; line-height:1.15; margin:0 0 .5rem}
-    h1{font-size:clamp(28px,4vw,44px)}
-    h2{font-size:clamp(22px,3vw,30px)}
-    h3{font-size:clamp(18px,2.2vw,22px)}
-    p{margin:.2rem 0 1rem}
-    a{color:inherit}
+  /* Container & 12-col */
+  .container{width:min(1080px,92vw);margin-inline:auto;padding:1rem}
+  .grid{display:grid; grid-template-columns:repeat(12, minmax(0,1fr)); gap:1rem}
+  .col-span-12{grid-column:span 12}
+  .col-span-8{grid-column:span 8}
+  .col-span-6{grid-column:span 6}
+  .col-span-4{grid-column:span 4}
+  @media (max-width: 960px){
+    .col-md-12{grid-column:span 12}
+    .col-md-6{grid-column:span 6}
+    .col-md-8{grid-column:span 8}
+    .col-md-4{grid-column:span 4}
+  }
+  @media (max-width: 720px){ .grid{gap:.9rem} }
 
-    /* Container & 12-col layout */
-    .container{width:var(--container); margin-inline:auto; padding-inline: max(var(--gutter), env(safe-area-inset-left));}
-    .grid{display:grid; grid-template-columns:repeat(12, minmax(0,1fr)); gap:var(--gutter)}
-    .col-span-12{grid-column:span 12}
-    .col-span-8{grid-column:span 8}
-    .col-span-6{grid-column:span 6}
-    .col-span-4{grid-column:span 4}
-    .col-span-3{grid-column:span 3}
-    @media (max-width: 960px){
-      .col-md-12{grid-column:span 12}
-      .col-md-6{grid-column:span 6}
-      .col-md-8{grid-column:span 8}
-      .col-md-4{grid-column:span 4}
-    }
-    @media (max-width: 720px){
-      .grid{gap:16px}
-      .col-sm-12{grid-column:span 12}
-    }
+  /* Nav sticky din tema + butoane accesibile */
+  .nav{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(11,18,32,.8),rgba(11,18,32,.35));backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid #17223a}
+  .brand{display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--text);font-weight:700}
+  .menu a{color:var(--muted);text-decoration:none;margin-left:1rem}
+  .menu a:hover{color:var(--text)}
+  .btn{background:#17233b;border:1px solid #26324d;color:var(--text);padding:.65rem 1rem;border-radius:.8rem;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;font-weight:600;cursor:pointer;transition:transform .18s ease, box-shadow .18s ease}
+  .btn:hover{box-shadow:0 0 0 4px rgba(96,165,250,.25)}
+  .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent2));border:none;color:#0b1220}
 
-    /* Header sticky */
-    .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
-    .skip-link:focus{position:fixed;left:12px;top:12px;padding:10px 14px;background:#fff;border:2px solid var(--primary);border-radius:10px;z-index:10000}
+  /* Hero */
+  .hero{position:relative;z-index:3;text-align:center;padding:4rem 1rem 3rem}
+  .logo{max-width:220px;margin-bottom:1rem;filter:drop-shadow(0 0 12px var(--accent));animation:pulse 3s infinite}
+  @keyframes pulse{0%,100%{filter:drop-shadow(0 0 10px var(--accent))}50%{filter:drop-shadow(0 0 16px var(--accent2))}}
+  .lead{color:var(--muted);max-width:70ch;margin:0 auto 1.2rem}
 
-    header.header{position:sticky; top:0; z-index:50; background:rgba(248,250,252,.85); backdrop-filter:saturate(160%) blur(10px); border-bottom:1px solid var(--border)}
-    .nav{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 0}
-    .logo{display:flex; align-items:center; gap:10px; font-weight:800; text-decoration:none}
-    .logo img{width:28px;height:28px;border-radius:8px}
-    .nav-links{display:flex; gap:6px; flex-wrap:wrap}
-    .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; text-decoration:none; font-weight:800; border:1px solid var(--border); background:#fff; transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease}
-    .btn:hover{transform:translateY(-1px); box-shadow:var(--shadow)}
-    .btn.primary{background:var(--primary); color:white; border-color:transparent}
-    .btn.ghost{background:transparent}
-    .nav a[aria-current="page"]{outline:2px solid transparent; box-shadow: inset 0 0 0 2px var(--primary)}
+  /* Breadcrumbs */
+  .breadcrumbs{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:14px;color:var(--muted);margin:6px 0 18px}
+  .breadcrumbs a{color:#c5d6f7;text-decoration:none}
+  .breadcrumbs [aria-hidden="true"]{opacity:.6}
 
-    /* Hero */
-    .hero{padding:24px 0 8px}
-    .lead{color:var(--muted); font-size:18px; max-width:62ch}
-    .chips{display:flex; gap:8px; flex-wrap:wrap; margin:.8rem 0}
-    .chip{font-weight:600; padding:6px 10px; border:1px solid var(--border); border-radius:999px; background:#fff}
+  /* Carduri & grile (OKLCH mix pentru suprafețe) */
+  .cards{display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:1rem}
+  .card{grid-column:span 4; display:flex; flex-direction:column; background:color-mix(in oklab, var(--card) 92%, #08111f); border:1px solid #1b2a44; border-radius:var(--radius); padding:1.1rem; box-shadow:0 8px 32px rgba(7,12,22,.6); transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease}
+  .card:hover{transform:translateY(-2px); box-shadow:0 12px 44px rgba(7,12,22,.7); border-color:#22406a}
+  .card--featured{grid-column:span 8}
+  @media (max-width:1024px){ .card{grid-column:span 6} .card--featured{grid-column:span 12} }
+  @media (max-width:640px){ .card{grid-column:span 12} }
 
-    /* Breadcrumbs pentru pagini interne */
-    .breadcrumbs{display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:14px; color:#64748b; margin:6px 0 18px}
-    .breadcrumbs a{color:#334155; text-decoration:none}
-    .breadcrumbs [aria-hidden="true"]{opacity:.6}
+  .card-media{position:relative; aspect-ratio:16/9; background:#0e1629; border-radius:1rem; overflow:hidden; border:1px solid #1b2a44}
+  .card-media img{width:100%; height:100%; object-fit:cover; display:block}
+  .card-body{padding:.6rem 0 0}
+  .card-title{font-weight:800; font-size:18px; margin:0 0 6px}
+  .card-excerpt{color:var(--muted); display:-webkit-box; -webkit-line-clamp:2; line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; min-height:3.2em}
+  .card-tags{display:flex; gap:6px; flex-wrap:wrap; margin:10px 0 12px}
+  .tag{font-size:12px; border:1px solid #22406a; border-radius:999px; padding:4px 8px; background:#0f1a2d; color:#c8dcff}
+  .link{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; text-decoration:none; font-weight:800; border:1px solid #26324d; background:#17233b; color:var(--text)}
+  .link.primary{background:linear-gradient(90deg,var(--accent),var(--accent2)); border:none; color:#0b1220}
 
-    /* Carduri proiect (chenare de poză) */
-    .cards{display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:var(--gutter)}
-    .card{grid-column:span 4; display:flex; flex-direction:column; border:1px solid var(--border); background:var(--surface); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease}
-    .card:hover{transform:translateY(-2px); box-shadow:0 10px 36px rgba(15,23,42,.12)}
-    .card--featured{grid-column:span 8}
-    @media (max-width: 1024px){ .card{grid-column:span 6} .card--featured{grid-column:span 12} }
-    @media (max-width: 640px){ .card{grid-column:span 12} }
+  /* Secțiuni suplimentare din tema furnizată */
+  .section{padding:2rem 1rem 3rem}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem}
+  .product{display:grid;grid-template-columns:340px 1fr;gap:1.25rem;align-items:center;margin-top:1rem}
+  .product-img{width:100%;max-width:340px}
+  .ticks{list-style:none;padding-left:1rem}
+  .ticks li{position:relative;margin:.4rem 0;color:var(--muted)}
+  .ticks li::before{content:"✔";position:absolute;left:-1rem;opacity:.7}
+  .terminal{background:#0e1629;border:1px solid #1b2a44;border-radius:.8rem;padding:.8rem;min-height:3rem;color:#c8dcff;overflow:auto}
+  .pricing{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1rem}
+  .price-card{background:color-mix(in oklab, var(--card) 92%, #08111f);border:1px solid #22406a;border-radius:1rem;padding:1rem;text-align:center}
+  .price-card .price{font-size:2rem;margin:.2rem 0 1rem}
+  .price-card.highlight{outline:2px solid var(--accent);box-shadow:0 8px 40px rgba(96,165,250,.2)}
+  .form .field{display:grid;gap:.3rem;margin:.7rem 0}
+  .form input,.form textarea{background:#0f1a2d;border:1px solid #223755;color:var(--text);border-radius:.6rem;padding:.6rem}
+  .form input:focus,.form textarea:focus{outline:none;box-shadow:0 0 0 3px rgba(96,165,250,.35)}
 
-    .card-media{position:relative; aspect-ratio:16/9; background:#E2E8F0}
-    .card-media img{width:100%; height:100%; object-fit:cover; display:block}
-    .card-body{padding:14px 14px 12px}
-    .card-title{font-weight:800; font-size:18px; margin:0 0 6px}
-    .card-excerpt{color:var(--muted); display:-webkit-box; -webkit-line-clamp:2; line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; min-height:3.2em}
-    .card-tags{display:flex; gap:6px; flex-wrap:wrap; margin:10px 0 12px}
-    .tag{font-size:12px; border:1px solid var(--border); border-radius:999px; padding:4px 8px; background:#fff}
-    .card-actions{margin-top:auto; padding:0 14px 14px}
-    .link{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; text-decoration:none; font-weight:800; border:1px solid var(--border); background:#fff}
-    .link.primary{background:var(--primary); color:#fff; border-color:transparent}
+  /* Accesibilitate focus */
+  :is(a,button,input,select,textarea):focus{outline:none; box-shadow:0 0 0 3px var(--ring)}
 
-    /* Accesibilitate: focus states */
-    :is(a,button,input,select,textarea):focus{outline:none; box-shadow:0 0 0 3px var(--ring)}
+  /* Footer */
+  footer{border-top:1px solid #17223a;text-align:center;padding:1.2rem 1rem;color:var(--muted);margin-top:2rem}
 
-    /* Micro-interacțiuni */
-    @media (prefers-reduced-motion: reduce){
-      *{transition:none !important; animation:none !important}
-    }
-
-    /* Footer */
-    footer{border-top:1px solid var(--border); margin-top:40px; padding:24px 0 60px; color:var(--muted); text-align:center}
-  </style>
+  /* Responsive din tema furnizată */
+  @media (max-width: 900px){
+    .grid-3{grid-template-columns:1fr}
+    .product{grid-template-columns:1fr}
+    .pricing{grid-template-columns:1fr}
+  }
+</style>
 
   <!-- OG & Twitter Cards (exemplu) -->
   <meta property="og:title" content="CashFlowLab — Acasă">
@@ -133,6 +122,7 @@
   }</script>
 </head>
 <body>
+  <div id="bg" aria-hidden="true"></div>
   <a href="#main" class="skip-link">Sari la conținut</a>
 
   <!-- HEADER -->
