@@ -15,6 +15,188 @@
     <a class="sr-only" href="#content">Sari la conținut</a>
     <canvas id="bg-canvas" aria-hidden="true"></canvas>
 
+    <!-- Header / Nav -->
+    <header class="container" role="banner">
+      <a href="#" class="brand" aria-label="Rivo">
+        <img src="assets/logo.svg" alt="Rivo logo" width="36" height="36" />
+        <span>Rivo</span>
+      </a>
+      <nav aria-label="Principal">
+        <a href="#caracteristici">Caracteristici</a>
+        <a href="#produse">Produse</a>
+        <a href="#pret">Preț</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="content">
+      <!-- Hero -->
+      <section class="hero container" aria-labelledby="hero-title">
+        <div class="hero-inner">
+          <h1 id="hero-title">Rivo — <span class="accent">mai rapid</span>, mai precis.</h1>
+          <p class="lead">
+            Interfață modernă cu fundal „video-like” de linii și glow. Perfect pentru prezentări sau landing-uri.
+          </p>
+          <div class="cta">
+            <a class="btn primary" href="#produse">Vezi produsele</a>
+            <a class="btn ghost" href="#pret">Află prețul</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features -->
+      <section id="caracteristici" class="section container" aria-labelledby="features-title">
+        <h2 id="features-title">Caracteristici</h2>
+        <div class="grid three">
+          <div class="card">
+            <h3>Performanță</h3>
+            <p>Canvas accelerat, 60fps pe majoritatea dispozitivelor și optimizări pentru energie.</p>
+          </div>
+          <div class="card">
+            <h3>Design</h3>
+            <p>Linii fluide cu efect de glow/bleed și particule stelare pentru profunzime.</p>
+          </div>
+          <div class="card">
+            <h3>Accesibilitate</h3>
+            <p>Respectă „prefers-reduced-motion” — animarea poate fi atenuată automat.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Products (3 items) -->
+      <section id="produse" class="section container" aria-labelledby="products-title">
+        <h2 id="products-title">Produse</h2>
+        <div class="grid three">
+          <!-- Produs 1 -->
+          <article class="card" aria-labelledby="p1-title">
+            <img
+              alt="Rivo Lite – interfață rapidă"
+              style="width:100%;border-radius:12px;border:1px solid var(--border);"
+              src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="%237df8ff"/><stop offset="1" stop-color="%231cb8d4"/></linearGradient></defs><rect width="100%" height="100%" fill="%23072035"/><circle cx="120" cy="120" r="90" fill="url(%23g)" opacity="0.5"/><text x="40" y="300" fill="%23bfeaff" font-size="42" font-family="Inter, Arial">Rivo Lite</text></svg>' />
+            <h3 id="p1-title" style="margin-top:12px;">Rivo Lite</h3>
+            <p>Landing basic cu fundal animat, ideal pentru demo-uri și proiecte personale.</p>
+            <ul class="check">
+              <li>Setup în 1 minut</li>
+              <li>Formular Netlify inclus</li>
+              <li>Zero dependențe</li>
+            </ul>
+            <div class="cta" style="justify-content:flex-start;margin-top:12px;">
+              <a class="btn small ghost" href="#pret">Detalii</a>
+              <a class="btn small primary" href="#contact">Comandă</a>
+            </div>
+          </article>
+
+          <!-- Produs 2 -->
+          <article class="card" aria-labelledby="p2-title">
+            <img
+              alt="Rivo Pro – pachet comercial"
+              style="width:100%;border-radius:12px;border:1px solid var(--border);"
+              src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500"><rect width="100%" height="100%" fill="%23072035"/><rect x="40" y="60" width="720" height="240" rx="18" fill="%230b2138"/><text x="60" y="200" fill="%23bfeaff" font-size="42" font-family="Inter, Arial">Rivo Pro</text><circle cx="680" cy="380" r="80" fill="%237df8ff" opacity="0.25"/></svg>' />
+            <h3 id="p2-title" style="margin-top:12px;">Rivo Pro</h3>
+            <p>Licență comercială + personalizare culori, viteze, intensitate glow.</p>
+            <ul class="check">
+              <li>Tema brand custom</li>
+              <li>Optimizare performanță</li>
+              <li>Asistență 30 zile</li>
+            </ul>
+            <div class="cta" style="justify-content:flex-start;margin-top:12px;">
+              <a class="btn small ghost" href="#pret">Detalii</a>
+              <a class="btn small primary" href="#contact">Cumpără</a>
+            </div>
+          </article>
+
+          <!-- Produs 3 -->
+          <article class="card" aria-labelledby="p3-title">
+            <img
+              alt="Rivo Team – colaborare"
+              style="width:100%;border-radius:12px;border:1px solid var(--border);"
+              src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500"><rect width="100%" height="100%" fill="%23072035"/><g opacity="0.5"><circle cx="120" cy="120" r="70" fill="%231cb8d4"/><circle cx="220" cy="160" r="70" fill="%237df8ff"/></g><text x="40" y="300" fill="%23bfeaff" font-size="42" font-family="Inter, Arial">Rivo Team</text></svg>' />
+            <h3 id="p3-title" style="margin-top:12px;">Rivo Team</h3>
+            <p>Pachet de echipă cu suport prioritar și update-uri regulate.</p>
+            <ul class="check">
+              <li>Licențe multiple</li>
+              <li>Onboarding rapid</li>
+              <li>Mentenață trimestrială</li>
+            </ul>
+            <div class="cta" style="justify-content:flex-start;margin-top:12px;">
+              <a class="btn small ghost" href="#pret">Detalii</a>
+              <a class="btn small primary" href="#contact">Solicită ofertă</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Pricing -->
+      <section id="pret" class="section container" aria-labelledby="pricing-title">
+        <h2 id="pricing-title">Preț</h2>
+        <div class="grid three">
+          <div class="price card">
+            <h3>Start</h3>
+            <p class="money">€0</p>
+            <p>Personal / demo</p>
+            <a class="btn small ghost" href="#contact">Începe</a>
+          </div>
+          <div class="price card featured">
+            <h3>Pro</h3>
+            <p class="money">€49</p>
+            <p>Site comercial</p>
+            <a class="btn small primary" href="#contact">Cumpără</a>
+          </div>
+          <div class="price card">
+            <h3>Team</h3>
+            <p class="money">€149</p>
+            <p>Licență extinsă</p>
+            <a class="btn small ghost" href="#contact">Contact</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact / Netlify form -->
+      <section id="contact" class="section container" aria-labelledby="contact-title">
+        <h2 id="contact-title">Contact</h2>
+        <form name="contact" method="POST" data-netlify="true" class="form">
+          <input type="hidden" name="form-name" value="contact" />
+          <label>
+            Nume
+            <input name="name" required />
+          </label>
+          <label>
+            Email
+            <input name="email" type="email" required />
+          </label>
+          <label>
+            Mesaj
+            <textarea name="message" rows="4" required></textarea>
+          </label>
+          <button class="btn primary" type="submit">Trimite</button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="container footer" role="contentinfo">
+      <p>© <span id="year"></span> Rivo. Toate drepturile rezervate.</p>
+    </footer>
+
+    <script defer src="script.js"></script>
+  </body>
+</html>
+<!doctype html>
+<html lang="ro">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rivo — mai rapid, mai precis.</title>
+    <meta name="description" content="Interfață modernă cu fundal video-like de linii și efecte glow. Perfect pentru prezentări sau landing-uri." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  </head>
+  <body>
+    <a class="sr-only" href="#content">Sari la conținut</a>
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
     <!-- Header / Navbar -->
     <header class="navbar" role="banner">
       <div class="container nav-inner">
