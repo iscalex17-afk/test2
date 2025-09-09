@@ -1,101 +1,142 @@
 <!doctype html>
 <html lang="ro">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rivo • Tech Demo</title>
-  <meta name="description" content="Rivo – site demo cu background profesional, linii vizuale animate și logo." />
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <canvas id="bg" aria-hidden="true"></canvas>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rivo — mai rapid, mai precis.</title>
+    <meta name="description" content="Interfață modernă cu fundal video-like de linii și efecte glow. Perfect pentru prezentări sau landing-uri." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  </head>
+  <body>
+    <!-- Canvas background -->
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
 
-  <header class="container nav">
-    <a href="#hero" class="brand">
-      <img src="logo.png" alt="Logo Rivo" width="36" height="36"/>
-      <span>Rivo</span>
-    </a>
-    <nav class="menu">
-      <a href="#features">Caracteristici</a>
-      <a href="#product">Produs</a>
-      <a href="#pricing">Preț</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+    <!-- Header / Nav -->
+    <header class="container">
+      <a href="#" class="brand" aria-label="Rivo">
+        <img src="assets/logo.svg" alt="Rivo logo" width="36" height="36" />
+        <span>Rivo</span>
+      </a>
+      <nav>
+        <a href="#caracteristici">Caracteristici</a>
+        <a href="#produs">Produs</a>
+        <a href="#pret">Preț</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
 
-  <main id="hero" class="container hero">
-    <img src="logo.png" class="logo" alt="Logo Rivo"/>
-    <h1>Rivo — mai rapid, mai precis.</h1>
-    <p class="lead">Interfață modernă cu fundal „video‑like” de linii și efecte glow. Perfect pentru prezentări sau landing‑uri.</p>
-    <div class="actions">
-      <a class="btn primary" href="#product">Vezi produsul</a>
-      <a class="btn" href="#pricing">Află prețul</a>
-    </div>
-  </main>
-
-  <section id="features" class="container section">
-    <h2>Caracteristici</h2>
-    <div class="grid">
-      <article class="card"><h3>Aspect profesional</h3><p>Tipografie curată, margini soft, efecte subtile.</p></article>
-      <article class="card"><h3>Canvas „video‑like”</h3><p>Linii dinamice cu glow și parallax; rulează eficient.</p></article>
-      <article class="card"><h3>Netlify Ready</h3><p>Static 100%. Deploy prin drag &amp; drop.</p></article>
-    </div>
-  </section>
-
-  <section id="product" class="container section">
-    <h2>Produsul: Rivo Kit</h2>
-    <div class="product">
-      <img src="assets/rivo-illustration.svg" alt="Rivo Kit" class="product-img"/>
-      <div class="product-body">
-        <p><strong>Rivo Kit</strong> este un set minimal de componente (carduri, grile, butoane) și efecte animate pentru site-uri rapide.</p>
-        <ul class="ticks">
-          <li>Zero dependențe</li>
-          <li>Compatibil Netlify / GitHub Pages</li>
-          <li>Design sistem coerent</li>
-        </ul>
-        <div class="actions">
-          <a class="btn primary" href="#pricing">Încearcă Rivo</a>
-          <button class="btn" id="demoBtn">Rulează demo</button>
+    <!-- Hero -->
+    <section class="hero container">
+      <div class="hero-inner">
+        <h1>Rivo — <span class="accent">mai rapid</span>, mai precis.</h1>
+        <p class="lead">
+          Interfață modernă cu fundal „video‑like” de linii și glow. Perfect pentru prezentări sau landing‑uri.
+        </p>
+        <div class="cta">
+          <a class="btn primary" href="#produs">Vezi produsul</a>
+          <a class="btn ghost" href="#pret">Află prețul</a>
         </div>
-        <pre id="demoOut" class="terminal" aria-live="polite"></pre>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="pricing" class="container section">
-    <h2>Preț</h2>
-    <div class="pricing">
-      <div class="price-card">
-        <h3>Starter</h3>
-        <p class="price">0€</p>
-        <ul><li>Cod sursă</li><li>Componente bază</li><li>Deploy instant</li></ul>
-        <a class="btn primary" href="#contact">Ia-l gratuit</a>
+    <!-- Features -->
+    <section id="caracteristici" class="section container">
+      <h2>Caracteristici</h2>
+      <div class="grid three">
+        <div class="card">
+          <h3>Performanță</h3>
+          <p>Canvas accelerat, 60fps pe majoritatea dispozitivelor și optimizări pentru energie.</p>
+        </div>
+        <div class="card">
+          <h3>Design</h3>
+          <p>Linii fluide cu efect de glow/bleed și particule stelare pentru profunzime.</p>
+        </div>
+        <div class="card">
+          <h3>Accesibilitate</h3>
+          <p>Respectă „prefers-reduced-motion” — animarea poate fi atenuată automat.</p>
+        </div>
       </div>
-      <div class="price-card highlight">
-        <h3>Plus</h3>
-        <p class="price">19€</p>
-        <ul><li>Layout-uri extra</li><li>Formulare &amp; 404 custom</li><li>Suport rapid</li></ul>
-        <a class="btn primary" href="#contact">Ia varianta Plus</a>
+    </section>
+
+    <!-- Product -->
+    <section id="produs" class="section container">
+      <h2>Produs</h2>
+      <div class="grid two">
+        <div class="card">
+          <h3>SDK Web</h3>
+          <p>Integrare simplă cu HTML/JS vanilla. Compatibil Netlify, Vercel, GitHub Pages.</p>
+          <ul class="check">
+            <li>API minimalist</li>
+            <li>Dark/Light auto</li>
+            <li>Zero dependențe</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Branding</h3>
+          <p>Logo SVG, paletă custom, control asupra vitezei și intensității de glow.</p>
+          <ul class="check">
+            <li>Culori editabile</li>
+            <li>Rezoluție 4K</li>
+            <li>Fallback static</li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="contact" class="container section">
-    <h2>Contact</h2>
-    <form class="card form" name="contact" method="POST" data-netlify="true">
-      <input type="hidden" name="form-name" value="contact" />
-      <div class="field"><label>Nume</label><input name="name" required /></div>
-      <div class="field"><label>Email</label><input type="email" name="email" required /></div>
-      <div class="field"><label>Mesaj</label><textarea name="message" rows="4"></textarea></div>
-      <button type="submit" class="btn primary">Trimite</button>
-    </form>
-  </section>
+    <!-- Pricing -->
+    <section id="pret" class="section container">
+      <h2>Preț</h2>
+      <div class="grid three">
+        <div class="price card">
+          <h3>Start</h3>
+          <p class="money">€0</p>
+          <p>Personal / demo</p>
+          <a class="btn small ghost" href="#contact">Începe</a>
+        </div>
+        <div class="price card featured">
+          <h3>Pro</h3>
+          <p class="money">€49</p>
+          <p>Site comercial</p>
+          <a class="btn small primary" href="#contact">Cumpără</a>
+        </div>
+        <div class="price card">
+          <h3>Team</h3>
+          <p class="money">€149</p>
+          <p>Licență extinsă</p>
+          <a class="btn small ghost" href="#contact">Contact</a>
+        </div>
+      </div>
+    </section>
 
-  <footer class="container footer">
-    <small>&copy; <span id="year"></span> Rivo. Făcut de Gigi.</small>
-  </footer>
+    <!-- Contact / Netlify form -->
+    <section id="contact" class="section container">
+      <h2>Contact</h2>
+      <form name="contact" method="POST" data-netlify="true" class="form">
+        <input type="hidden" name="form-name" value="contact" />
+        <label>
+          Nume
+          <input name="name" required />
+        </label>
+        <label>
+          Email
+          <input name="email" type="email" required />
+        </label>
+        <label>
+          Mesaj
+          <textarea name="message" rows="4" required></textarea>
+        </label>
+        <button class="btn primary" type="submit">Trimite</button>
+      </form>
+    </section>
 
-  <script src="script.js"></script>
-</body>
+    <footer class="container footer">
+      <p>© <span id="year"></span> Rivo. Toate drepturile rezervate.</p>
+    </footer>
+
+    <script defer src="script.js"></script>
+  </body>
 </html>
