@@ -4,27 +4,26 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>RIVO — lansări digitale care chiar convertesc</title>
-  <meta name="description" content="Landing premium cu aurora fluidă, parallax, CTA-uri clare și secțiuni pentru kituri digitale. Gata de lansare." />
+  <meta name="description" content="Landing premium cu aurora fluidă, parallax pe scroll & mouse, CTA-uri clare și secțiuni pentru kituri digitale. Gata de lansare." />
   <meta name="theme-color" content="#061628" />
   <meta property="og:title" content="RIVO — lansări digitale care chiar convertesc" />
   <meta property="og:description" content="Fundal aurora cinematic, rece. Kiturile tale digitale. CTA-uri puternice. Conversie reală." />
   <meta property="og:type" content="website" />
+  <meta name="color-scheme" content="dark only" />
 
-  <!-- Favicon RIVO -->
-  <link rel="icon" type="image/svg+xml"
-    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g1' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%235AD1FF'/%3E%3Cstop offset='1' stop-color='%231CB8D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%23061328'/%3E%3Ccircle cx='32' cy='32' r='20' stroke='url(%23g1)' stroke-width='3.5' fill='none'/%3E%3Cpath d='M20 40l10-16h9c6 0 8 2.5 8 8s-2 8-8 8h-7l6 9' stroke='url(%23g1)' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
 
   <style>
     :root{
+      /* Paletă rece premium */
       --bg:#061628; --bg-2:#04101e;
       --ink:#eaf5ff; --muted:#b9d6ff;
-      --cold1:#5ad1ff; --cold2:#1cb8d4; --cold3:#53ffe2;
+      --cold-1:#7fe0ff; --cold-2:#39c2e6; --cold-3:#53ffe2; /* accente */
       --border:#123053; --card:#0b2240; --card-2:#0f2b52;
-      --radius:18px; --shadow:0 12px 34px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.03);
+      --radius:18px; --radius-lg:22px;
+      --shadow:0 14px 40px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.04);
       --maxw:1200px;
     }
     *{box-sizing:border-box}
@@ -32,60 +31,62 @@
     html{scroll-behavior:smooth}
     body{
       margin:0; font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--ink); background:linear-gradient(180deg,var(--bg),var(--bg-2)); overflow-x:hidden;
+      color:var(--ink);
+      background:linear-gradient(180deg,var(--bg),var(--bg-2));
+      overflow-x:hidden;
+      text-rendering:optimizeLegibility; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
     }
     a{color:inherit;text-decoration:none}
     img{display:block;max-width:100%}
     .sr-only{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
 
-    /* BACKGROUND LAYERS */
-    #bg{position:fixed;inset:0;z-index:-3}
-    .bg-vignette{position:fixed;inset:0;z-index:-2;pointer-events:none;
+    /* ========== BACKGROUND ========== */
+    #aurora{position:fixed;inset:0;z-index:-3;display:block}
+    .vignette{position:fixed;inset:0;z-index:-2;pointer-events:none;
       background:
-        radial-gradient(60% 60% at 70% 15%, rgba(90,209,255,.12), transparent 60%),
-        radial-gradient(40% 40% at 20% 75%, rgba(28,184,212,.14), transparent 65%),
-        radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,.55), transparent 70%);
-      will-change:transform;
+        radial-gradient(60% 60% at 68% 12%, rgba(127,224,255,.14), transparent 60%),
+        radial-gradient(40% 40% at 20% 78%, rgba(57,194,230,.16), transparent 65%),
+        radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,.6), transparent 72%);
+      transition:transform .3s ease;
     }
-    .grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.075;mix-blend-mode:overlay;
+    .grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.08;mix-blend-mode:overlay;
       background-image:
         radial-gradient(rgba(255,255,255,.06) 1px, transparent 1.2px),
         radial-gradient(rgba(255,255,255,.035) 1px, transparent 1.1px);
       background-size:3px 3px,5px 5px; background-position:0 0,1px 2px;
     }
 
-    /* LAYOUT */
+    /* ========== LAYOUT ========== */
     .container{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 22px}
-    header.nav{position:sticky;top:0;z-index:50;
-      backdrop-filter:saturate(140%) blur(10px);
-      background:color-mix(in srgb,#061628 82%, transparent);
+    header.nav{position:sticky;top:0;z-index:60;backdrop-filter:saturate(150%) blur(12px);
+      background:color-mix(in srgb, #061628 86%, transparent);
       border-bottom:1px solid var(--border);
     }
     .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
-    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.2px}
-    .mark{width:196px;height:44px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .mark{width:210px;height:48px}
     .links{display:flex;gap:18px;flex-wrap:wrap}
     .links a{padding:10px 12px;border-radius:10px;opacity:.9}
-    .links a:hover{background:rgba(90,209,255,.12);opacity:1}
-    .hero{position:relative;padding:110px 0 60px}
+    .links a:hover{background:rgba(127,224,255,.14);opacity:1}
+    .hero{position:relative;padding:120px 0 60px}
     .hero-inner{max-width:980px;position:relative;z-index:1}
-    h1{font-size:clamp(38px,5.6vw,74px);line-height:1.04;margin:0 0 14px}
-    .accent{color:var(--cold1)}
+    h1{font-size:clamp(40px,5.8vw,78px);line-height:1.04;margin:0 0 14px;letter-spacing:-.02em}
+    .accent{color:var(--cold-1)}
     .lead{font-size:clamp(16px,2.2vw,20px);color:var(--muted);margin:0 0 26px}
     .cta{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
     .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 16px;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);font-weight:700;transition:transform .15s ease, background .2s ease, border-color .2s ease}
     .btn.small{padding:9px 12px;font-size:14px}
-    .btn.primary{background:linear-gradient(135deg,var(--cold1),var(--cold2));color:#001c23;border-color:transparent}
+    .btn.primary{background:linear-gradient(135deg,var(--cold-1),var(--cold-2));color:#001a21;border-color:transparent}
     .btn.primary:hover{transform:translateY(-1px) scale(1.01)}
-    .btn.ghost{background:rgba(90,209,255,.1)}
-    .btn.ghost:hover{background:rgba(90,209,255,.16)}
-    .badge{display:inline-flex;align-items:center;gap:8px;font-size:12px;background:rgba(90,209,255,.14);border:1px solid rgba(90,209,255,.35);padding:6px 10px;border-radius:999px}
+    .btn.ghost{background:rgba(127,224,255,.1)}
+    .btn.ghost:hover{background:rgba(127,224,255,.15)}
+    .badge{display:inline-flex;align-items:center;gap:8px;font-size:12px;background:rgba(127,224,255,.16);border:1px solid rgba(127,224,255,.38);padding:6px 10px;border-radius:999px}
 
-    /* Hero glyph R mare */
-    .glyph{position:absolute;right:-8%;top:-14%;width:min(66vw,880px);opacity:.10;
-      filter:drop-shadow(0 16px 42px rgba(0,0,0,.6));pointer-events:none}
+    /* Glyph R uriaș, discret */
+    .glyph{position:absolute;right:-7%;top:-14%;width:min(64vw,900px);opacity:.10;
+      filter:drop-shadow(0 16px 42px rgba(0,0,0,.65));pointer-events:none}
 
-    .section{padding:72px 0}
+    .section{padding:76px 0}
     .section h2{font-size:clamp(26px,3vw,38px);margin:0 0 18px}
     .grid{display:grid;gap:18px}
     .grid.two{grid-template-columns:repeat(1,1fr)}
@@ -93,61 +94,73 @@
     @media (min-width:760px){.grid.two{grid-template-columns:repeat(2,1fr)}.grid.three{grid-template-columns:repeat(3,1fr)}}
 
     .card{background:linear-gradient(180deg,var(--card),var(--card-2));border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
-    .card:hover{border-color:color-mix(in srgb,var(--cold2) 38%,var(--border))}
+    .card:hover{border-color:color-mix(in srgb,var(--cold-2) 40%,var(--border))}
     .card h3{margin:6px 0 8px;font-size:20px}
     .card p{margin:0;color:var(--muted)}
     .check{list-style:none;padding:0;margin:12px 0 0}
     .check li{display:flex;gap:10px;align-items:flex-start;padding:6px 0}
-    .check li::before{content:"";width:18px;height:18px;flex:0 0 18px;border-radius:5px;border:1px solid var(--border);background:radial-gradient(circle at 60% 40%,var(--cold2),transparent 55%);box-shadow:inset 0 0 0 2px rgba(0,0,0,.22)}
+    .check li::before{content:"";width:18px;height:18px;flex:0 0 18px;border-radius:5px;border:1px solid var(--border);
+      background:radial-gradient(circle at 60% 40%,var(--cold-2),transparent 55%);box-shadow:inset 0 0 0 2px rgba(0,0,0,.22)}
     .product-img{width:100%;border-radius:14px;border:1px solid var(--border)}
+
     .price.card{text-align:center}
-    .price .money{font-size:32px;font-weight:800;margin:2px 0 8px;color:var(--cold1)}
-    .price.featured{border-color:color-mix(in srgb,var(--cold1) 38%,var(--border));box-shadow:0 0 0 1px rgba(90,209,255,.16),var(--shadow)}
-    .cta-band{position:relative;margin:12px 0 0;padding:18px;border:1px dashed var(--border);border-radius:var(--radius);background:rgba(90,209,255,.08)}
-    .sep{height:1px;width:100%;position:relative;margin:6px 0;background:linear-gradient(90deg,rgba(0,0,0,0),rgba(90,209,255,.42),rgba(0,0,0,0));filter:blur(.2px)}
-    .sep::after{content:"";position:absolute;inset:-8px 0;background:radial-gradient(50% 200% at 50% 50%,rgba(90,209,255,.14),transparent 70%)}
+    .price .money{font-size:32px;font-weight:800;margin:2px 0 8px;color:var(--cold-1)}
+    .price.featured{border-color:color-mix(in srgb,var(--cold-1) 40%,var(--border));box-shadow:0 0 0 1px rgba(127,224,255,.16),var(--shadow)}
+    .cta-band{position:relative;margin:12px 0 0;padding:18px;border:1px dashed var(--border);border-radius:var(--radius);background:rgba(127,224,255,.08)}
+
+    .sep{height:1px;width:100%;position:relative;margin:6px 0;background:linear-gradient(90deg,rgba(0,0,0,0),rgba(127,224,255,.45),rgba(0,0,0,0));filter:blur(.2px)}
+    .sep::after{content:"";position:absolute;inset:-8px 0;background:radial-gradient(50% 200% at 50% 50%,rgba(127,224,255,.16),transparent 70%)}
 
     .form{display:grid;gap:12px;max-width:680px}
     label{display:grid;gap:6px;font-weight:600}
     input,textarea{background:#0a1f3f;color:var(--ink);border:1px solid var(--border);border-radius:12px;padding:12px;outline:none}
-    input:focus,textarea:focus{border-color:color-mix(in srgb,var(--cold1) 55%,var(--border))}
+    input:focus,textarea:focus{border-color:color-mix(in srgb,var(--cold-1) 60%,var(--border))}
+
     .footer{border-top:1px solid var(--border);padding:24px 0;color:var(--muted);font-size:14px}
 
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+    @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
   </style>
 </head>
 <body>
   <a class="sr-only" href="#content">Sari la conținut</a>
 
   <!-- BACKGROUND -->
-  <canvas id="bg" aria-hidden="true"></canvas>
-  <div class="bg-vignette" id="vignette" aria-hidden="true"></div>
+  <canvas id="aurora" aria-hidden="true"></canvas>
+  <div class="vignette" id="vignette" aria-hidden="true"></div>
   <div class="grain" aria-hidden="true"></div>
 
   <!-- NAV -->
   <header class="nav" role="banner">
     <div class="container nav-inner">
       <a href="#" class="brand" aria-label="RIVO">
-        <!-- LOGO RIVO (monogram R + wordmark RIVO) -->
-        <svg class="mark" viewBox="0 0 220 50" role="img" aria-label="RIVO">
+        <!-- Logo RIVO: monogramă “R” high-end + wordmark curat -->
+        <svg class="mark" viewBox="0 0 250 56" role="img" aria-label="RIVO">
           <defs>
-            <linearGradient id="rvA" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#5AD1FF"/><stop offset="1" stop-color="#1CB8D4"/>
+            <linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#7fe0ff"/><stop offset="1" stop-color="#39c2e6"/>
             </linearGradient>
-            <filter id="rvGlow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1.1"/></filter>
+            <linearGradient id="logoGloss" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="rgba(255,255,255,.55)"/>
+              <stop offset=".5" stop-color="rgba(255,255,255,.0)"/>
+            </linearGradient>
+            <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%">
+              <feGaussianBlur stdDeviation="1.2"/>
+            </filter>
           </defs>
-          <!-- Monogram R în cerc -->
-          <g transform="translate(0,5)">
-            <circle cx="20" cy="20" r="17" fill="none" stroke="url(#rvA)" stroke-width="2.6"/>
-            <path d="M10 27l7-11h7c4.5 0 6.5 1.9 6.5 6.5S29 29 24 29h-6l5.3 7.3"
-                  fill="none" stroke="url(#rvA)" stroke-width="3" stroke-linecap="round" filter="url(#rvGlow)"/>
+          <!-- Monogram R în medalion -->
+          <g transform="translate(0,4)">
+            <circle cx="22" cy="24" r="20" fill="none" stroke="url(#logoGrad)" stroke-width="2.8"/>
+            <path d="M9 30l8.5-13H26c6 0 8.5 2.4 8.5 8.3S30.8 34 25 34h-6.4l6.8 9.6"
+              fill="none" stroke="url(#logoGrad)" stroke-width="3.4" stroke-linecap="round" filter="url(#softGlow)"/>
+            <!-- reflexie mică sus -->
+            <ellipse cx="22" cy="12.5" rx="12" ry="5" fill="url(#logoGloss)" opacity=".28"/>
           </g>
-          <!-- Wordmark RIVO -->
-          <g transform="translate(58,4)" fill="url(#rvA)">
-            <path d="M0 35V5h12.2c7.7 0 12.3 3.7 12.3 9.7c0 4.5-2.6 7.6-7 8.9L27 35h-8l-7.8-8.9H7.2V35H0zm7.2-15.1h2.4c4.1 0 6.4-1.3 6.4-4.4c0-2.8-2.2-4.2-6.3-4.2H7.2v8.6z"/>
-            <path d="M39.6 35c-6.8 0-11.4-4.8-11.4-12S32.8 11 39.6 11s11.4 4.8 11.4 12s-4.6 12-11.4 12zm0-6.1c3.4 0 5.6-2.7 5.6-5.9s-2.2-5.9-5.6-5.9s-5.6 2.6-5.6 5.9s2.2 5.9 5.6 5.9z"/>
-            <rect x="57.5" y="11" width="7" height="24"/>
-            <path d="M73.5 35l12-24h6.8l12 24h-7.6l-1.9-4.2H83l-1.9 4.2h-7.6zm12.5-9.7h8.8L89.3 17l-3.3 8.3z"/>
+          <!-- Wordmark RIVO (litere proporționate, tracking negativ subtil) -->
+          <g transform="translate(66,2)" fill="url(#logoGrad)">
+            <path d="M0 44V4h14.2c9 0 14.4 4.2 14.4 10.9c0 5-3 8.4-8.2 9.9L32 44h-9.3l-9-10.3H7.6V44H0Zm7.6-17.6H11c4.9 0 7.6-1.5 7.6-5.1c0-3.2-2.7-4.9-7.6-4.9H7.6v10z"/>
+            <path d="M41 44c-7.7 0-12.9-5.5-12.9-13.7S33.3 16.7 41 16.7S54 22.2 54 30.3S48.7 44 41 44Zm0-7c3.9 0 6.3-3.1 6.3-6.7s-2.5-6.7-6.3-6.7s-6.3 3-6.3 6.7S37.1 37 41 37Z"/>
+            <rect x="60.5" y="16.7" width="7.7" height="27.3" rx="1"/>
+            <path d="M77.3 44l13.7-27.3h7.8L112.5 44h-8.7l-2.2-4.8H87.5L85.3 44h-8ZM91 33.9h10.1L96.1 21.7 91 33.9Z"/>
           </g>
         </svg>
       </a>
@@ -159,31 +172,33 @@
         <a href="#faq">FAQ</a>
         <a href="#contact">Contact</a>
       </nav>
-      <a class="btn small primary" href="#contact">Începe acum</a>
+      <div class="cta">
+        <a class="btn small ghost" id="toggle" href="#demo">Pauză animație</a>
+        <a class="btn small primary" href="#contact">Începe acum</a>
+      </div>
     </div>
   </header>
 
   <!-- HERO -->
   <main id="content">
     <section class="hero container" aria-labelledby="hero-title">
-      <!-- R mare ca glyph -->
-      <svg class="glyph" viewBox="0 0 700 700" aria-hidden="true">
-        <defs><linearGradient id="gBig" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5AD1FF"/><stop offset="1" stop-color="#1CB8D4"/></linearGradient></defs>
-        <circle cx="350" cy="350" r="260" stroke="url(#gBig)" stroke-width="26" fill="none"/>
-        <path d="M240 420l110-180h110q56 0 56 56v48q0 56-56 56h-80l78 108"
+      <!-- Glyph R mare -->
+      <svg class="glyph" viewBox="0 0 760 760" aria-hidden="true">
+        <defs><linearGradient id="gBig" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7fe0ff"/><stop offset="1" stop-color="#39c2e6"/></linearGradient></defs>
+        <circle cx="380" cy="380" r="285" stroke="url(#gBig)" stroke-width="26" fill="none"/>
+        <path d="M250 450l130-210h120q62 0 62 62v52q0 62-62 62h-90l88 122"
               stroke="url(#gBig)" stroke-width="26" fill="none" stroke-linecap="round"/>
       </svg>
 
       <div class="hero-inner">
-        <span class="badge">🎯 Lansări digitale • PDF • Template-uri</span>
-        <h1 id="hero-title">RIVO — <span class="accent">rece</span>, precis, premium.</h1>
-        <p class="lead">Aurora fluidă (3 straturi + parallax) cu glow cinematic, micro-grain fin și mișcare **ultra-smooth**. Structură gândită pentru conversie — perfect pentru <strong>kituri de cashflow</strong>, <strong>playbook-uri PDF</strong> și <strong>template-uri de automatizare</strong>.</p>
+        <span class="badge">🎯 Lansări digitale • PDF • Template-uri • Automations</span>
+        <h1 id="hero-title">RIVO — <span class="accent">rece</span>, precis, <span class="accent">premium</span>.</h1>
+        <p class="lead">Aurora fluidă în 4 straturi (spline + low-pass + trail), parallax pe scroll & mouse, glow filmic, micro-grain. Arhitectură gândită pentru conversie — perfect pentru <strong>kituri de cashflow</strong>, <strong>playbook-uri PDF</strong> și <strong>template-uri de automatizare</strong>.</p>
         <div class="cta">
           <a class="btn primary" href="#produse">Vezi kiturile</a>
           <a class="btn ghost" href="#pret">Planuri & preț</a>
-          <a class="btn ghost" href="#demo" id="toggle">Pauză animație</a>
         </div>
-        <div class="cta-band"><strong>Optimizat 60fps</strong> (spline + low-pass + trail). Respectă <em>prefers-reduced-motion</em>.</div>
+        <div class="cta-band"><strong>60fps</strong> pe hardware modern • Respectă <em>prefers-reduced-motion</em> • Rămâne clar la DPR 2x.</div>
       </div>
     </section>
 
@@ -193,9 +208,9 @@
     <section id="caracteristici" class="section container" aria-labelledby="features-title">
       <h2 id="features-title">De ce RIVO</h2>
       <div class="grid three">
-        <article class="card"><h3>Conversie</h3><p>Layout “launchpad” modern, copy scurt, CTA-uri clare. Focus pe acțiune, nu pe zgomot.</p></article>
-        <article class="card"><h3>Design premium</h3><p>Aurora rece, profunzime curată, contraste AA/AAA. Totul respiră “high-end”.</p></article>
-        <article class="card"><h3>Implementare rapidă</h3><p>Site static. Publici pe Netlify, Vercel sau Cloudflare Pages. Formular Netlify inclus.</p></article>
+        <article class="card"><h3>Conversie</h3><p>Structură “launchpad”, copy scurt, ierarhie clară, CTA-uri vizibile.</p></article>
+        <article class="card"><h3>Design premium</h3><p>Aurora rece cu profunzime, contrast AA/AAA, vibe high-end.</p></article>
+        <article class="card"><h3>Implementare rapidă</h3><p>Static, deploy instant pe Netlify/Vercel. Formular Netlify inclus.</p></article>
       </div>
     </section>
 
@@ -207,30 +222,30 @@
       <div class="grid three">
         <!-- Produs 1 -->
         <article class="card" aria-labelledby="p1">
-          <svg class="product-img" viewBox="0 0 800 500" role="img" aria-label="Cashflow Kit">
+          <svg class="product-img" viewBox="0 0 800 500" role="img" aria-label="Cashflow Kit (preview)">
             <defs>
-              <linearGradient id="p1g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b2a54"/><stop offset="1" stop-color="#113b77"/></linearGradient>
-              <linearGradient id="p1a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5AD1FF"/><stop offset="1" stop-color="#1CB8D4"/></linearGradient>
-              <filter id="soft"><feGaussianBlur stdDeviation="10"/></filter>
+              <linearGradient id="p1g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b2a54"/><stop offset="1" stop-color="#123c78"/></linearGradient>
+              <linearGradient id="p1a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7fe0ff"/><stop offset="1" stop-color="#39c2e6"/></linearGradient>
+              <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="8"/></filter>
             </defs>
             <rect width="800" height="500" rx="16" fill="url(#p1g)"/>
-            <g opacity=".9">
-              <rect x="60" y="70" width="300" height="360" rx="14" fill="#0d2f5c" stroke="#123c75"/>
-              <rect x="90" y="110" width="240" height="44" rx="8" fill="#0f3b72"/>
-              <rect x="90" y="170" width="210" height="18" rx="6" fill="#134983"/>
-              <rect x="90" y="200" width="210" height="18" rx="6" fill="#134983"/>
-              <rect x="90" y="230" width="210" height="18" rx="6" fill="#134983"/>
-              <rect x="90" y="270" width="240" height="100" rx="10" fill="#0f3b72"/>
+            <g opacity=".95">
+              <rect x="60" y="70" width="300" height="360" rx="14" fill="#0d2f5c" stroke="#133b74"/>
+              <rect x="90" y="110" width="240" height="46" rx="9" fill="#0f3b72"/>
+              <rect x="90" y="175" width="210" height="18" rx="6" fill="#145091"/>
+              <rect x="90" y="204" width="210" height="18" rx="6" fill="#145091"/>
+              <rect x="90" y="233" width="210" height="18" rx="6" fill="#145091"/>
+              <rect x="90" y="270" width="240" height="100" rx="12" fill="#0f3b72"/>
             </g>
-            <circle cx="520" cy="160" r="110" fill="url(#p1a)" opacity=".12" filter="url(#soft)"/>
-            <rect x="430" y="260" width="300" height="160" rx="14" fill="#0d2f5c" stroke="#123c75"/>
-            <rect x="450" y="285" width="260" height="18" rx="6" fill="#134983"/>
-            <rect x="450" y="315" width="210" height="18" rx="6" fill="#134983"/>
-            <rect x="450" y="345" width="180" height="18" rx="6" fill="#134983"/>
-            <text x="60" y="460" fill="#c7e7ff" font-family="Inter, Arial" font-size="36">Cashflow Kit</text>
+            <circle cx="520" cy="160" r="110" fill="url(#p1a)" opacity=".16" filter="url(#soft)"/>
+            <rect x="430" y="260" width="300" height="160" rx="14" fill="#0d2f5c" stroke="#133b74"/>
+            <rect x="450" y="285" width="260" height="18" rx="6" fill="#145091"/>
+            <rect x="450" y="315" width="210" height="18" rx="6" fill="#145091"/>
+            <rect x="450" y="345" width="180" height="18" rx="6" fill="#145091"/>
+            <text x="60" y="460" fill="#cfeaff" font-family="Inter, Arial" font-size="36">Cashflow Kit</text>
           </svg>
           <h3 id="p1" style="margin-top:12px;">Cashflow Kit</h3>
-          <p>Dashboard + șabloane + ghid pentru 90 zile de venit.</p>
+          <p>Dashboard + șabloane + ghid pentru 90 de zile de venit.</p>
           <ul class="check"><li>Google Sheets</li><li>Tracker venit/cheltuieli</li><li>Forecast model</li></ul>
           <div class="cta" style="justify-content:flex-start;margin-top:12px;">
             <a class="btn small ghost" href="#pret">Detalii</a>
@@ -240,23 +255,23 @@
 
         <!-- Produs 2 -->
         <article class="card" aria-labelledby="p2">
-          <svg class="product-img" viewBox="0 0 800 500" role="img" aria-label="PDF Playbook">
+          <svg class="product-img" viewBox="0 0 800 500" role="img" aria-label="PDF Playbook (preview)">
             <defs>
               <linearGradient id="p2g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#092549"/><stop offset="1" stop-color="#0d2f5c"/></linearGradient>
-              <linearGradient id="p2a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#53FFE2"/><stop offset="1" stop-color="#5AD1FF"/></linearGradient>
+              <linearGradient id="p2a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#53ffe2"/><stop offset="1" stop-color="#7fe0ff"/></linearGradient>
             </defs>
             <rect width="800" height="500" rx="16" fill="url(#p2g)"/>
-            <rect x="60" y="70" width="300" height="360" rx="14" fill="#0d2f5c" stroke="#123c75"/>
-            <rect x="90" y="110" width="220" height="44" rx="8" fill="#0f3b72"/>
-            <rect x="90" y="170" width="210" height="18" rx="6" fill="#134983"/>
-            <rect x="90" y="200" width="210" height="18" rx="6" fill="#134983"/>
-            <rect x="410" y="90" width="330" height="280" rx="14" fill="#0d2f5c" stroke="#123c75"/>
-            <circle cx="640" cy="360" r="90" fill="url(#p2a)" opacity=".18"/>
-            <text x="60" y="460" fill="#c7e7ff" font-family="Inter, Arial" font-size="36">PDF Playbook</text>
+            <rect x="60" y="70" width="300" height="360" rx="14" fill="#0d2f5c" stroke="#133b74"/>
+            <rect x="90" y="110" width="220" height="46" rx="9" fill="#0f3b72"/>
+            <rect x="90" y="175" width="210" height="18" rx="6" fill="#145091"/>
+            <rect x="90" y="204" width="210" height="18" rx="6" fill="#145091"/>
+            <rect x="410" y="90" width="330" height="280" rx="14" fill="#0d2f5c" stroke="#133b74"/>
+            <circle cx="640" cy="360" r="90" fill="url(#p2a)" opacity=".2"/>
+            <text x="60" y="460" fill="#cfeaff" font-family="Inter, Arial" font-size="36">PDF Playbook</text>
           </svg>
           <h3 id="p2" style="margin-top:12px;">PDF Playbook</h3>
-          <p>Framework-uri, headline swipes și structuri de ofertă.</p>
-          <ul class="check"><li>Framework AIDA/PASTOR</li><li>Exemple reale</li><li>Ready-to-use</li></ul>
+          <p>Framework-uri, headline swipes & structuri de ofertă.</p>
+          <ul class="check"><li>AIDA / PASTOR</li><li>Exemple reale</li><li>Ready-to-use</li></ul>
           <div class="cta" style="justify-content:flex-start;margin-top:12px;">
             <a class="btn small ghost" href="#pret">Detalii</a>
             <a class="btn small primary" href="#contact">Descarcă</a>
@@ -265,19 +280,19 @@
 
         <!-- Produs 3 -->
         <article class="card" aria-labelledby="p3">
-          <svg class="product-img" viewBox="0 0 800 500" role="img" aria-label="Automation Templates">
+          <svg class="product-img" viewBox="0 0 800 500" role="img" aria-label="Automation Templates (preview)">
             <defs>
               <linearGradient id="p3g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a284f"/><stop offset="1" stop-color="#0e3468"/></linearGradient>
-              <linearGradient id="p3a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5AD1FF"/><stop offset="1" stop-color="#1CB8D4"/></linearGradient>
+              <linearGradient id="p3a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7fe0ff"/><stop offset="1" stop-color="#39c2e6"/></linearGradient>
             </defs>
             <rect width="800" height="500" rx="16" fill="url(#p3g)"/>
-            <rect x="60" y="90" width="320" height="300" rx="14" fill="#0d2f5c" stroke="#123c75"/>
-            <rect x="420" y="150" width="320" height="180" rx="14" fill="#0d2f5c" stroke="#123c75"/>
-            <circle cx="620" cy="120" r="70" fill="url(#p3a)" opacity=".18"/>
-            <text x="60" y="460" fill="#c7e7ff" font-family="Inter, Arial" font-size="36">Automation Templates</text>
+            <rect x="60" y="90" width="320" height="300" rx="14" fill="#0d2f5c" stroke="#133b74"/>
+            <rect x="420" y="150" width="320" height="180" rx="14" fill="#0d2f5c" stroke="#133b74"/>
+            <circle cx="620" cy="120" r="70" fill="url(#p3a)" opacity=".2"/>
+            <text x="60" y="460" fill="#cfeaff" font-family="Inter, Arial" font-size="36">Automation Templates</text>
           </svg>
           <h3 id="p3" style="margin-top:12px;">Automation Templates</h3>
-          <p>Secvențe plug-and-play pentru newsletter, onboarding și upsell.</p>
+          <p>Secvențe plug-and-play: newsletter, onboarding, upsell.</p>
           <ul class="check"><li>Secvențe email</li><li>Macro-uri & prompts</li><li>Funnel DM</li></ul>
           <div class="cta" style="justify-content:flex-start;margin-top:12px;">
             <a class="btn small ghost" href="#pret">Detalii</a>
@@ -293,9 +308,9 @@
     <section id="testimoniale" class="section container" aria-labelledby="t-title">
       <h2 id="t-title">Ce spun clienții</h2>
       <div class="grid three">
-        <article class="card"><p>„Cashflow Kit mi-a clarificat cifrele în 30 de minute.”</p><p style="opacity:.8;margin-top:8px">— Andrei, fondator studio</p></article>
-        <article class="card"><p>„PDF Playbook = pagini de vânzare scrise în 2 ore, nu 2 zile.”</p><p style="opacity:.8;margin-top:8px">— Bianca, marketer</p></article>
-        <article class="card"><p>„Template-urile au tăiat zile de muncă repetitivă.”</p><p style="opacity:.8;margin-top:8px">— Vlad, e-commerce</p></article>
+        <article class="card"><p>„Cashflow Kit mi-a clarificat cifrele în 30 de minute.”</p><p style="opacity:.82;margin-top:8px">— Andrei, fondator studio</p></article>
+        <article class="card"><p>„PDF Playbook = pagini de vânzare în 2 ore, nu 2 zile.”</p><p style="opacity:.82;margin-top:8px">— Bianca, marketer</p></article>
+        <article class="card"><p>„Template-urile au tăiat zile de muncă repetitivă.”</p><p style="opacity:.82;margin-top:8px">— Vlad, e-commerce</p></article>
       </div>
     </section>
 
@@ -307,7 +322,7 @@
         <div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
           <div>
             <h2 id="cta-title" style="margin:0 0 6px">Pregătit să încasezi mai clar?</h2>
-            <p class="lead" style="margin:0">Începe cu Cashflow Kit și rulează o lansare simplă în 48h.</p>
+            <p class="lead" style="margin:0">Începe cu Cashflow Kit și rulează o lansare în 48h.</p>
           </div>
           <div class="cta">
             <a class="btn primary" href="#contact">Cere ofertă</a>
@@ -327,7 +342,7 @@
         <div class="price card featured"><h3>Pro</h3><p class="money">€49</p><p>Cashflow Kit + PDF Playbook</p><a class="btn small primary" href="#contact">Cumpără</a></div>
         <div class="price card"><h3>Team</h3><p class="money">€149</p><p>Tot + licență extinsă</p><a class="btn small ghost" href="#contact">Contact</a></div>
       </div>
-      <p class="cta-band">Toate planurile includ suport prin email și actualizări minore.</p>
+      <p class="cta-band">Toate planurile includ suport prin email și update-uri minore.</p>
     </section>
 
     <div class="sep" aria-hidden="true"></div>
@@ -335,9 +350,9 @@
     <!-- FAQ -->
     <section id="faq" class="section container" aria-labelledby="faq-title">
       <h2 id="faq-title">Întrebări frecvente</h2>
-      <div class="faq">
+      <div class="grid two">
         <details class="card"><summary style="cursor:pointer;font-weight:700">Pot opri animația?</summary><p style="margin-top:10px;color:var(--muted)">Da, apasă „Pauză animație” sau activează <em>Reduce Motion</em> în sistem.</p></details>
-        <details class="card"><summary style="cursor:pointer;font-weight:700">Cum schimb produsele?</summary><p style="margin-top:10px;color:var(--muted)">Înlocuiește SVG-urile cu imagini reale (1200×750 .webp) și editează titlurile/descrierile.</p></details>
+        <details class="card"><summary style="cursor:pointer;font-weight:700">Cum schimb produsele?</summary><p style="margin-top:10px;color:var(--muted)">Înlocuiește SVG-urile cu imagini reale (1200×750 .webp) și editează textele.</p></details>
         <details class="card"><summary style="cursor:pointer;font-weight:700">Hosting?</summary><p style="margin-top:10px;color:var(--muted)">Netlify, Vercel, Cloudflare Pages, GitHub Pages. E site static.</p></details>
         <details class="card"><summary style="cursor:pointer;font-weight:700">Licențiere</summary><p style="margin-top:10px;color:var(--muted)">Conținutul tău rămâne al tău. Template-ul nu revendică nimic.</p></details>
       </div>
@@ -350,8 +365,8 @@
       <h2 id="contact-title">Contact</h2>
       <form name="contact" method="POST" data-netlify="true" class="form">
         <input type="hidden" name="form-name" value="contact" />
-        <label>Nume<input name="name" required /></label>
-        <label>Email<input name="email" type="email" required /></label>
+        <label>Nume<input name="name" autocomplete="name" required /></label>
+        <label>Email<input name="email" type="email" autocomplete="email" required /></label>
         <label>Mesaj<textarea name="message" rows="4" required></textarea></label>
         <button class="btn primary" type="submit">Trimite</button>
       </form>
@@ -363,19 +378,60 @@
   </footer>
 
   <script>
-    // Footer year
+    // An din footer
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // ============================
-    // AURORA (3 straturi) + PARALLAX
-    // ============================
+    // ================================
+    // AURORA ULTRA-SMOOTH (4 straturi)
+    // - catmull-rom spline + low-pass
+    // - parallax scroll + mouse
+    // - offscreen buffers pentru glow
+    // ================================
     (function(){
-      const c = document.getElementById('bg');
-      const cx = c.getContext('2d',{alpha:true});
+      const c = document.getElementById('aurora');
+      const ctx = c.getContext('2d',{alpha:true});
       const vignette = document.getElementById('vignette');
-      let w,h,dpr; let run=true;
       const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      let scrollY=0, smooth=0;
+      let w,h,dpr, run = !RM, t = 0;
+      let scrollY = 0, sSmooth = 0;
+      let mx = 0, my = 0, mSmoothX = 0, mSmoothY = 0;
+
+      // Layere cu viteze/amplitudini diferite
+      const CFG = [
+        { ribbons:7, nodes:24, speed:.0034, amp:.11, blur:14, drift:230, pf:0.16,
+          col:[[127,224,255,.12],[57,194,230,.32],[83,255,226,.14]] },
+        { ribbons:6, nodes:22, speed:.0028, amp:.095, blur:12, drift:190, pf:0.28,
+          col:[[127,224,255,.10],[57,194,230,.28],[83,255,226,.12]] },
+        { ribbons:5, nodes:20, speed:.0022, amp:.08, blur:10, drift:150, pf:0.42,
+          col:[[127,224,255,.08],[57,194,230,.24],[83,255,226,.10]] },
+        { ribbons:4, nodes:18, speed:.0018, amp:.065, blur:8, drift:120, pf:0.58,
+          col:[[127,224,255,.06],[57,194,230,.20],[83,255,226,.08]] }
+      ];
+
+      const lerp = (a,b,u)=>a+(b-a)*u;
+      function n2(x,y){ const s=Math.sin(x*12.9898 + y*78.233)*43758.5453; return s-Math.floor(s); }
+      function catmull(p0,p1,p2,p3,t){ const v0=(p2-p0)*.5, v1=(p3-p1)*.5, t2=t*t, t3=t2*t;
+        return (2*t3-3*t2+1)*p1 + (t3-2*t2+t)*v0 + (-2*t3+3*t2)*p2 + (t3-t2)*v1;
+      }
+
+      let buffers = [], layers = [];
+      function createBuffer(){
+        const off=document.createElement('canvas');
+        off.width=w; off.height=h;
+        return { cvs:off, ctx: off.getContext('2d') };
+      }
+      function buildLayers(){
+        buffers = CFG.map(()=>createBuffer());
+        layers = CFG.map(cfg=>{
+          const arr=[];
+          for(let i=0;i<cfg.ribbons;i++){
+            const off=Math.random()*1e3;
+            const pts=Array.from({length:cfg.nodes+1},(_,k)=>({x:(k/cfg.nodes)*w,y:(i/(cfg.ribbons-1))*h}));
+            arr.push({off,pts});
+          }
+          return {cfg,arr};
+        });
+      }
 
       function resize(){
         dpr = Math.min(devicePixelRatio||1, 2);
@@ -383,109 +439,83 @@
         h = c.height= Math.floor(innerHeight* dpr);
         c.style.width = innerWidth+'px';
         c.style.height= innerHeight+'px';
-        // recreate offscreen buffers on resize
-        buffers = LAYERS.map(l=>createLayerBuffer());
+        buildLayers();
       }
       addEventListener('resize', resize, {passive:true});
-
-      // Config
-      const LAYERS = [
-        { ribbons:6, nodes:22, speed:.0032, amp:.11, blur:12, drift:220, pf:0.18,
-          col:[[90,209,255,.12],[28,184,212,.3],[83,255,226,.14]] },
-        { ribbons:5, nodes:20, speed:.0026, amp:.09, blur:10, drift:180, pf:0.32,
-          col:[[90,209,255,.10],[28,184,212,.26],[83,255,226,.12]] },
-        { ribbons:4, nodes:18, speed:.0021, amp:.075,blur:8,  drift:140, pf:0.5,
-          col:[[90,209,255,.08],[28,184,212,.22],[83,255,226,.10]] }
-      ];
-
-      // Offscreen buffers (pentru glow mai fin și draw batching)
-      let buffers = [];
-      function createLayerBuffer(){
-        const off = document.createElement('canvas');
-        off.width = w; off.height = h;
-        return { cvs: off, ctx: off.getContext('2d') };
-      }
-
-      // Init ribbons
-      const layers = LAYERS.map(cfg=>{
-        const arr=[];
-        for(let i=0;i<cfg.ribbons;i++){
-          const off=Math.random()*1e3;
-          const pts=Array.from({length:cfg.nodes+1},(_,k)=>({x:(k/cfg.nodes)*w,y:(i/(cfg.ribbons-1))*h}));
-          arr.push({off,pts});
-        }
-        return {cfg,arr};
-      });
-
-      const sparks = Array.from({length:80},()=>spawnSpark());
-
-      function spawnSpark(){
-        const a=Math.random()*Math.PI*2;
-        const s=(Math.random()*0.45+0.15)*(RM?0.25:1);
-        return {x:Math.random()*w,y:Math.random()*h,vx:Math.cos(a)*s,vy:Math.sin(a)*s,r:(12+Math.random()*6)*dpr};
-      }
-
-      function n2(x,y){ const s=Math.sin(x*12.9898 + y*78.233)*43758.5453; return s-Math.floor(s); }
-      const lerp=(a,b,u)=>a+(b-a)*u;
-      function catmull(p0,p1,p2,p3,t){ const v0=(p2-p0)*.5,v1=(p3-p1)*.5,t2=t*t,t3=t2*t;
-        return (2*t3-3*t2+1)*p1 + (t3-2*t2+t)*v0 + (-2*t3+3*t2)*p2 + (t3-t2)*v1;
-      }
-
-      addEventListener('scroll',()=>{scrollY=window.scrollY||document.documentElement.scrollTop||0},{passive:true});
       resize();
 
-      let t=0;
+      // input parallax
+      addEventListener('scroll', ()=>{ scrollY = window.scrollY || 0; }, {passive:true});
+      addEventListener('pointermove', (e)=>{
+        const cx = innerWidth/2, cy = innerHeight/2;
+        mx = (e.clientX - cx) / cx; // -1..1
+        my = (e.clientY - cy) / cy;
+      }, {passive:true});
+
+      // particule
+      const sparks = Array.from({length:90},()=>spawn());
+      function spawn(){
+        const a=Math.random()*Math.PI*2;
+        const s=(Math.random()*0.45+0.18)*(RM?0.25:1);
+        return {x:Math.random()*w,y:Math.random()*h,vx:Math.cos(a)*s,vy:Math.sin(a)*s,r:(10+Math.random()*7)*dpr};
+      }
+
       function frame(){
         if(!run){ requestAnimationFrame(frame); return; }
-        t+=1;
-        smooth = lerp(smooth, scrollY, .09);
+        t += 1;
+        sSmooth = lerp(sSmooth, scrollY, .085);
+        mSmoothX = lerp(mSmoothX, mx, .06);
+        mSmoothY = lerp(mSmoothY, my, .06);
 
-        // vignette parallax fin
-        vignette.style.transform = `translate3d(${(smooth*-0.01)}px, ${(smooth*-0.02)}px, 0)`;
+        // Parallax pe vignette
+        vignette.style.transform = `translate3d(${(-sSmooth*0.012 + mSmoothX*8)}px, ${(-sSmooth*0.02 + mSmoothY*10)}px, 0)`;
 
-        // fade trail
-        cx.fillStyle='rgba(6,22,44,0.44)';
-        cx.fillRect(0,0,w,h);
-        cx.save();
-        cx.globalCompositeOperation='lighter';
+        // trail soft
+        ctx.fillStyle='rgba(6,22,44,0.46)';
+        ctx.fillRect(0,0,w,h);
+        ctx.save();
+        ctx.globalCompositeOperation='lighter';
 
-        // per layer, draw into offscreen for soft shadow/glow, apoi compunem
-        for(let li=0;li<layers.length;li++){
-          const {cfg,arr}=layers[li];
-          const {cvs,ctx}=buffers[li];
-          ctx.clearRect(0,0,w,h);
+        // layere în offscreen + compunere
+        for(let li=0; li<layers.length; li++){
+          const {cfg, arr} = layers[li];
+          const {cvs, ctx:bx} = buffers[li];
+          bx.clearRect(0,0,w,h);
 
-          const AMP=Math.min(w,h)*cfg.amp;
-          const stepT=(RM?0.3:1)*cfg.speed;
-          const pOffset=smooth*cfg.pf;
+          const AMP = Math.min(w,h) * cfg.amp;
+          const stepT = (RM?0.3:1) * cfg.speed;
+          const pOffset = sSmooth*cfg.pf;
+          const mOffsetX = mSmoothX * 16 * (li+1);
+          const mOffsetY = mSmoothY * 18 * (li+1);
 
           for(const r of arr){
             // update points
             for(let i=0;i<r.pts.length;i++){
               const px=(i/(r.pts.length-1))*w;
-              const kx=px*0.001+r.off;
-              const ky=t*stepT*100+i*0.03;
-              const ang=n2(kx,ky)*Math.PI*2;
-              const baseY=(r.off*7 + px*0.035 + t*stepT*cfg.drift)%(h*1.3) - h*0.15 + pOffset;
-              const ty=baseY + Math.sin(ang)*AMP;
+              const kx=px*0.001 + r.off;
+              const ky=t*stepT*100 + i*0.028;
+              const ang = n2(kx,ky) * Math.PI*2;
+              const baseY = (r.off*7 + px*0.035 + t*stepT*cfg.drift)%(h*1.3) - h*0.15 + pOffset + mOffsetY;
+              const ty = baseY + Math.sin(ang)*AMP;
               const p=r.pts[i];
-              p.x=px; p.y=lerp(p.y,ty,0.1);
+              p.x = px + mOffsetX;
+              p.y = lerp(p.y, ty, 0.1);
             }
 
-            // gradient pe Y (rece)
+            // gradient rece pe Y
             const midY=r.pts[(r.pts.length/2)|0].y;
-            const g=ctx.createLinearGradient(0, midY-AMP, 0, midY+AMP);
+            const g=bx.createLinearGradient(0, midY-AMP, 0, midY+AMP);
             const [c1,c2,c3]=cfg.col;
             g.addColorStop(0,`rgba(${c1[0]},${c1[1]},${c1[2]},${c1[3]})`);
             g.addColorStop(0.5,`rgba(${c2[0]},${c2[1]},${c2[2]},${c2[3]})`);
             g.addColorStop(1,`rgba(${c3[0]},${c3[1]},${c3[2]},${c3[3]})`);
 
-            ctx.lineWidth=1.6*dpr;
-            ctx.shadowBlur=cfg.blur*dpr;
-            ctx.shadowColor='rgba(90,209,255,0.22)';
-            ctx.strokeStyle=g;
+            bx.lineWidth=1.7*dpr;
+            bx.shadowBlur=cfg.blur*dpr;
+            bx.shadowColor='rgba(127,224,255,0.24)';
+            bx.strokeStyle=g;
 
-            ctx.beginPath();
+            bx.beginPath();
             for(let i=0;i<r.pts.length-1;i++){
               const a=r.pts[i], b=r.pts[i+1];
               const p0=(i>0)?r.pts[i-1].y:a.y;
@@ -495,36 +525,40 @@
                 const tt=s/3;
                 const x=lerp(a.x,b.x,tt);
                 const y=catmull(p0,p1,p2,p3,tt);
-                if(i===0&&s===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+                if(i===0&&s===0) bx.moveTo(x,y); else bx.lineTo(x,y);
               }
             }
-            ctx.stroke();
+            bx.stroke();
           }
-
-          // compunem layer în scena principală
-          cx.drawImage(cvs,0,0);
+          ctx.drawImage(cvs,0,0);
         }
 
-        // particule stelare (cu ușor drift pe scroll)
+        // particule drift
         for(const sp of sparks){
-          sp.x+=sp.vx; sp.y+=sp.vy + (smooth*0.0005);
-          if(sp.x<-30||sp.x>w+30||sp.y<-30||sp.y>h+30) Object.assign(sp,spawnSpark());
-          const g=cx.createRadialGradient(sp.x,sp.y,0, sp.x,sp.y, sp.r);
-          g.addColorStop(0,'rgba(90,209,255,0.14)'); g.addColorStop(1,'rgba(28,184,212,0)');
-          cx.fillStyle=g; cx.beginPath(); cx.arc(sp.x,sp.y,sp.r,0,Math.PI*2); cx.fill();
+          sp.x+=sp.vx + mSmoothX*0.6;
+          sp.y+=sp.vy + (sSmooth*0.0005) + mSmoothY*0.6;
+          if(sp.x<-40||sp.x>w+40||sp.y<-40||sp.y>h+40){
+            Object.assign(sp, spawn());
+          }
+          const g=ctx.createRadialGradient(sp.x,sp.y,0, sp.x,sp.y, sp.r);
+          g.addColorStop(0,'rgba(127,224,255,0.15)');
+          g.addColorStop(1,'rgba(57,194,230,0)');
+          ctx.fillStyle=g; ctx.beginPath(); ctx.arc(sp.x,sp.y,sp.r,0,Math.PI*2); ctx.fill();
         }
 
-        cx.restore();
+        ctx.restore();
         requestAnimationFrame(frame);
       }
+
+      // start
       if(!RM) requestAnimationFrame(frame);
 
-      // Toggle
-      const btn=document.getElementById('toggle');
-      const label=()=>{ if(btn) btn.textContent=run?'Pauză animație':'Pornește animația';};
-      btn?.addEventListener('click',e=>{ e.preventDefault(); run=!run; label(); });
-      document.addEventListener('visibilitychange',()=>{ run=!document.hidden && !RM; label(); });
-      label();
+      // Toggle animație
+      const toggle=document.getElementById('toggle');
+      function setToggle(){ if(toggle) toggle.textContent = run ? 'Pauză animație' : 'Pornește animația'; }
+      toggle?.addEventListener('click', (e)=>{ e.preventDefault(); run = !run; setToggle(); });
+      document.addEventListener('visibilitychange', ()=>{ run = !document.hidden && !RM; setToggle(); });
+      setToggle();
     })();
   </script>
 </body>
