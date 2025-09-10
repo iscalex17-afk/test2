@@ -1,18 +1,274 @@
-<a href="/" class="brand" aria-label="RIVO">
-  <svg class="rivo-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 60">
-    <defs>
-      <linearGradient id="rivoGradient" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#5AD1FF"/>
-        <stop offset="1" stop-color="#1CB8D4"/>
-      </linearGradient>
-    </defs>
-    <!-- Emblemă R -->
-    <circle cx="28" cy="30" r="24" stroke="url(#rivoGradient)" stroke-width="3" fill="none"/>
-    <path d="M18 38l8-12h8q7 0 7 7v2q0 7-7 7h-7l6 8" 
-          fill="none" stroke="url(#rivoGradient)" stroke-width="3" stroke-linecap="round"/>
-    
-    <!-- Wordmark RIVO -->
-    <text x="70" y="40" font-family="Inter, Arial, sans-serif" 
-          font-weight="800" font-size="36" fill="url(#rivoGradient)">RIVO</text>
+import React, { useEffect, useState } from "react";
+import { Check, ArrowRight, HelpCircle, Users, Rocket, CreditCard, X } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+
+// ===== RIVO — PREMIUM SITE (clean + glow + welcome popup) =====
+// TailwindCSS + lucide-react + shadcn/ui components
+// Pages: Acasă, Produse, Pricing, FAQ, Contact
+// Popup: apare la prima vizită (localStorage), blur pe fundal, glow cyan subtil
+
+// LOGO (păstrăm iconița în colț)
+const RivoLogo = ({ size = 28 }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none" aria-label="RIVO logo">
+    <circle cx="50" cy="50" r="45" stroke="#18B6D7" strokeWidth="6" />
+    <path d="M36 60V42c0-6.5 5.3-11.8 11.8-11.8h10.4c1.9 0 3.5 1.6 3.5 3.5s-1.6 3.5-3.5 3.5H47.8c-2.7 0-4.8 2.2-4.8 4.8v12.1c0 2.7 2.2 4.8 4.8 4.8h4.9c5.6 0 10.2 4.6 10.2 10.2v0c0 1.9-1.6 3.5-3.5 3.5H52.2c-8.9 0-16.2-7.2-16.2-16.2Z" fill="#18B6D7" />
+    <path d="M58 70c-2 0-3.6-1.6-3.6-3.6 0-2 1.6-3.6 3.6-3.6h8.5c2 0 3.6 1.6 3.6 3.6 0 2-1.6 3.6-3.6 3.6H58Z" fill="#18B6D7" />
   </svg>
-</a>
+);
+
+// Router simplu
+const PAGES = { HOME: "home", PRODUCTS: "products", PRICING: "pricing", FAQ: "faq", CONTACT: "contact" };
+
+const NavLink = ({ label, page, current, setPage }) => (
+  <button onClick={() => setPage(page)} className={`text-sm ${current === page ? "text-white" : "text-white/70 hover:text-white"}`}>{label}</button>
+);
+
+const Section = ({ children, className = "" }) => (
+  <section className={`mx-auto w-full max-w-7xl px-5 md:px-8 ${className}`}>{children}</section>
+);
+
+const Bullet = ({ children }) => (
+  <li className="flex items-start gap-2 text-left"><Check className="mt-1 h-5 w-5 text-cyan-400" /><span>{children}</span></li>
+);
+
+// Glow background (subtil, fără artificii copilărești)
+const Glow = () => (
+  <div className="pointer-events-none fixed inset-0 -z-10">
+    <div className="absolute -top-40 -left-40 h-[50rem] w-[50rem] rounded-full blur-3xl opacity-30" style={{ background: "radial-gradient(closest-side, rgba(24,182,215,0.4), rgba(24,182,215,0.06), transparent)" }} />
+    <div className="absolute -bottom-40 -right-40 h-[50rem] w-[50rem] rounded-full blur-3xl opacity-20" style={{ background: "radial-gradient(closest-side, rgba(0,140,255,0.35), rgba(0,140,255,0.05), transparent)" }} />
+  </div>
+);
+
+// Popup component
+const WelcomePopup = ({ open, onClose, onProducts, onPricing }) => {
+  if (!open) return null;
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
+      <div role="dialog" aria-modal="true" className="relative w-[90%] max-w-lg rounded-2xl border border-white/10 bg-[#0E1526]/95 p-6 shadow-2xl">
+        <button aria-label="Închide" onClick={onClose} className="absolute right-3 top-3 rounded-full p-1 text-white/70 hover:text-white"><X className="h-5 w-5" /></button>
+        <div className="flex items-center gap-3 mb-3">
+          <RivoLogo size={24} /><h3 className="text-xl font-semibold">Bine ai venit la <span className="text-cyan-400">RIVO</span></h3>
+        </div>
+        <p className="text-white/80 text-sm">
+          Automatizare rece. Conversie precisă. Începe cu produsele noastre sau vezi planurile — alegerea e a ta.
+        </p>
+        <div className="mt-5 grid grid-cols-2 gap-3">
+          <button onClick={onProducts} className="rounded-xl bg-[#18B6D7] px-4 py-2 text-sm font-semibold text-black hover:bg-cyan-400">Vezi Produsele</button>
+          <button onClick={onPricing} className="rounded-xl bg-white/10 px-4 py-2 text-sm font-semibold hover:bg-white/20">Planuri & Preț</button>
+        </div>
+        <p className="mt-3 text-[11px] text-white/50">* Fereastra apare doar la prima vizită pe acest dispozitiv.</p>
+      </div>
+    </div>
+  );
+};
+
+// Layout principal
+const Shell = ({ children, page, setPage }) => (
+  <div className="min-h-screen w-full text-white bg-[#0B1220]">
+    <Glow />
+    <header className="sticky top-0 z-40 backdrop-blur bg-white/5 border-b border-white/10">
+      <Section className="flex items-center justify-between py-3">
+        <div className="flex items-center gap-2"><RivoLogo /><span className="font-bold">RIVO</span></div>
+        <nav className="hidden md:flex items-center gap-6">
+          <NavLink label="Acasă" page={PAGES.HOME} current={page} setPage={setPage} />
+          <NavLink label="Produse" page={PAGES.PRODUCTS} current={page} setPage={setPage} />
+          <NavLink label="Pricing" page={PAGES.PRICING} current={page} setPage={setPage} />
+          <NavLink label="FAQ" page={PAGES.FAQ} current={page} setPage={setPage} />
+          <NavLink label="Contact" page={PAGES.CONTACT} current={page} setPage={setPage} />
+        </nav>
+        <a href="#" className="rounded-xl bg-[#18B6D7] px-4 py-2 text-sm font-semibold text-black hover:bg-cyan-400">Începe gratuit</a>
+      </Section>
+    </header>
+
+    <main>{children}</main>
+
+    <footer className="mt-20 border-t border-white/10 bg-white/5">
+      <Section className="py-10 flex flex-col md:flex-row items-center justify-between text-sm text-white/70">
+        <div className="flex items-center gap-2"><RivoLogo /><span>RIVO</span></div>
+        <p>© {new Date().getFullYear()} RIVO • Premium business platform</p>
+      </Section>
+    </footer>
+  </div>
+);
+
+// Pagini
+const HomePage = ({ setPage }) => (
+  <Section className="py-20">
+    <h1 className="text-5xl font-extrabold leading-tight">Automatizare rece. Conversie precisă. Experiență premium.</h1>
+    <p className="mt-4 text-lg text-white/80 max-w-3xl">RIVO este platforma care îți livrează funnel-uri, checkout și AI copilote, toate optimizate pentru ROI real. Clean & profesional, fără balast.</p>
+    <div className="mt-8 flex gap-4">
+      <button onClick={() => setPage(PAGES.PRODUCTS)} className="rounded-xl bg-[#18B6D7] px-6 py-3 text-sm font-semibold text-black hover:bg-cyan-400">Vezi Produsele</button>
+      <button onClick={() => setPage(PAGES.PRICING)} className="rounded-xl border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold hover:bg-white/10">Planuri & Preț</button>
+    </div>
+  </Section>
+);
+
+// --- Example products (plug-and-play copy)
+const PRODUCTS = [
+  {
+    title: "RIVO Launch Kit",
+    subtitle: "Pagina ta de lansare live în 48h",
+    description: "Un kit complet pentru prima ta lansare: landing premium, countdown, secțiuni de beneficii și CTA-uri testate pe trafic real.",
+    benefits: [
+      "+27% rată de conversie medie pe funnel-uri simple",
+      "Integrare rapidă cu Stripe/Gumroad în < 30 min",
+      "Copy de lansare + checklist pas-cu-pas",
+    ],
+    price: "$37",
+    checkoutHref: "#", // înlocuiește cu linkul tău Gumroad/Stripe
+  },
+  {
+    title: "RIVO Autopilot Email System",
+    subtitle: "Email care vinde în somn",
+    description: "Secvențe de 7, 14 și 30 de zile, gata de personalizat, cu declanșatoare pentru abandon coș și follow-up post-cumpărare.",
+    benefits: [
+      "+18–32% din venit provenit din email în 30 de zile",
+      "Șabloane pentru 5 tipuri de oferte (tripwire, bundle, upsell)",
+      "Tagging logic + ghid de integrare (no-code)",
+    ],
+    price: "$97",
+    checkoutHref: "#",
+  },
+  {
+    title: "RIVO AI Offer Optimizer",
+    subtitle: "Optimizare de ofertă ghidată de AI",
+    description: "Copilotul care îți rearanjează promisiunea, bonusurile și garanția pentru a maximiza conversia fără să-ți schimbi produsul.",
+    benefits: [
+      "+12–22% uplift la CTR pe paginile cu trafic >1k vizite",
+      "Framework-uri: 4P, PAS, Star–Story–Solution",
+      "Testare A/B ghidată + check-list legal & trust",
+    ],
+    price: "$147",
+    checkoutHref: "#",
+  },
+];
+
+const ProductsPage = () => (
+  <Section className="py-16">
+    <div className="mb-6">
+      <h2 className="text-3xl font-bold">Produsele RIVO</h2>
+      <p className="mt-2 text-white/70 max-w-2xl">Alege un kit, înlocuiește copy-ul cu specificul tău și publică. Carduri optimizate pentru conversie: promisiune clară, beneficii măsurabile, dovadă și CTA.</p>
+    </div>
+    <div className="grid gap-6 md:grid-cols-3">
+      {PRODUCTS.map((p, i) => (
+        <ProductCard key={i} product={p} />
+      ))}
+    </div>
+  </Section>
+);
+
+const ProductCard = ({ product }) => (
+  <Card className="group border border-white/10 bg-white/5 rounded-2xl overflow-hidden hover:border-white/20 transition-colors">
+    <CardHeader>
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <CardTitle className="text-xl leading-tight">{product.title}</CardTitle>
+          <p className="text-sm text-white/60 mt-1">{product.subtitle}</p>
+        </div>
+        <span className="text-2xl font-bold whitespace-nowrap">{product.price}</span>
+      </div>
+    </CardHeader>
+    <CardContent className="space-y-4">
+      <p className="text-sm text-white/70">{product.description}</p>
+      <ul className="space-y-2 text-sm text-white/80">
+        {product.benefits.map((b, idx) => (<Bullet key={idx}>{b}</Bullet>))}
+      </ul>
+      <div className="pt-2 flex items-center justify-between">
+        <a href={product.checkoutHref} className="inline-flex items-center gap-2 rounded-xl bg-[#18B6D7] px-4 py-2 text-sm font-semibold text-black hover:bg-cyan-400">
+          Cumpără acum <ArrowRight className="h-4 w-4" />
+        </a>
+        <a href="#" className="text-xs text-white/60 hover:text-white">Vezi demo</a>
+      </div>
+      <div className="flex items-center gap-3 text-xs text-white/60"><CreditCard className="h-4 w-4"/> Stripe • Gumroad</div>
+    </CardContent>
+  </Card>
+);
+
+const PricingPage = () => (
+  <Section className="py-16">
+    <h2 className="text-3xl font-bold mb-6">Pricing</h2>
+    <div className="grid md:grid-cols-2 gap-6 mb-10">
+      <Card className="bg-white/5 p-5"><CardTitle className="text-xl">$10,000+</CardTitle><p className="text-white/70">Educație clasică: scumpă, lentă, teoretică.</p></Card>
+      <Card className="bg-white/5 p-5 border border-cyan-400"><CardTitle className="text-xl">$37</CardTitle><p className="text-white/70">RIVO: acces instant, practică, automatizare.</p></Card>
+    </div>
+    <div className="grid md:grid-cols-3 gap-6">
+      <Tier name="Free Kit" price="$0" bullets={["Landing page", "3 secțiuni", "Ghid rapid"]} />
+      <Tier name="Pro" price="$37" bullets={["Funnel complet", "Email + Stripe", "Automatizări de bază"]} highlight />
+      <Tier name="Premium" price="$97" bullets={["AI copilote", "Bundle complet", "Support prioritar"]} />
+    </div>
+  </Section>
+);
+
+const Tier = ({ name, price, bullets, highlight }) => (
+  <Card className={`p-5 bg-white/5 ${highlight ? "border border-cyan-400" : "border-white/10"} rounded-2xl`}>
+    <CardTitle className="text-xl mb-2">{name}</CardTitle>
+    <p className="text-3xl font-bold mb-4">{price}</p>
+    <ul className="space-y-2 text-sm">{bullets.map((b,i)=><Bullet key={i}>{b}</Bullet>)}</ul>
+    <a href="#" className={`mt-4 inline-flex w-full items-center justify-center rounded-xl px-4 py-2 text-sm font-semibold ${highlight ? "bg-[#18B6D7] text-black hover:bg-cyan-400" : "bg-white/10 hover:bg-white/20"}`}>Alege</a>
+  </Card>
+);
+
+const FAQPage = () => (
+  <Section className="py-16">
+    <h2 className="text-3xl font-bold mb-6">Întrebări frecvente</h2>
+    <div className="grid md:grid-cols-2 gap-6">
+      <FAQItem q="Cât durează să lansez?" a="În 24–48h poți avea pagina ta live cu checkout integrat." />
+      <FAQItem q="Pot folosi Stripe sau Gumroad?" a="Da, avem ghiduri și butoane integrate pentru ambele." />
+      <FAQItem q="Există refund?" a="Da, garanție 14 zile pentru planurile plătite." />
+      <FAQItem q="Este pentru începători?" a="Da, primești playbook-uri pas cu pas și suport din comunitate." />
+    </div>
+  </Section>
+);
+
+const FAQItem = ({ q, a }) => (
+  <Card className="p-5 bg-white/5 border border-white/10 rounded-2xl">
+    <CardTitle className="text-lg mb-2 flex items-center gap-2"><HelpCircle className="h-5 w-5"/> {q}</CardTitle>
+    <p className="text-sm text-white/70">{a}</p>
+  </Card>
+);
+
+const ContactPage = () => (
+  <Section className="py-16">
+    <h2 className="text-3xl font-bold mb-6">Contact</h2>
+    <div className="grid gap-4">
+      <a href="#" className="flex items-center gap-2 bg-[#18B6D7] text-black px-4 py-2 rounded-xl hover:bg-cyan-400"><Users className="h-4 w-4"/> Comunitate</a>
+      <a href="#" className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-xl hover:bg-white/20"><Rocket className="h-4 w-4"/> Demo</a>
+      <a href="#" className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-xl hover:bg-white/20"><CreditCard className="h-4 w-4"/> Setup Stripe/Gumroad</a>
+    </div>
+  </Section>
+);
+
+// Root
+export default function RIVO() {
+  const [page, setPage] = useState(PAGES.HOME);
+  const [welcomeOpen, setWelcomeOpen] = useState(false);
+
+  useEffect(() => {
+    // Arată popup doar la prima vizită
+    const seen = typeof window !== 'undefined' ? localStorage.getItem('rivo_welcome_seen') : null;
+    if (!seen) {
+      setWelcomeOpen(true);
+      localStorage.setItem('rivo_welcome_seen', '1');
+    }
+  }, []);
+
+  return (
+    <>
+      <Shell page={page} setPage={setPage}>
+        {page === PAGES.HOME && <HomePage setPage={setPage} />}
+        {page === PAGES.PRODUCTS && <ProductsPage />}
+        {page === PAGES.PRICING && <PricingPage />}
+        {page === PAGES.FAQ && <FAQPage />}
+        {page === PAGES.CONTACT && <ContactPage />}
+      </Shell>
+      <WelcomePopup
+        open={welcomeOpen}
+        onClose={() => setWelcomeOpen(false)}
+        onProducts={() => { setWelcomeOpen(false); setPage(PAGES.PRODUCTS); }}
+        onPricing={() => { setWelcomeOpen(false); setPage(PAGES.PRICING); }}
+      />
+    </>
+  );
+}
