@@ -1,466 +1,531 @@
 <!doctype html>
 <html lang="ro">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Rivo — lansări digitale care chiar convertesc</title>
-    <meta name="description" content="Landing premium albastru rece, cu fundal aurora ultra-smooth, CTA-uri, produse, preț, FAQ și contact. Gata de lansare." />
-    <meta name="theme-color" content="#071a30" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RIVO — lansări digitale care chiar convertesc</title>
+  <meta name="description" content="Landing premium cu aurora fluidă, parallax, CTA-uri clare și secțiuni pentru kituri digitale. Gata de lansare." />
+  <meta name="theme-color" content="#061628" />
+  <meta property="og:title" content="RIVO — lansări digitale care chiar convertesc" />
+  <meta property="og:description" content="Fundal aurora cinematic, rece. Kiturile tale digitale. CTA-uri puternice. Conversie reală." />
+  <meta property="og:type" content="website" />
 
-    <!-- SEO / Social -->
-    <meta property="og:title" content="Rivo — lansări digitale care chiar convertesc" />
-    <meta property="og:description" content="Fundal aurora premium. Kiturile tale digitale. CTA-uri clare. Conversie reală." />
-    <meta property="og:type" content="website" />
+  <!-- Favicon RIVO -->
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g1' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%235AD1FF'/%3E%3Cstop offset='1' stop-color='%231CB8D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%23061328'/%3E%3Ccircle cx='32' cy='32' r='20' stroke='url(%23g1)' stroke-width='3.5' fill='none'/%3E%3Cpath d='M20 40l10-16h9c6 0 8 2.5 8 8s-2 8-8 8h-7l6 9' stroke='url(%23g1)' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Favicon (R rece v2) -->
-    <link rel="icon" type="image/svg+xml"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%235fe4ff'/%3E%3Cstop offset='1' stop-color='%231cb8d4'/%3E%3C/linearGradient%3E%3ClinearGradient id='g2' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='%235ad1ff'/%3E%3Cstop offset='1' stop-color='%2300d1ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%2306142a'/%3E%3Ccircle cx='32' cy='32' r='22' stroke='url(%23g)' stroke-width='3.5' fill='none'/%3E%3Cpath d='M22 40l10-16h9c5 0 7 2 7 7s-2 7-7 7h-7l6 9' stroke='url(%23g2)' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <style>
+    :root{
+      --bg:#061628; --bg-2:#04101e;
+      --ink:#eaf5ff; --muted:#b9d6ff;
+      --cold1:#5ad1ff; --cold2:#1cb8d4; --cold3:#53ffe2;
+      --border:#123053; --card:#0b2240; --card-2:#0f2b52;
+      --radius:18px; --shadow:0 12px 34px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.03);
+      --maxw:1200px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--ink); background:linear-gradient(180deg,var(--bg),var(--bg-2)); overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+    .sr-only{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
 
-    <style>
-      :root{
-        --bg:#071a30; --bg-2:#051426;
-        --ink:#e8f4ff; --muted:#b7d3ff;
-        --blue:#5ad1ff; --cyan:#1cb8d4; --teal:#53ffe2;
-        --border:#113156; --card:#0a2240; --card-2:#0e2a4f;
-        --radius:18px; --shadow: 0 10px 30px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.03);
-        --maxw:1200px;
-      }
-      *{ box-sizing:border-box }
-      html,body{ height:100% }
-      html{ scroll-behavior:smooth }
-      body{ margin:0; font-family:"Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:var(--ink); background:linear-gradient(180deg,var(--bg),var(--bg-2)); overflow-x:hidden }
-      a{ color:inherit; text-decoration:none }
-      img{ display:block; max-width:100% }
-      .sr-only{ position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden }
+    /* BACKGROUND LAYERS */
+    #bg{position:fixed;inset:0;z-index:-3}
+    .bg-vignette{position:fixed;inset:0;z-index:-2;pointer-events:none;
+      background:
+        radial-gradient(60% 60% at 70% 15%, rgba(90,209,255,.12), transparent 60%),
+        radial-gradient(40% 40% at 20% 75%, rgba(28,184,212,.14), transparent 65%),
+        radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,.55), transparent 70%);
+      will-change:transform;
+    }
+    .grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.075;mix-blend-mode:overlay;
+      background-image:
+        radial-gradient(rgba(255,255,255,.06) 1px, transparent 1.2px),
+        radial-gradient(rgba(255,255,255,.035) 1px, transparent 1.1px);
+      background-size:3px 3px,5px 5px; background-position:0 0,1px 2px;
+    }
 
-      /* Background */
-      #bg-canvas{ position:fixed; inset:0; z-index:-1 }
-      .bg-vignette{ position:fixed; inset:0; z-index:-1; pointer-events:none; background:
-        radial-gradient(60% 60% at 70% 20%, rgba(90,209,255,.10), transparent 60%),
-        radial-gradient(40% 40% at 20% 75%, rgba(28,184,212,.12), transparent 65%),
-        radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,.48), transparent 70%);
-      }
+    /* LAYOUT */
+    .container{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 22px}
+    header.nav{position:sticky;top:0;z-index:50;
+      backdrop-filter:saturate(140%) blur(10px);
+      background:color-mix(in srgb,#061628 82%, transparent);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.2px}
+    .mark{width:196px;height:44px}
+    .links{display:flex;gap:18px;flex-wrap:wrap}
+    .links a{padding:10px 12px;border-radius:10px;opacity:.9}
+    .links a:hover{background:rgba(90,209,255,.12);opacity:1}
+    .hero{position:relative;padding:110px 0 60px}
+    .hero-inner{max-width:980px;position:relative;z-index:1}
+    h1{font-size:clamp(38px,5.6vw,74px);line-height:1.04;margin:0 0 14px}
+    .accent{color:var(--cold1)}
+    .lead{font-size:clamp(16px,2.2vw,20px);color:var(--muted);margin:0 0 26px}
+    .cta{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 16px;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);font-weight:700;transition:transform .15s ease, background .2s ease, border-color .2s ease}
+    .btn.small{padding:9px 12px;font-size:14px}
+    .btn.primary{background:linear-gradient(135deg,var(--cold1),var(--cold2));color:#001c23;border-color:transparent}
+    .btn.primary:hover{transform:translateY(-1px) scale(1.01)}
+    .btn.ghost{background:rgba(90,209,255,.1)}
+    .btn.ghost:hover{background:rgba(90,209,255,.16)}
+    .badge{display:inline-flex;align-items:center;gap:8px;font-size:12px;background:rgba(90,209,255,.14);border:1px solid rgba(90,209,255,.35);padding:6px 10px;border-radius:999px}
 
-      /* Layout/Header */
-      .container{ width:100%; max-width:var(--maxw); margin:0 auto; padding:0 20px }
-      header.navbar{ position:sticky; top:0; backdrop-filter:saturate(140%) blur(10px); background: color-mix(in srgb, #051426 80%, transparent); border-bottom:1px solid var(--border); z-index:50 }
-      .nav-inner{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:12px 0 }
-      .brand{ display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px }
-      .rmark{ width:168px; height:40px }
-      .nav-links{ display:flex; gap:18px; flex-wrap:wrap }
-      .nav-links a{ padding:10px 12px; border-radius:10px; opacity:.9 }
-      .nav-links a:hover{ background:rgba(90,209,255,.10); opacity:1 }
-      .cta-top{ white-space:nowrap }
+    /* Hero glyph R mare */
+    .glyph{position:absolute;right:-8%;top:-14%;width:min(66vw,880px);opacity:.10;
+      filter:drop-shadow(0 16px 42px rgba(0,0,0,.6));pointer-events:none}
 
-      /* Hero */
-      .hero{ position:relative; padding:96px 0 52px }
-      .hero-inner{ max-width:940px; position:relative; z-index:1 }
-      h1{ font-size: clamp(36px, 5.2vw, 68px); line-height:1.05; margin:0 0 14px }
-      .accent{ color:var(--blue) }
-      .lead{ font-size: clamp(16px, 2.2vw, 20px); color:var(--muted); margin:0 0 26px }
-      .cta{ display:flex; align-items:center; gap:12px; flex-wrap:wrap }
+    .section{padding:72px 0}
+    .section h2{font-size:clamp(26px,3vw,38px);margin:0 0 18px}
+    .grid{display:grid;gap:18px}
+    .grid.two{grid-template-columns:repeat(1,1fr)}
+    .grid.three{grid-template-columns:repeat(1,1fr)}
+    @media (min-width:760px){.grid.two{grid-template-columns:repeat(2,1fr)}.grid.three{grid-template-columns:repeat(3,1fr)}}
 
-      /* Hero glyph (R mare) */
-      .hero-glyph{ position:absolute; right:-6%; top:-10%; width:min(64vw,820px); opacity:.10; filter: drop-shadow(0 14px 42px rgba(0,0,0,.55)); pointer-events:none }
+    .card{background:linear-gradient(180deg,var(--card),var(--card-2));border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+    .card:hover{border-color:color-mix(in srgb,var(--cold2) 38%,var(--border))}
+    .card h3{margin:6px 0 8px;font-size:20px}
+    .card p{margin:0;color:var(--muted)}
+    .check{list-style:none;padding:0;margin:12px 0 0}
+    .check li{display:flex;gap:10px;align-items:flex-start;padding:6px 0}
+    .check li::before{content:"";width:18px;height:18px;flex:0 0 18px;border-radius:5px;border:1px solid var(--border);background:radial-gradient(circle at 60% 40%,var(--cold2),transparent 55%);box-shadow:inset 0 0 0 2px rgba(0,0,0,.22)}
+    .product-img{width:100%;border-radius:14px;border:1px solid var(--border)}
+    .price.card{text-align:center}
+    .price .money{font-size:32px;font-weight:800;margin:2px 0 8px;color:var(--cold1)}
+    .price.featured{border-color:color-mix(in srgb,var(--cold1) 38%,var(--border));box-shadow:0 0 0 1px rgba(90,209,255,.16),var(--shadow)}
+    .cta-band{position:relative;margin:12px 0 0;padding:18px;border:1px dashed var(--border);border-radius:var(--radius);background:rgba(90,209,255,.08)}
+    .sep{height:1px;width:100%;position:relative;margin:6px 0;background:linear-gradient(90deg,rgba(0,0,0,0),rgba(90,209,255,.42),rgba(0,0,0,0));filter:blur(.2px)}
+    .sep::after{content:"";position:absolute;inset:-8px 0;background:radial-gradient(50% 200% at 50% 50%,rgba(90,209,255,.14),transparent 70%)}
 
-      .btn{ display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:12px 16px; border-radius:12px; border:1px solid var(--border); box-shadow:var(--shadow); font-weight:600; transition:transform .15s ease, background .2s ease, border-color .2s ease }
-      .btn.small{ padding:9px 12px; font-size:14px }
-      .btn.primary{ background:linear-gradient(135deg, var(--blue), var(--cyan)); color:#021d24; border-color:transparent }
-      .btn.primary:hover{ transform:translateY(-1px) scale(1.01) }
-      .btn.ghost{ background:rgba(90,209,255,.09) }
-      .btn.ghost:hover{ background:rgba(90,209,255,.15) }
+    .form{display:grid;gap:12px;max-width:680px}
+    label{display:grid;gap:6px;font-weight:600}
+    input,textarea{background:#0a1f3f;color:var(--ink);border:1px solid var(--border);border-radius:12px;padding:12px;outline:none}
+    input:focus,textarea:focus{border-color:color-mix(in srgb,var(--cold1) 55%,var(--border))}
+    .footer{border-top:1px solid var(--border);padding:24px 0;color:var(--muted);font-size:14px}
 
-      .section{ padding:66px 0 }
-      .section h2{ font-size: clamp(26px, 3vw, 36px); margin:0 0 18px }
-      .grid{ display:grid; gap:16px }
-      .grid.two{ grid-template-columns: repeat(1,1fr) }
-      .grid.three{ grid-template-columns: repeat(1,1fr) }
-      @media(min-width:720px){ .grid.two{ grid-template-columns: repeat(2,1fr) } .grid.three{ grid-template-columns: repeat(3,1fr) } }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+  </style>
+</head>
+<body>
+  <a class="sr-only" href="#content">Sari la conținut</a>
 
-      .card{ background:linear-gradient(180deg,var(--card),var(--card-2)); border:1px solid var(--border); border-radius:var(--radius); padding:20px; box-shadow:var(--shadow) }
-      .card:hover{ border-color: color-mix(in srgb, var(--cyan) 36%, var(--border)) }
-      .card h3{ margin:6px 0 8px; font-size:20px }
-      .card p{ margin:0; color:var(--muted) }
+  <!-- BACKGROUND -->
+  <canvas id="bg" aria-hidden="true"></canvas>
+  <div class="bg-vignette" id="vignette" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
 
-      .badge{ display:inline-flex; align-items:center; gap:8px; font-size:12px; background:rgba(90,209,255,.12); border:1px solid rgba(90,209,255,.3); padding:6px 10px; border-radius:999px }
-
-      .check{ list-style:none; padding:0; margin:12px 0 0 }
-      .check li{ display:flex; gap:10px; align-items:flex-start; padding:6px 0 }
-      .check li::before{ content:""; width:18px; height:18px; flex:0 0 18px; border-radius:5px; border:1px solid var(--border); background: radial-gradient(circle at 60% 40%, var(--cyan), transparent 55%); box-shadow: inset 0 0 0 2px rgba(0,0,0,.22) }
-
-      .product-img{ width:100%; border-radius:14px; border:1px solid var(--border) }
-      .price.card{ text-align:center }
-      .price .money{ font-size:32px; font-weight:800; margin:2px 0 8px; color:var(--blue) }
-      .price.featured{ border-color: color-mix(in srgb, var(--blue) 38%, var(--border)); box-shadow: 0 0 0 1px rgba(90,209,255,.16), var(--shadow) }
-
-      .cta-band{ position:relative; margin: 12px 0 0; padding: 18px; border:1px dashed var(--border); border-radius:var(--radius); background: rgba(90,209,255,.06) }
-      .faq{ max-width:900px }
-      details.faq-item{ background:linear-gradient(180deg,var(--card),var(--card-2)); border:1px solid var(--border); border-radius:var(--radius); padding:16px; margin:10px 0 }
-      details.faq-item summary{ cursor:pointer; list-style:none; font-weight:700 }
-      details.faq-item[open]{ border-color: color-mix(in srgb, var(--cyan) 36%, var(--border)) }
-
-      .form{ display:grid; gap:12px; max-width:680px }
-      label{ display:grid; gap:6px; font-weight:600 }
-      input, textarea{ background:#082041; color:var(--ink); border:1px solid var(--border); border-radius:12px; padding:12px; outline:none }
-      input:focus, textarea:focus{ border-color: color-mix(in srgb, var(--blue) 55%, var(--border)) }
-
-      .footer{ border-top:1px solid var(--border); padding:22px 0; color:var(--muted); font-size:14px }
-
-      @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto } .btn{ transition:none } }
-    </style>
-  </head>
-  <body>
-    <a class="sr-only" href="#content">Sari la conținut</a>
-    <canvas id="bg-canvas" aria-hidden="true"></canvas>
-    <div class="bg-vignette" aria-hidden="true"></div>
-
-    <!-- Header / Navbar -->
-    <header class="navbar" role="banner">
-      <div class="container nav-inner">
-        <a href="#" class="brand" aria-label="Rivo">
-          <!-- Logo Rivo v2 (monogram + wordmark) -->
-          <svg class="rmark" viewBox="0 0 168 40" aria-hidden="true" role="img">
-            <defs>
-              <linearGradient id="rv2a" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#5fe4ff"/><stop offset="1" stop-color="#1cb8d4"/>
-              </linearGradient>
-              <linearGradient id="rv2b" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0" stop-color="#5ad1ff"/><stop offset="1" stop-color="#00d1ff"/>
-              </linearGradient>
-              <filter id="rv2glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1.2"/></filter>
-            </defs>
-            <!-- Monogram R -->
-            <g transform="translate(0,0)">
-              <circle cx="20" cy="20" r="16" fill="none" stroke="url(#rv2a)" stroke-width="2.5"/>
-              <path d="M10 27l7-11h7c4 0 6 1.8 6 6s-2 6-6 6h-6l5 7" fill="none" stroke="url(#rv2b)" stroke-width="3" stroke-linecap="round" filter="url(#rv2glow)"/>
-              <circle cx="31" cy="9" r="1.5" fill="#5fe4ff" opacity="0.9"/>
-            </g>
-            <!-- Wordmark Rivo -->
-            <g transform="translate(48,4)" fill="url(#rv2a)">
-              <path d="M0 26V4h8.8c5.7 0 9.2 2.8 9.2 7.3c0 3.4-1.9 5.7-5.2 6.7L21 26h-6.1l-6-6.7H6.8V26H0zm6.8-11.3h1.8c3.1 0 4.8-1 4.8-3.3c0-2.1-1.6-3.2-4.7-3.2H6.8v6.5z"/>
-              <path d="M28.5 26c-5.1 0-8.6-3.6-8.6-9.1S23.5 7.9 28.5 7.9s8.6 3.6 8.6 9s-3.5 9.1-8.6 9.1zm0-4.6c2.6 0 4.2-2 4.2-4.5s-1.6-4.5-4.2-4.5s-4.2 2-4.2 4.5s1.6 4.5 4.2 4.5z"/>
-              <path d="M41.7 26V8.3h5.7l4.6 11.9l4.6-11.9h5.6V26h-4.8V15.9l-4 10.1h-2.9l-4-10.1V26h-4.8z"/>
-              <path d="M69.3 26V8.3h5V26h-5z"/>
-            </g>
-          </svg>
-          <span class="sr-only">Rivo</span>
-        </a>
-        <nav class="nav-links" aria-label="Principal">
-          <a href="#caracteristici">Caracteristici</a>
-          <a href="#produse">Produse</a>
-          <a href="#pret">Preț</a>
-          <a href="#testimoniale">Testimoniale</a>
-          <a href="#faq">FAQ</a>
-          <a href="#contact">Contact</a>
-        </nav>
-        <a class="btn small primary cta-top" href="#contact">Începe acum</a>
-      </div>
-    </header>
-
-    <main id="content">
-      <!-- Hero -->
-      <section class="hero container" aria-labelledby="hero-title">
-        <!-- R mare (heroglyph) -->
-        <svg class="hero-glyph" viewBox="0 0 640 640" aria-hidden="true">
-          <defs><linearGradient id="gBig" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5ad1ff"/><stop offset="1" stop-color="#1cb8d4"/></linearGradient></defs>
-          <circle cx="320" cy="320" r="240" stroke="url(#gBig)" stroke-width="26" fill="none"/>
-          <path d="M220 380l96-160h100q50 0 50 50v40q0 50-50 50h-70l70 100" stroke="url(#gBig)" stroke-width="26" fill="none" stroke-linecap="round"/>
+  <!-- NAV -->
+  <header class="nav" role="banner">
+    <div class="container nav-inner">
+      <a href="#" class="brand" aria-label="RIVO">
+        <!-- LOGO RIVO (monogram R + wordmark RIVO) -->
+        <svg class="mark" viewBox="0 0 220 50" role="img" aria-label="RIVO">
+          <defs>
+            <linearGradient id="rvA" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#5AD1FF"/><stop offset="1" stop-color="#1CB8D4"/>
+            </linearGradient>
+            <filter id="rvGlow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1.1"/></filter>
+          </defs>
+          <!-- Monogram R în cerc -->
+          <g transform="translate(0,5)">
+            <circle cx="20" cy="20" r="17" fill="none" stroke="url(#rvA)" stroke-width="2.6"/>
+            <path d="M10 27l7-11h7c4.5 0 6.5 1.9 6.5 6.5S29 29 24 29h-6l5.3 7.3"
+                  fill="none" stroke="url(#rvA)" stroke-width="3" stroke-linecap="round" filter="url(#rvGlow)"/>
+          </g>
+          <!-- Wordmark RIVO -->
+          <g transform="translate(58,4)" fill="url(#rvA)">
+            <path d="M0 35V5h12.2c7.7 0 12.3 3.7 12.3 9.7c0 4.5-2.6 7.6-7 8.9L27 35h-8l-7.8-8.9H7.2V35H0zm7.2-15.1h2.4c4.1 0 6.4-1.3 6.4-4.4c0-2.8-2.2-4.2-6.3-4.2H7.2v8.6z"/>
+            <path d="M39.6 35c-6.8 0-11.4-4.8-11.4-12S32.8 11 39.6 11s11.4 4.8 11.4 12s-4.6 12-11.4 12zm0-6.1c3.4 0 5.6-2.7 5.6-5.9s-2.2-5.9-5.6-5.9s-5.6 2.6-5.6 5.9s2.2 5.9 5.6 5.9z"/>
+            <rect x="57.5" y="11" width="7" height="24"/>
+            <path d="M73.5 35l12-24h6.8l12 24h-7.6l-1.9-4.2H83l-1.9 4.2h-7.6zm12.5-9.7h8.8L89.3 17l-3.3 8.3z"/>
+          </g>
         </svg>
+      </a>
+      <nav class="links" aria-label="Principal">
+        <a href="#caracteristici">Caracteristici</a>
+        <a href="#produse">Produse</a>
+        <a href="#pret">Preț</a>
+        <a href="#testimoniale">Testimoniale</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="btn small primary" href="#contact">Începe acum</a>
+    </div>
+  </header>
 
-        <div class="hero-inner">
-          <span class="badge">🎯 Lansări digitale • PDF • Template-uri</span>
-          <h1 id="hero-title">Rivo — <span class="accent">rece</span>, precis, premium.</h1>
-          <p class="lead">Fundal **Aurora** ultra-smooth pe 3 straturi, CTA-uri clare, secțiuni gândite pentru conversie. Perfect pentru <strong>kituri de cashflow</strong>, <strong>playbook-uri PDF</strong> și <strong>template-uri de automatizare</strong>.</p>
-          <div class="cta">
-            <a class="btn primary" href="#produse">Vezi kiturile</a>
-            <a class="btn ghost" href="#pret">Planuri & preț</a>
-            <a class="btn ghost" href="#demo" id="toggle-anim">Pauză animație</a>
-          </div>
-          <div class="cta-band"><strong>Ultra-smooth</strong> (spline + low-pass + trail), optimizat pentru 60fps; respectă <em>prefers-reduced-motion</em>.</div>
+  <!-- HERO -->
+  <main id="content">
+    <section class="hero container" aria-labelledby="hero-title">
+      <!-- R mare ca glyph -->
+      <svg class="glyph" viewBox="0 0 700 700" aria-hidden="true">
+        <defs><linearGradient id="gBig" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5AD1FF"/><stop offset="1" stop-color="#1CB8D4"/></linearGradient></defs>
+        <circle cx="350" cy="350" r="260" stroke="url(#gBig)" stroke-width="26" fill="none"/>
+        <path d="M240 420l110-180h110q56 0 56 56v48q0 56-56 56h-80l78 108"
+              stroke="url(#gBig)" stroke-width="26" fill="none" stroke-linecap="round"/>
+      </svg>
+
+      <div class="hero-inner">
+        <span class="badge">🎯 Lansări digitale • PDF • Template-uri</span>
+        <h1 id="hero-title">RIVO — <span class="accent">rece</span>, precis, premium.</h1>
+        <p class="lead">Aurora fluidă (3 straturi + parallax) cu glow cinematic, micro-grain fin și mișcare **ultra-smooth**. Structură gândită pentru conversie — perfect pentru <strong>kituri de cashflow</strong>, <strong>playbook-uri PDF</strong> și <strong>template-uri de automatizare</strong>.</p>
+        <div class="cta">
+          <a class="btn primary" href="#produse">Vezi kiturile</a>
+          <a class="btn ghost" href="#pret">Planuri & preț</a>
+          <a class="btn ghost" href="#demo" id="toggle">Pauză animație</a>
         </div>
-      </section>
+        <div class="cta-band"><strong>Optimizat 60fps</strong> (spline + low-pass + trail). Respectă <em>prefers-reduced-motion</em>.</div>
+      </div>
+    </section>
 
-      <!-- Value props -->
-      <section id="caracteristici" class="section container" aria-labelledby="features-title">
-        <h2 id="features-title">De ce Rivo</h2>
-        <div class="grid three">
-          <article class="card"><h3>Conversie reală</h3><p>Structură inspirată din launchpads moderne. Mesaje scurte, CTA-uri la vedere.</p></article>
-          <article class="card"><h3>Design premium</h3><p>Temă rece, aurora cinematică, profunzime fără zgomot vizual.</p></article>
-          <article class="card"><h3>Setup rapid</h3><p>Static; publici pe Netlify/Vercel. Formular Netlify inclus.</p></article>
-        </div>
-      </section>
+    <div class="sep" aria-hidden="true"></div>
 
-      <!-- Products (SVG previews ca mockup – schimbă ulterior cu .webp) -->
-      <section id="produse" class="section container" aria-labelledby="products-title">
-        <h2 id="products-title">Kiturile tale</h2>
-        <div class="grid three">
-          <article class="card" aria-labelledby="p1">
-            <svg class="product-img" viewBox="0 0 800 500" role="img" aria-label="Cashflow Kit">
-              <defs><linearGradient id="cg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b2a54"/><stop offset="1" stop-color="#0f376e"/></linearGradient><linearGradient id="acc1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5ad1ff"/><stop offset="1" stop-color="#1cb8d4"/></linearGradient><filter id="soft"><feGaussianBlur stdDeviation="10"/></filter></defs>
-              <rect width="800" height="500" rx="16" fill="url(#cg1)"/>
-              <g opacity=".9"><rect x="60" y="70" width="300" height="360" rx="14" fill="#0d2f5c" stroke="#123c75"/><rect x="90" y="110" width="240" height="40" rx="8" fill="#0f3b72"/><rect x="90" y="170" width="210" height="18" rx="6" fill="#134983"/><rect x="90" y="200" width="210" height="18" rx="6" fill="#134983"/><rect x="90" y="230" width="210" height="18" rx="6" fill="#134983"/><rect x="90" y="270" width="240" height="100" rx="10" fill="#0f3b72"/></g>
-              <circle cx="520" cy="160" r="110" fill="url(#acc1)" opacity=".12" filter="url(#soft)"/>
-              <rect x="430" y="260" width="300" height="160" rx="14" fill="#0d2f5c" stroke="#123c75"/>
-              <rect x="450" y="285" width="260" height="18" rx="6" fill="#134983"/>
-              <rect x="450" y="315" width="210" height="18" rx="6" fill="#134983"/>
-              <rect x="450" y="345" width="180" height="18" rx="6" fill="#134983"/>
-              <text x="60" y="460" fill="#bfe5ff" font-family="Inter, Arial" font-size="36">Cashflow Kit</text>
-            </svg>
-            <h3 id="p1" style="margin-top:12px;">Cashflow Kit</h3>
-            <p>Dashboard + șabloane + ghid video pentru 90 zile de venit.</p>
-            <ul class="check"><li>Dashboard Google Sheets</li><li>Tracker venit/cheltuieli</li><li>Model forecast</li></ul>
-            <div class="cta" style="justify-content:flex-start;margin-top:12px;">
-              <a class="btn small ghost" href="#pret">Detalii</a>
-              <a class="btn small primary" href="#contact">Ia-l acum</a>
-            </div>
-          </article>
+    <!-- WHY -->
+    <section id="caracteristici" class="section container" aria-labelledby="features-title">
+      <h2 id="features-title">De ce RIVO</h2>
+      <div class="grid three">
+        <article class="card"><h3>Conversie</h3><p>Layout “launchpad” modern, copy scurt, CTA-uri clare. Focus pe acțiune, nu pe zgomot.</p></article>
+        <article class="card"><h3>Design premium</h3><p>Aurora rece, profunzime curată, contraste AA/AAA. Totul respiră “high-end”.</p></article>
+        <article class="card"><h3>Implementare rapidă</h3><p>Site static. Publici pe Netlify, Vercel sau Cloudflare Pages. Formular Netlify inclus.</p></article>
+      </div>
+    </section>
 
-          <article class="card" aria-labelledby="p2">
-            <svg class="product-img" viewBox="0 0 800 500" role="img" aria-label="PDF Playbook">
-              <defs><linearGradient id="cg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#092549"/><stop offset="1" stop-color="#0d2f5c"/></linearGradient><linearGradient id="acc2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#53ffe2"/><stop offset="1" stop-color="#5ad1ff"/></linearGradient></defs>
-              <rect width="800" height="500" rx="16" fill="url(#cg2)"/>
+    <div class="sep" aria-hidden="true"></div>
+
+    <!-- PRODUCTS -->
+    <section id="produse" class="section container" aria-labelledby="products-title">
+      <h2 id="products-title">Kiturile tale</h2>
+      <div class="grid three">
+        <!-- Produs 1 -->
+        <article class="card" aria-labelledby="p1">
+          <svg class="product-img" viewBox="0 0 800 500" role="img" aria-label="Cashflow Kit">
+            <defs>
+              <linearGradient id="p1g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b2a54"/><stop offset="1" stop-color="#113b77"/></linearGradient>
+              <linearGradient id="p1a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5AD1FF"/><stop offset="1" stop-color="#1CB8D4"/></linearGradient>
+              <filter id="soft"><feGaussianBlur stdDeviation="10"/></filter>
+            </defs>
+            <rect width="800" height="500" rx="16" fill="url(#p1g)"/>
+            <g opacity=".9">
               <rect x="60" y="70" width="300" height="360" rx="14" fill="#0d2f5c" stroke="#123c75"/>
-              <rect x="90" y="110" width="220" height="40" rx="8" fill="#0f3b72"/>
+              <rect x="90" y="110" width="240" height="44" rx="8" fill="#0f3b72"/>
               <rect x="90" y="170" width="210" height="18" rx="6" fill="#134983"/>
               <rect x="90" y="200" width="210" height="18" rx="6" fill="#134983"/>
-              <rect x="410" y="90" width="330" height="280" rx="14" fill="#0d2f5c" stroke="#123c75"/>
-              <circle cx="640" cy="360" r="90" fill="url(#acc2)" opacity=".18"/>
-              <text x="60" y="460" fill="#bfe5ff" font-family="Inter, Arial" font-size="36">PDF Playbook</text>
-            </svg>
-            <h3 id="p2" style="margin-top:12px;">PDF Playbook</h3>
-            <p>Framework-uri, titluri & oferte care convertesc + exemple.</p>
-            <ul class="check"><li>Framework AIDA/PASTOR</li><li>Headline swipes</li><li>Structuri de ofertă</li></ul>
-            <div class="cta" style="justify-content:flex-start;margin-top:12px;">
-              <a class="btn small ghost" href="#pret">Detalii</a>
-              <a class="btn small primary" href="#contact">Descarcă</a>
-            </div>
-          </article>
+              <rect x="90" y="230" width="210" height="18" rx="6" fill="#134983"/>
+              <rect x="90" y="270" width="240" height="100" rx="10" fill="#0f3b72"/>
+            </g>
+            <circle cx="520" cy="160" r="110" fill="url(#p1a)" opacity=".12" filter="url(#soft)"/>
+            <rect x="430" y="260" width="300" height="160" rx="14" fill="#0d2f5c" stroke="#123c75"/>
+            <rect x="450" y="285" width="260" height="18" rx="6" fill="#134983"/>
+            <rect x="450" y="315" width="210" height="18" rx="6" fill="#134983"/>
+            <rect x="450" y="345" width="180" height="18" rx="6" fill="#134983"/>
+            <text x="60" y="460" fill="#c7e7ff" font-family="Inter, Arial" font-size="36">Cashflow Kit</text>
+          </svg>
+          <h3 id="p1" style="margin-top:12px;">Cashflow Kit</h3>
+          <p>Dashboard + șabloane + ghid pentru 90 zile de venit.</p>
+          <ul class="check"><li>Google Sheets</li><li>Tracker venit/cheltuieli</li><li>Forecast model</li></ul>
+          <div class="cta" style="justify-content:flex-start;margin-top:12px;">
+            <a class="btn small ghost" href="#pret">Detalii</a>
+            <a class="btn small primary" href="#contact">Ia-l acum</a>
+          </div>
+        </article>
 
-          <article class="card" aria-labelledby="p3">
-            <svg class="product-img" viewBox="0 0 800 500" role="img" aria-label="Automation Templates">
-              <defs><linearGradient id="cg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a284f"/><stop offset="1" stop-color="#0e3468"/></linearGradient><linearGradient id="acc3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5ad1ff"/><stop offset="1" stop-color="#1cb8d4"/></linearGradient></defs>
-              <rect width="800" height="500" rx="16" fill="url(#cg3)"/>
-              <rect x="60" y="90" width="320" height="300" rx="14" fill="#0d2f5c" stroke="#123c75"/>
-              <rect x="420" y="150" width="320" height="180" rx="14" fill="#0d2f5c" stroke="#123c75"/>
-              <circle cx="620" cy="120" r="70" fill="url(#acc3)" opacity=".18"/>
-              <text x="60" y="460" fill="#bfe5ff" font-family="Inter, Arial" font-size="36">Automation Templates</text>
-            </svg>
-            <h3 id="p3" style="margin-top:12px;">Automation Templates</h3>
-            <p>Secvențe plug-and-play pentru newsletter, onboarding și upsell.</p>
-            <ul class="check"><li>Secvențe email</li><li>Mesaje DM</li><li>Prompts & macro-uri</li></ul>
-            <div class="cta" style="justify-content:flex-start;margin-top:12px;">
-              <a class="btn small ghost" href="#pret">Detalii</a>
-              <a class="btn small primary" href="#contact">Folosește acum</a>
-            </div>
-          </article>
-        </div>
-      </section>
+        <!-- Produs 2 -->
+        <article class="card" aria-labelledby="p2">
+          <svg class="product-img" viewBox="0 0 800 500" role="img" aria-label="PDF Playbook">
+            <defs>
+              <linearGradient id="p2g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#092549"/><stop offset="1" stop-color="#0d2f5c"/></linearGradient>
+              <linearGradient id="p2a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#53FFE2"/><stop offset="1" stop-color="#5AD1FF"/></linearGradient>
+            </defs>
+            <rect width="800" height="500" rx="16" fill="url(#p2g)"/>
+            <rect x="60" y="70" width="300" height="360" rx="14" fill="#0d2f5c" stroke="#123c75"/>
+            <rect x="90" y="110" width="220" height="44" rx="8" fill="#0f3b72"/>
+            <rect x="90" y="170" width="210" height="18" rx="6" fill="#134983"/>
+            <rect x="90" y="200" width="210" height="18" rx="6" fill="#134983"/>
+            <rect x="410" y="90" width="330" height="280" rx="14" fill="#0d2f5c" stroke="#123c75"/>
+            <circle cx="640" cy="360" r="90" fill="url(#p2a)" opacity=".18"/>
+            <text x="60" y="460" fill="#c7e7ff" font-family="Inter, Arial" font-size="36">PDF Playbook</text>
+          </svg>
+          <h3 id="p2" style="margin-top:12px;">PDF Playbook</h3>
+          <p>Framework-uri, headline swipes și structuri de ofertă.</p>
+          <ul class="check"><li>Framework AIDA/PASTOR</li><li>Exemple reale</li><li>Ready-to-use</li></ul>
+          <div class="cta" style="justify-content:flex-start;margin-top:12px;">
+            <a class="btn small ghost" href="#pret">Detalii</a>
+            <a class="btn small primary" href="#contact">Descarcă</a>
+          </div>
+        </article>
 
-      <!-- Testimoniale -->
-      <section id="testimoniale" class="section container" aria-labelledby="t-title">
-        <h2 id="t-title">Ce spun clienții</h2>
-        <div class="grid three">
-          <article class="card"><p>„Am configurat Cashflow Kit în 30 min. Mi-a dublat claritatea pe cifre.”</p><p style="opacity:.8;margin-top:8px">— Andrei, fondator studio</p></article>
-          <article class="card"><p>„PDF Playbook mi-a scurtat scrierea paginii de vânzare la 2 ore.”</p><p style="opacity:.8;margin-top:8px">— Bianca, marketer</p></article>
-          <article class="card"><p>„Template-urile de automatizare mi-au salvat zile întregi de muncă.”</p><p style="opacity:.8;margin-top:8px">— Vlad, e-commerce</p></article>
-        </div>
-      </section>
+        <!-- Produs 3 -->
+        <article class="card" aria-labelledby="p3">
+          <svg class="product-img" viewBox="0 0 800 500" role="img" aria-label="Automation Templates">
+            <defs>
+              <linearGradient id="p3g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a284f"/><stop offset="1" stop-color="#0e3468"/></linearGradient>
+              <linearGradient id="p3a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5AD1FF"/><stop offset="1" stop-color="#1CB8D4"/></linearGradient>
+            </defs>
+            <rect width="800" height="500" rx="16" fill="url(#p3g)"/>
+            <rect x="60" y="90" width="320" height="300" rx="14" fill="#0d2f5c" stroke="#123c75"/>
+            <rect x="420" y="150" width="320" height="180" rx="14" fill="#0d2f5c" stroke="#123c75"/>
+            <circle cx="620" cy="120" r="70" fill="url(#p3a)" opacity=".18"/>
+            <text x="60" y="460" fill="#c7e7ff" font-family="Inter, Arial" font-size="36">Automation Templates</text>
+          </svg>
+          <h3 id="p3" style="margin-top:12px;">Automation Templates</h3>
+          <p>Secvențe plug-and-play pentru newsletter, onboarding și upsell.</p>
+          <ul class="check"><li>Secvențe email</li><li>Macro-uri & prompts</li><li>Funnel DM</li></ul>
+          <div class="cta" style="justify-content:flex-start;margin-top:12px;">
+            <a class="btn small ghost" href="#pret">Detalii</a>
+            <a class="btn small primary" href="#contact">Folosește acum</a>
+          </div>
+        </article>
+      </div>
+    </section>
 
-      <!-- CTA -->
-      <section id="demo" class="section" aria-labelledby="cta-title">
-        <div class="container">
-          <div class="card" style="display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap">
-            <div>
-              <h2 id="cta-title" style="margin:0 0 6px">Pregătit să încasezi mai clar?</h2>
-              <p class="lead" style="margin:0">Începe cu Cashflow Kit și rulează o lansare simplă în 48h.</p>
-            </div>
-            <div class="cta">
-              <a class="btn primary" href="#contact">Cere ofertă</a>
-              <a class="btn ghost" href="#pret">Vezi planuri</a>
-            </div>
+    <div class="sep" aria-hidden="true"></div>
+
+    <!-- TESTIMONIALE -->
+    <section id="testimoniale" class="section container" aria-labelledby="t-title">
+      <h2 id="t-title">Ce spun clienții</h2>
+      <div class="grid three">
+        <article class="card"><p>„Cashflow Kit mi-a clarificat cifrele în 30 de minute.”</p><p style="opacity:.8;margin-top:8px">— Andrei, fondator studio</p></article>
+        <article class="card"><p>„PDF Playbook = pagini de vânzare scrise în 2 ore, nu 2 zile.”</p><p style="opacity:.8;margin-top:8px">— Bianca, marketer</p></article>
+        <article class="card"><p>„Template-urile au tăiat zile de muncă repetitivă.”</p><p style="opacity:.8;margin-top:8px">— Vlad, e-commerce</p></article>
+      </div>
+    </section>
+
+    <div class="sep" aria-hidden="true"></div>
+
+    <!-- CTA -->
+    <section id="demo" class="section" aria-labelledby="cta-title">
+      <div class="container">
+        <div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+          <div>
+            <h2 id="cta-title" style="margin:0 0 6px">Pregătit să încasezi mai clar?</h2>
+            <p class="lead" style="margin:0">Începe cu Cashflow Kit și rulează o lansare simplă în 48h.</p>
+          </div>
+          <div class="cta">
+            <a class="btn primary" href="#contact">Cere ofertă</a>
+            <a class="btn ghost" href="#pret">Vezi planuri</a>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Pricing -->
-      <section id="pret" class="section container" aria-labelledby="pricing-title">
-        <h2 id="pricing-title">Planuri & preț</h2>
-        <div class="grid three">
-          <div class="price card"><h3>Start</h3><p class="money">€0</p><p>Sampler PDF + 1 template</p><a class="btn small ghost" href="#contact">Începe</a></div>
-          <div class="price card featured"><h3>Pro</h3><p class="money">€49</p><p>Cashflow Kit + PDF Playbook</p><a class="btn small primary" href="#contact">Cumpără</a></div>
-          <div class="price card"><h3>Team</h3><p class="money">€149</p><p>Tot + licență extinsă</p><a class="btn small ghost" href="#contact">Contact</a></div>
-        </div>
-        <p class="cta-band">Toate planurile includ suport prin email și actualizări minore.</p>
-      </section>
+    <div class="sep" aria-hidden="true"></div>
 
-      <!-- FAQ -->
-      <section id="faq" class="section container" aria-labelledby="faq-title">
-        <h2 id="faq-title">Întrebări frecvente</h2>
-        <div class="faq">
-          <details class="faq-item"><summary>Pot opri animația?</summary><p>Da, din butonul „Pauză animație” sau cu setarea <em>Reduce Motion</em>.</p></details>
-          <details class="faq-item"><summary>Cum schimb produsele?</summary><p>Înlocuiește SVG-urile cu capturi reale (1200×750 .webp) și editează titlurile/descrierile.</p></details>
-          <details class="faq-item"><summary>Hosting?</summary><p>Static: Netlify, Vercel, Cloudflare Pages, GitHub Pages.</p></details>
-          <details class="faq-item"><summary>Licențiere</summary><p>Poți vinde kiturile tale; acest template nu revendică conținutul tău.</p></details>
-        </div>
-      </section>
+    <!-- PRICING -->
+    <section id="pret" class="section container" aria-labelledby="pricing-title">
+      <h2 id="pricing-title">Planuri & preț</h2>
+      <div class="grid three">
+        <div class="price card"><h3>Start</h3><p class="money">€0</p><p>Sampler PDF + 1 template</p><a class="btn small ghost" href="#contact">Începe</a></div>
+        <div class="price card featured"><h3>Pro</h3><p class="money">€49</p><p>Cashflow Kit + PDF Playbook</p><a class="btn small primary" href="#contact">Cumpără</a></div>
+        <div class="price card"><h3>Team</h3><p class="money">€149</p><p>Tot + licență extinsă</p><a class="btn small ghost" href="#contact">Contact</a></div>
+      </div>
+      <p class="cta-band">Toate planurile includ suport prin email și actualizări minore.</p>
+    </section>
 
-      <!-- Contact -->
-      <section id="contact" class="section container" aria-labelledby="contact-title">
-        <h2 id="contact-title">Contact</h2>
-        <form name="contact" method="POST" data-netlify="true" class="form">
-          <input type="hidden" name="form-name" value="contact" />
-          <label>Nume<input name="name" required /></label>
-          <label>Email<input name="email" type="email" required /></label>
-          <label>Mesaj<textarea name="message" rows="4" required></textarea></label>
-          <button class="btn primary" type="submit">Trimite</button>
-        </form>
-      </section>
-    </main>
+    <div class="sep" aria-hidden="true"></div>
 
-    <footer class="container footer" role="contentinfo">
-      <p>© <span id="year"></span> Rivo. Toate drepturile rezervate.</p>
-    </footer>
+    <!-- FAQ -->
+    <section id="faq" class="section container" aria-labelledby="faq-title">
+      <h2 id="faq-title">Întrebări frecvente</h2>
+      <div class="faq">
+        <details class="card"><summary style="cursor:pointer;font-weight:700">Pot opri animația?</summary><p style="margin-top:10px;color:var(--muted)">Da, apasă „Pauză animație” sau activează <em>Reduce Motion</em> în sistem.</p></details>
+        <details class="card"><summary style="cursor:pointer;font-weight:700">Cum schimb produsele?</summary><p style="margin-top:10px;color:var(--muted)">Înlocuiește SVG-urile cu imagini reale (1200×750 .webp) și editează titlurile/descrierile.</p></details>
+        <details class="card"><summary style="cursor:pointer;font-weight:700">Hosting?</summary><p style="margin-top:10px;color:var(--muted)">Netlify, Vercel, Cloudflare Pages, GitHub Pages. E site static.</p></details>
+        <details class="card"><summary style="cursor:pointer;font-weight:700">Licențiere</summary><p style="margin-top:10px;color:var(--muted)">Conținutul tău rămâne al tău. Template-ul nu revendică nimic.</p></details>
+      </div>
+    </section>
 
-    <script>
-      // Anul din footer
-      document.getElementById('year').textContent = new Date().getFullYear();
+    <div class="sep" aria-hidden="true"></div>
 
-      // =======================
-      // AURORA BACKGROUND (3 straturi) — ribbons + particule
-      // =======================
-      (function(){
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d', { alpha:true });
-        let w,h,dpr; let running = true;
-        const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    <!-- CONTACT -->
+    <section id="contact" class="section container" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact</h2>
+      <form name="contact" method="POST" data-netlify="true" class="form">
+        <input type="hidden" name="form-name" value="contact" />
+        <label>Nume<input name="name" required /></label>
+        <label>Email<input name="email" type="email" required /></label>
+        <label>Mesaj<textarea name="message" rows="4" required></textarea></label>
+        <button class="btn primary" type="submit">Trimite</button>
+      </form>
+    </section>
+  </main>
 
-        function resize(){
-          dpr = Math.min(devicePixelRatio || 1, 2);
-          w = canvas.width  = Math.floor(innerWidth  * dpr);
-          h = canvas.height = Math.floor(innerHeight * dpr);
-          canvas.style.width = innerWidth + 'px';
-          canvas.style.height = innerHeight + 'px';
+  <footer class="container footer" role="contentinfo">
+    <p>© <span id="year"></span> RIVO. Toate drepturile rezervate.</p>
+  </footer>
+
+  <script>
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ============================
+    // AURORA (3 straturi) + PARALLAX
+    // ============================
+    (function(){
+      const c = document.getElementById('bg');
+      const cx = c.getContext('2d',{alpha:true});
+      const vignette = document.getElementById('vignette');
+      let w,h,dpr; let run=true;
+      const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let scrollY=0, smooth=0;
+
+      function resize(){
+        dpr = Math.min(devicePixelRatio||1, 2);
+        w = c.width = Math.floor(innerWidth * dpr);
+        h = c.height= Math.floor(innerHeight* dpr);
+        c.style.width = innerWidth+'px';
+        c.style.height= innerHeight+'px';
+        // recreate offscreen buffers on resize
+        buffers = LAYERS.map(l=>createLayerBuffer());
+      }
+      addEventListener('resize', resize, {passive:true});
+
+      // Config
+      const LAYERS = [
+        { ribbons:6, nodes:22, speed:.0032, amp:.11, blur:12, drift:220, pf:0.18,
+          col:[[90,209,255,.12],[28,184,212,.3],[83,255,226,.14]] },
+        { ribbons:5, nodes:20, speed:.0026, amp:.09, blur:10, drift:180, pf:0.32,
+          col:[[90,209,255,.10],[28,184,212,.26],[83,255,226,.12]] },
+        { ribbons:4, nodes:18, speed:.0021, amp:.075,blur:8,  drift:140, pf:0.5,
+          col:[[90,209,255,.08],[28,184,212,.22],[83,255,226,.10]] }
+      ];
+
+      // Offscreen buffers (pentru glow mai fin și draw batching)
+      let buffers = [];
+      function createLayerBuffer(){
+        const off = document.createElement('canvas');
+        off.width = w; off.height = h;
+        return { cvs: off, ctx: off.getContext('2d') };
+      }
+
+      // Init ribbons
+      const layers = LAYERS.map(cfg=>{
+        const arr=[];
+        for(let i=0;i<cfg.ribbons;i++){
+          const off=Math.random()*1e3;
+          const pts=Array.from({length:cfg.nodes+1},(_,k)=>({x:(k/cfg.nodes)*w,y:(i/(cfg.ribbons-1))*h}));
+          arr.push({off,pts});
         }
-        addEventListener('resize', resize, {passive:true});
-        resize();
+        return {cfg,arr};
+      });
 
-        // Config
-        const LAYERS = [
-          { ribbons: 6, nodes: 22, speed: 0.0032, amp: 0.11, blur: 12, color:[ [90,209,255,0.12], [28,184,212,0.30], [83,255,226,0.14] ], drift: 220 },
-          { ribbons: 5, nodes: 20, speed: 0.0026, amp: 0.09, blur: 10, color:[ [90,209,255,0.10], [28,184,212,0.26], [83,255,226,0.12] ], drift: 180 },
-          { ribbons: 4, nodes: 18, speed: 0.0021, amp: 0.07, blur: 8,  color:[ [90,209,255,0.08], [28,184,212,0.22], [83,255,226,0.10] ], drift: 140 }
-        ];
-        const sparks = Array.from({length: 80}, ()=>spawnSpark());
-        const layers = LAYERS.map(cfg => makeLayer(cfg));
-        let t = 0;
+      const sparks = Array.from({length:80},()=>spawnSpark());
 
-        function makeLayer(cfg){
-          const {ribbons, nodes} = cfg;
-          const arr = [];
-          for(let i=0;i<ribbons;i++){
-            const off = Math.random()*1e3;
-            const pts = Array.from({length:nodes+1}, (_,k)=>({ x:(k/nodes)*w, y:(i/(ribbons-1))*h }));
-            arr.push({ off, pts });
-          }
-          return { cfg, arr };
-        }
+      function spawnSpark(){
+        const a=Math.random()*Math.PI*2;
+        const s=(Math.random()*0.45+0.15)*(RM?0.25:1);
+        return {x:Math.random()*w,y:Math.random()*h,vx:Math.cos(a)*s,vy:Math.sin(a)*s,r:(12+Math.random()*6)*dpr};
+      }
 
-        function spawnSpark(){
-          const a = Math.random()*Math.PI*2;
-          const s = (Math.random()*0.45+0.15) * (RM?0.25:1);
-          return { x:Math.random()*w, y:Math.random()*h, vx:Math.cos(a)*s, vy:Math.sin(a)*s, r:(12+Math.random()*6)*dpr };
-        }
+      function n2(x,y){ const s=Math.sin(x*12.9898 + y*78.233)*43758.5453; return s-Math.floor(s); }
+      const lerp=(a,b,u)=>a+(b-a)*u;
+      function catmull(p0,p1,p2,p3,t){ const v0=(p2-p0)*.5,v1=(p3-p1)*.5,t2=t*t,t3=t2*t;
+        return (2*t3-3*t2+1)*p1 + (t3-2*t2+t)*v0 + (-2*t3+3*t2)*p2 + (t3-t2)*v1;
+      }
 
-        function n2(x,y){ const s=Math.sin(x*12.9898 + y*78.233)*43758.5453; return s-Math.floor(s); }
-        const lerp=(a,b,u)=>a+(b-a)*u;
-        function catmull(p0,p1,p2,p3,t){ const v0=(p2-p0)*.5, v1=(p3-p1)*.5; const t2=t*t, t3=t2*t; return (2*t3-3*t2+1)*p1 + (t3-2*t2+t)*v0 + (-2*t3+3*t2)*p2 + (t3-t2)*v1; }
+      addEventListener('scroll',()=>{scrollY=window.scrollY||document.documentElement.scrollTop||0},{passive:true});
+      resize();
 
-        function draw(){
-          if(!running){ requestAnimationFrame(draw); return; }
-          t += 1;
+      let t=0;
+      function frame(){
+        if(!run){ requestAnimationFrame(frame); return; }
+        t+=1;
+        smooth = lerp(smooth, scrollY, .09);
 
-          // Trail subtil
-          ctx.fillStyle = 'rgba(6,22,44,0.42)';
-          ctx.fillRect(0,0,w,h);
+        // vignette parallax fin
+        vignette.style.transform = `translate3d(${(smooth*-0.01)}px, ${(smooth*-0.02)}px, 0)`;
 
-          ctx.save();
-          ctx.globalCompositeOperation = 'lighter';
+        // fade trail
+        cx.fillStyle='rgba(6,22,44,0.44)';
+        cx.fillRect(0,0,w,h);
+        cx.save();
+        cx.globalCompositeOperation='lighter';
 
-          // Straturi Aurora (parallax light)
-          for(const layer of layers){
-            const { cfg, arr } = layer;
-            const AMP = Math.min(w,h) * cfg.amp;
-            const stepT = (RM?0.3:1) * cfg.speed;
+        // per layer, draw into offscreen for soft shadow/glow, apoi compunem
+        for(let li=0;li<layers.length;li++){
+          const {cfg,arr}=layers[li];
+          const {cvs,ctx}=buffers[li];
+          ctx.clearRect(0,0,w,h);
 
-            for(const r of arr){
-              // Actualizează punctele (curgere diagonală + flow field)
-              for(let i=0;i<r.pts.length;i++){
-                const px = (i/(r.pts.length-1)) * w;
-                const kx = px*0.001 + r.off;
-                const ky = t*stepT*100 + i*0.03;
-                const ang = n2(kx,ky)*Math.PI*2;
-                const baseY = (r.off*7 + px*0.035 + t*stepT*cfg.drift) % (h*1.3) - h*0.15;
-                const ty = baseY + Math.sin(ang)*AMP;
-                const p = r.pts[i];
-                p.x = px;
-                p.y = lerp(p.y, ty, 0.10);
-              }
+          const AMP=Math.min(w,h)*cfg.amp;
+          const stepT=(RM?0.3:1)*cfg.speed;
+          const pOffset=smooth*cfg.pf;
 
-              // Stroke gradient rece + glow
-              const midY = r.pts[(r.pts.length/2)|0].y;
-              const g = ctx.createLinearGradient(0, midY-AMP, 0, midY+AMP);
-              const [c1,c2,c3] = cfg.color;
-              g.addColorStop(0, `rgba(${c1[0]},${c1[1]},${c1[2]},${c1[3]})`);
-              g.addColorStop(0.5, `rgba(${c2[0]},${c2[1]},${c2[2]},${c2[3]})`);
-              g.addColorStop(1, `rgba(${c3[0]},${c3[1]},${c3[2]},${c3[3]})`);
-
-              ctx.lineWidth = 1.6 * dpr;
-              ctx.shadowBlur = cfg.blur * dpr;
-              ctx.shadowColor = 'rgba(90,209,255,0.22)';
-              ctx.strokeStyle = g;
-
-              ctx.beginPath();
-              for(let i=0;i<r.pts.length-1;i++){
-                const a = r.pts[i], b = r.pts[i+1];
-                const p0 = (i>0) ? r.pts[i-1].y : a.y;
-                const p1 = a.y, p2 = b.y;
-                const p3 = (i<r.pts.length-2) ? r.pts[i+2].y : b.y;
-                for(let s=0;s<3;s++){
-                  const tt = s/3;
-                  const x = lerp(a.x, b.x, tt);
-                  const y = catmull(p0,p1,p2,p3,tt);
-                  if(i===0 && s===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
-                }
-              }
-              ctx.stroke();
+          for(const r of arr){
+            // update points
+            for(let i=0;i<r.pts.length;i++){
+              const px=(i/(r.pts.length-1))*w;
+              const kx=px*0.001+r.off;
+              const ky=t*stepT*100+i*0.03;
+              const ang=n2(kx,ky)*Math.PI*2;
+              const baseY=(r.off*7 + px*0.035 + t*stepT*cfg.drift)%(h*1.3) - h*0.15 + pOffset;
+              const ty=baseY + Math.sin(ang)*AMP;
+              const p=r.pts[i];
+              p.x=px; p.y=lerp(p.y,ty,0.1);
             }
+
+            // gradient pe Y (rece)
+            const midY=r.pts[(r.pts.length/2)|0].y;
+            const g=ctx.createLinearGradient(0, midY-AMP, 0, midY+AMP);
+            const [c1,c2,c3]=cfg.col;
+            g.addColorStop(0,`rgba(${c1[0]},${c1[1]},${c1[2]},${c1[3]})`);
+            g.addColorStop(0.5,`rgba(${c2[0]},${c2[1]},${c2[2]},${c2[3]})`);
+            g.addColorStop(1,`rgba(${c3[0]},${c3[1]},${c3[2]},${c3[3]})`);
+
+            ctx.lineWidth=1.6*dpr;
+            ctx.shadowBlur=cfg.blur*dpr;
+            ctx.shadowColor='rgba(90,209,255,0.22)';
+            ctx.strokeStyle=g;
+
+            ctx.beginPath();
+            for(let i=0;i<r.pts.length-1;i++){
+              const a=r.pts[i], b=r.pts[i+1];
+              const p0=(i>0)?r.pts[i-1].y:a.y;
+              const p1=a.y, p2=b.y;
+              const p3=(i<r.pts.length-2)?r.pts[i+2].y:b.y;
+              for(let s=0;s<3;s++){
+                const tt=s/3;
+                const x=lerp(a.x,b.x,tt);
+                const y=catmull(p0,p1,p2,p3,tt);
+                if(i===0&&s===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+              }
+            }
+            ctx.stroke();
           }
 
-          // Particule stelare
-          for(const s of sparks){
-            s.x+=s.vx; s.y+=s.vy;
-            if(s.x<-30||s.x>w+30||s.y<-30||s.y>h+30){ Object.assign(s, spawnSpark()); }
-            const g = ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,s.r);
-            g.addColorStop(0,'rgba(90,209,255,0.14)'); g.addColorStop(1,'rgba(28,184,212,0)');
-            ctx.fillStyle=g; ctx.beginPath(); ctx.arc(s.x,s.y, s.r, 0, Math.PI*2); ctx.fill();
-          }
-
-          ctx.restore();
-          requestAnimationFrame(draw);
+          // compunem layer în scena principală
+          cx.drawImage(cvs,0,0);
         }
-        if(!RM) requestAnimationFrame(draw);
 
-        // Toggle control
-        const btn = document.getElementById('toggle-anim');
-        const label = ()=>{ if(btn) btn.textContent = running? 'Pauză animație' : 'Pornește animația'; };
-        btn?.addEventListener('click', e=>{ e.preventDefault(); running=!running; label(); });
-        document.addEventListener('visibilitychange', ()=>{ running = !document.hidden && !RM; label(); });
-        label();
-      })();
-    </script>
-  </body>
+        // particule stelare (cu ușor drift pe scroll)
+        for(const sp of sparks){
+          sp.x+=sp.vx; sp.y+=sp.vy + (smooth*0.0005);
+          if(sp.x<-30||sp.x>w+30||sp.y<-30||sp.y>h+30) Object.assign(sp,spawnSpark());
+          const g=cx.createRadialGradient(sp.x,sp.y,0, sp.x,sp.y, sp.r);
+          g.addColorStop(0,'rgba(90,209,255,0.14)'); g.addColorStop(1,'rgba(28,184,212,0)');
+          cx.fillStyle=g; cx.beginPath(); cx.arc(sp.x,sp.y,sp.r,0,Math.PI*2); cx.fill();
+        }
+
+        cx.restore();
+        requestAnimationFrame(frame);
+      }
+      if(!RM) requestAnimationFrame(frame);
+
+      // Toggle
+      const btn=document.getElementById('toggle');
+      const label=()=>{ if(btn) btn.textContent=run?'Pauză animație':'Pornește animația';};
+      btn?.addEventListener('click',e=>{ e.preventDefault(); run=!run; label(); });
+      document.addEventListener('visibilitychange',()=>{ run=!document.hidden && !RM; label(); });
+      label();
+    })();
+  </script>
+</body>
 </html>
