@@ -535,3 +535,106 @@ document.addEventListener('DOMContentLoaded', boot);
 </form>
 </body>
 </html>
+[build]
+  publish = "."
+  command = ""
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+  included_files = ["netlify/functions/**"]
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# Protejează rutele “autentificate” (opțional, dacă treci pe JWT/roles)
+# [[redirects]]
+#   from = "/dashboard"
+#   to = "/login"
+#   status = 302
+#   conditions = { Role = ["guest"] }
+// netlify/functions/create-checkout-session.js
+import Stripe from 'stripe';
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2023-10-16' });
+
+// Mapare productId -> priceId (Stripe)
+const priceMap = (() => {
+  try { return JSON.parse(process.env.STRIPE_PRICE_MAP_JSON || "{}"); }
+  catch { return {}; }
+})();
+
+/**
+ * Body așteptat:
+ * { items: [{ id: "ai-prompts-20", qty: 1 }, ... ] }
+ */
+export async function handler(event) {
+  if (event.httpMethod !== 'POST') {
+    return { statusCode: 405, body: 'Method Not Allowed' };
+  }
+  try {
+    const { items } = JSON.parse(event.body || '{}');
+    if (!Array.isArray(items) || items.length === 0) {
+      return { statusCode: 400, body: 'Cart empty' };
+    }
+
+    const line_items = [];
+    for (const it of items) {
+      const priceId = priceMap[it.id];
+      if (!priceId) {
+        return { statusCode: 400, body: `Missing price for ${it.id}` };
+      }
+      line_items.push({ price: priceId, quantity: Math.max(1, Number(it.qty || 1)) });
+    }
+
+    const site = process.env.SITE_URL || 'http://localhost:8888';
+    const session = await stripe.checkout.sessions.create({
+      mode: 'payment',
+      line_items,
+      success_url: `${site}/#/dashboard?paid=1`,
+      cancel_url: `${site}/#/cart`,
+      metadata: { app: 'rivo-skill-to-earn' }
+    });
+
+    return {
+      statusCode: 200,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url: session.url })
+    };
+  } catch (err) {
+    console.error(err);
+    return { statusCode: 500, body: 'Stripe error' };
+  }
+}
+<script>
+async function checkoutFlow(){
+  const items = Cart.all();
+  if(items.length===0) return alert('Cos gol.');
+
+  try{
+    const res = await fetch('/api/create-checkout-session', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ items })
+    });
+    if(!res.ok){ throw new Error('Checkout failed'); }
+    const { url } = await res.json();
+    if(url){ window.location = url; return; }
+    throw new Error('No URL from Stripe');
+  }catch(err){
+    console.error(err);
+    // fallback DEMO: marchează achiziții local
+    items.forEach(it=> Purchases.add(it.id));
+    Cart.clear(); renderCart(); renderCartPage?.();
+    alert('Demo fallback: cursurile au fost activate în Dashboard.');
+    location.hash = '#/dashboard';
+  }
+}
+</script>
+{
+  "ai-prompts-20": "price_12345",
+  "wf-templates-60": "price_67890",
+  "prompt-pro-100": "price_ABCDE"
+}
