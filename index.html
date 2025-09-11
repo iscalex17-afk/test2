@@ -1,431 +1,537 @@
 <!doctype html>
 <html lang="ro">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Rivo — Prompts & AI Workflows</title>
-    <meta name="description" content="Rivo: creează și rulează fluxuri de lucru AI din simple prompt-uri. Platformă no‑code cu exemple, galerii, testimoniale și planuri tarifare. Dark/glow futurist, rapid și responsive.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%239467F5'/%3E%3Cstop offset='1' stop-color='%2300D1FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='36' height='36' rx='8' fill='%23090B10'/%3E%3Cpath d='M10 24l8-12 8 12' stroke='url(%23g)' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3C/svg%3E" type="image/svg+xml">
-    <style>
-      :root{
-        --bg:#07080d;          /* dark space */
-        --bg-soft:#0b0f19;      /* panels */
-        --card:#0f1424;         /* cards */
-        --text:#eef2ff;         /* near-white */
-        --muted:#b7c1e1;        /* soft steel */
-        --edge:#1a2140;         /* borders */
-        --glow-1:#7c5cff;       /* violet */
-        --glow-2:#22d3ee;       /* cyan */
-        --glow-3:#f5d46b;       /* soft gold */
-        --accent:#8b5cf6;       /* primary */
-        --accent-2:#06b6d4;     /* secondary */
-        --radius:16px;
-        --radius-lg:22px;
-        --maxw:1180px;
-        --shadow:0 10px 30px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.02);
-      }
-      *{box-sizing:border-box}
-      html,body{height:100%}
-      html{scroll-behavior:smooth}
-      body{
-        margin:0; font-family:"Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-        color:var(--text); background:radial-gradient(120% 120% at 10% -10%, rgba(139,92,246,.18), transparent 50%),
-                 radial-gradient(120% 120% at 110% 10%, rgba(34,211,238,.14), transparent 50%), var(--bg);
-        overflow-x:hidden;
-      }
-      a{color:inherit; text-decoration:none}
-      img{display:block; max-width:100%}
-      .sr-only{position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden}
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Rivo — Skill-to-Earn • Prompts & AI Workflows</title>
+<meta name="description" content="Rivo: micro-cursuri, prompts & AI workflows. Catalog, cos, checkout (Stripe Links), progres, XP, certificate. Dark neon/glow.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%239467F5'/%3E%3Cstop offset='1' stop-color='%2300D1FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='36' height='36' rx='8' fill='%23090B10'/%3E%3Cpath d='M10 24l8-12 8 12' stroke='url(%23g)' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3C/svg%3E" type="image/svg+xml">
+<style>
+:root{
+  --bg:#07080d; --bg2:#0b0f19; --card:#0f1424; --edge:#1a2140; --text:#eef2ff; --muted:#b7c1e1;
+  --vio:#7c5cff; --cy:#22d3ee; --gold:#f5d46b; --accent:#8b5cf6; --radius:16px; --shadow:0 10px 30px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.02)
+}
+*{box-sizing:border-box} html,body{height:100%} html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);
+  background:radial-gradient(120% 120% at 10% -10%, rgba(139,92,246,.18), transparent 50%),
+             radial-gradient(120% 120% at 110% 10%, rgba(34,211,238,.14), transparent 50%), var(--bg); overflow-x:hidden}
+a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
+.container{max-width:1180px;margin:0 auto;padding:0 20px}
+.grid{display:grid;gap:16px} .two{grid-template-columns:repeat(1,1fr)} .three{grid-template-columns:repeat(1,1fr)}
+@media(min-width:900px){.two{grid-template-columns:repeat(2,1fr)} .three{grid-template-columns:repeat(3,1fr)}}
 
-      /* STARFIELD / GRID BG */
-      .fx-bg{position:fixed; inset:0; z-index:-2; pointer-events:none; background:
-        radial-gradient(80% 60% at 50% -10%, rgba(139,92,246,.25), transparent 55%),
-        radial-gradient(60% 50% at 120% 20%, rgba(34,211,238,.18), transparent 60%),
-        radial-gradient(60% 60% at -20% 120%, rgba(245,212,107,.10), transparent 60%);
-        filter:saturate(105%) contrast(102%);
-      }
-      .gridlines:before{content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
-        background-image: linear-gradient(rgba(124,92,255,.06) 1px, transparent 1px),
-                          linear-gradient(90deg, rgba(124,92,255,.06) 1px, transparent 1px);
-        background-size: 28px 28px; mask-image: radial-gradient(80% 60% at 50% 10%, rgba(255,255,255,.9), transparent 70%);
-      }
+header.nav{position:sticky;top:0;z-index:60;border-bottom:1px solid var(--edge);
+  backdrop-filter:saturate(140%) blur(10px);
+  background:linear-gradient(180deg, rgba(11,15,25,.75), rgba(11,15,25,.55))}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800}
+.brand .dot{width:10px;height:10px;border-radius:999px;background:radial-gradient(circle at 40% 40%, var(--cy), var(--vio));box-shadow:0 0 14px var(--cy)}
+.nav-links{display:flex;gap:12px;flex-wrap:wrap}
+.nav-links a{padding:8px 10px;border-radius:10px;opacity:.92}
+.nav-links a:hover{background:rgba(124,92,255,.12);box-shadow:0 0 20px rgba(124,92,255,.35) inset;opacity:1}
+.kit{display:flex;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:10px 16px;border-radius:12px;border:1px solid var(--edge);box-shadow:var(--shadow);font-weight:700;cursor:pointer;transition:transform .15s, box-shadow .2s, background .2s}
+.btn.small{padding:7px 12px;font-size:14px}
+.btn.primary{background:
+  radial-gradient(120% 120% at 0% 0%, rgba(124,92,255,.35), transparent 50%),
+  radial-gradient(120% 120% at 100% 0%, rgba(34,211,238,.28), transparent 50%), var(--bg2); border-color:transparent}
+.btn.primary:hover{transform:translateY(-1px) scale(1.01); box-shadow:0 0 24px rgba(124,92,255,.45), 0 0 28px rgba(34,211,238,.35)}
+.btn.ghost{background:rgba(124,92,255,.10)}
+.badge{display:inline-flex;gap:8px;padding:6px 10px;border:1px solid var(--edge);border-radius:999px;font-weight:700;font-size:12px;background:rgba(6,182,212,.08)}
+.money{font-weight:800;background:linear-gradient(135deg,#fff,#a5b4fc 40%, #7c5cff 70%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.muted{color:var(--muted)}
+.section{padding:70px 0;opacity:0;transform:translateY(24px);transition:opacity .6s, transform .6s}
+.section.is-visible{opacity:1;transform:translateY(0)}
+.card{background:linear-gradient(180deg, rgba(15,20,36,.92), rgba(11,15,25,.92));border:1px solid var(--edge);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.hero{padding:96px 0 54px;text-align:center}
+h1{font-size:clamp(36px,5vw,68px);margin:0 0 12px}
+.glow{background:linear-gradient(135deg,#fff,#a5b4fc 35%,#7c5cff 60%,#22d3ee 95%);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 30px rgba(124,92,255,.25)}
+.lead{font-size:clamp(16px,2vw,20px)}
+.kbd{display:inline-block;padding:6px 10px;border-radius:8px;border:1px solid var(--edge);background:rgba(255,255,255,.03);font-family:ui-monospace,Consolas,monospace;font-size:12px}
+.frame{border-radius:14px;border:1px solid var(--edge);padding:8px;background:linear-gradient(180deg,#0d1224,#0a0f20);box-shadow:0 1px 0 rgba(255,255,255,.03) inset,0 0 0 1px rgba(124,92,255,.12),0 12px 32px rgba(0,0,0,.45)}
+.frame img{border-radius:10px;border:1px solid #141a34}
+.progress{height:10px;background:#101731;border-radius:999px;overflow:hidden}
+.progress>div{height:100%;width:0;background:linear-gradient(90deg,var(--vio),var(--cy));transition:width .3s}
+details{border:1px solid var(--edge);border-radius:12px;padding:10px;background:#0b1020}
+summary{cursor:pointer;list-style:none}
+/* Cart bubble + Drawer */
+.cart-btn{position:relative}
+.cart-badge{position:absolute;right:-6px;top:-6px;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:radial-gradient(circle at 40% 40%, var(--gold), #b38b2e);color:#1a1400;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 16px rgba(245,212,107,.4)}
+.drawer{position:fixed;inset:0;z-index:1000;display:none}
+.drawer.open{display:block}
+.drawer .overlay{position:absolute;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(4px)}
+.panel{position:absolute;right:0;top:0;height:100%;width:min(520px,92vw);background:linear-gradient(180deg, rgba(15,20,36,.98), rgba(11,15,25,.98));border-left:1px solid var(--edge);box-shadow: -20px 0 60px rgba(0,0,0,.5);display:flex;flex-direction:column}
+.panel header{display:flex;align-items:center;justify-content:space-between;padding:16px;border-bottom:1px solid var(--edge)}
+.panel .body{padding:16px;overflow:auto;flex:1}
+.item{display:grid;grid-template-columns:72px 1fr auto;gap:12px;align-items:center;border:1px solid var(--edge);border-radius:12px;padding:10px;background:#0b1020}
+.qty{display:flex;align-items:center;gap:8px}
+.qty button{width:28px;height:28px;border-radius:8px;border:1px solid var(--edge);background:#0f1834;color:var(--text);cursor:pointer}
+.total{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--edge);padding-top:12px;margin-top:12px}
+hr.line{border:none;border-top:1px solid var(--edge);margin:12px 0}
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:1000;background:rgba(3,6,14,.6);backdrop-filter:blur(6px)}
+.modal.open{display:flex}
+.modal-card{width:min(560px,92vw);background:linear-gradient(180deg, rgba(15,20,36,.96), rgba(11,15,25,.96));border:1px solid var(--edge);border-radius:20px;padding:20px;box-shadow:0 24px 60px rgba(0,0,0,.7)}
+.close{border:none;background:transparent;color:var(--muted);font-size:22px;cursor:pointer}
+footer{border-top:1px solid var(--edge);padding:26px 0;color:var(--muted);font-size:14px;text-align:center}
+</style>
+</head>
+<body>
+<a class="sr-only" href="#content">Sari la conținut</a>
 
-      /* LAYOUT */
-      .container{width:100%; max-width:var(--maxw); margin:0 auto; padding:0 20px}
-      header.nav{position:sticky; top:0; z-index:50; border-bottom:1px solid var(--edge);
-        backdrop-filter:saturate(140%) blur(10px);
-        background:linear-gradient(180deg, rgba(11,15,25,.75), rgba(11,15,25,.55));}
-      .nav-inner{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 0}
-      .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px}
-      .brand .dot{width:8px; height:8px; border-radius:999px; background:radial-gradient(circle at 40% 40%, var(--glow-2), var(--glow-1)); box-shadow:0 0 14px var(--glow-2)}
-      .nav-links{display:flex; gap:14px; align-items:center; flex-wrap:wrap}
-      .nav-links a{padding:9px 12px; border-radius:10px; opacity:.92}
-      .nav-links a:hover{background:rgba(124,92,255,.12); box-shadow:0 0 20px rgba(124,92,255,.25) inset; opacity:1}
-      .cta-top{display:flex; gap:10px}
+<!-- Entry WOW Popup -->
+<div class="modal" id="entryModal" role="dialog" aria-modal="true" aria-labelledby="m-title">
+  <div class="modal-card">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+      <h3 id="m-title" class="glow" style="margin:0">Bine ai venit la Rivo ✨</h3>
+      <button class="close" id="m-close" aria-label="Închide">×</button>
+    </div>
+    <p class="muted">Activează <strong>trial 14 zile</strong> sau primește resurse gratuite despre Prompts & Workflows.</p>
+    <form name="lead" method="POST" data-netlify="true" class="card" style="display:grid;gap:10px">
+      <input type="hidden" name="form-name" value="lead"/>
+      <label>Email <input type="email" name="email" required placeholder="nume@email.com"></label>
+      <button class="btn primary" type="submit">Vreau acces</button>
+    </form>
+  </div>
+</div>
 
-      .btn{display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:11px 16px; border-radius:12px; border:1px solid var(--edge); box-shadow:var(--shadow); font-weight:700; transition:transform .15s ease, box-shadow .2s ease, background .2s ease}
-      .btn.small{padding:8px 12px; font-size:14px}
-      .btn.primary{background:radial-gradient(120% 120% at 0% 0%, rgba(124,92,255,.35), transparent 50%),
-                    radial-gradient(120% 120% at 100% 0%, rgba(34,211,238,.28), transparent 50%), var(--bg-soft);
-                    border-color:transparent}
-      .btn.primary:hover{transform:translateY(-1px) scale(1.01); box-shadow:0 0 24px rgba(124,92,255,.35), 0 0 28px rgba(34,211,238,.25)}
-      .btn.ghost{background:rgba(124,92,255,.10)}
-      .btn.ghost:hover{background:rgba(124,92,255,.18)}
+<!-- Cart Drawer -->
+<div class="drawer" id="cartDrawer" aria-hidden="true">
+  <div class="overlay" id="cartOverlay"></div>
+  <div class="panel" role="dialog" aria-labelledby="cartTitle">
+    <header>
+      <h3 id="cartTitle" style="margin:0">Cosul tău</h3>
+      <button class="close" id="cartClose">×</button>
+    </header>
+    <div class="body">
+      <div id="cartItems" class="grid" style="gap:12px"></div>
+      <div class="total">
+        <strong>Total</strong>
+        <strong id="cartTotal" class="money">€0</strong>
+      </div>
+      <div class="grid" style="margin-top:12px">
+        <button class="btn primary" id="checkoutBtn">Finalizează (demo / Stripe Link)</button>
+        <button class="btn" id="clearCart">Golește cosul</button>
+      </div>
+      <p class="muted" style="margin-top:10px;font-size:13px">Stripe Payment Links suportă plata pe produs. Pentru coș consolidat, folosește Stripe Checkout cu funcție serverless.</p>
+    </div>
+  </div>
+</div>
 
-      h1{font-size:clamp(36px, 5vw, 68px); line-height:1.05; margin:0 0 14px}
-      h2{font-size:clamp(26px, 3.2vw, 38px); margin:0 0 16px}
-      .muted{color:var(--muted)}
-      .lead{font-size:clamp(16px, 2vw, 20px)}
-      .chip{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border:1px solid var(--edge); border-radius:999px; font-weight:700; font-size:12px; background:rgba(6,182,212,.08)}
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#/">
+      <span class="dot" aria-hidden="true"></span><span>Rivo</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#/catalog">Cursuri</a>
+      <a href="#/how">Workflows</a>
+      <a href="#/pricing">Prețuri</a>
+      <a href="#/faq">FAQ</a>
+    </nav>
+    <div class="kit">
+      <button class="btn small" id="loginBtn">Log in</button>
+      <button class="btn small cart-btn" id="openCart">🛒 Cos <span class="cart-badge" id="cartCount">0</span></button>
+      <a class="btn primary small" href="#/dashboard">Dashboard</a>
+    </div>
+  </div>
+</header>
 
-      /* HERO */
-      .hero{position:relative; padding:92px 0 54px}
-      .hero-inner{max-width:900px; margin:0 auto; text-align:center}
-      .glow-title{background:linear-gradient(135deg, #fff, #a5b4fc 35%, #7c5cff 60%, #22d3ee 95%); -webkit-background-clip:text; background-clip:text; color:transparent; text-shadow:0 0 30px rgba(124,92,255,.2)}
-      .kbd{display:inline-block; padding:6px 10px; border-radius:8px; border:1px solid var(--edge); background:rgba(255,255,255,.03); font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size:12px}
-      .hero-cta{display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:14px}
-      .note{margin-top:12px; font-size:13px; color:#c9d4ff}
+<main class="container" id="content">
+  <!-- HOME -->
+  <section class="hero section" data-view="home">
+    <span class="badge">Prompts → AI Workflows • Skill-to-Earn</span>
+    <h1 class="glow">Automatizează-ți creativitatea cu AI</h1>
+    <p class="lead muted">Transformă prompt-urile în fluxuri de lucru inteligente. Micro-cursuri, progres, XP, certificate.</p>
+    <div style="display:flex;gap:12px;justify-content:center;margin-top:10px">
+      <a class="btn primary" href="#/catalog">Vezi cursurile</a>
+      <a class="btn" href="#/how">Cum funcționează</a>
+    </div>
+    <p class="muted" style="margin-top:8px">Apasă <span class="kbd">G</span><span class="kbd">G</span> pentru căutare globală (demo).</p>
 
-      /* SECTIONS */
-      .section{padding:70px 0; opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease}
-      .section.is-visible{opacity:1; transform:translateY(0)}
-      .grid{display:grid; gap:16px}
-      .two{grid-template-columns:repeat(1, minmax(0,1fr))}
-      .three{grid-template-columns:repeat(1, minmax(0,1fr))}
-      @media (min-width:900px){ .two{grid-template-columns:repeat(2,1fr)} .three{grid-template-columns:repeat(3,1fr)} }
+    <div class="section">
+      <h2 style="text-align:center">Cursuri populare</h2>
+      <div id="homeCatalog" class="grid three"></div>
+    </div>
+  </section>
 
-      .card{background:linear-gradient(180deg, rgba(15,20,36,.92), rgba(11,15,25,.92)); border:1px solid var(--edge); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow)}
-      .card h3{margin:8px 0 6px; font-size:20px}
+  <!-- CATALOG -->
+  <section class="section" data-view="catalog">
+    <h2>Catalog</h2>
+    <div class="grid three" id="catalogList"></div>
+  </section>
 
-      /* WORKFLOWS DIAGRAM */
-      .flow{display:grid; gap:14px}
-      .flow-step{display:flex; align-items:flex-start; gap:12px; background:rgba(124,92,255,.08); border:1px dashed rgba(124,92,255,.25); padding:12px; border-radius:12px}
-      .flow-step .dot{width:10px; height:10px; border-radius:999px; background:radial-gradient(circle at 40% 40%, var(--glow-1), var(--glow-2)); box-shadow:0 0 12px rgba(34,211,238,.5)}
-
-      /* EXEMPLE PROMPTS (slider) */
-      .slider{position:relative; overflow:hidden; border:1px solid var(--edge); border-radius:var(--radius); background:var(--card)}
-      .slides{display:flex; transition:transform .5s ease}
-      .slide{min-width:100%; padding:18px; display:grid; gap:12px}
-      .prompt{background:#0b1020; border:1px solid var(--edge); border-radius:12px; padding:14px}
-      .resp{background:#0c1226; border:1px solid var(--edge); border-radius:12px; padding:14px}
-      .nav-btn{position:absolute; top:50%; transform:translateY(-50%); background:rgba(124,92,255,.2); border:1px solid var(--edge); border-radius:12px; padding:8px 10px; cursor:pointer}
-      .nav-btn:hover{background:rgba(124,92,255,.3)}
-      .prev{left:10px} .next{right:10px}
-
-      /* GALERIE */
-      .gallery{display:grid; grid-template-columns:repeat(1, minmax(0,1fr)); gap:14px}
-      @media (min-width:800px){ .gallery{grid-template-columns:repeat(3,1fr)} }
-      .frame{border-radius:14px; border:1px solid var(--edge); padding:8px; background:linear-gradient(180deg,#0d1224,#0a0f20); box-shadow:0 1px 0 rgba(255,255,255,.03) inset, 0 0 0 1px rgba(124,92,255,.12), 0 12px 32px rgba(0,0,0,.45)}
-      .frame img{border-radius:10px; border:1px solid #141a34}
-
-      /* TESTIMONIALE */
-      .quote{font-style:italic}
-      .avatar{width:36px; height:36px; border-radius:999px; border:1px solid var(--edge); object-fit:cover}
-      .row{display:flex; align-items:center; gap:10px}
-
-      /* PRICING + TOGGLE */
-      .pricing{display:grid; gap:16px}
-      @media (min-width:880px){ .pricing{grid-template-columns:repeat(3,1fr)} }
-      .price{ text-align:center }
-      .money{font-size:34px; font-weight:800; margin:6px 0 8px; background:linear-gradient(135deg,#fff,#a5b4fc 40%, #7c5cff 70%); -webkit-background-clip:text; background-clip:text; color:transparent}
-      .featured{border-color:rgba(124,92,255,.45); box-shadow:0 0 0 1px rgba(124,92,255,.25), var(--shadow)}
-      .toggle{display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:12px}
-      .switch{position:relative; width:56px; height:28px; background:#111834; border:1px solid var(--edge); border-radius:999px; cursor:pointer}
-      .knob{position:absolute; top:2px; left:2px; width:24px; height:24px; border-radius:999px; background:radial-gradient(circle at 40% 40%, var(--glow-2), var(--glow-1)); box-shadow:0 0 16px rgba(34,211,238,.5); transition:left .2s ease}
-      .switch.on .knob{left:30px}
-
-      /* FORME */
-      .form{display:grid; gap:12px; max-width:700px; margin:0 auto}
-      label{display:grid; gap:6px; font-weight:700}
-      input, textarea, select{background:#0b1020; color:var(--text); border:1px solid var(--edge); border-radius:12px; padding:12px; outline:none}
-      input:focus, textarea:focus, select:focus{border-color:rgba(124,92,255,.6); box-shadow:0 0 0 3px rgba(124,92,255,.18)}
-
-      /* FOOTER */
-      footer{border-top:1px solid var(--edge); padding:26px 0; color:var(--muted); font-size:14px}
-      .links{display:flex; gap:14px; flex-wrap:wrap; justify-content:center}
-
-      /* MODAL (pop-up) */
-      .modal{position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:1000; background:rgba(3,6,14,.6); backdrop-filter:blur(6px)}
-      .modal.open{display:flex}
-      .modal-card{ width:min(560px, 92vw); background:linear-gradient(180deg, rgba(15,20,36,.96), rgba(11,15,25,.96)); border:1px solid var(--edge); border-radius:var(--radius-lg); padding:20px; box-shadow:0 24px 60px rgba(0,0,0,.7)}
-      .modal-header{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px}
-      .close{border:none; background:transparent; color:var(--muted); font-size:22px; cursor:pointer}
-    </style>
-  </head>
-  <body class="gridlines">
-    <a class="sr-only" href="#content">Sari la conținut</a>
-    <div class="fx-bg" aria-hidden="true"></div>
-
-    <!-- POPUP intrare (lead capture / trial) -->
-    <div class="modal" id="entryModal" role="dialog" aria-modal="true" aria-labelledby="m-title" aria-describedby="m-desc">
-      <div class="modal-card">
-        <div class="modal-header">
-          <h3 id="m-title" style="margin:0">Bine ai venit la <span class="glow-title">Rivo</span></h3>
-          <button class="close" aria-label="Închide" id="m-close">×</button>
-        </div>
-        <p id="m-desc" class="muted" style="margin:0 0 12px">Activează <strong>trial 14 zile</strong> sau primește resurse gratuite despre Prompts & AI Workflows.</p>
-        <form name="lead" method="POST" data-netlify="true" class="form">
-          <input type="hidden" name="form-name" value="lead" />
-          <label>Email
-            <input type="email" name="email" required placeholder="nume@email.com" />
-          </label>
-          <button class="btn primary" type="submit">Vreau acces</button>
-        </form>
+  <!-- COURSE -->
+  <section class="section" data-view="course" id="courseView">
+    <div class="grid two">
+      <div>
+        <img id="cThumb" alt="thumb" style="border-radius:12px;border:1px solid #141a34;margin-bottom:10px"/>
+        <h1 id="cTitle">Titlu curs</h1>
+        <p class="muted" id="cMeta"></p>
+        <p id="cSummary" class="muted"></p>
+        <div class="grid" style="grid-template-columns:repeat(1,auto);gap:10px" id="buyActions"></div>
+      </div>
+      <div class="card">
+        <h3>Curriculum & Progres</h3>
+        <div id="curriculum"></div>
+        <div class="progress" style="margin-top:10px"><div id="bar"></div></div>
+        <div class="muted" id="xpLine" style="margin-top:6px">XP: 0</div>
       </div>
     </div>
+  </section>
 
-    <!-- HEADER -->
-    <header class="nav" role="banner">
-      <div class="container nav-inner">
-        <a class="brand" href="#" aria-label="Rivo">
-          <span class="dot" aria-hidden="true"></span>
-          <span>Rivo</span>
-        </a>
-        <nav class="nav-links" aria-label="Principal">
-          <a href="#workflows">Workflows</a>
-          <a href="#exemple">Exemple</a>
-          <a href="#galerie">Galerie</a>
-          <a href="#preturi">Prețuri</a>
-          <a href="#abonare">Abonare</a>
-        </nav>
-        <div class="cta-top">
-          <a class="btn ghost small" href="#preturi">Planuri</a>
-          <a class="btn primary small" href="#abonare">Înscrie-te</a>
+  <!-- HOW -->
+  <section class="section" data-view="how">
+    <h2>Cum funcționează Rivo</h2>
+    <div class="grid two">
+      <article class="card"><h3>1) Prompt</h3><p class="muted">Descrii rezultatul dorit.</p></article>
+      <article class="card"><h3>2) Workflow</h3><p class="muted">Rivo propune pașii, tu ajustezi no-code.</p></article>
+      <article class="card"><h3>3) Rulare</h3><p class="muted">Execuție, log-uri, alerte.</p></article>
+      <article class="card"><h3>4) Învățare</h3><p class="muted">Optimizare continuă din feedback.</p></article>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="section" data-view="pricing">
+    <h2>Planuri</h2>
+    <div class="grid three">
+      <article class="card" style="text-align:center"><h3>Free</h3><p class="money">€0</p><p class="muted">Lecții demo</p></article>
+      <article class="card" style="text-align:center;border-color:rgba(124,92,255,.45);box-shadow:0 0 0 1px rgba(124,92,255,.25),var(--shadow)"><h3>Pro</h3><p class="money">€29/lună</p><p class="muted">Toate cursurile</p></article>
+      <article class="card" style="text-align:center"><h3>Enterprise</h3><p class="money">Contact</p><p class="muted">SSO, SLA</p></article>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" data-view="faq">
+    <h2>FAQ</h2>
+    <details class="card"><summary><strong>Ce primesc după plată?</strong></summary><p class="muted">Acces instant + progres + certificat.</p></details>
+    <details class="card"><summary><strong>Pot descărca materialele?</strong></summary><p class="muted">PDF-uri da, video streaming.</p></details>
+    <details class="card"><summary><strong>Certificatele sunt acreditate?</strong></summary><p class="muted">Certificate de completare (micro-badge).</p></details>
+
+    <form name="contact" method="POST" data-netlify="true" class="card" style="margin-top:14px;display:grid;gap:10px;max-width:680px">
+      <input type="hidden" name="form-name" value="contact"/>
+      <h3>Ai întrebări?</h3>
+      <label>Nume <input name="name" required></label>
+      <label>Email <input type="email" name="email" required></label>
+      <label>Mesaj <textarea name="message" rows="4" required></textarea></label>
+      <button class="btn primary" type="submit">Trimite</button>
+    </form>
+  </section>
+
+  <!-- DASHBOARD -->
+  <section class="section" data-view="dashboard">
+    <h1>Bun venit, <span id="userName">Cursant</span> 👋</h1>
+    <div class="grid two" id="myCourses"></div>
+  </section>
+
+  <!-- CART VIEW (route-based fallback) -->
+  <section class="section" data-view="cart">
+    <h2>Cos</h2>
+    <div id="cartPage"></div>
+  </section>
+</main>
+
+<footer class="container">
+  <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+    <a href="#">Termeni</a>•<a href="#">Confidențialitate</a>•<a href="#/faq">Ajutor</a>
+  </div>
+  <p style="margin:8px 0 0">© <span id="year"></span> Rivo — Skill-to-Earn</p>
+</footer>
+
+<!-- COURSES JSON (embedded) -->
+<script type="application/json" id="courses">
+[
+  {
+    "id":"ai-prompts-20",
+    "title":"Pachet 20 Prompts – Content, Image, Analysis",
+    "level":"Începător","duration":"1.5h","price":15,
+    "category":"AI Prompts",
+    "payment_link":"REPLACE_WITH_STRIPE_PAYMENT_LINK_ai_prompts_20",
+    "thumb":"https://images.unsplash.com/photo-1534759846116-57968a434a49?q=80&w=1200&auto=format&fit=crop",
+    "summary":"20 prompts testate pentru copy, imagini și analiză.",
+    "modules":[
+      {"title":"Introducere","lessons":["Ce e un prompt bun","Structură & ton","Evitarea halucinațiilor"]},
+      {"title":"Content","lessons":["Outreach email","Postări social","Rezumat + TODO"]},
+      {"title":"Image","lessons":["Stiluri & compoziție","Variații & seed-uri"]},
+      {"title":"Analysis","lessons":["Sentiment","Clasificare etichete","Topic mining"]}
+    ]
+  },
+  {
+    "id":"wf-templates-60",
+    "title":"Workflow Templates – 60 No-Code Automations",
+    "level":"Intermediar","duration":"3h","price":59,
+    "category":"Automations",
+    "payment_link":"REPLACE_WITH_STRIPE_PAYMENT_LINK_wf_templates_60",
+    "thumb":"https://images.unsplash.com/photo-1551281044-8d8d2aa1a24d?q=80&w=1200&auto=format&fit=crop",
+    "summary":"60 șabloane no-code pentru CRM, email, analytics, imagini.",
+    "modules":[
+      {"title":"Setup","lessons":["Chei API","Trigger & actions","Rate limiting"]},
+      {"title":"Marketing","lessons":["Rescriere landing","Drip emails","Lead scoring AI"]}
+    ]
+  },
+  {
+    "id":"prompt-pro-100",
+    "title":"Prompt Pack PRO – 100 pentru echipe",
+    "level":"Avansat","duration":"5h","price":39,
+    "category":"AI Prompts",
+    "payment_link":"REPLACE_WITH_STRIPE_PAYMENT_LINK_prompt_pro_100",
+    "thumb":"https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop",
+    "summary":"Colecție extinsă: content, code, vizual, date.",
+    "modules":[
+      {"title":"Arhitectură","lessons":["Chain-of-thought","Self-critique","Function calling"]}
+    ]
+  }
+]
+</script>
+
+<script>
+/* ==== UTIL ==== */
+const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const COURSES = JSON.parse($('#courses').textContent);
+const money = n => `€${(+n).toFixed(0)}`;
+
+/* ==== AUTH (demo) ==== */
+const Auth={
+  user(){try{return JSON.parse(localStorage.getItem('rivo_user')||'null')}catch{return null}},
+  login(email){const u={email,name:email.split('@')[0]}; localStorage.setItem('rivo_user',JSON.stringify(u)); return u;},
+  logout(){localStorage.removeItem('rivo_user')}
+};
+
+/* ==== CART ==== */
+const Cart={
+  key:'rivo_cart',
+  all(){try{return JSON.parse(localStorage.getItem(this.key)||'[]')}catch{return []}},
+  save(items){localStorage.setItem(this.key,JSON.stringify(items)); updateCartBadge();},
+  add(id){const items=this.all(); const i=items.find(x=>x.id===id); if(i){i.qty++} else {items.push({id,qty:1})} this.save(items)},
+  remove(id){const items=this.all().filter(x=>x.id!==id); this.save(items)},
+  setQty(id,qty){const items=this.all().map(x=>x.id===id?({...x,qty:Math.max(1,qty)}):x); this.save(items)},
+  clear(){this.save([])},
+  total(){return this.all().reduce((s,it)=>{const c=COURSES.find(x=>x.id===it.id); return s+ (c? c.price*it.qty:0)},0)}
+};
+function updateCartBadge(){ $('#cartCount').textContent = Cart.all().reduce((s,i)=>s+i.qty,0) }
+
+/* ==== PURCHASES (demo) ==== */
+const Purchases={
+  key:'rivo_purchases',
+  all(){try{return JSON.parse(localStorage.getItem(this.key)||'[]')}catch{return []}},
+  save(a){localStorage.setItem(this.key,JSON.stringify(a))},
+  add(id){const a=this.all(); if(!a.includes(id)){a.push(id); this.save(a)}},
+  has(id){return this.all().includes(id)}
+};
+
+/* ==== PROGRESS / XP ==== */
+const Progress={
+  get(id){try{return JSON.parse(localStorage.getItem('rivo_prog_'+id)||'{}')}catch{return {}}},
+  set(id,obj){localStorage.setItem('rivo_prog_'+id,JSON.stringify(obj))},
+  mark(id,key){const p=this.get(id); if(!p[key]){ p[key]=true; this.set(id,p); XP.add(10); } return p;}
+};
+const XP={
+  get(){return +localStorage.getItem('rivo_xp')||0},
+  set(v){localStorage.setItem('rivo_xp',String(v))},
+  add(n){this.set(this.get()+n)}
+};
+
+/* ==== ROUTER ==== */
+const views=$$('[data-view]');
+function show(view){ views.forEach(v=>v.classList.remove('is-visible','active')); const el=$(`[data-view="${view}"]`); if(el){ el.classList.add('active'); setTimeout(()=>el.classList.add('is-visible'),10); } }
+function route(){
+  const h=location.hash||'#/';
+  const params=new URLSearchParams(h.split('?')[1]||'');
+  if(h.startsWith('#/catalog')){ show('catalog'); renderCatalog(COURSES,$('#catalogList')); }
+  else if(h.startsWith('#/course')){ show('course'); const id=params.get('id'); renderCourse(id); }
+  else if(h.startsWith('#/how')){ show('how'); }
+  else if(h.startsWith('#/pricing')){ show('pricing'); }
+  else if(h.startsWith('#/faq')){ show('faq'); }
+  else if(h.startsWith('#/dashboard')){ show('dashboard'); renderDashboard(); }
+  else if(h.startsWith('#/cart')){ show('cart'); renderCartPage(); }
+  else { show('home'); renderCatalog(COURSES.slice(0,3),$('#homeCatalog')); }
+  // Stripe Payment Link redirect success
+  const qs=new URLSearchParams(location.search);
+  if(qs.get('success')==='1' && qs.get('course')){ Purchases.add(qs.get('course')); history.replaceState({},'',location.pathname+location.hash); }
+}
+window.addEventListener('hashchange',route);
+
+/* ==== RENDERERS ==== */
+function courseCard(c,cta=true){
+  return `<article class="card">
+    <img src="${c.thumb}" alt="${c.title}" style="border-radius:12px;border:1px solid #141a34;margin-bottom:10px;aspect-ratio:16/9;object-fit:cover"/>
+    <h3 style="margin:6px 0">${c.title}</h3>
+    <p class="muted">${c.summary}</p>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">
+      <span class="money">${money(c.price)}</span>
+      <div style="display:flex;gap:8px">
+        <a class="btn" href="#/course?id=${c.id}">Detalii</a>
+        ${cta? `<button class="btn primary" data-add="${c.id}">Adaugă în cos</button>`:''}
+      </div>
+    </div>
+  </article>`;
+}
+function wireAddButtons(scope=document){ scope.querySelectorAll('[data-add]').forEach(b=> b.addEventListener('click',()=>{ Cart.add(b.dataset.add); openCart(); })); }
+function renderCatalog(list,mount){ mount.innerHTML=list.map(c=>courseCard(c)).join(''); wireAddButtons(mount); }
+
+function renderCourse(id){
+  const c=COURSES.find(x=>x.id===id);
+  if(!c){ $('#courseView').innerHTML='<p>Curs indisponibil.</p>'; return; }
+  $('#cThumb').src=c.thumb; $('#cTitle').textContent=c.title; $('#cMeta').textContent=`${c.level} • ${c.duration} • ${c.category}`;
+  $('#cSummary').textContent=c.summary;
+  const owned=Purchases.has(c.id);
+  $('#buyActions').innerHTML = `
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn primary" data-add="${c.id}">${owned?'Începe / Continuă':'Adaugă în cos'} (${money(c.price)})</button>
+      ${c.payment_link && !c.payment_link.startsWith('REPLACE_WITH_') ? `<a class="btn" href="${c.payment_link}" target="_blank" rel="noopener">Stripe Link</a>`:''}
+      ${owned? `<button class="btn" id="genCert">Certificat</button>`:''}
+    </div>
+    <p class="muted" style="font-size:13px;margin:6px 0 0">Plata securizată Stripe. Acces instant la conținut după achiziție.</p>`;
+  wireAddButtons($('#buyActions'));
+
+  const prog=Progress.get(c.id);
+  const total=c.modules.reduce((s,m)=>s+m.lessons.length,0);
+  const done=Object.keys(prog).length; const pct=Math.min(100,Math.round(done/total*100))||0;
+  $('#bar').style.width=pct+'%'; $('#xpLine').textContent = `XP: ${XP.get()} • Progres: ${pct}%`;
+
+  $('#curriculum').innerHTML = c.modules.map((m,mi)=>`
+    <details ${mi===0?'open':''}><summary><strong>${m.title}</strong></summary>
+      <ol style="line-height:1.8;margin:8px 0 0 16px">
+        ${m.lessons.map((l,li)=>{
+          const key=`${mi}_${li}`, checked=!!prog[key], lock=owned?'':' (🔒)';
+          return `<li style="display:flex;align-items:center;gap:8px;margin:6px 0">
+              <input type="checkbox" ${checked?'checked':''} data-lesson="${key}" ${owned?'':'disabled'}>
+              <span>${l}${lock}</span>
+          </li>`;
+        }).join('')}
+      </ol>
+    </details>`).join('');
+  $('#curriculum').onchange=(e)=>{ const box=e.target.closest('[data-lesson]'); if(!box) return;
+    const p=Progress.mark(c.id, box.getAttribute('data-lesson'));
+    const done=Object.keys(p).length; const pct=Math.min(100,Math.round(done/total*100));
+    $('#bar').style.width=pct+'%'; $('#xpLine').textContent = `XP: ${XP.get()} • Progres: ${pct}%`;
+  };
+  $('#genCert')?.addEventListener('click',()=> alert('Demo: certificat generat! (integrare PDF în funcție serverless)'));
+}
+
+function renderDashboard(){
+  const u=Auth.user(); if(!u){ const email=prompt('Email pentru logare:'); if(!email) return; Auth.login(email); }
+  $('#userName').textContent=Auth.user()?.name || 'Cursant';
+  const mine=COURSES.filter(c=> Purchases.has(c.id));
+  const wrap=$('#myCourses');
+  if(mine.length===0){ wrap.innerHTML='<p class="muted">Încă nu ai cursuri. Explorează <a href="#/catalog" style="text-decoration:underline">catalogul</a>.</p>'; return;}
+  wrap.innerHTML=mine.map(c=>{
+    const prog=Progress.get(c.id); const total=c.modules.reduce((s,m)=>s+m.lessons.length,0);
+    const pct=Math.min(100,Math.round(Object.keys(prog).length/total*100))||0;
+    return `<article class="card">
+      <div style="display:flex;gap:12px;align-items:flex-start">
+        <img src="${c.thumb}" alt="${c.title}" style="width:120px;height:80px;object-fit:cover;border-radius:10px;border:1px solid #141a34">
+        <div style="flex:1">
+          <h3 style="margin:4px 0 6px">${c.title}</h3>
+          <div class="progress"><div style="width:${pct}%"></div></div>
+          <div class="muted" style="margin-top:6px">Progres: ${pct}%</div>
+          <div style="display:flex;gap:8px;margin-top:10px">
+            <a class="btn primary" href="#/course?id=${c.id}">Continuă</a>
+            ${pct===100? `<button class="btn" onclick="alert('Demo: certificat PDF.');">Certificat</button>`:''}
+          </div>
         </div>
       </div>
-    </header>
+    </article>`;
+  }).join('');
+}
 
-    <main id="content">
-      <!-- HERO -->
-      <section class="hero container section" aria-labelledby="hero-title">
-        <div class="hero-inner">
-          <span class="chip">Prompts → AI Workflows • no-code</span>
-          <h1 id="hero-title" class="glow-title">Automatizează-ți creativitatea cu AI</h1>
-          <p class="lead muted">Rivo transformă prompt-urile în fluxuri de lucru inteligente: creezi, rulezi și scalezi automatizări AI — fără o linie de cod.</p>
-          <div class="hero-cta">
-            <a class="btn primary" href="#exemple">Vezi în acțiune</a>
-            <a class="btn ghost" href="#workflows">Află cum funcționează</a>
-          </div>
-          <p class="note">Apasă <span class="kbd">G</span><span class="kbd">G</span> pentru căutare globală (demo UI).</p>
-        </div>
-      </section>
+/* ==== CART RENDER ==== */
+function cartItemRow(it){
+  const c=COURSES.find(x=>x.id===it.id); if(!c) return '';
+  return `<div class="item">
+    <img src="${c.thumb}" alt="${c.title}" style="width:72px;height:56px;object-fit:cover;border-radius:8px;border:1px solid #141a34">
+    <div><strong>${c.title}</strong><div class="muted">${money(c.price)} • ${c.level}</div></div>
+    <div class="qty">
+      <button data-dec="${it.id}">−</button><span>${it.qty}</span><button data-inc="${it.id}">+</button>
+      <button class="btn small" data-del="${it.id}" style="margin-left:6px">✕</button>
+    </div>
+  </div>`;
+}
+function wireCartControls(scope){
+  scope.querySelectorAll('[data-inc]').forEach(b=> b.addEventListener('click',()=>{ const id=b.dataset.inc; const it=Cart.all().find(x=>x.id===id); Cart.setQty(id,(it?.qty||1)+1); renderCart(); }));
+  scope.querySelectorAll('[data-dec]').forEach(b=> b.addEventListener('click',()=>{ const id=b.dataset.dec; const it=Cart.all().find(x=>x.id===id); Cart.setQty(id,Math.max(1,(it?.qty||1)-1)); renderCart(); }));
+  scope.querySelectorAll('[data-del]').forEach(b=> b.addEventListener('click',()=>{ Cart.remove(b.dataset.del); renderCart(); }));
+}
+function renderCart(){
+  const items=Cart.all(); const list=items.map(cartItemRow).join('') || '<p class="muted">Cosul este gol.</p>';
+  $('#cartItems').innerHTML=list; $('#cartTotal').textContent=money(Cart.total()); wireCartControls($('#cartItems'));
+}
+function renderCartPage(){
+  const items=Cart.all(); if(items.length===0){ $('#cartPage').innerHTML='<p class="muted">Cosul este gol. <a href="#/catalog" style="text-decoration:underline">Vezi cursuri</a>.</p>'; return; }
+  $('#cartPage').innerHTML = `
+    <div class="grid" style="gap:12px">${items.map(cartItemRow).join('')}</div>
+    <hr class="line">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <strong>Total</strong><strong class="money">${money(Cart.total())}</strong>
+    </div>
+    <div class="grid" style="margin-top:12px">
+      <button class="btn primary" id="checkoutBtnPg">Finalizează (demo / Stripe Link)</button>
+      <button class="btn" id="clearCartPg">Golește cosul</button>
+    </div>`;
+  wireCartControls($('#cartPage'));
+  $('#clearCartPg').onclick=()=>{ Cart.clear(); renderCartPage(); };
+  $('#checkoutBtnPg').onclick=checkoutFlow;
+}
 
-      <!-- WORKFLOWS: Cum funcționează -->
-      <section id="workflows" class="section container" aria-labelledby="w-title">
-        <h2 id="w-title">Cum funcționează Rivo</h2>
-        <div class="grid two">
-          <article class="card">
-            <h3>1) Definire Prompt</h3>
-            <p class="muted">Scrii ce vrei să obții. Rivo înțelege intenția și propune pașii workflow-ului.</p>
-            <div class="flow" style="margin-top:10px">
-              <div class="flow-step"><span class="dot"></span><div><strong>Exemplu:</strong> „Rezumă rapoartele pe Q3 și trimite email echipei.”</div></div>
-              <div class="flow-step"><span class="dot"></span><div>Parser semantic → identifică colectare date, sinteză, trimitere email.</div></div>
-            </div>
-          </article>
-          <article class="card">
-            <h3>2) Configurare no‑code</h3>
-            <p class="muted">Rivo generează automat pașii. Tu ajustezi parametri, surse și rezultate.</p>
-            <div class="flow" style="margin-top:10px">
-              <div class="flow-step"><span class="dot"></span><div>Conectori: Docs, Sheets, CRM, Email.</div></div>
-              <div class="flow-step"><span class="dot"></span><div>Execuție și validare în timp real, cu preview al output-ului.</div></div>
-            </div>
-          </article>
-          <article class="card">
-            <h3>3) Rulare & Monitorizare</h3>
-            <p class="muted">Pornești fluxul. Vezi log-uri, stări și rezultate, cu alertare automată.</p>
-          </article>
-          <article class="card">
-            <h3>4) Învățare continuă</h3>
-            <p class="muted">Feedback-ul optimizează prompt-urile și pașii, crescând calitatea rezultatelor.</p>
-          </article>
-        </div>
-      </section>
+/* ==== CHECKOUT FLOW ==== */
+function checkoutFlow(){
+  const items=Cart.all();
+  if(items.length===0) return alert('Cos gol.');
+  // Dacă ai Payment Links reale, le deschidem pe rând (simplu).
+  const withLinks = items.filter(it=> {const c=COURSES.find(x=>x.id===it.id); return c && c.payment_link && !c.payment_link.startsWith('REPLACE_WITH_');});
+  if(withLinks.length){
+    alert('Veți fi redirecționat către Stripe pentru fiecare produs din coș.');
+    const first = COURSES.find(x=>x.id===withLinks[0].id);
+    window.open(first.payment_link,'_blank');
+    // NOTE: pentru consolidare într-o singură plată, folosește Stripe Checkout + Netlify Functions.
+  } else {
+    // DEMO: marcăm achiziții local și golim coșul
+    items.forEach(it=> Purchases.add(it.id));
+    Cart.clear(); renderCart(); renderCartPage?.();
+    alert('Demo: comandă finalizată. Cursurile au fost activate în Dashboard.');
+    location.hash = '#/dashboard';
+  }
+}
 
-      <!-- EXEMPLE PROMPTS (slider) -->
-      <section id="exemple" class="section container" aria-labelledby="ex-title">
-        <h2 id="ex-title">Exemple de Prompts</h2>
-        <div class="slider" aria-roledescription="carousel">
-          <div class="slides" id="slides">
-            <div class="slide" aria-label="Slide 1">
-              <div class="prompt"><strong>Prompt:</strong> Generează un rezumat săptămânal al vânzărilor și trimite-l echipei.</div>
-              <div class="resp"><strong>Workflow:</strong> Sheets → Analiză AI → Raport → Email.</div>
-            </div>
-            <div class="slide" aria-label="Slide 2">
-              <div class="prompt"><strong>Prompt:</strong> Creează o imagine cu un oraș futurist la apus.</div>
-              <div class="resp"><strong>Rezultat:</strong> 3 variații imagine AI + link descărcare.</div>
-            </div>
-            <div class="slide" aria-label="Slide 3">
-              <div class="prompt"><strong>Prompt:</strong> Analizează sentimentul din recenziile clienților din ultima lună.</div>
-              <div class="resp"><strong>Workflow:</strong> Import CSV → NLP → Dashboard sintetic.</div>
-            </div>
-          </div>
-          <button class="nav-btn prev" id="prev" aria-label="Anterior">◀</button>
-          <button class="nav-btn next" id="next" aria-label="Următor">▶</button>
-        </div>
-      </section>
+/* ==== UI WIRING ==== */
+function openCart(){ $('#cartDrawer').classList.add('open'); renderCart(); }
+function closeCart(){ $('#cartDrawer').classList.remove('open'); }
+$('#openCart').onclick=openCart; $('#cartClose').onclick=closeCart; $('#cartOverlay').onclick=closeCart;
+$('#clearCart').onclick=()=>{ Cart.clear(); renderCart(); };
+$('#checkoutBtn').onclick=checkoutFlow;
 
-      <!-- GALERIE (UI + vizual) -->
-      <section id="galerie" class="section container" aria-labelledby="gal-title">
-        <h2 id="gal-title">Galerie</h2>
-        <div class="gallery">
-          <figure class="frame"><img alt="Dashboard Rivo" src="https://images.unsplash.com/photo-1551281044-8d8d2aa1a24d?q=80&w=1200&auto=format&fit=crop" /></figure>
-          <figure class="frame"><img alt="Editor Workflow" src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop" /></figure>
-          <figure class="frame"><img alt="Grafic Analitic" src="https://images.unsplash.com/photo-1551281044-8f5f9f63ed73?q=80&w=1200&auto=format&fit=crop" /></figure>
-        </div>
-      </section>
+/* ==== ENTRY POPUP ==== */
+(function(){
+  const modal=$('#entryModal'), close=$('#m-close'); const last=localStorage.getItem('rivo_modal_ts'); const WEEK=7*24*60*60*1000;
+  if(!last || (Date.now()-Number(last))>WEEK) modal.classList.add('open');
+  close.addEventListener('click',()=>{ modal.classList.remove('open'); localStorage.setItem('rivo_modal_ts', String(Date.now())); });
+  modal.addEventListener('click',e=>{ if(e.target===modal) close.click(); });
+})();
 
-      <!-- TESTIMONIALE -->
-      <section class="section container" aria-labelledby="t-title">
-        <h2 id="t-title">Ce spun utilizatorii</h2>
-        <div class="grid three">
-          <article class="card">
-            <p class="quote">„Rivo ne-a automatizat raportarea. Am câștigat ore bune în fiecare săptămână.”</p>
-            <div class="row"><img class="avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop" alt="Avatar"/> <div><strong>Ioana L.</strong><br/><span class="muted">UX Designer</span></div></div>
-          </article>
-          <article class="card">
-            <p class="quote">„Prompt → Workflow → Email – atât de simplu. Echipa e super încântată.”</p>
-            <div class="row"><img class="avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop" alt="Avatar"/> <div><strong>Andrei P.</strong><br/><span class="muted">Manager Operațiuni</span></div></div>
-          </article>
-          <article class="card">
-            <p class="quote">„Integrare cu tool-urile noastre și monitorizare clară. Recomand!”</p>
-            <div class="row"><img class="avatar" src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?q=80&w=200&auto=format&fit=crop" alt="Avatar"/> <div><strong>Marius T.</strong><br/><span class="muted">Director Suport</span></div></div>
-          </article>
-        </div>
-      </section>
+/* ==== HERO GG Search (demo) ==== */
+let gCount=0,lastKey=0; window.addEventListener('keydown',e=>{ const t=Date.now(); if(t-lastKey>450)gCount=0; lastKey=t; if(e.key.toLowerCase()==='g'){gCount++; if(gCount===2){ alert('Căutare globală (demo) — tastează promptul tău.'); gCount=0; }}});
 
-      <!-- PREȚURI + TOGGLE -->
-      <section id="preturi" class="section container" aria-labelledby="p-title">
-        <h2 id="p-title">Planuri & Prețuri</h2>
-        <div class="toggle">
-          <span>Plată lunar</span>
-          <div id="billing" class="switch" role="switch" aria-checked="false" tabindex="0"><div class="knob"></div></div>
-          <span>Plată anual (‑20%)</span>
-        </div>
-        <div class="pricing">
-          <article class="card price">
-            <h3>Basic</h3>
-            <p class="money" data-month="€9" data-year="€7">€9</p>
-            <p class="muted">Pentru începători</p>
-            <ul class="muted" style="line-height:1.8">
-              <li>Workflow-uri de bază</li>
-              <li>Conectori populari</li>
-              <li>Suport comunitate</li>
-            </ul>
-            <a class="btn ghost" href="#abonare">Începe</a>
-          </article>
-          <article class="card price featured">
-            <h3>Pro</h3>
-            <p class="money" data-month="€29" data-year="€23">€29</p>
-            <p class="muted">Pentru profesioniști</p>
-            <ul class="muted" style="line-height:1.8">
-              <li>Toți conectorii</li>
-              <li>Execuții nelimitate</li>
-              <li>Monitorizare & alerte</li>
-            </ul>
-            <a class="btn primary" href="#abonare">Alege Pro</a>
-          </article>
-          <article class="card price">
-            <h3>Enterprise</h3>
-            <p class="money" data-month="Contact" data-year="Contact">Contact</p>
-            <p class="muted">Pentru echipe mari</p>
-            <ul class="muted" style="line-height:1.8">
-              <li>SSO, SLA, Onboarding</li>
-              <li>Integrare custom</li>
-              <li>Suport dedicat</li>
-            </ul>
-            <a class="btn ghost" href="#abonare">Contactează-ne</a>
-          </article>
-        </div>
-      </section>
+/* ==== SCROLL REVEAL ==== */
+const sections=$$('.section'); const io=new IntersectionObserver(ents=>ents.forEach(en=>{if(en.isIntersecting)en.target.classList.add('is-visible')}),{threshold:.12}); sections.forEach(s=>io.observe(s));
 
-      <!-- FORMULAR abonare / comandă (Netlify Forms) -->
-      <section id="abonare" class="section container" aria-labelledby="a-title">
-        <h2 id="a-title">Înscrie-te în Rivo</h2>
-        <form name="signup" method="POST" data-netlify="true" class="form">
-          <input type="hidden" name="form-name" value="signup" />
-          <label>Nume
-            <input name="name" required />
-          </label>
-          <label>Email
-            <input type="email" name="email" required />
-          </label>
-          <label>Alege plan
-            <select name="plan" required>
-              <option>Basic</option>
-              <option selected>Pro</option>
-              <option>Enterprise</option>
-            </select>
-          </label>
-          <label>Mesaj (opțional)
-            <textarea name="message" rows="4" placeholder="Ex: cerere demo pentru echipă"></textarea>
-          </label>
-          <button class="btn primary" type="submit">Creează contul</button>
-          <p class="muted" style="font-size:13px">Prin trimitere ești de acord cu <a href="#" style="text-decoration:underline">Termenii</a> și <a href="#" style="text-decoration:underline">Politica de confidențialitate</a>.</p>
-        </form>
-      </section>
-    </main>
+/* ==== NAV ==== */
+$('#loginBtn').onclick=()=>{ const email=prompt('Email:'); if(!email) return; Auth.login(email); route(); };
+$('#year').textContent=new Date().getFullYear();
 
-    <footer class="container" role="contentinfo">
-      <div class="links" aria-label="Legal">
-        <a href="#">Termeni</a>
-        <a href="#">Confidențialitate</a>
-        <a href="#abonare">Contact</a>
-      </div>
-      <p style="text-align:center; margin:10px 0 0">© <span id="year"></span> Rivo — Prompts & AI Workflows</p>
-    </footer>
+/* ==== INIT ==== */
+function initHome(){ renderCatalog(COURSES.slice(0,3), $('#homeCatalog')); }
+function boot(){ updateCartBadge(); initHome(); route(); }
+document.addEventListener('DOMContentLoaded', boot);
+</script>
 
-    <script>
-      // YEAR
-      document.getElementById('year').textContent = new Date().getFullYear();
-
-      // POPUP intrare (1/7 zile)
-      const modal = document.getElementById('entryModal');
-      const closeBtn = document.getElementById('m-close');
-      const last = localStorage.getItem('rivo_modal_ts');
-      const now = Date.now();
-      const WEEK = 7*24*60*60*1000;
-      if(!last || (now - Number(last)) > WEEK){ modal.classList.add('open'); }
-      closeBtn.addEventListener('click', ()=>{ modal.classList.remove('open'); localStorage.setItem('rivo_modal_ts', String(Date.now())); });
-      modal.addEventListener('click', (e)=>{ if(e.target===modal){ closeBtn.click(); } });
-
-      // REVEAL on scroll
-      const sections = [...document.querySelectorAll('.section')];
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('is-visible'); } });
-      },{ threshold:.12 });
-      sections.forEach(s=> io.observe(s));
-
-      // HERO fake global search (GG)
-      let gCount = 0; let lastKeyTime = 0;
-      window.addEventListener('keydown', (e)=>{
-        const t = Date.now(); if(t - lastKeyTime > 450) gCount = 0; lastKeyTime = t;
-        if(e.key.toLowerCase()==='g'){ gCount++; if(gCount===2){ alert('Căutare globală (demo) — introduce promptul tău.'); gCount=0; } }
-      });
-
-      // SLIDER
-      const slides = document.getElementById('slides');
-      const prev = document.getElementById('prev');
-      const next = document.getElementById('next');
-      let idx = 0; const total = slides.children.length;
-      function go(i){ idx = (i+total)%total; slides.style.transform = `translateX(${-idx*100}%)`; }
-      prev.addEventListener('click', ()=> go(idx-1));
-      next.addEventListener('click', ()=> go(idx+1));
-      let auto = setInterval(()=> go(idx+1), 5000);
-      [prev,next,slides].forEach(el=> el.addEventListener('mouseenter', ()=> clearInterval(auto)));
-
-      // PRICING TOGGLE (lunar / anual)
-      const billing = document.getElementById('billing');
-      const monies = document.querySelectorAll('.money');
-      const setMode = (annual)=>{
-        monies.forEach(m=>{ const y=m.getAttribute('data-year'); const mo=m.getAttribute('data-month'); m.textContent = annual? y : mo; });
-        billing.classList.toggle('on', annual); billing.setAttribute('aria-checked', annual? 'true':'false');
-      };
-      billing.addEventListener('click', ()=> setMode(!billing.classList.contains('on')));
-      billing.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); setMode(!billing.classList.contains('on')); }});
-
-    </script>
-  </body>
+<!-- Hidden Netlify anti-spam form shadow -->
+<form name="lead" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="hidden" name="form-name" value="lead"/><input name="bot-field"/>
+</form>
+<form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="hidden" name="form-name" value="contact"/><input name="bot-field"/>
+</form>
+</body>
 </html>
