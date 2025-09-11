@@ -3,379 +3,429 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>RivoFit — programe fitness în PDF</title>
-    <meta name="description" content="Site complet, paletă auriu crom + negru mat + alb. Fundal foto fitness centrat, popup la intrare, tranziții slide, galerie cu rame, layout pe mijloc și scroll vertical.">
+    <title>Rivo — Prompts & AI Workflows</title>
+    <meta name="description" content="Rivo: creează și rulează fluxuri de lucru AI din simple prompt-uri. Platformă no‑code cu exemple, galerii, testimoniale și planuri tarifare. Dark/glow futurist, rapid și responsive.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23f5d46b'/%3E%3Cstop offset='1' stop-color='%23b38b2e'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='36' height='36' rx='8' fill='%230a0a0a'/%3E%3Cpath d='M9 24l6-12 6 12' stroke='url(%23g)' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3C/svg%3E" type="image/svg+xml">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%239467F5'/%3E%3Cstop offset='1' stop-color='%2300D1FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='36' height='36' rx='8' fill='%23090B10'/%3E%3Cpath d='M10 24l8-12 8 12' stroke='url(%23g)' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3C/svg%3E" type="image/svg+xml">
     <style>
       :root{
-        --bg:#0a0a0a;             /* negru mat */
-        --bg-2:#0f0f0f;           /* strat întunecat */
-        --text:#ffffff;           /* alb curat */
-        --muted:#d5d5d5;          /* argintiu cald */
-        --accent:#f5d46b;         /* auriu crom deschis */
-        --accent-2:#b38b2e;       /* auriu crom închis */
-        --border:#2a2a2a;         /* chenar discret */
-        --card:#111111;           /* card negru mat */
-        --card-2:#161616;         /* hover card */
-        --shadow: 0 10px 30px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.02);
+        --bg:#07080d;          /* dark space */
+        --bg-soft:#0b0f19;      /* panels */
+        --card:#0f1424;         /* cards */
+        --text:#eef2ff;         /* near-white */
+        --muted:#b7c1e1;        /* soft steel */
+        --edge:#1a2140;         /* borders */
+        --glow-1:#7c5cff;       /* violet */
+        --glow-2:#22d3ee;       /* cyan */
+        --glow-3:#f5d46b;       /* soft gold */
+        --accent:#8b5cf6;       /* primary */
+        --accent-2:#06b6d4;     /* secondary */
         --radius:16px;
         --radius-lg:22px;
-        --maxw:1140px;
+        --maxw:1180px;
+        --shadow:0 10px 30px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.02);
       }
-      * { box-sizing:border-box }
-      html,body{ height:100% }
-      html{ scroll-behavior:smooth }
+      *{box-sizing:border-box}
+      html,body{height:100%}
+      html{scroll-behavior:smooth}
       body{
-        margin:0;
-        font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-        color:var(--text);
-        background: var(--bg);
+        margin:0; font-family:"Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        color:var(--text); background:radial-gradient(120% 120% at 10% -10%, rgba(139,92,246,.18), transparent 50%),
+                 radial-gradient(120% 120% at 110% 10%, rgba(34,211,238,.14), transparent 50%), var(--bg);
         overflow-x:hidden;
       }
-      a{ color:inherit; text-decoration:none }
-      img{ display:block; max-width:100% }
-      .sr-only{ position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden }
+      a{color:inherit; text-decoration:none}
+      img{display:block; max-width:100%}
+      .sr-only{position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden}
 
-      /* FUNDAL FOTO FITNESS CENTRAT */
-      .bg-photo{ position:fixed; inset:0; z-index:-2; background:
-        url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=1920&auto=format&fit=crop') center center / cover no-repeat; filter: grayscale(15%) contrast(1.05) saturate(105%); }
-      .bg-overlay{ position:fixed; inset:0; z-index:-1; pointer-events:none; background:
-        radial-gradient(120% 90% at 50% 10%, rgba(0,0,0,.35) 0%, rgba(0,0,0,.6) 55%, rgba(0,0,0,.85) 100%),
-        radial-gradient(60% 60% at 50% 50%, rgba(245,212,107,.08), transparent 65%);
-        backdrop-filter: blur(1.5px);
+      /* STARFIELD / GRID BG */
+      .fx-bg{position:fixed; inset:0; z-index:-2; pointer-events:none; background:
+        radial-gradient(80% 60% at 50% -10%, rgba(139,92,246,.25), transparent 55%),
+        radial-gradient(60% 50% at 120% 20%, rgba(34,211,238,.18), transparent 60%),
+        radial-gradient(60% 60% at -20% 120%, rgba(245,212,107,.10), transparent 60%);
+        filter:saturate(105%) contrast(102%);
+      }
+      .gridlines:before{content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
+        background-image: linear-gradient(rgba(124,92,255,.06) 1px, transparent 1px),
+                          linear-gradient(90deg, rgba(124,92,255,.06) 1px, transparent 1px);
+        background-size: 28px 28px; mask-image: radial-gradient(80% 60% at 50% 10%, rgba(255,255,255,.9), transparent 70%);
       }
 
-      /* Layout pe mijloc */
-      .container{ width:100%; max-width:var(--maxw); margin:0 auto; padding:0 20px; text-align:center }
-      header.navbar{ position:sticky; top:0; backdrop-filter:saturate(140%) blur(10px);
-        background: color-mix(in srgb, #0c0c0c 65%, transparent);
-        border-bottom:1px solid var(--border); z-index:50 }
-      .nav-inner{ display:flex; align-items:center; justify-content:center; gap:18px; padding:14px 0; flex-wrap:wrap }
-      .brand{ display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px }
-      .nav-links{ display:flex; gap:18px; flex-wrap:wrap }
-      .nav-links a{ padding:10px 12px; border-radius:10px; opacity:.9 }
-      .nav-links a:hover{ background:rgba(245,212,107,.12); opacity:1 }
+      /* LAYOUT */
+      .container{width:100%; max-width:var(--maxw); margin:0 auto; padding:0 20px}
+      header.nav{position:sticky; top:0; z-index:50; border-bottom:1px solid var(--edge);
+        backdrop-filter:saturate(140%) blur(10px);
+        background:linear-gradient(180deg, rgba(11,15,25,.75), rgba(11,15,25,.55));}
+      .nav-inner{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 0}
+      .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px}
+      .brand .dot{width:8px; height:8px; border-radius:999px; background:radial-gradient(circle at 40% 40%, var(--glow-2), var(--glow-1)); box-shadow:0 0 14px var(--glow-2)}
+      .nav-links{display:flex; gap:14px; align-items:center; flex-wrap:wrap}
+      .nav-links a{padding:9px 12px; border-radius:10px; opacity:.92}
+      .nav-links a:hover{background:rgba(124,92,255,.12); box-shadow:0 0 20px rgba(124,92,255,.25) inset; opacity:1}
+      .cta-top{display:flex; gap:10px}
 
-      .hero{ position:relative; padding:96px 0 42px }
-      .hero-inner{ margin:0 auto; max-width:860px }
-      h1{ font-size: clamp(36px, 5vw, 64px); line-height:1.05; margin:0 0 14px }
-      .accent{ color:var(--accent) }
-      .lead{ font-size: clamp(16px, 2.2vw, 20px); color:var(--muted); margin:0 0 26px }
-      .cta{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; justify-content:center }
+      .btn{display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:11px 16px; border-radius:12px; border:1px solid var(--edge); box-shadow:var(--shadow); font-weight:700; transition:transform .15s ease, box-shadow .2s ease, background .2s ease}
+      .btn.small{padding:8px 12px; font-size:14px}
+      .btn.primary{background:radial-gradient(120% 120% at 0% 0%, rgba(124,92,255,.35), transparent 50%),
+                    radial-gradient(120% 120% at 100% 0%, rgba(34,211,238,.28), transparent 50%), var(--bg-soft);
+                    border-color:transparent}
+      .btn.primary:hover{transform:translateY(-1px) scale(1.01); box-shadow:0 0 24px rgba(124,92,255,.35), 0 0 28px rgba(34,211,238,.25)}
+      .btn.ghost{background:rgba(124,92,255,.10)}
+      .btn.ghost:hover{background:rgba(124,92,255,.18)}
 
-      .badge{ display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border:1px solid var(--border); border-radius:999px; font-weight:600; font-size:13px; background:rgba(245,212,107,.07) }
+      h1{font-size:clamp(36px, 5vw, 68px); line-height:1.05; margin:0 0 14px}
+      h2{font-size:clamp(26px, 3.2vw, 38px); margin:0 0 16px}
+      .muted{color:var(--muted)}
+      .lead{font-size:clamp(16px, 2vw, 20px)}
+      .chip{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border:1px solid var(--edge); border-radius:999px; font-weight:700; font-size:12px; background:rgba(6,182,212,.08)}
 
-      .btn{ display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:12px 16px; border-radius:12px; border:1px solid var(--border); box-shadow:var(--shadow); font-weight:600; transition:transform .15s ease, background .2s ease, border-color .2s ease }
-      .btn.small{ padding:9px 12px; font-weight:600; font-size:14px }
-      .btn.primary{ background:linear-gradient(135deg, var(--accent), var(--accent-2)); color:#1a1400; border-color:transparent }
-      .btn.primary:hover{ transform:translateY(-1px) scale(1.01) }
-      .btn.ghost{ background:rgba(245,212,107,.08) }
-      .btn.ghost:hover{ background:rgba(245,212,107,.14) }
+      /* HERO */
+      .hero{position:relative; padding:92px 0 54px}
+      .hero-inner{max-width:900px; margin:0 auto; text-align:center}
+      .glow-title{background:linear-gradient(135deg, #fff, #a5b4fc 35%, #7c5cff 60%, #22d3ee 95%); -webkit-background-clip:text; background-clip:text; color:transparent; text-shadow:0 0 30px rgba(124,92,255,.2)}
+      .kbd{display:inline-block; padding:6px 10px; border-radius:8px; border:1px solid var(--edge); background:rgba(255,255,255,.03); font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size:12px}
+      .hero-cta{display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:14px}
+      .note{margin-top:12px; font-size:13px; color:#c9d4ff}
 
-      .section{ padding:60px 0 }
-      .section h2{ font-size: clamp(26px, 3vw, 34px); margin:0 0 18px }
+      /* SECTIONS */
+      .section{padding:70px 0; opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease}
+      .section.is-visible{opacity:1; transform:translateY(0)}
+      .grid{display:grid; gap:16px}
+      .two{grid-template-columns:repeat(1, minmax(0,1fr))}
+      .three{grid-template-columns:repeat(1, minmax(0,1fr))}
+      @media (min-width:900px){ .two{grid-template-columns:repeat(2,1fr)} .three{grid-template-columns:repeat(3,1fr)} }
 
-      .grid{ display:grid; gap:16px; justify-items:center }
-      .grid.two{ grid-template-columns:repeat(1,1fr) }
-      .grid.three{ grid-template-columns:repeat(1,1fr) }
-      @media (min-width:860px){ .grid.two{ grid-template-columns:repeat(2, minmax(0,1fr)) } .grid.three{ grid-template-columns:repeat(3, minmax(0,1fr)) } }
+      .card{background:linear-gradient(180deg, rgba(15,20,36,.92), rgba(11,15,25,.92)); border:1px solid var(--edge); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow)}
+      .card h3{margin:8px 0 6px; font-size:20px}
 
-      .card{ width:100%; background:linear-gradient(180deg, rgba(17,17,17,.9), rgba(22,22,22,.9)); border:1px solid var(--border); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow); text-align:left }
-      .card h3{ margin: 6px 0 8px; font-size:20px }
-      .card p{ margin:0; color:var(--muted) }
+      /* WORKFLOWS DIAGRAM */
+      .flow{display:grid; gap:14px}
+      .flow-step{display:flex; align-items:flex-start; gap:12px; background:rgba(124,92,255,.08); border:1px dashed rgba(124,92,255,.25); padding:12px; border-radius:12px}
+      .flow-step .dot{width:10px; height:10px; border-radius:999px; background:radial-gradient(circle at 40% 40%, var(--glow-1), var(--glow-2)); box-shadow:0 0 12px rgba(34,211,238,.5)}
 
-      /* Rame foto auriu crom */
-      .frame{ border-radius:14px; border:1px solid #3a3a3a; padding:8px; background: linear-gradient(180deg, #1a1a1a, #101010); box-shadow: 0 1px 0 rgba(255,255,255,.05) inset, 0 0 0 1px rgba(255,215,130,.08), 0 10px 30px rgba(0,0,0,.4) }
-      .frame img{ border-radius:10px; border:1px solid #2a2a2a }
-      .bevel{ position:relative }
-      .bevel:before{ content:""; position:absolute; inset:0; border-radius:14px; pointer-events:none; background: linear-gradient(135deg, rgba(245,212,107,.35), rgba(179,139,46,.0) 35%, rgba(255,255,255,.08) 60%, rgba(0,0,0,0) 100%); mix-blend-mode:screen; opacity:.5 }
+      /* EXEMPLE PROMPTS (slider) */
+      .slider{position:relative; overflow:hidden; border:1px solid var(--edge); border-radius:var(--radius); background:var(--card)}
+      .slides{display:flex; transition:transform .5s ease}
+      .slide{min-width:100%; padding:18px; display:grid; gap:12px}
+      .prompt{background:#0b1020; border:1px solid var(--edge); border-radius:12px; padding:14px}
+      .resp{background:#0c1226; border:1px solid var(--edge); border-radius:12px; padding:14px}
+      .nav-btn{position:absolute; top:50%; transform:translateY(-50%); background:rgba(124,92,255,.2); border:1px solid var(--edge); border-radius:12px; padding:8px 10px; cursor:pointer}
+      .nav-btn:hover{background:rgba(124,92,255,.3)}
+      .prev{left:10px} .next{right:10px}
 
-      .product-img{ width:100%; border-radius:12px; border:1px solid var(--border) }
-      .price.card{ text-align:center }
-      .price .money{ font-size:32px; font-weight:800; margin:2px 0 8px; background: linear-gradient(135deg,var(--accent),#fff); -webkit-background-clip:text; background-clip:text; color:transparent }
-      .price.featured{ border-color: color-mix(in srgb, var(--accent) 40%, var(--border)); box-shadow: 0 0 0 1px rgba(245,212,107,.15), var(--shadow) }
+      /* GALERIE */
+      .gallery{display:grid; grid-template-columns:repeat(1, minmax(0,1fr)); gap:14px}
+      @media (min-width:800px){ .gallery{grid-template-columns:repeat(3,1fr)} }
+      .frame{border-radius:14px; border:1px solid var(--edge); padding:8px; background:linear-gradient(180deg,#0d1224,#0a0f20); box-shadow:0 1px 0 rgba(255,255,255,.03) inset, 0 0 0 1px rgba(124,92,255,.12), 0 12px 32px rgba(0,0,0,.45)}
+      .frame img{border-radius:10px; border:1px solid #141a34}
 
-      .cta-band{ position:relative; margin: 10px auto 0; padding: 18px; border:1px dashed var(--border); border-radius:var(--radius); background: rgba(245,212,107,.06); max-width:860px }
-      .pricing-note{ color:var(--muted); margin-top:10px; font-size:14px; text-align:center }
+      /* TESTIMONIALE */
+      .quote{font-style:italic}
+      .avatar{width:36px; height:36px; border-radius:999px; border:1px solid var(--edge); object-fit:cover}
+      .row{display:flex; align-items:center; gap:10px}
 
-      .faq{ max-width:900px; margin:0 auto }
-      details.faq-item{ background:linear-gradient(180deg, rgba(17,17,17,.92), rgba(22,22,22,.92)); border:1px solid var(--border); border-radius:var(--radius); padding:16px; margin:10px 0 }
-      details.faq-item summary{ cursor:pointer; list-style:none; font-weight:700 }
-      details.faq-item[open]{ border-color: color-mix(in srgb, var(--accent-2) 38%, var(--border)) }
-      details.faq-item p{ color:var(--muted); margin: 10px 0 0 }
+      /* PRICING + TOGGLE */
+      .pricing{display:grid; gap:16px}
+      @media (min-width:880px){ .pricing{grid-template-columns:repeat(3,1fr)} }
+      .price{ text-align:center }
+      .money{font-size:34px; font-weight:800; margin:6px 0 8px; background:linear-gradient(135deg,#fff,#a5b4fc 40%, #7c5cff 70%); -webkit-background-clip:text; background-clip:text; color:transparent}
+      .featured{border-color:rgba(124,92,255,.45); box-shadow:0 0 0 1px rgba(124,92,255,.25), var(--shadow)}
+      .toggle{display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:12px}
+      .switch{position:relative; width:56px; height:28px; background:#111834; border:1px solid var(--edge); border-radius:999px; cursor:pointer}
+      .knob{position:absolute; top:2px; left:2px; width:24px; height:24px; border-radius:999px; background:radial-gradient(circle at 40% 40%, var(--glow-2), var(--glow-1)); box-shadow:0 0 16px rgba(34,211,238,.5); transition:left .2s ease}
+      .switch.on .knob{left:30px}
 
-      .form{ display:grid; gap:12px; max-width:680px; margin:0 auto }
-      label{ display:grid; gap:6px; font-weight:600; text-align:left }
-      input, textarea, select{ background:#0e0e0e; color:var(--text); border:1px solid var(--border); border-radius:12px; padding:12px; outline:none }
-      input:focus, textarea:focus, select:focus{ border-color: color-mix(in srgb, var(--accent) 50%, var(--border)) }
+      /* FORME */
+      .form{display:grid; gap:12px; max-width:700px; margin:0 auto}
+      label{display:grid; gap:6px; font-weight:700}
+      input, textarea, select{background:#0b1020; color:var(--text); border:1px solid var(--edge); border-radius:12px; padding:12px; outline:none}
+      input:focus, textarea:focus, select:focus{border-color:rgba(124,92,255,.6); box-shadow:0 0 0 3px rgba(124,92,255,.18)}
 
-      .footer{ border-top:1px solid var(--border); padding:22px 0; color:var(--muted); font-size:14px }
-      .links{ display:flex; gap:16px; flex-wrap:wrap; justify-content:center }
+      /* FOOTER */
+      footer{border-top:1px solid var(--edge); padding:26px 0; color:var(--muted); font-size:14px}
+      .links{display:flex; gap:14px; flex-wrap:wrap; justify-content:center}
 
-      /* Tranziții slide între secțiuni */
-      .section{ opacity:0; transform:translateX(40px); transition: opacity .5s ease, transform .6s ease }
-      .section.is-visible{ opacity:1; transform:translateX(0) }
-      .slide-out{ animation: slideOut .45s ease both }
-      @keyframes slideOut{ from{ opacity:1; transform:translateX(0) } to{ opacity:0; transform:translateX(-40px) } }
-
-      /* Popup modal intrare */
-      .modal{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:1000; background: rgba(0,0,0,.55) }
-      .modal.open{ display:flex }
-      .modal-card{ width:min(520px, 92vw); background: linear-gradient(180deg, rgba(17,17,17,.96), rgba(22,22,22,.96)); border:1px solid var(--border); border-radius:var(--radius-lg); padding:20px; box-shadow: 0 20px 50px rgba(0,0,0,.6) }
-      .modal-header{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px }
-      .close{ border:none; background:transparent; color:var(--muted); font-size:22px; cursor:pointer }
+      /* MODAL (pop-up) */
+      .modal{position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:1000; background:rgba(3,6,14,.6); backdrop-filter:blur(6px)}
+      .modal.open{display:flex}
+      .modal-card{ width:min(560px, 92vw); background:linear-gradient(180deg, rgba(15,20,36,.96), rgba(11,15,25,.96)); border:1px solid var(--edge); border-radius:var(--radius-lg); padding:20px; box-shadow:0 24px 60px rgba(0,0,0,.7)}
+      .modal-header{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px}
+      .close{border:none; background:transparent; color:var(--muted); font-size:22px; cursor:pointer}
     </style>
   </head>
-  <body>
+  <body class="gridlines">
     <a class="sr-only" href="#content">Sari la conținut</a>
-    <div class="bg-photo" aria-hidden="true"></div>
-    <div class="bg-overlay" aria-hidden="true"></div>
+    <div class="fx-bg" aria-hidden="true"></div>
 
-    <!-- Popup intrare -->
+    <!-- POPUP intrare (lead capture / trial) -->
     <div class="modal" id="entryModal" role="dialog" aria-modal="true" aria-labelledby="m-title" aria-describedby="m-desc">
-      <div class="modal-card bevel">
+      <div class="modal-card">
         <div class="modal-header">
-          <h3 id="m-title" style="margin:0">Bine ai venit la RivoFit</h3>
+          <h3 id="m-title" style="margin:0">Bine ai venit la <span class="glow-title">Rivo</span></h3>
           <button class="close" aria-label="Închide" id="m-close">×</button>
         </div>
-        <p id="m-desc" style="color:var(--muted); margin:0 0 12px">Primești 10% reducere la primul PDF. Introdu emailul și îți trimitem codul.</p>
-        <form name="promo" method="POST" data-netlify="true" class="form">
-          <input type="hidden" name="form-name" value="promo" />
-          <label>
-            Email
+        <p id="m-desc" class="muted" style="margin:0 0 12px">Activează <strong>trial 14 zile</strong> sau primește resurse gratuite despre Prompts & AI Workflows.</p>
+        <form name="lead" method="POST" data-netlify="true" class="form">
+          <input type="hidden" name="form-name" value="lead" />
+          <label>Email
             <input type="email" name="email" required placeholder="nume@email.com" />
           </label>
-          <button class="btn primary" type="submit">Trimite-mi codul</button>
+          <button class="btn primary" type="submit">Vreau acces</button>
         </form>
       </div>
     </div>
 
-    <!-- Header / Navbar -->
-    <header class="navbar" role="banner">
+    <!-- HEADER -->
+    <header class="nav" role="banner">
       <div class="container nav-inner">
-        <a href="#" class="brand" aria-label="RivoFit">
-          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23f5d46b'/%3E%3Cstop offset='1' stop-color='%23b38b2e'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='36' height='36' rx='8' fill='%230a0a0a'/%3E%3Cpath d='M9 24l6-12 6 12' stroke='url(%23g)' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3C/svg%3E" alt="RivoFit logo" width="36" height="36" />
-          <span>RivoFit</span>
+        <a class="brand" href="#" aria-label="Rivo">
+          <span class="dot" aria-hidden="true"></span>
+          <span>Rivo</span>
         </a>
         <nav class="nav-links" aria-label="Principal">
-          <a href="#de-ce">De ce RivoFit</a>
+          <a href="#workflows">Workflows</a>
+          <a href="#exemple">Exemple</a>
           <a href="#galerie">Galerie</a>
-          <a href="#produse">PDF-uri</a>
-          <a href="#pret">Prețuri</a>
-          <a href="#comanda">Comandă</a>
+          <a href="#preturi">Prețuri</a>
+          <a href="#abonare">Abonare</a>
         </nav>
+        <div class="cta-top">
+          <a class="btn ghost small" href="#preturi">Planuri</a>
+          <a class="btn primary small" href="#abonare">Înscrie-te</a>
+        </div>
       </div>
     </header>
 
     <main id="content">
-      <!-- Hero -->
+      <!-- HERO -->
       <section class="hero container section" aria-labelledby="hero-title">
         <div class="hero-inner">
-          <span class="badge">PDF-uri descărcabile • antrenament & nutriție</span>
-          <h1 id="hero-title">Calm, clar, <span class="accent">eficient</span>.</h1>
-          <p class="lead">Fundal foto 100% fitness, centrat. Programe pentru progres constant, design premium auriu/black&white.</p>
-          <div class="cta">
-            <a class="btn primary" href="#produse">Vezi PDF-urile</a>
-            <a class="btn ghost" href="#pret">Prețuri</a>
+          <span class="chip">Prompts → AI Workflows • no-code</span>
+          <h1 id="hero-title" class="glow-title">Automatizează-ți creativitatea cu AI</h1>
+          <p class="lead muted">Rivo transformă prompt-urile în fluxuri de lucru inteligente: creezi, rulezi și scalezi automatizări AI — fără o linie de cod.</p>
+          <div class="hero-cta">
+            <a class="btn primary" href="#exemple">Vezi în acțiune</a>
+            <a class="btn ghost" href="#workflows">Află cum funcționează</a>
           </div>
-          <div class="cta-band" role="note" aria-label="Notă">
-            Tranziții line tip slide între secțiuni • Popup reducere la intrare.
-          </div>
+          <p class="note">Apasă <span class="kbd">G</span><span class="kbd">G</span> pentru căutare globală (demo UI).</p>
         </div>
       </section>
 
-      <!-- De ce -->
-      <section id="de-ce" class="section container" aria-labelledby="why-title">
-        <h2 id="why-title">De ce RivoFit</h2>
-        <div class="grid three">
-          <article class="card" aria-labelledby="f1">
-            <h3 id="f1">Structură clară</h3>
-            <p>Programe explicate pas cu pas, acasă sau la sală.</p>
+      <!-- WORKFLOWS: Cum funcționează -->
+      <section id="workflows" class="section container" aria-labelledby="w-title">
+        <h2 id="w-title">Cum funcționează Rivo</h2>
+        <div class="grid two">
+          <article class="card">
+            <h3>1) Definire Prompt</h3>
+            <p class="muted">Scrii ce vrei să obții. Rivo înțelege intenția și propune pașii workflow-ului.</p>
+            <div class="flow" style="margin-top:10px">
+              <div class="flow-step"><span class="dot"></span><div><strong>Exemplu:</strong> „Rezumă rapoartele pe Q3 și trimite email echipei.”</div></div>
+              <div class="flow-step"><span class="dot"></span><div>Parser semantic → identifică colectare date, sinteză, trimitere email.</div></div>
+            </div>
           </article>
-          <article class="card" aria-labelledby="f2">
-            <h3 id="f2">Nutriție inclusă</h3>
-            <p>Ghid macro + meniuri și liste de cumpărături.</p>
+          <article class="card">
+            <h3>2) Configurare no‑code</h3>
+            <p class="muted">Rivo generează automat pașii. Tu ajustezi parametri, surse și rezultate.</p>
+            <div class="flow" style="margin-top:10px">
+              <div class="flow-step"><span class="dot"></span><div>Conectori: Docs, Sheets, CRM, Email.</div></div>
+              <div class="flow-step"><span class="dot"></span><div>Execuție și validare în timp real, cu preview al output-ului.</div></div>
+            </div>
           </article>
-          <article class="card" aria-labelledby="f3">
-            <h3 id="f3">Estetică premium</h3>
-            <p>Auriu crom pe negru mat + alb pentru contrast impecabil.</p>
+          <article class="card">
+            <h3>3) Rulare & Monitorizare</h3>
+            <p class="muted">Pornești fluxul. Vezi log-uri, stări și rezultate, cu alertare automată.</p>
+          </article>
+          <article class="card">
+            <h3>4) Învățare continuă</h3>
+            <p class="muted">Feedback-ul optimizează prompt-urile și pașii, crescând calitatea rezultatelor.</p>
           </article>
         </div>
       </section>
 
-      <!-- Galerie -->
+      <!-- EXEMPLE PROMPTS (slider) -->
+      <section id="exemple" class="section container" aria-labelledby="ex-title">
+        <h2 id="ex-title">Exemple de Prompts</h2>
+        <div class="slider" aria-roledescription="carousel">
+          <div class="slides" id="slides">
+            <div class="slide" aria-label="Slide 1">
+              <div class="prompt"><strong>Prompt:</strong> Generează un rezumat săptămânal al vânzărilor și trimite-l echipei.</div>
+              <div class="resp"><strong>Workflow:</strong> Sheets → Analiză AI → Raport → Email.</div>
+            </div>
+            <div class="slide" aria-label="Slide 2">
+              <div class="prompt"><strong>Prompt:</strong> Creează o imagine cu un oraș futurist la apus.</div>
+              <div class="resp"><strong>Rezultat:</strong> 3 variații imagine AI + link descărcare.</div>
+            </div>
+            <div class="slide" aria-label="Slide 3">
+              <div class="prompt"><strong>Prompt:</strong> Analizează sentimentul din recenziile clienților din ultima lună.</div>
+              <div class="resp"><strong>Workflow:</strong> Import CSV → NLP → Dashboard sintetic.</div>
+            </div>
+          </div>
+          <button class="nav-btn prev" id="prev" aria-label="Anterior">◀</button>
+          <button class="nav-btn next" id="next" aria-label="Următor">▶</button>
+        </div>
+      </section>
+
+      <!-- GALERIE (UI + vizual) -->
       <section id="galerie" class="section container" aria-labelledby="gal-title">
         <h2 id="gal-title">Galerie</h2>
-        <p class="pricing-note" style="margin-bottom:14px">Rezultate reale — transformări înainte/după și momente din antrenamente.</p>
-        <div class="grid three">
-          <!-- Before / After 1 -->
-          <figure class="frame bevel"><img alt="Înainte — transformare 1" src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?q=80&w=1000&auto=format&fit=crop"/></figure>
-          <figure class="frame bevel"><img alt="După — transformare 1" src="https://images.unsplash.com/photo-1605296866985-8aa3c7c7e4b1?q=80&w=1000&auto=format&fit=crop"/></figure>
-          <figure class="frame bevel"><img alt="Antrenament ramat" src="https://images.unsplash.com/photo-1558611848-73f7eb4001a1?q=80&w=1000&auto=format&fit=crop"/></figure>
-
-          <!-- Before / After 2 -->
-          <figure class="frame bevel"><img alt="Înainte — transformare 2" src="https://images.unsplash.com/photo-1544717302-de2939b7ef71?q=80&w=1000&auto=format&fit=crop"/></figure>
-          <figure class="frame bevel"><img alt="După — transformare 2" src="https://images.unsplash.com/photo-1594737625785-c6683fc7b20d?q=80&w=1000&auto=format&fit=crop"/></figure>
-          <figure class="frame bevel"><img alt="Antrenament cu gantere" src="https://images.unsplash.com/photo-1550345332-09e3ac987658?q=80&w=1000&auto=format&fit=crop"/></figure>
+        <div class="gallery">
+          <figure class="frame"><img alt="Dashboard Rivo" src="https://images.unsplash.com/photo-1551281044-8d8d2aa1a24d?q=80&w=1200&auto=format&fit=crop" /></figure>
+          <figure class="frame"><img alt="Editor Workflow" src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop" /></figure>
+          <figure class="frame"><img alt="Grafic Analitic" src="https://images.unsplash.com/photo-1551281044-8f5f9f63ed73?q=80&w=1200&auto=format&fit=crop" /></figure>
         </div>
       </section>
 
-      <!-- Produse (PDF-uri) -->
-      <section id="produse" class="section container" aria-labelledby="products-title">
-        <h2 id="products-title">PDF-uri de antrenament & nutriție</h2>
+      <!-- TESTIMONIALE -->
+      <section class="section container" aria-labelledby="t-title">
+        <h2 id="t-title">Ce spun utilizatorii</h2>
         <div class="grid three">
-          <article class="card" aria-labelledby="p1-title">
-            <img class="product-img" alt="PDF Începători — 8 săptămâni" src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500"><rect width="100%" height="100%" fill="%23111111"/><rect x="40" y="60" width="320" height="380" rx="14" fill="%23161616"/><text x="60" y="240" fill="%23ffffff" font-size="38" font-family="Inter, Arial">Începători</text><rect x="380" y="60" width="380" height="180" rx="14" fill="%23161616"/><rect x="380" y="260" width="380" height="180" rx="14" fill="%23161616"/></svg>' />
-            <h3 id="p1-title" style="margin-top:12px;">Start • 8 săptămâni</h3>
-            <p>Full‑body, 3 zile/săptămână + ghid nutriție.</p>
-            <div class="cta" style="justify-content:center;margin-top:12px;">
-              <a class="btn small ghost" href="#pret">Detalii</a>
-              <a class="btn small primary" href="#comanda" data-product="start">Cumpără</a>
-            </div>
+          <article class="card">
+            <p class="quote">„Rivo ne-a automatizat raportarea. Am câștigat ore bune în fiecare săptămână.”</p>
+            <div class="row"><img class="avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop" alt="Avatar"/> <div><strong>Ioana L.</strong><br/><span class="muted">UX Designer</span></div></div>
           </article>
-          <article class="card" aria-labelledby="p2-title">
-            <img class="product-img" alt="PDF Intermediar — 12 săptămâni" src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500"><rect width="100%" height="100%" fill="%23111111"/><rect x="40" y="60" width="720" height="240" rx="18" fill="%23161616"/><text x="60" y="200" fill="%23ffffff" font-size="38" font-family="Inter, Arial">Intermediar</text><circle cx="680" cy="380" r="80" fill="%23b38b2e" opacity="0.35"/></svg>' />
-            <h3 id="p2-title" style="margin-top:12px;">Build • 12 săptămâni</h3>
-            <p>Push/Pull/Legs sau Upper/Lower + meal‑plan pentru masă.</p>
-            <div class="cta" style="justify-content:center;margin-top:12px;">
-              <a class="btn small ghost" href="#pret">Detalii</a>
-              <a class="btn small primary" href="#comanda" data-product="pro">Cumpără</a>
-            </div>
+          <article class="card">
+            <p class="quote">„Prompt → Workflow → Email – atât de simplu. Echipa e super încântată.”</p>
+            <div class="row"><img class="avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop" alt="Avatar"/> <div><strong>Andrei P.</strong><br/><span class="muted">Manager Operațiuni</span></div></div>
           </article>
-          <article class="card" aria-labelledby="p3-title">
-            <img class="product-img" alt="Pachet Complet" src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500"><rect width="100%" height="100%" fill="%23111111"/><g opacity="0.5"><circle cx="120" cy="120" r="70" fill="%23b38b2e"/><circle cx="220" cy="160" r="70" fill="%23f5d46b"/></g><text x="40" y="300" fill="%23ffffff" font-size="38" font-family="Inter, Arial">Pachet Complet</text></svg>' />
-            <h3 id="p3-title" style="margin-top:12px;">Complete • 16 săptămâni</h3>
-            <p>Program avansat + nutriție & suplimente + mindset & obiceiuri.</p>
-            <div class="cta" style="justify-content:center;margin-top:12px;">
-              <a class="btn small ghost" href="#pret">Detalii</a>
-              <a class="btn small primary" href="#comanda" data-product="team">Cumpără</a>
-            </div>
+          <article class="card">
+            <p class="quote">„Integrare cu tool-urile noastre și monitorizare clară. Recomand!”</p>
+            <div class="row"><img class="avatar" src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?q=80&w=200&auto=format&fit=crop" alt="Avatar"/> <div><strong>Marius T.</strong><br/><span class="muted">Director Suport</span></div></div>
           </article>
         </div>
       </section>
 
-      <!-- Pricing -->
-      <section id="pret" class="section container" aria-labelledby="pricing-title">
-        <h2 id="pricing-title">Prețuri</h2>
-        <div class="grid three">
-          <div class="price card">
-            <h3>Start</h3>
-            <p class="money">€19</p>
-            <p>Utilizare personală</p>
-            <a class="btn small ghost" href="#comanda" data-product="start">Cumpără</a>
-          </div>
-          <div class="price card featured">
-            <h3>Build</h3>
-            <p class="money">€49</p>
-            <p>Utilizare personală</p>
-            <a class="btn small primary" href="#comanda" data-product="pro">Cumpără</a>
-          </div>
-          <div class="price card">
-            <h3>Complete</h3>
-            <p class="money">€99</p>
-            <p>Licență extinsă</p>
-            <a class="btn small ghost" href="#comanda" data-product="team">Cumpără</a>
-          </div>
+      <!-- PREȚURI + TOGGLE -->
+      <section id="preturi" class="section container" aria-labelledby="p-title">
+        <h2 id="p-title">Planuri & Prețuri</h2>
+        <div class="toggle">
+          <span>Plată lunar</span>
+          <div id="billing" class="switch" role="switch" aria-checked="false" tabindex="0"><div class="knob"></div></div>
+          <span>Plată anual (‑20%)</span>
         </div>
-        <p class="pricing-note">Primești link de descărcare pe email după plată.</p>
+        <div class="pricing">
+          <article class="card price">
+            <h3>Basic</h3>
+            <p class="money" data-month="€9" data-year="€7">€9</p>
+            <p class="muted">Pentru începători</p>
+            <ul class="muted" style="line-height:1.8">
+              <li>Workflow-uri de bază</li>
+              <li>Conectori populari</li>
+              <li>Suport comunitate</li>
+            </ul>
+            <a class="btn ghost" href="#abonare">Începe</a>
+          </article>
+          <article class="card price featured">
+            <h3>Pro</h3>
+            <p class="money" data-month="€29" data-year="€23">€29</p>
+            <p class="muted">Pentru profesioniști</p>
+            <ul class="muted" style="line-height:1.8">
+              <li>Toți conectorii</li>
+              <li>Execuții nelimitate</li>
+              <li>Monitorizare & alerte</li>
+            </ul>
+            <a class="btn primary" href="#abonare">Alege Pro</a>
+          </article>
+          <article class="card price">
+            <h3>Enterprise</h3>
+            <p class="money" data-month="Contact" data-year="Contact">Contact</p>
+            <p class="muted">Pentru echipe mari</p>
+            <ul class="muted" style="line-height:1.8">
+              <li>SSO, SLA, Onboarding</li>
+              <li>Integrare custom</li>
+              <li>Suport dedicat</li>
+            </ul>
+            <a class="btn ghost" href="#abonare">Contactează-ne</a>
+          </article>
+        </div>
       </section>
 
-      <!-- Comandă -->
-      <section id="comanda" class="section container" aria-labelledby="order-title">
-        <h2 id="order-title">Comandă</h2>
-        <form name="order" method="POST" data-netlify="true" class="form">
-          <input type="hidden" name="form-name" value="order" />
-          <label>
-            Alege produsul
-            <select name="product" required>
-              <option value="Start €19">Start — €19</option>
-              <option value="Build €49">Build — €49</option>
-              <option value="Complete €99">Complete — €99</option>
-            </select>
-          </label>
-          <label>
-            Nume
+      <!-- FORMULAR abonare / comandă (Netlify Forms) -->
+      <section id="abonare" class="section container" aria-labelledby="a-title">
+        <h2 id="a-title">Înscrie-te în Rivo</h2>
+        <form name="signup" method="POST" data-netlify="true" class="form">
+          <input type="hidden" name="form-name" value="signup" />
+          <label>Nume
             <input name="name" required />
           </label>
-          <label>
-            Email
-            <input name="email" type="email" required />
+          <label>Email
+            <input type="email" name="email" required />
           </label>
-          <label>
-            Mesaj (opțional)
-            <textarea name="message" rows="4" placeholder="Ex: factură pe firmă"></textarea>
+          <label>Alege plan
+            <select name="plan" required>
+              <option>Basic</option>
+              <option selected>Pro</option>
+              <option>Enterprise</option>
+            </select>
           </label>
-          <button class="btn primary" type="submit">Plasează comanda</button>
-          <p class="pricing-note">Pentru checkout automat: Stripe / Gumroad / Lemon Squeezy.</p>
+          <label>Mesaj (opțional)
+            <textarea name="message" rows="4" placeholder="Ex: cerere demo pentru echipă"></textarea>
+          </label>
+          <button class="btn primary" type="submit">Creează contul</button>
+          <p class="muted" style="font-size:13px">Prin trimitere ești de acord cu <a href="#" style="text-decoration:underline">Termenii</a> și <a href="#" style="text-decoration:underline">Politica de confidențialitate</a>.</p>
         </form>
       </section>
     </main>
 
-    <footer class="container footer" role="contentinfo">
+    <footer class="container" role="contentinfo">
       <div class="links" aria-label="Legal">
         <a href="#">Termeni</a>
         <a href="#">Confidențialitate</a>
-        <a href="#comanda">Contact</a>
+        <a href="#abonare">Contact</a>
       </div>
-      <p style="text-align:center; margin:8px 0 0">© <span id="year"></span> RivoFit</p>
+      <p style="text-align:center; margin:10px 0 0">© <span id="year"></span> Rivo — Prompts & AI Workflows</p>
     </footer>
 
     <script>
-      // Anul curent
+      // YEAR
       document.getElementById('year').textContent = new Date().getFullYear();
 
-      // Popup intrare (o singură dată / 7 zile)
+      // POPUP intrare (1/7 zile)
       const modal = document.getElementById('entryModal');
       const closeBtn = document.getElementById('m-close');
-      const last = localStorage.getItem('rf_modal_ts');
+      const last = localStorage.getItem('rivo_modal_ts');
       const now = Date.now();
       const WEEK = 7*24*60*60*1000;
       if(!last || (now - Number(last)) > WEEK){ modal.classList.add('open'); }
-      closeBtn.addEventListener('click', ()=>{ modal.classList.remove('open'); localStorage.setItem('rf_modal_ts', String(Date.now())); });
+      closeBtn.addEventListener('click', ()=>{ modal.classList.remove('open'); localStorage.setItem('rivo_modal_ts', String(Date.now())); });
       modal.addEventListener('click', (e)=>{ if(e.target===modal){ closeBtn.click(); } });
 
-      // Preselectează produsul pe click
-      document.addEventListener('click', (e)=>{
-        const btn = e.target.closest('[data-product]');
-        if(!btn) return;
-        const map = { start: 'Start €19', pro: 'Build €49', team: 'Complete €99' };
-        const form = document.querySelector('form[name="order"]');
-        if(form){ form.product.value = map[btn.dataset.product]; document.getElementById('order-title').scrollIntoView({behavior:'smooth'}); }
-      });
-
-      // Tranziții slide între secțiuni
+      // REVEAL on scroll
       const sections = [...document.querySelectorAll('.section')];
       const io = new IntersectionObserver((entries)=>{
         entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('is-visible'); } });
-      },{ threshold:.1 });
+      },{ threshold:.12 });
       sections.forEach(s=> io.observe(s));
 
-      // Slide la navigare (smooth + anim out)
-      document.querySelectorAll('a[href^="#"]').forEach(a=>{
-        a.addEventListener('click', (e)=>{
-          const href = a.getAttribute('href');
-          if(!href || href.length<2) return;
-          e.preventDefault();
-          const target = document.querySelector(href);
-          if(!target) return;
-          const current = sections.find(s=>{
-            const r = s.getBoundingClientRect();
-            return r.top <= 80 && r.bottom >= 160;
-          });
-          if(current){
-            current.classList.add('slide-out');
-            setTimeout(()=>{
-              target.scrollIntoView({behavior:'smooth'});
-              current.classList.remove('slide-out');
-            }, 300);
-          } else {
-            target.scrollIntoView({behavior:'smooth'});
-          }
-        });
+      // HERO fake global search (GG)
+      let gCount = 0; let lastKeyTime = 0;
+      window.addEventListener('keydown', (e)=>{
+        const t = Date.now(); if(t - lastKeyTime > 450) gCount = 0; lastKeyTime = t;
+        if(e.key.toLowerCase()==='g'){ gCount++; if(gCount===2){ alert('Căutare globală (demo) — introduce promptul tău.'); gCount=0; } }
       });
+
+      // SLIDER
+      const slides = document.getElementById('slides');
+      const prev = document.getElementById('prev');
+      const next = document.getElementById('next');
+      let idx = 0; const total = slides.children.length;
+      function go(i){ idx = (i+total)%total; slides.style.transform = `translateX(${-idx*100}%)`; }
+      prev.addEventListener('click', ()=> go(idx-1));
+      next.addEventListener('click', ()=> go(idx+1));
+      let auto = setInterval(()=> go(idx+1), 5000);
+      [prev,next,slides].forEach(el=> el.addEventListener('mouseenter', ()=> clearInterval(auto)));
+
+      // PRICING TOGGLE (lunar / anual)
+      const billing = document.getElementById('billing');
+      const monies = document.querySelectorAll('.money');
+      const setMode = (annual)=>{
+        monies.forEach(m=>{ const y=m.getAttribute('data-year'); const mo=m.getAttribute('data-month'); m.textContent = annual? y : mo; });
+        billing.classList.toggle('on', annual); billing.setAttribute('aria-checked', annual? 'true':'false');
+      };
+      billing.addEventListener('click', ()=> setMode(!billing.classList.contains('on')));
+      billing.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); setMode(!billing.classList.contains('on')); }});
+
     </script>
   </body>
 </html>
