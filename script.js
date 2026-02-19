@@ -1,55 +1,66 @@
+const REVIEWS = [
+  { name:"M. Krüger", stars:5, city:"Helmstedt", date:"2026-02-10", text:"Schnell reagiert, pünktlich da, Ergebnis top." },
+  { name:"S. Neumann", stars:5, city:"Wolfsburg", date:"2026-01-28", text:"Umzugsreinigung mit Abnahme – ohne Stress. Sehr gründlich." },
+  { name:"Hausverwaltung B.", stars:5, city:"Braunschweig", date:"2026-01-17", text:"Zuverlässig, sauber, termintreu. Kommunikation professionell." },
+  { name:"T. Brandt", stars:4, city:"Königslutter", date:"2026-01-05", text:"Gute Arbeit, fairer Preis. Würde wieder buchen." },
+  { name:"A. Weber", stars:5, city:"Schöningen", date:"2025-12-18", text:"Entrümpelung im Keller – schnell erledigt und sauber hinterlassen." },
+  { name:"N. Richter", stars:5, city:"Gifhorn", date:"2025-12-04", text:"Büro war richtig sauber. Sehr angenehm und diskret." }
+];
+
 function starString(n){
-  const full = "★★★★★";
-  const empty = "☆☆☆☆☆";
-  return full.slice(0, n) + empty.slice(0, 5 - n);
+  const full="★★★★★", empty="☆☆☆☆☆";
+  return full.slice(0,n) + empty.slice(0,5-n);
 }
-
-function escapeHtml(str){
-  return String(str).replace(/[&<>"']/g, s => ({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-  }[s]));
-}
-
 function formatDate(iso){
-  try{
-    const d = new Date(iso);
-    return d.toLocaleDateString("de-DE", { day:"2-digit", month:"2-digit", year:"numeric" });
-  }catch{ return ""; }
+  const d=new Date(iso);
+  return d.toLocaleDateString("de-DE",{day:"2-digit",month:"2-digit",year:"numeric"});
 }
 
-async function loadReviews(){
-  const res = await fetch("reviews.json", { cache: "no-store" });
-  const data = await res.json();
-
-  const count = data.length;
-  const avg = count ? (data.reduce((s,r)=>s+r.stars,0) / count) : 0;
-  const avgTxt = count ? avg.toFixed(1) : "—";
-
-  const avgEls = [document.getElementById("avgRating"), document.getElementById("avgRating2")];
-  const countEls = [document.getElementById("reviewCount"), document.getElementById("reviewCount2")];
-  avgEls.forEach(el => el && (el.textContent = avgTxt));
-  countEls.forEach(el => el && (el.textContent = String(count)));
-
+function renderReviews(){
   const wrap = document.getElementById("reviews");
   if(!wrap) return;
 
-  wrap.innerHTML = data
-    .sort((a,b)=> new Date(b.date) - new Date(a.date))
-    .slice(0, 9)
+  const count = REVIEWS.length;
+  const avg = count ? (REVIEWS.reduce((s,r)=>s+r.stars,0)/count) : 0;
+
+  const avgEl = document.getElementById("avgRating");
+  const countEl = document.getElementById("reviewCount");
+  if(avgEl) avgEl.textContent = avg.toFixed(1);
+  if(countEl) countEl.textContent = String(count);
+
+  wrap.innerHTML = REVIEWS
+    .slice().sort((a,b)=> new Date(b.date) - new Date(a.date))
+    .slice(0, 6)
     .map(r => `
       <article class="review">
         <div class="review__top">
           <div>
-            <div class="review__name">${escapeHtml(r.name)}</div>
-            <div class="review__meta">${escapeHtml(r.city || "Helmstedt")} • ${formatDate(r.date)}</div>
+            <div class="review__name">${r.name}</div>
+            <div class="review__meta">${r.city} • ${formatDate(r.date)}</div>
           </div>
-          <div class="stars" aria-label="${r.stars} von 5 Sternen">${starString(r.stars)}</div>
+          <div class="stars">${starString(r.stars)}</div>
         </div>
-        <p class="muted">${escapeHtml(r.text)}</p>
+        <p>${r.text}</p>
       </article>
     `).join("");
 }
 
+function scrollToOffer(){
+  const card = document.getElementById("offerCard");
+  if(!card) return;
+  card.scrollIntoView({behavior:"smooth", block:"center"});
+  card.style.transition = "box-shadow .2s ease";
+  const prev = card.style.boxShadow;
+  card.style.boxShadow = "0 0 0 6px rgba(14,165,233,.25), 0 16px 50px rgba(11,18,32,.12)";
+  setTimeout(()=> card.style.boxShadow = prev, 1200);
+}
+
 document.addEventListener("DOMContentLoaded", ()=>{
-  loadReviews().catch(()=>{});
+  renderReviews();
+
+  document.getElementById("angebotSichernBtn")?.addEventListener("click", scrollToOffer);
+
+  document.querySelectorAll("[data-scroll='offerCard']").forEach(btn=>{
+    btn.addEventListener("click", scrollToOffer);
+  });
 });
