@@ -4,8 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>REVO Reinigung & Entrümpelung | Helmstedt + Umkreis 100 km</title>
-  <meta name="description" content="REVO Reinigung & Entrümpelung in Helmstedt + Umkreis 100 km. Schnell. Zuverlässig. Fair. Jetzt anrufen & Angebot sichern." />
-  <meta name="robots" content="index,follow" />
+  <meta name="description" content="Reinigung & Entrümpelung in Helmstedt + Umkreis 100 km. Schnell. Zuverlässig. Fair. Jetzt Angebot sichern." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -20,9 +19,8 @@
       </div>
     </a>
 
-    <nav class="nav">
+    <nav class="nav" aria-label="Navigation">
       <a href="#leistungen">Leistungen</a>
-      <a href="#servicepakete">Pakete</a>
       <a href="#galerie">Galerie</a>
       <a href="#bewertungen">Bewertungen</a>
       <a href="#kontakt">Kontakt</a>
@@ -37,53 +35,170 @@
 
 <main id="top">
 
-  <!-- HERO (ca template-ul din poza) -->
-  <section class="hero">
-    <div class="hero__bg" aria-hidden="true"></div>
-    <div class="container hero__inner">
-      <div class="hero__content">
-        <div class="pill">38350 Helmstedt • Umkreis 100 km</div>
-        <h1>Reinigung & Entrümpelung, <span class="accent">die wirklich abliefert</span>.</h1>
-        <p class="lead">
-          Schnell. Zuverlässig. Fair. Für Privatkunden & Hausverwaltungen.
-          <strong>Jetzt anrufen & Angebot sichern!</strong>
-        </p>
+  <!-- HERO SLIDER (exact ca template) -->
+  <section class="hero" aria-label="Hero Slider">
+    <div class="hero__slides" id="slides">
+      <div class="hero__slide is-active" style="background-image:url('images/hero-1.jpg')"></div>
+      <div class="hero__slide" style="background-image:url('images/hero-2.jpg')"></div>
+      <div class="hero__slide" style="background-image:url('images/hero-3.jpg')"></div>
+    </div>
 
-        <div class="hero__actions">
-          <button class="btn btn--primary" id="angebotSichernBtn" type="button">Angebot sichern</button>
-          <a class="btn" href="#leistungen">Leistungen ansehen</a>
+    <div class="hero__overlay" aria-hidden="true"></div>
+
+    <div class="container hero__content">
+      <div class="hero__kicker">38350 Helmstedt • Umkreis 100 km</div>
+
+      <h1 class="hero__title">
+        Reinigung & Entrümpelung <span class="accent">auf Top-Niveau</span>
+      </h1>
+
+      <p class="hero__text">
+        Schnell. Zuverlässig. Fair. Für Privatkunden & Hausverwaltungen.
+        <strong>Jetzt Angebot sichern.</strong>
+      </p>
+
+      <div class="hero__actions">
+        <button class="btn btn--primary" id="ctaOffer" type="button">Angebot sichern</button>
+        <a class="btn btn--light" href="#leistungen">Leistungen ansehen</a>
+      </div>
+
+      <div class="hero__dots" id="dots" aria-label="Slider Punkte">
+        <button class="dot is-active" type="button" aria-label="Slide 1"></button>
+        <button class="dot" type="button" aria-label="Slide 2"></button>
+        <button class="dot" type="button" aria-label="Slide 3"></button>
+      </div>
+    </div>
+
+    <button class="arrow arrow--left" id="prev" aria-label="Vorheriger Slide" type="button">‹</button>
+    <button class="arrow arrow--right" id="next" aria-label="Nächster Slide" type="button">›</button>
+  </section>
+
+  <!-- 4 FEATURES (exact ca template) -->
+  <section class="features" aria-label="Highlights">
+    <div class="container features__grid">
+      <article class="feature">
+        <div class="feature__icon" aria-hidden="true">🧼</div>
+        <h3>Grundreinigung</h3>
+        <p>Küche, Bad, Böden, Details – gründlich & sauber.</p>
+      </article>
+
+      <article class="feature">
+        <div class="feature__icon" aria-hidden="true">🏢</div>
+        <h3>Büroreinigung</h3>
+        <p>Professionell, diskret, zuverlässig – für B2B.</p>
+      </article>
+
+      <article class="feature">
+        <div class="feature__icon" aria-hidden="true">🗝️</div>
+        <h3>Abnahme-ready</h3>
+        <p>Umzugsreinigung mit Abnahme – stressfrei übergeben.</p>
+      </article>
+
+      <article class="feature">
+        <div class="feature__icon" aria-hidden="true">📦</div>
+        <h3>Entrümpelung</h3>
+        <p>Keller, Dachboden, Wohnung, Garage – sauber geräumt.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- LEISTUNGEN -->
+  <section id="leistungen" class="section">
+    <div class="container">
+      <div class="section__head">
+        <h2>Leistungen</h2>
+        <p>Wir lösen Probleme – nicht nur „putzen“.</p>
+      </div>
+
+      <div class="serviceGrid">
+        <div class="serviceCard">
+          <h3>Unterhaltsreinigung</h3>
+          <p>Regelmäßig sauber – planbar und stressfrei.</p>
         </div>
+        <div class="serviceCard">
+          <h3>Treppenhausreinigung</h3>
+          <p>Der erste Eindruck zählt – sauber & termintreu.</p>
+        </div>
+        <div class="serviceCard">
+          <h3>Bauendreinigung</h3>
+          <p>Staub, Schmutz, Rückstände weg – abnahmebereit.</p>
+        </div>
+        <div class="serviceCard">
+          <h3>Wohnungs-/Hausreinigung</h3>
+          <p>Gründlich, strukturiert, mit Blick fürs Detail.</p>
+        </div>
+      </div>
 
-        <div class="hero__proof">
-          <div class="proof">
-            <div class="proof__big" id="avgRating">4.8</div>
-            <div class="proof__small">Ø Bewertung</div>
-          </div>
-          <div class="proof">
-            <div class="proof__big" id="reviewCount">6</div>
-            <div class="proof__small">Rezensionen</div>
-          </div>
-          <div class="proof">
-            <div class="proof__big">100%</div>
-            <div class="proof__small">Fokus auf Qualität</div>
+      <div class="ctaBand" id="offerBand">
+        <div>
+          <h3>Kostenloses Angebot in 60 Sekunden</h3>
+          <p>Kurzes Formular – wir melden uns schnell.</p>
+        </div>
+        <button class="btn btn--primary" id="ctaOffer2" type="button">Zum Formular</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIE -->
+  <section id="galerie" class="section section--soft">
+    <div class="container">
+      <div class="section__head">
+        <h2>Galerie</h2>
+        <p>Ersetze Platzhalter später mit echten Vorher/Nachher Fotos.</p>
+      </div>
+
+      <div class="gallery">
+        <img src="images/gallery-1.jpg" alt="Galerie 1" loading="lazy" />
+        <img src="images/gallery-2.jpg" alt="Galerie 2" loading="lazy" />
+        <img src="images/gallery-3.jpg" alt="Galerie 3" loading="lazy" />
+        <img src="images/gallery-4.jpg" alt="Galerie 4" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- BEWERTUNGEN -->
+  <section id="bewertungen" class="section">
+    <div class="container">
+      <div class="section__head">
+        <h2>Bewertungen</h2>
+        <p>Echte Stimmen. Keine Märchen.</p>
+      </div>
+
+      <div class="reviews" id="reviews"></div>
+    </div>
+  </section>
+
+  <!-- KONTAKT + FORMULAR -->
+  <section id="kontakt" class="section section--soft">
+    <div class="container contact">
+      <div>
+        <h2>Kontakt</h2>
+        <p>Helmstedt + 100 km • Privat & Hausverwaltung</p>
+
+        <div class="contactCards">
+          <a class="contactCard" href="tel:+49REPLACE">
+            <div class="k">Telefon</div><div class="v">+49 REPLACE</div><div class="m">Click-to-call</div>
+          </a>
+          <a class="contactCard" href="https://wa.me/49REPLACE" rel="noopener">
+            <div class="k">WhatsApp</div><div class="v">Chat starten</div><div class="m">Schnelle Antwort</div>
+          </a>
+          <div class="contactCard">
+            <div class="k">Einsatzgebiet</div><div class="v">38350 Helmstedt</div><div class="m">+ Umkreis 100 km</div>
           </div>
         </div>
       </div>
 
-      <!-- Formular Card (landing/offer) -->
-      <div class="offerCard" id="offerCard">
-        <div class="offerCard__head">
-          <h2>In 60 Sekunden zum Angebot</h2>
-          <p>Kurz ausfüllen, wir melden uns schnell.</p>
-        </div>
+      <div class="formCard" id="offerForm">
+        <h3>In 60 Sekunden zum Angebot</h3>
+        <p class="muted">Kurz ausfüllen – wir melden uns schnell.</p>
 
         <form name="lead" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="form">
           <input type="hidden" name="form-name" value="lead" />
           <p class="hidden"><label>Don’t fill this out: <input name="bot-field" /></label></p>
 
-          <label>Name* <input name="fullName" required minlength="2" placeholder="Max Mustermann" /></label>
-          <label>Telefon* <input name="phone" required inputmode="tel" placeholder="0151 12345678" /></label>
-          <label>PLZ / Ort* <input name="zipOrCity" required placeholder="38350 Helmstedt" /></label>
+          <label>Name* <input name="fullName" required minlength="2" /></label>
+          <label>Telefon* <input name="phone" required inputmode="tel" /></label>
+          <label>PLZ / Ort* <input name="zipOrCity" required /></label>
 
           <label>Service*
             <select name="service" required>
@@ -99,192 +214,14 @@
             </select>
           </label>
 
-          <label>Nachricht* <textarea name="message" required minlength="10" placeholder="Kurz beschreiben: Größe, Zustand, Terminwunsch…"></textarea></label>
+          <label>Nachricht* <textarea name="message" required minlength="10" placeholder="Größe, Zustand, Terminwunsch…"></textarea></label>
 
           <button class="btn btn--primary btn--full" type="submit">Angebot anfragen</button>
-
           <div class="form__meta">
-            <a href="tel:+49REPLACE">Oder direkt anrufen</a><span class="dot">•</span>
-            <a href="https://wa.me/49REPLACE" rel="noopener">WhatsApp schreiben</a>
+            <a href="tel:+49REPLACE">Oder anrufen</a><span class="sep">•</span>
+            <a href="https://wa.me/49REPLACE" rel="noopener">WhatsApp</a>
           </div>
         </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- FEATURE ROW (exact ca template) -->
-  <section class="features">
-    <div class="container features__grid">
-      <article class="feature">
-        <div class="feature__icon">✓</div>
-        <h3>Sauber & gründlich</h3>
-        <p>Detailfokus statt “schnell schnell”.</p>
-      </article>
-
-      <article class="feature">
-        <div class="feature__icon">⚡</div>
-        <h3>Kurzfristige Termine</h3>
-        <p>Wenn’s brennt, sind wir da.</p>
-      </article>
-
-      <article class="feature">
-        <div class="feature__icon">🏢</div>
-        <h3>B2B & Hausverwaltung</h3>
-        <p>Planbar. Termintreu. Abnahme-ready.</p>
-      </article>
-
-      <article class="feature">
-        <div class="feature__icon">📦</div>
-        <h3>Entrümpelung</h3>
-        <p>Keller, Dachboden, Wohnung, Garage.</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- LEISTUNGEN -->
-  <section id="leistungen" class="section">
-    <div class="container">
-      <div class="section__head">
-        <h2>Leistungen</h2>
-        <p>Wir lösen Probleme – nicht nur „putzen“.</p>
-      </div>
-
-      <div class="services">
-        <article class="serviceCard">
-          <img src="images/service-1.jpg" alt="Grundreinigung" loading="lazy" />
-          <div>
-            <h3>Grundreinigung</h3>
-            <p>Für Neustart-Feeling: Küche, Bad, Böden, Details.</p>
-            <button class="linkBtn" data-scroll="offerCard" type="button">Angebot anfragen →</button>
-          </div>
-        </article>
-
-        <article class="serviceCard">
-          <img src="images/service-2.jpg" alt="Büroreinigung" loading="lazy" />
-          <div>
-            <h3>Büroreinigung</h3>
-            <p>Professionell, diskret, zuverlässig.</p>
-            <button class="linkBtn" data-scroll="offerCard" type="button">Angebot anfragen →</button>
-          </div>
-        </article>
-
-        <article class="serviceCard">
-          <img src="images/service-3.jpg" alt="Umzugsreinigung mit Abnahme" loading="lazy" />
-          <div>
-            <h3>Umzugsreinigung mit Abnahme</h3>
-            <p>Übergabe sauber. Stress runter. Risiko runter.</p>
-            <button class="linkBtn" data-scroll="offerCard" type="button">Angebot anfragen →</button>
-          </div>
-        </article>
-
-        <article class="serviceCard serviceCard--highlight">
-          <img src="images/service-4.jpg" alt="Entrümpelung" loading="lazy" />
-          <div>
-            <h3>Entrümpelung</h3>
-            <p>Keller, Dachboden, Wohnung, Garage – wir räumen sauber auf.</p>
-            <button class="linkBtn" data-scroll="offerCard" type="button">Angebot anfragen →</button>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- PAKETE -->
-  <section id="servicepakete" class="section section--soft">
-    <div class="container">
-      <div class="section__head">
-        <h2>Pakete</h2>
-        <p>Fair kalkuliert. Transparent. Ohne Märchen.</p>
-      </div>
-
-      <div class="packages">
-        <article class="package">
-          <h3>Basic</h3>
-          <ul>
-            <li>Kurzer Einsatz</li>
-            <li>1–2 Räume</li>
-            <li>Ideal für Auffrischung</li>
-          </ul>
-          <button class="btn btn--primary btn--full" data-scroll="offerCard" type="button">Angebot sichern</button>
-        </article>
-
-        <article class="package package--best">
-          <div class="tag">Beliebt</div>
-          <h3>Standard</h3>
-          <ul>
-            <li>Wohnung / Haus</li>
-            <li>Gründlich + Details</li>
-            <li>Perfekt vor Besuch / Übergabe</li>
-          </ul>
-          <button class="btn btn--primary btn--full" data-scroll="offerCard" type="button">Angebot sichern</button>
-        </article>
-
-        <article class="package">
-          <h3>B2B / Abnahme</h3>
-          <ul>
-            <li>Büro / Treppenhaus</li>
-            <li>Abnahme-ready</li>
-            <li>Planbar & termintreu</li>
-          </ul>
-          <button class="btn btn--primary btn--full" data-scroll="offerCard" type="button">Angebot sichern</button>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- GALERIE -->
-  <section id="galerie" class="section">
-    <div class="container">
-      <div class="section__head">
-        <h2>Galerie</h2>
-        <p>Echte Fotos verkaufen. Platzhalter bis du sie hast.</p>
-      </div>
-
-      <div class="gallery">
-        <img src="images/gallery-1.jpg" alt="Galerie 1" loading="lazy" />
-        <img src="images/gallery-2.jpg" alt="Galerie 2" loading="lazy" />
-        <img src="images/gallery-3.jpg" alt="Galerie 3" loading="lazy" />
-        <img src="images/gallery-4.jpg" alt="Galerie 4" loading="lazy" />
-      </div>
-    </div>
-  </section>
-
-  <!-- BEWERTUNGEN -->
-  <section id="bewertungen" class="section section--soft">
-    <div class="container">
-      <div class="section__head">
-        <h2>Bewertungen</h2>
-        <p>Echte Stimmen. Keine Märchen.</p>
-      </div>
-
-      <div class="reviews" id="reviews"></div>
-    </div>
-  </section>
-
-  <!-- KONTAKT -->
-  <section id="kontakt" class="section">
-    <div class="container contact">
-      <div>
-        <h2>Kontakt</h2>
-        <p>Schnellster Weg: Anruf oder WhatsApp.</p>
-
-        <div class="contactCards">
-          <a class="contactCard" href="tel:+49REPLACE">
-            <div class="k">Telefon</div><div class="v">+49 REPLACE</div><div class="m">Click-to-call</div>
-          </a>
-          <a class="contactCard" href="https://wa.me/49REPLACE" rel="noopener">
-            <div class="k">WhatsApp</div><div class="v">Chat starten</div><div class="m">Schnelle Antwort</div>
-          </a>
-          <div class="contactCard">
-            <div class="k">Einsatzgebiet</div><div class="v">Helmstedt + 100 km</div><div class="m">WOB • BS • MD</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="contact__cta">
-        <h3>Jetzt Angebot sichern</h3>
-        <p>Ein Klick – Formular ausfüllen – fertig.</p>
-        <button class="btn btn--primary btn--full" data-scroll="offerCard" type="button">Zum Formular</button>
       </div>
     </div>
   </section>
