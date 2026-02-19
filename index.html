@@ -1,431 +1,360 @@
 <!doctype html>
-<html lang="ro">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Rivo — Prompts & AI Workflows</title>
-    <meta name="description" content="Rivo: creează și rulează fluxuri de lucru AI din simple prompt-uri. Platformă no‑code cu exemple, galerii, testimoniale și planuri tarifare. Dark/glow futurist, rapid și responsive.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%239467F5'/%3E%3Cstop offset='1' stop-color='%2300D1FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='36' height='36' rx='8' fill='%23090B10'/%3E%3Cpath d='M10 24l8-12 8 12' stroke='url(%23g)' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3C/svg%3E" type="image/svg+xml">
-    <style>
-      :root{
-        --bg:#07080d;          /* dark space */
-        --bg-soft:#0b0f19;      /* panels */
-        --card:#0f1424;         /* cards */
-        --text:#eef2ff;         /* near-white */
-        --muted:#b7c1e1;        /* soft steel */
-        --edge:#1a2140;         /* borders */
-        --glow-1:#7c5cff;       /* violet */
-        --glow-2:#22d3ee;       /* cyan */
-        --glow-3:#f5d46b;       /* soft gold */
-        --accent:#8b5cf6;       /* primary */
-        --accent-2:#06b6d4;     /* secondary */
-        --radius:16px;
-        --radius-lg:22px;
-        --maxw:1180px;
-        --shadow:0 10px 30px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.02);
-      }
-      *{box-sizing:border-box}
-      html,body{height:100%}
-      html{scroll-behavior:smooth}
-      body{
-        margin:0; font-family:"Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-        color:var(--text); background:radial-gradient(120% 120% at 10% -10%, rgba(139,92,246,.18), transparent 50%),
-                 radial-gradient(120% 120% at 110% 10%, rgba(34,211,238,.14), transparent 50%), var(--bg);
-        overflow-x:hidden;
-      }
-      a{color:inherit; text-decoration:none}
-      img{display:block; max-width:100%}
-      .sr-only{position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden}
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>REVO Reinigung & Entrümpelung | Helmstedt + Umkreis 100 km</title>
+  <meta name="description" content="REVO Reinigung & Entrümpelung in Helmstedt + Umkreis 100 km. Schnell. Zuverlässig. Fair. Jetzt anrufen & Angebot sichern." />
+  <meta name="robots" content="index,follow" />
 
-      /* STARFIELD / GRID BG */
-      .fx-bg{position:fixed; inset:0; z-index:-2; pointer-events:none; background:
-        radial-gradient(80% 60% at 50% -10%, rgba(139,92,246,.25), transparent 55%),
-        radial-gradient(60% 50% at 120% 20%, rgba(34,211,238,.18), transparent 60%),
-        radial-gradient(60% 60% at -20% 120%, rgba(245,212,107,.10), transparent 60%);
-        filter:saturate(105%) contrast(102%);
-      }
-      .gridlines:before{content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
-        background-image: linear-gradient(rgba(124,92,255,.06) 1px, transparent 1px),
-                          linear-gradient(90deg, rgba(124,92,255,.06) 1px, transparent 1px);
-        background-size: 28px 28px; mask-image: radial-gradient(80% 60% at 50% 10%, rgba(255,255,255,.9), transparent 70%);
-      }
+  <meta property="og:title" content="REVO Reinigung & Entrümpelung" />
+  <meta property="og:description" content="Reinigung & Entrümpelung in Helmstedt + Umkreis 100 km. Jetzt anrufen & Angebot sichern!" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="de_DE" />
 
-      /* LAYOUT */
-      .container{width:100%; max-width:var(--maxw); margin:0 auto; padding:0 20px}
-      header.nav{position:sticky; top:0; z-index:50; border-bottom:1px solid var(--edge);
-        backdrop-filter:saturate(140%) blur(10px);
-        background:linear-gradient(180deg, rgba(11,15,25,.75), rgba(11,15,25,.55));}
-      .nav-inner{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 0}
-      .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px}
-      .brand .dot{width:8px; height:8px; border-radius:999px; background:radial-gradient(circle at 40% 40%, var(--glow-2), var(--glow-1)); box-shadow:0 0 14px var(--glow-2)}
-      .nav-links{display:flex; gap:14px; align-items:center; flex-wrap:wrap}
-      .nav-links a{padding:9px 12px; border-radius:10px; opacity:.92}
-      .nav-links a:hover{background:rgba(124,92,255,.12); box-shadow:0 0 20px rgba(124,92,255,.25) inset; opacity:1}
-      .cta-top{display:flex; gap:10px}
+  <link rel="stylesheet" href="styles.css" />
+</head>
 
-      .btn{display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:11px 16px; border-radius:12px; border:1px solid var(--edge); box-shadow:var(--shadow); font-weight:700; transition:transform .15s ease, box-shadow .2s ease, background .2s ease}
-      .btn.small{padding:8px 12px; font-size:14px}
-      .btn.primary{background:radial-gradient(120% 120% at 0% 0%, rgba(124,92,255,.35), transparent 50%),
-                    radial-gradient(120% 120% at 100% 0%, rgba(34,211,238,.28), transparent 50%), var(--bg-soft);
-                    border-color:transparent}
-      .btn.primary:hover{transform:translateY(-1px) scale(1.01); box-shadow:0 0 24px rgba(124,92,255,.35), 0 0 28px rgba(34,211,238,.25)}
-      .btn.ghost{background:rgba(124,92,255,.10)}
-      .btn.ghost:hover{background:rgba(124,92,255,.18)}
+<body>
+  <a class="skip" href="#main">Zum Inhalt springen</a>
 
-      h1{font-size:clamp(36px, 5vw, 68px); line-height:1.05; margin:0 0 14px}
-      h2{font-size:clamp(26px, 3.2vw, 38px); margin:0 0 16px}
-      .muted{color:var(--muted)}
-      .lead{font-size:clamp(16px, 2vw, 20px)}
-      .chip{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border:1px solid var(--edge); border-radius:999px; font-weight:700; font-size:12px; background:rgba(6,182,212,.08)}
-
-      /* HERO */
-      .hero{position:relative; padding:92px 0 54px}
-      .hero-inner{max-width:900px; margin:0 auto; text-align:center}
-      .glow-title{background:linear-gradient(135deg, #fff, #a5b4fc 35%, #7c5cff 60%, #22d3ee 95%); -webkit-background-clip:text; background-clip:text; color:transparent; text-shadow:0 0 30px rgba(124,92,255,.2)}
-      .kbd{display:inline-block; padding:6px 10px; border-radius:8px; border:1px solid var(--edge); background:rgba(255,255,255,.03); font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size:12px}
-      .hero-cta{display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:14px}
-      .note{margin-top:12px; font-size:13px; color:#c9d4ff}
-
-      /* SECTIONS */
-      .section{padding:70px 0; opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease}
-      .section.is-visible{opacity:1; transform:translateY(0)}
-      .grid{display:grid; gap:16px}
-      .two{grid-template-columns:repeat(1, minmax(0,1fr))}
-      .three{grid-template-columns:repeat(1, minmax(0,1fr))}
-      @media (min-width:900px){ .two{grid-template-columns:repeat(2,1fr)} .three{grid-template-columns:repeat(3,1fr)} }
-
-      .card{background:linear-gradient(180deg, rgba(15,20,36,.92), rgba(11,15,25,.92)); border:1px solid var(--edge); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow)}
-      .card h3{margin:8px 0 6px; font-size:20px}
-
-      /* WORKFLOWS DIAGRAM */
-      .flow{display:grid; gap:14px}
-      .flow-step{display:flex; align-items:flex-start; gap:12px; background:rgba(124,92,255,.08); border:1px dashed rgba(124,92,255,.25); padding:12px; border-radius:12px}
-      .flow-step .dot{width:10px; height:10px; border-radius:999px; background:radial-gradient(circle at 40% 40%, var(--glow-1), var(--glow-2)); box-shadow:0 0 12px rgba(34,211,238,.5)}
-
-      /* EXEMPLE PROMPTS (slider) */
-      .slider{position:relative; overflow:hidden; border:1px solid var(--edge); border-radius:var(--radius); background:var(--card)}
-      .slides{display:flex; transition:transform .5s ease}
-      .slide{min-width:100%; padding:18px; display:grid; gap:12px}
-      .prompt{background:#0b1020; border:1px solid var(--edge); border-radius:12px; padding:14px}
-      .resp{background:#0c1226; border:1px solid var(--edge); border-radius:12px; padding:14px}
-      .nav-btn{position:absolute; top:50%; transform:translateY(-50%); background:rgba(124,92,255,.2); border:1px solid var(--edge); border-radius:12px; padding:8px 10px; cursor:pointer}
-      .nav-btn:hover{background:rgba(124,92,255,.3)}
-      .prev{left:10px} .next{right:10px}
-
-      /* GALERIE */
-      .gallery{display:grid; grid-template-columns:repeat(1, minmax(0,1fr)); gap:14px}
-      @media (min-width:800px){ .gallery{grid-template-columns:repeat(3,1fr)} }
-      .frame{border-radius:14px; border:1px solid var(--edge); padding:8px; background:linear-gradient(180deg,#0d1224,#0a0f20); box-shadow:0 1px 0 rgba(255,255,255,.03) inset, 0 0 0 1px rgba(124,92,255,.12), 0 12px 32px rgba(0,0,0,.45)}
-      .frame img{border-radius:10px; border:1px solid #141a34}
-
-      /* TESTIMONIALE */
-      .quote{font-style:italic}
-      .avatar{width:36px; height:36px; border-radius:999px; border:1px solid var(--edge); object-fit:cover}
-      .row{display:flex; align-items:center; gap:10px}
-
-      /* PRICING + TOGGLE */
-      .pricing{display:grid; gap:16px}
-      @media (min-width:880px){ .pricing{grid-template-columns:repeat(3,1fr)} }
-      .price{ text-align:center }
-      .money{font-size:34px; font-weight:800; margin:6px 0 8px; background:linear-gradient(135deg,#fff,#a5b4fc 40%, #7c5cff 70%); -webkit-background-clip:text; background-clip:text; color:transparent}
-      .featured{border-color:rgba(124,92,255,.45); box-shadow:0 0 0 1px rgba(124,92,255,.25), var(--shadow)}
-      .toggle{display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:12px}
-      .switch{position:relative; width:56px; height:28px; background:#111834; border:1px solid var(--edge); border-radius:999px; cursor:pointer}
-      .knob{position:absolute; top:2px; left:2px; width:24px; height:24px; border-radius:999px; background:radial-gradient(circle at 40% 40%, var(--glow-2), var(--glow-1)); box-shadow:0 0 16px rgba(34,211,238,.5); transition:left .2s ease}
-      .switch.on .knob{left:30px}
-
-      /* FORME */
-      .form{display:grid; gap:12px; max-width:700px; margin:0 auto}
-      label{display:grid; gap:6px; font-weight:700}
-      input, textarea, select{background:#0b1020; color:var(--text); border:1px solid var(--edge); border-radius:12px; padding:12px; outline:none}
-      input:focus, textarea:focus, select:focus{border-color:rgba(124,92,255,.6); box-shadow:0 0 0 3px rgba(124,92,255,.18)}
-
-      /* FOOTER */
-      footer{border-top:1px solid var(--edge); padding:26px 0; color:var(--muted); font-size:14px}
-      .links{display:flex; gap:14px; flex-wrap:wrap; justify-content:center}
-
-      /* MODAL (pop-up) */
-      .modal{position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:1000; background:rgba(3,6,14,.6); backdrop-filter:blur(6px)}
-      .modal.open{display:flex}
-      .modal-card{ width:min(560px, 92vw); background:linear-gradient(180deg, rgba(15,20,36,.96), rgba(11,15,25,.96)); border:1px solid var(--edge); border-radius:var(--radius-lg); padding:20px; box-shadow:0 24px 60px rgba(0,0,0,.7)}
-      .modal-header{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px}
-      .close{border:none; background:transparent; color:var(--muted); font-size:22px; cursor:pointer}
-    </style>
-  </head>
-  <body class="gridlines">
-    <a class="sr-only" href="#content">Sari la conținut</a>
-    <div class="fx-bg" aria-hidden="true"></div>
-
-    <!-- POPUP intrare (lead capture / trial) -->
-    <div class="modal" id="entryModal" role="dialog" aria-modal="true" aria-labelledby="m-title" aria-describedby="m-desc">
-      <div class="modal-card">
-        <div class="modal-header">
-          <h3 id="m-title" style="margin:0">Bine ai venit la <span class="glow-title">Rivo</span></h3>
-          <button class="close" aria-label="Închide" id="m-close">×</button>
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="#top" aria-label="REVO Startseite">
+        <img class="brand__logo" src="images/logo.jpg" alt="REVO Logo" />
+        <div class="brand__text">
+          <div class="brand__name">REVO</div>
+          <div class="brand__sub">Reinigung & Entrümpelung</div>
         </div>
-        <p id="m-desc" class="muted" style="margin:0 0 12px">Activează <strong>trial 14 zile</strong> sau primește resurse gratuite despre Prompts & AI Workflows.</p>
-        <form name="lead" method="POST" data-netlify="true" class="form">
-          <input type="hidden" name="form-name" value="lead" />
-          <label>Email
-            <input type="email" name="email" required placeholder="nume@email.com" />
-          </label>
-          <button class="btn primary" type="submit">Vreau acces</button>
-        </form>
+      </a>
+
+      <nav class="nav" aria-label="Hauptnavigation">
+        <a href="#leistungen">Leistungen</a>
+        <a href="#preise">Preise</a>
+        <a href="#galerie">Galerie</a>
+        <a href="#bewertungen">Bewertungen</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+
+      <div class="header__cta">
+        <!-- REPLACE: set your real numbers -->
+        <a class="btn btn--ghost" href="https://wa.me/49REPLACE" rel="noopener">WhatsApp</a>
+        <a class="btn btn--primary" href="tel:+49REPLACE">Jetzt anrufen</a>
       </div>
     </div>
+  </header>
 
-    <!-- HEADER -->
-    <header class="nav" role="banner">
-      <div class="container nav-inner">
-        <a class="brand" href="#" aria-label="Rivo">
-          <span class="dot" aria-hidden="true"></span>
-          <span>Rivo</span>
-        </a>
-        <nav class="nav-links" aria-label="Principal">
-          <a href="#workflows">Workflows</a>
-          <a href="#exemple">Exemple</a>
-          <a href="#galerie">Galerie</a>
-          <a href="#preturi">Prețuri</a>
-          <a href="#abonare">Abonare</a>
-        </nav>
-        <div class="cta-top">
-          <a class="btn ghost small" href="#preturi">Planuri</a>
-          <a class="btn primary small" href="#abonare">Înscrie-te</a>
+  <main id="main">
+    <section id="top" class="hero">
+      <div class="container hero__grid">
+        <div class="hero__left">
+          <p class="pill">38350 Helmstedt • Umkreis 100 km</p>
+          <h1>Reinigung & Entrümpelung, die wirklich abliefert.</h1>
+          <p class="lead">
+            Schnell. Zuverlässig. Fair. Für Privatkunden & Hausverwaltungen.
+            <strong>Jetzt anrufen & Angebot sichern!</strong>
+          </p>
+
+          <div class="hero__badges">
+            <span class="badge">Kurzfristige Termine</span>
+            <span class="badge">Abnahme-ready</span>
+            <span class="badge">Sauber & strukturiert</span>
+          </div>
+
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#kontakt">Kostenloses Angebot</a>
+            <a class="btn btn--soft" href="#leistungen">Leistungen ansehen</a>
+          </div>
+
+          <div class="trust">
+            <div class="trust__item">
+              <div class="trust__big" id="avgRating">—</div>
+              <div class="trust__small">Ø Bewertung</div>
+            </div>
+            <div class="trust__item">
+              <div class="trust__big" id="reviewCount">—</div>
+              <div class="trust__small">Rezensionen</div>
+            </div>
+            <div class="trust__item">
+              <div class="trust__big">100%</div>
+              <div class="trust__small">Fokus auf Qualität</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__right">
+          <div class="heroCard">
+            <div class="heroCard__top">
+              <h2 class="h3">In 60 Sekunden zum Angebot</h2>
+              <p class="muted">Kurz ausfüllen, wir melden uns schnell.</p>
+            </div>
+
+            <!-- Netlify Forms -->
+            <form name="lead" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="form">
+              <input type="hidden" name="form-name" value="lead" />
+              <p class="hidden">
+                <label>Don’t fill this out: <input name="bot-field" /></label>
+              </p>
+
+              <label>
+                Name*
+                <input name="fullName" required minlength="2" placeholder="Max Mustermann" />
+              </label>
+
+              <label>
+                Telefon*
+                <input name="phone" required placeholder="0151 12345678" inputmode="tel" />
+              </label>
+
+              <label>
+                PLZ / Ort*
+                <input name="zipOrCity" required placeholder="38350 Helmstedt" />
+              </label>
+
+              <label>
+                Service*
+                <select name="service" required>
+                  <option value="" disabled selected>Bitte auswählen</option>
+                  <option>Grundreinigung</option>
+                  <option>Unterhaltsreinigung</option>
+                  <option>Büroreinigung</option>
+                  <option>Treppenhausreinigung</option>
+                  <option>Bauendreinigung</option>
+                  <option>Wohnungs-/Hausreinigung</option>
+                  <option>Umzugsreinigung mit Abnahme</option>
+                  <option>Entrümpelung</option>
+                </select>
+              </label>
+
+              <label>
+                Nachricht*
+                <textarea name="message" required minlength="10" placeholder="Kurz beschreiben: Größe, Zustand, Terminwunsch…"></textarea>
+              </label>
+
+              <label>
+                Wunschtermin (optional)
+                <input name="preferredDate" placeholder="z.B. Freitag, 10:00" />
+              </label>
+
+              <button class="btn btn--primary btn--full" type="submit">Angebot anfragen</button>
+
+              <div class="form__meta">
+                <a class="link" href="tel:+49REPLACE">Oder direkt anrufen</a>
+                <span class="dot">•</span>
+                <a class="link" href="https://wa.me/49REPLACE" rel="noopener">WhatsApp schreiben</a>
+              </div>
+            </form>
+          </div>
+
+          <div class="heroImage">
+            <img src="images/hero-cleaning.jpg" alt="Professionelle Reinigung" loading="lazy" />
+          </div>
         </div>
       </div>
-    </header>
+    </section>
 
-    <main id="content">
-      <!-- HERO -->
-      <section class="hero container section" aria-labelledby="hero-title">
-        <div class="hero-inner">
-          <span class="chip">Prompts → AI Workflows • no-code</span>
-          <h1 id="hero-title" class="glow-title">Automatizează-ți creativitatea cu AI</h1>
-          <p class="lead muted">Rivo transformă prompt-urile în fluxuri de lucru inteligente: creezi, rulezi și scalezi automatizări AI — fără o linie de cod.</p>
-          <div class="hero-cta">
-            <a class="btn primary" href="#exemple">Vezi în acțiune</a>
-            <a class="btn ghost" href="#workflows">Află cum funcționează</a>
+    <section id="leistungen" class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2>Leistungen</h2>
+          <p class="muted">Wir lösen Probleme – nicht nur “putzen”. Sauber, schnell, zuverlässig.</p>
+        </div>
+
+        <div class="services">
+          <article class="serviceCard">
+            <img src="images/service-1.jpg" alt="Grundreinigung" loading="lazy" />
+            <div>
+              <h3>Grundreinigung</h3>
+              <p class="muted">Für Neustart-Feeling: Küche, Bad, Böden, Details.</p>
+              <a class="link" href="#kontakt">Angebot anfragen →</a>
+            </div>
+          </article>
+
+          <article class="serviceCard">
+            <img src="images/service-2.jpg" alt="Büroreinigung" loading="lazy" />
+            <div>
+              <h3>Büroreinigung</h3>
+              <p class="muted">Professionell, diskret, zuverlässig. Für Teams, die liefern müssen.</p>
+              <a class="link" href="#kontakt">Angebot anfragen →</a>
+            </div>
+          </article>
+
+          <article class="serviceCard">
+            <img src="images/service-3.jpg" alt="Umzugsreinigung mit Abnahme" loading="lazy" />
+            <div>
+              <h3>Umzugsreinigung mit Abnahme</h3>
+              <p class="muted">Übergabe sauber. Stress runter. Risiko runter.</p>
+              <a class="link" href="#kontakt">Angebot anfragen →</a>
+            </div>
+          </article>
+
+          <article class="serviceCard serviceCard--highlight">
+            <img src="images/service-4.jpg" alt="Entrümpelung" loading="lazy" />
+            <div>
+              <h3>Entrümpelung</h3>
+              <p class="muted">Keller, Dachboden, Wohnung, Garage – wir räumen sauber auf.</p>
+              <a class="link" href="#kontakt">Angebot anfragen →</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="b2b">
+          <div>
+            <h3>Für Hausverwaltungen & B2B</h3>
+            <p class="muted">Kurzfristig. Abnahme-orientiert. Weniger Aufwand für euch.</p>
           </div>
-          <p class="note">Apasă <span class="kbd">G</span><span class="kbd">G</span> pentru căutare globală (demo UI).</p>
+          <ul class="checklist">
+            <li>Turnaround bei Übergaben</li>
+            <li>Fixe Ansprechpartner</li>
+            <li>Planbar & termintreu</li>
+          </ul>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- WORKFLOWS: Cum funcționează -->
-      <section id="workflows" class="section container" aria-labelledby="w-title">
-        <h2 id="w-title">Cum funcționează Rivo</h2>
-        <div class="grid two">
-          <article class="card">
-            <h3>1) Definire Prompt</h3>
-            <p class="muted">Scrii ce vrei să obții. Rivo înțelege intenția și propune pașii workflow-ului.</p>
-            <div class="flow" style="margin-top:10px">
-              <div class="flow-step"><span class="dot"></span><div><strong>Exemplu:</strong> „Rezumă rapoartele pe Q3 și trimite email echipei.”</div></div>
-              <div class="flow-step"><span class="dot"></span><div>Parser semantic → identifică colectare date, sinteză, trimitere email.</div></div>
-            </div>
-          </article>
-          <article class="card">
-            <h3>2) Configurare no‑code</h3>
-            <p class="muted">Rivo generează automat pașii. Tu ajustezi parametri, surse și rezultate.</p>
-            <div class="flow" style="margin-top:10px">
-              <div class="flow-step"><span class="dot"></span><div>Conectori: Docs, Sheets, CRM, Email.</div></div>
-              <div class="flow-step"><span class="dot"></span><div>Execuție și validare în timp real, cu preview al output-ului.</div></div>
-            </div>
-          </article>
-          <article class="card">
-            <h3>3) Rulare & Monitorizare</h3>
-            <p class="muted">Pornești fluxul. Vezi log-uri, stări și rezultate, cu alertare automată.</p>
-          </article>
-          <article class="card">
-            <h3>4) Învățare continuă</h3>
-            <p class="muted">Feedback-ul optimizează prompt-urile și pașii, crescând calitatea rezultatelor.</p>
-          </article>
-        </div>
-      </section>
-
-      <!-- EXEMPLE PROMPTS (slider) -->
-      <section id="exemple" class="section container" aria-labelledby="ex-title">
-        <h2 id="ex-title">Exemple de Prompts</h2>
-        <div class="slider" aria-roledescription="carousel">
-          <div class="slides" id="slides">
-            <div class="slide" aria-label="Slide 1">
-              <div class="prompt"><strong>Prompt:</strong> Generează un rezumat săptămânal al vânzărilor și trimite-l echipei.</div>
-              <div class="resp"><strong>Workflow:</strong> Sheets → Analiză AI → Raport → Email.</div>
-            </div>
-            <div class="slide" aria-label="Slide 2">
-              <div class="prompt"><strong>Prompt:</strong> Creează o imagine cu un oraș futurist la apus.</div>
-              <div class="resp"><strong>Rezultat:</strong> 3 variații imagine AI + link descărcare.</div>
-            </div>
-            <div class="slide" aria-label="Slide 3">
-              <div class="prompt"><strong>Prompt:</strong> Analizează sentimentul din recenziile clienților din ultima lună.</div>
-              <div class="resp"><strong>Workflow:</strong> Import CSV → NLP → Dashboard sintetic.</div>
-            </div>
+    <section id="preise" class="section section--soft">
+      <div class="container pricing">
+        <div>
+          <h2>Preise</h2>
+          <p class="muted">Keine Fantasiepreise. Wir kalkulieren fair – basierend auf Aufwand.</p>
+          <div class="chips">
+            <span class="chip">m²</span>
+            <span class="chip">Zustand</span>
+            <span class="chip">Material</span>
+            <span class="chip">Anfahrt</span>
+            <span class="chip">Zeitfenster</span>
           </div>
-          <button class="nav-btn prev" id="prev" aria-label="Anterior">◀</button>
-          <button class="nav-btn next" id="next" aria-label="Următor">▶</button>
         </div>
-      </section>
 
-      <!-- GALERIE (UI + vizual) -->
-      <section id="galerie" class="section container" aria-labelledby="gal-title">
-        <h2 id="gal-title">Galerie</h2>
+        <div class="pricingBox">
+          <h3>Kostenloses Angebot in 60 Sekunden</h3>
+          <p class="muted">Formular ausfüllen oder direkt anrufen.</p>
+          <div class="pricingBox__btns">
+            <a class="btn btn--primary" href="#kontakt">Jetzt Angebot sichern</a>
+            <a class="btn btn--soft" href="tel:+49REPLACE">Anrufen</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="galerie" class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2>Galerie</h2>
+          <p class="muted">Echte Vorher/Nachher-Fotos bringen Vertrauen. Platzhalter bis du sie hast.</p>
+        </div>
+
         <div class="gallery">
-          <figure class="frame"><img alt="Dashboard Rivo" src="https://images.unsplash.com/photo-1551281044-8d8d2aa1a24d?q=80&w=1200&auto=format&fit=crop" /></figure>
-          <figure class="frame"><img alt="Editor Workflow" src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop" /></figure>
-          <figure class="frame"><img alt="Grafic Analitic" src="https://images.unsplash.com/photo-1551281044-8f5f9f63ed73?q=80&w=1200&auto=format&fit=crop" /></figure>
+          <img src="images/gallery-1.jpg" alt="Reinigung Foto 1" loading="lazy" />
+          <img src="images/gallery-2.jpg" alt="Reinigung Foto 2" loading="lazy" />
+          <img src="images/gallery-3.jpg" alt="Reinigung Foto 3" loading="lazy" />
+          <img src="images/gallery-4.jpg" alt="Reinigung Foto 4" loading="lazy" />
+          <img src="images/gallery-5.jpg" alt="Reinigung Foto 5" loading="lazy" />
+          <img src="images/gallery-6.jpg" alt="Reinigung Foto 6" loading="lazy" />
         </div>
-      </section>
-
-      <!-- TESTIMONIALE -->
-      <section class="section container" aria-labelledby="t-title">
-        <h2 id="t-title">Ce spun utilizatorii</h2>
-        <div class="grid three">
-          <article class="card">
-            <p class="quote">„Rivo ne-a automatizat raportarea. Am câștigat ore bune în fiecare săptămână.”</p>
-            <div class="row"><img class="avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop" alt="Avatar"/> <div><strong>Ioana L.</strong><br/><span class="muted">UX Designer</span></div></div>
-          </article>
-          <article class="card">
-            <p class="quote">„Prompt → Workflow → Email – atât de simplu. Echipa e super încântată.”</p>
-            <div class="row"><img class="avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop" alt="Avatar"/> <div><strong>Andrei P.</strong><br/><span class="muted">Manager Operațiuni</span></div></div>
-          </article>
-          <article class="card">
-            <p class="quote">„Integrare cu tool-urile noastre și monitorizare clară. Recomand!”</p>
-            <div class="row"><img class="avatar" src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?q=80&w=200&auto=format&fit=crop" alt="Avatar"/> <div><strong>Marius T.</strong><br/><span class="muted">Director Suport</span></div></div>
-          </article>
-        </div>
-      </section>
-
-      <!-- PREȚURI + TOGGLE -->
-      <section id="preturi" class="section container" aria-labelledby="p-title">
-        <h2 id="p-title">Planuri & Prețuri</h2>
-        <div class="toggle">
-          <span>Plată lunar</span>
-          <div id="billing" class="switch" role="switch" aria-checked="false" tabindex="0"><div class="knob"></div></div>
-          <span>Plată anual (‑20%)</span>
-        </div>
-        <div class="pricing">
-          <article class="card price">
-            <h3>Basic</h3>
-            <p class="money" data-month="€9" data-year="€7">€9</p>
-            <p class="muted">Pentru începători</p>
-            <ul class="muted" style="line-height:1.8">
-              <li>Workflow-uri de bază</li>
-              <li>Conectori populari</li>
-              <li>Suport comunitate</li>
-            </ul>
-            <a class="btn ghost" href="#abonare">Începe</a>
-          </article>
-          <article class="card price featured">
-            <h3>Pro</h3>
-            <p class="money" data-month="€29" data-year="€23">€29</p>
-            <p class="muted">Pentru profesioniști</p>
-            <ul class="muted" style="line-height:1.8">
-              <li>Toți conectorii</li>
-              <li>Execuții nelimitate</li>
-              <li>Monitorizare & alerte</li>
-            </ul>
-            <a class="btn primary" href="#abonare">Alege Pro</a>
-          </article>
-          <article class="card price">
-            <h3>Enterprise</h3>
-            <p class="money" data-month="Contact" data-year="Contact">Contact</p>
-            <p class="muted">Pentru echipe mari</p>
-            <ul class="muted" style="line-height:1.8">
-              <li>SSO, SLA, Onboarding</li>
-              <li>Integrare custom</li>
-              <li>Suport dedicat</li>
-            </ul>
-            <a class="btn ghost" href="#abonare">Contactează-ne</a>
-          </article>
-        </div>
-      </section>
-
-      <!-- FORMULAR abonare / comandă (Netlify Forms) -->
-      <section id="abonare" class="section container" aria-labelledby="a-title">
-        <h2 id="a-title">Înscrie-te în Rivo</h2>
-        <form name="signup" method="POST" data-netlify="true" class="form">
-          <input type="hidden" name="form-name" value="signup" />
-          <label>Nume
-            <input name="name" required />
-          </label>
-          <label>Email
-            <input type="email" name="email" required />
-          </label>
-          <label>Alege plan
-            <select name="plan" required>
-              <option>Basic</option>
-              <option selected>Pro</option>
-              <option>Enterprise</option>
-            </select>
-          </label>
-          <label>Mesaj (opțional)
-            <textarea name="message" rows="4" placeholder="Ex: cerere demo pentru echipă"></textarea>
-          </label>
-          <button class="btn primary" type="submit">Creează contul</button>
-          <p class="muted" style="font-size:13px">Prin trimitere ești de acord cu <a href="#" style="text-decoration:underline">Termenii</a> și <a href="#" style="text-decoration:underline">Politica de confidențialitate</a>.</p>
-        </form>
-      </section>
-    </main>
-
-    <footer class="container" role="contentinfo">
-      <div class="links" aria-label="Legal">
-        <a href="#">Termeni</a>
-        <a href="#">Confidențialitate</a>
-        <a href="#abonare">Contact</a>
       </div>
-      <p style="text-align:center; margin:10px 0 0">© <span id="year"></span> Rivo — Prompts & AI Workflows</p>
-    </footer>
+    </section>
 
-    <script>
-      // YEAR
-      document.getElementById('year').textContent = new Date().getFullYear();
+    <section id="bewertungen" class="section section--soft">
+      <div class="container">
+        <div class="section__head">
+          <h2>Bewertungen</h2>
+          <p class="muted">Echte Stimmen. Keine Märchen.</p>
+        </div>
 
-      // POPUP intrare (1/7 zile)
-      const modal = document.getElementById('entryModal');
-      const closeBtn = document.getElementById('m-close');
-      const last = localStorage.getItem('rivo_modal_ts');
-      const now = Date.now();
-      const WEEK = 7*24*60*60*1000;
-      if(!last || (now - Number(last)) > WEEK){ modal.classList.add('open'); }
-      closeBtn.addEventListener('click', ()=>{ modal.classList.remove('open'); localStorage.setItem('rivo_modal_ts', String(Date.now())); });
-      modal.addEventListener('click', (e)=>{ if(e.target===modal){ closeBtn.click(); } });
+        <div class="reviewsTop">
+          <div class="ratingBox">
+            <div class="ratingBox__big"><span id="avgRating2">—</span> / 5</div>
+            <div class="ratingBox__small"><span id="reviewCount2">—</span> Rezensionen</div>
+          </div>
+          <a class="btn btn--primary" href="#kontakt">Angebot anfragen</a>
+        </div>
 
-      // REVEAL on scroll
-      const sections = [...document.querySelectorAll('.section')];
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('is-visible'); } });
-      },{ threshold:.12 });
-      sections.forEach(s=> io.observe(s));
+        <div class="reviews" id="reviews"></div>
+      </div>
+    </section>
 
-      // HERO fake global search (GG)
-      let gCount = 0; let lastKeyTime = 0;
-      window.addEventListener('keydown', (e)=>{
-        const t = Date.now(); if(t - lastKeyTime > 450) gCount = 0; lastKeyTime = t;
-        if(e.key.toLowerCase()==='g'){ gCount++; if(gCount===2){ alert('Căutare globală (demo) — introduce promptul tău.'); gCount=0; } }
-      });
+    <section id="kontakt" class="section">
+      <div class="container contact">
+        <div>
+          <h2>Kontakt</h2>
+          <p class="muted">Schnellster Weg: Anruf oder WhatsApp. Oder Formular – wir melden uns.</p>
 
-      // SLIDER
-      const slides = document.getElementById('slides');
-      const prev = document.getElementById('prev');
-      const next = document.getElementById('next');
-      let idx = 0; const total = slides.children.length;
-      function go(i){ idx = (i+total)%total; slides.style.transform = `translateX(${-idx*100}%)`; }
-      prev.addEventListener('click', ()=> go(idx-1));
-      next.addEventListener('click', ()=> go(idx+1));
-      let auto = setInterval(()=> go(idx+1), 5000);
-      [prev,next,slides].forEach(el=> el.addEventListener('mouseenter', ()=> clearInterval(auto)));
+          <div class="contactCards">
+            <a class="contactCard" href="tel:+49REPLACE">
+              <div class="contactCard__title">Telefon</div>
+              <div class="contactCard__value">+49 REPLACE</div>
+              <div class="contactCard__meta">Click-to-call</div>
+            </a>
 
-      // PRICING TOGGLE (lunar / anual)
-      const billing = document.getElementById('billing');
-      const monies = document.querySelectorAll('.money');
-      const setMode = (annual)=>{
-        monies.forEach(m=>{ const y=m.getAttribute('data-year'); const mo=m.getAttribute('data-month'); m.textContent = annual? y : mo; });
-        billing.classList.toggle('on', annual); billing.setAttribute('aria-checked', annual? 'true':'false');
-      };
-      billing.addEventListener('click', ()=> setMode(!billing.classList.contains('on')));
-      billing.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); setMode(!billing.classList.contains('on')); }});
+            <a class="contactCard" href="https://wa.me/49REPLACE" rel="noopener">
+              <div class="contactCard__title">WhatsApp</div>
+              <div class="contactCard__value">Chat starten</div>
+              <div class="contactCard__meta">Schnelle Antwort</div>
+            </a>
 
-    </script>
-  </body>
+            <div class="contactCard">
+              <div class="contactCard__title">Einsatzgebiet</div>
+              <div class="contactCard__value">Helmstedt + 100 km</div>
+              <div class="contactCard__meta">z.B. Wolfsburg, Braunschweig, Magdeburg</div>
+            </div>
+          </div>
+
+          <div class="legalLinks">
+            <a class="link" href="impressum.html">Impressum</a>
+            <span class="dot">•</span>
+            <a class="link" href="datenschutz.html">Datenschutz</a>
+          </div>
+        </div>
+
+        <div class="contactForm">
+          <h3>Jetzt kostenloses Angebot sichern</h3>
+          <p class="muted">Fülle kurz aus – wir melden uns schnell.</p>
+
+          <form name="lead-bottom" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="form">
+            <input type="hidden" name="form-name" value="lead-bottom" />
+            <p class="hidden">
+              <label>Don’t fill this out: <input name="bot-field" /></label>
+            </p>
+
+            <label>Name* <input name="fullName" required minlength="2" /></label>
+            <label>Telefon* <input name="phone" required inputmode="tel" /></label>
+            <label>PLZ / Ort* <input name="zipOrCity" required /></label>
+            <label>Service*
+              <select name="service" required>
+                <option value="" disabled selected>Bitte auswählen</option>
+                <option>Grundreinigung</option>
+                <option>Unterhaltsreinigung</option>
+                <option>Büroreinigung</option>
+                <option>Treppenhausreinigung</option>
+                <option>Bauendreinigung</option>
+                <option>Wohnungs-/Hausreinigung</option>
+                <option>Umzugsreinigung mit Abnahme</option>
+                <option>Entrümpelung</option>
+              </select>
+            </label>
+            <label>Nachricht* <textarea name="message" required minlength="10"></textarea></label>
+
+            <button class="btn btn--primary btn--full" type="submit">Angebot anfragen</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div>
+        <div class="footer__brand">REVO Reinigung & Entrümpelung</div>
+        <div class="muted">38350 Helmstedt + Umkreis 100 km</div>
+      </div>
+      <div class="footer__links">
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
 </html>
