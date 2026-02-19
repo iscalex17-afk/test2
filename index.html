@@ -6,816 +6,304 @@
   <title>REVO Reinigung & Entrümpelung | Helmstedt + Umkreis 100 km</title>
   <meta name="description" content="REVO Reinigung & Entrümpelung in Helmstedt + Umkreis 100 km. Schnell. Zuverlässig. Fair. Jetzt anrufen & Angebot sichern." />
   <meta name="robots" content="index,follow" />
-
-  <meta property="og:title" content="REVO Reinigung & Entrümpelung" />
-  <meta property="og:description" content="Reinigung & Entrümpelung in Helmstedt + Umkreis 100 km. Jetzt anrufen & Angebot sichern!" />
-  <meta property="og:type" content="website" />
-  <meta property="og:locale" content="de_DE" />
-
-  <style>
-    :root{
-      --bg:#ffffff;
-      --soft:#f6f8fc;
-      --soft2:#eef3fb;
-      --text:#0b1220;
-      --muted:#5b6b85;
-      --line:rgba(11,18,32,.10);
-      --brand:#0ea5e9;
-      --brand2:#0b6aa6;
-      --ok:#16a34a;
-      --warn:#f59e0b;
-      --shadow: 0 14px 40px rgba(11,18,32,.12);
-      --shadow2: 0 10px 26px rgba(11,18,32,.08);
-      --r: 16px;
-      --r2: 22px;
-      --max: 1120px;
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      color:var(--text);
-      background:
-        radial-gradient(900px 380px at 18% -10%, rgba(14,165,233,.18), transparent 60%),
-        radial-gradient(900px 380px at 95% 0%, rgba(14,165,233,.10), transparent 55%),
-        var(--bg);
-      line-height:1.5;
-    }
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
-
-    .container{max-width:var(--max);margin:0 auto;padding:0 18px}
-    .section{padding:72px 0}
-    .section--soft{background: linear-gradient(180deg, var(--soft), #fff)}
-    .muted{color:var(--muted)}
-    .dot{margin:0 8px;opacity:.7}
-    .link{color:var(--brand2);font-weight:800}
-    .link:hover{text-decoration:underline}
-    .hidden{display:none}
-
-    .skip{position:absolute;left:-999px;top:10px;background:#fff;color:#000;padding:10px 14px;border-radius:12px;border:1px solid var(--line)}
-    .skip:focus{left:10px}
-
-    h1,h2,h3{line-height:1.1;margin:0 0 10px}
-    h1{font-size:clamp(2rem, 4vw, 3.1rem); letter-spacing:-.02em}
-    h2{font-size:clamp(1.6rem, 2.6vw, 2.1rem); letter-spacing:-.01em}
-    .h3{font-size:1.2rem}
-
-    /* Header */
-    .header{
-      position:sticky;top:0;z-index:50;
-      background: rgba(255,255,255,.88);
-      backdrop-filter: blur(10px);
-      border-bottom:1px solid var(--line);
-    }
-    .header__inner{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0}
-    .brand{display:flex;align-items:center;gap:10px}
-    .brand__logo{
-      width:44px;height:44px;border-radius:12px;background:#fff;border:1px solid var(--line);
-      object-fit:contain; box-shadow: 0 8px 26px rgba(11,18,32,.10);
-    }
-    .brand__name{font-weight:950;letter-spacing:.6px}
-    .brand__sub{font-size:.86rem;color:var(--muted);font-weight:700}
-    .nav{display:flex;gap:14px;align-items:center}
-    .nav a{color:var(--muted);font-weight:800;font-size:.95rem}
-    .nav a:hover{color:var(--text)}
-    .header__cta{display:flex;gap:10px}
-
-    /* Buttons */
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:10px 14px;border-radius:14px;
-      border:1px solid var(--line);
-      background:#fff;
-      color:var(--text);
-      font-weight:900;
-      box-shadow: 0 10px 30px rgba(11,18,32,.06);
-      transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
-      cursor:pointer;
-    }
-    .btn:hover{transform:translateY(-1px); box-shadow: var(--shadow2)}
-    .btn--primary{
-      background: linear-gradient(135deg, var(--brand), rgba(14,165,233,.70));
-      color:#fff;
-      border-color: rgba(14,165,233,.40);
-    }
-    .btn--ghost{background: var(--soft)}
-    .btn--soft{background:#fff}
-    .btn--full{width:100%}
-
-    /* Hero */
-    .hero{padding:54px 0 18px}
-    .hero__grid{display:grid;grid-template-columns:1.08fr .92fr;gap:22px;align-items:start}
-    .pill{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:6px 10px;border:1px solid var(--line);border-radius:999px;
-      color:var(--muted);background:#fff;font-weight:800;font-size:.92rem;
-    }
-    .pill::before{content:"";width:9px;height:9px;border-radius:99px;background:var(--ok)}
-    .lead{font-size:1.05rem;color:var(--muted);max-width:58ch}
-    .hero__badges{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
-    .badge{
-      font-size:.92rem;padding:8px 10px;border-radius:999px;
-      border:1px solid var(--line);background:#fff;color:var(--muted);font-weight:800;
-    }
-    .hero__actions{display:flex;gap:10px;margin:18px 0 10px;flex-wrap:wrap}
-
-    .trust{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
-    .trust__item{
-      background:#fff;border:1px solid var(--line);border-radius:var(--r);
-      padding:12px 14px;min-width:160px;box-shadow: 0 10px 30px rgba(11,18,32,.06);
-    }
-    .trust__big{font-size:1.35rem;font-weight:950}
-    .trust__small{font-size:.88rem;color:var(--muted);font-weight:800}
-
-    /* Right side */
-    .heroCard{
-      background:#fff;border:1px solid var(--line);border-radius: var(--r2);
-      box-shadow: var(--shadow); overflow:hidden;
-      position:relative;
-    }
-    .heroCard::before{
-      content:"";
-      position:absolute; inset:-1px;
-      background: radial-gradient(600px 280px at 20% 0%, rgba(14,165,233,.18), transparent 60%);
-      pointer-events:none;
-    }
-    .heroCard__top{padding:18px 18px 0; position:relative}
-    .form{padding:18px;display:grid;gap:12px; position:relative}
-    .form label{display:grid;gap:6px;font-weight:900;font-size:.95rem}
-    .form input,.form select,.form textarea{
-      width:100%;padding:11px 12px;border-radius:14px;border:1px solid var(--line);
-      background:#fff;color:var(--text);outline:none;font-weight:700;
-    }
-    .form textarea{min-height:110px;resize:vertical}
-    .form input:focus,.form select:focus,.form textarea:focus{
-      border-color: rgba(14,165,233,.60);
-      box-shadow: 0 0 0 4px rgba(14,165,233,.18);
-    }
-    .form__meta{display:flex;justify-content:center;gap:8px;font-size:.92rem;color:var(--muted);flex-wrap:wrap}
-
-    /* Angebots-CTA attention */
-    .pulse{
-      animation: pulse 1.6s ease-in-out infinite;
-      box-shadow: 0 0 0 0 rgba(14,165,233,.30);
-    }
-    @keyframes pulse{
-      0%{box-shadow: 0 0 0 0 rgba(14,165,233,.28)}
-      70%{box-shadow: 0 0 0 16px rgba(14,165,233,0)}
-      100%{box-shadow: 0 0 0 0 rgba(14,165,233,0)}
-    }
-
-    /* Visual “background images” (clean, service-themed) */
-    .heroVisual{
-      margin-top:12px;
-      border-radius: var(--r2);
-      overflow:hidden;
-      border:1px solid var(--line);
-      box-shadow: 0 12px 34px rgba(11,18,32,.10);
-      background:
-        radial-gradient(420px 220px at 20% 20%, rgba(14,165,233,.22), transparent 60%),
-        radial-gradient(420px 220px at 90% 10%, rgba(14,165,233,.14), transparent 60%),
-        linear-gradient(135deg, #ffffff, #f3f7ff);
-      position:relative;
-      min-height:220px;
-    }
-    .heroVisual::after{
-      content:"";
-      position:absolute; inset:0;
-      background-image:
-        radial-gradient(circle at 20% 40%, rgba(14,165,233,.18) 0 3px, transparent 4px),
-        radial-gradient(circle at 40% 30%, rgba(14,165,233,.14) 0 3px, transparent 4px),
-        radial-gradient(circle at 70% 60%, rgba(14,165,233,.12) 0 3px, transparent 4px),
-        radial-gradient(circle at 85% 35%, rgba(14,165,233,.10) 0 3px, transparent 4px);
-      opacity:.8;
-      pointer-events:none;
-    }
-    .heroVisual__content{
-      position:relative;
-      padding:18px;
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap:12px;
-      min-height:220px;
-    }
-    .miniCard{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:12px;
-      box-shadow: var(--shadow2);
-      max-width:240px;
-    }
-    .miniCard strong{display:block;font-weight:950}
-    .miniRow{display:flex;gap:8px;align-items:center;color:var(--muted);font-weight:800;margin-top:8px;font-size:.92rem}
-    .dotOk{width:10px;height:10px;border-radius:99px;background:var(--ok)}
-    .dotBlue{width:10px;height:10px;border-radius:99px;background:var(--brand)}
-
-    /* Sections */
-    .section__head{margin-bottom:22px}
-
-    /* Services */
-    .services{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:12px;
-    }
-    .serviceCard{
-      display:flex; gap:14px; align-items:flex-start;
-      background:#fff;border:1px solid var(--line);border-radius: var(--r2);
-      padding:14px; box-shadow: 0 10px 26px rgba(11,18,32,.06);
-    }
-    .serviceIcon{
-      width:54px;height:54px;border-radius:18px;
-      border:1px solid rgba(14,165,233,.25);
-      background:
-        radial-gradient(220px 120px at 20% 20%, rgba(14,165,233,.25), transparent 60%),
-        linear-gradient(135deg, #fff, var(--soft));
-      display:grid; place-items:center;
-      flex:0 0 auto;
-    }
-    .serviceCard--highlight{border-color: rgba(14,165,233,.35)}
-    .serviceCard h3{margin:0 0 6px}
-
-    /* B2B box */
-    .b2b{
-      margin-top:18px;
-      padding:18px;
-      border-radius: var(--r2);
-      border:1px solid rgba(14,165,233,.22);
-      background: linear-gradient(135deg, rgba(14,165,233,.12), #fff);
-      display:flex;align-items:center;justify-content:space-between;gap:14px;
-    }
-    .checklist{margin:0;padding-left:18px;color:var(--muted);font-weight:800}
-    .checklist li{margin:4px 0}
-
-    /* Pricing */
-    .pricing{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
-    .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
-    .chip{
-      padding:8px 10px;border-radius:999px;border:1px solid var(--line);
-      background:#fff;color:var(--muted);font-weight:900;
-    }
-    .pricingBox{
-      min-width:320px;background:#fff;border:1px solid var(--line);
-      border-radius: var(--r2);padding:16px;box-shadow: var(--shadow);
-    }
-    .pricingBox__btns{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
-
-    /* Gallery (simple clean tiles) */
-    .gallery{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:10px;
-    }
-    .gTile{
-      height:190px;border-radius:18px;border:1px solid var(--line);
-      box-shadow: 0 10px 26px rgba(11,18,32,.06);
-      background:
-        radial-gradient(260px 180px at 20% 20%, rgba(14,165,233,.18), transparent 60%),
-        radial-gradient(260px 180px at 90% 10%, rgba(14,165,233,.10), transparent 55%),
-        linear-gradient(135deg, #fff, var(--soft));
-      position:relative;
-      overflow:hidden;
-    }
-    .gTile::after{
-      content:"";
-      position:absolute; inset:-30%;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.75), transparent 55%);
-      transform: rotate(10deg);
-      opacity:.7;
-    }
-    .gLabel{
-      position:absolute; left:12px; bottom:12px;
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:999px;
-      padding:6px 10px;
-      font-weight:950;
-      font-size:.9rem;
-      color:var(--muted);
-    }
-
-    /* Reviews */
-    .reviewsTop{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:14px}
-    .ratingBox{
-      padding:14px 16px;border-radius: var(--r2);
-      border:1px solid var(--line);background:#fff;box-shadow: 0 10px 26px rgba(11,18,32,.06);
-    }
-    .ratingBox__big{font-size:1.4rem;font-weight:950}
-    .ratingBox__small{color:var(--muted);font-size:.92rem;font-weight:900}
-    .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-    .review{
-      border:1px solid var(--line);background:#fff;border-radius: var(--r2);
-      padding:14px;box-shadow: 0 10px 26px rgba(11,18,32,.06);
-    }
-    .review__top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
-    .review__name{font-weight:950}
-    .review__meta{color:var(--muted);font-size:.9rem;font-weight:800}
-    .stars{letter-spacing:1px;color:var(--warn);font-weight:900}
-
-    /* Contact */
-    .contact{display:grid;grid-template-columns:1.05fr .95fr;gap:16px}
-    .contactCards{display:grid;gap:10px;margin-top:12px}
-    .contactCard{
-      display:block;padding:14px;border-radius: var(--r2);
-      border:1px solid var(--line);background:#fff;box-shadow: 0 10px 26px rgba(11,18,32,.06);
-    }
-    .contactCard__title{color:var(--muted);font-size:.92rem;font-weight:900}
-    .contactCard__value{font-weight:950;font-size:1.05rem;margin-top:2px}
-    .contactCard__meta{color:var(--muted);font-size:.9rem;margin-top:2px;font-weight:800}
-    .legalLinks{margin-top:12px}
-    .contactForm{
-      background:#fff;border:1px solid var(--line);
-      border-radius: var(--r2);box-shadow: var(--shadow);
-      padding:16px;
-    }
-
-    /* Footer */
-    .footer{border-top:1px solid var(--line);padding:22px 0;background:#fff}
-    .footer__inner{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-    .footer__links{display:flex;gap:12px;color:var(--muted);font-weight:900}
-    .footer__brand{font-weight:950}
-
-    /* Responsive */
-    @media (max-width: 980px){
-      .hero__grid, .contact{grid-template-columns:1fr}
-      .pricing{flex-direction:column}
-      .pricingBox{min-width:auto}
-      .nav{display:none}
-      .services{grid-template-columns:1fr}
-      .reviews{grid-template-columns:repeat(2,1fr)}
-      .gallery{grid-template-columns:repeat(2,1fr)}
-    }
-    @media (max-width: 520px){
-      .reviews{grid-template-columns:1fr}
-      .gallery{grid-template-columns:1fr}
-      .header__cta{flex-direction:column}
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-  <a class="skip" href="#main">Zum Inhalt springen</a>
 
-  <header class="header">
-    <div class="container header__inner">
-      <a class="brand" href="#top" aria-label="REVO Startseite">
+<header class="topbar">
+  <div class="container topbar__inner">
+    <a class="brand" href="#top" aria-label="REVO Startseite">
       <img class="brand__logo" src="images/logo.png" alt="REVO Logo" />
+      <div class="brand__text">
+        <div class="brand__name">REVO</div>
+        <div class="brand__sub">Reinigung & Entrümpelung</div>
+      </div>
+    </a>
 
+    <nav class="nav">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#servicepakete">Pakete</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#bewertungen">Bewertungen</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
 
-        <div class="brand__text">
-          <div class="brand__name">REVO</div>
-          <div class="brand__sub">Reinigung & Entrümpelung</div>
+    <div class="topbar__cta">
+      <a class="btn btn--ghost" href="https://wa.me/49REPLACE" rel="noopener">WhatsApp</a>
+      <a class="btn btn--primary" href="tel:+49REPLACE">Jetzt anrufen</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO (ca template-ul din poza) -->
+  <section class="hero">
+    <div class="hero__bg" aria-hidden="true"></div>
+    <div class="container hero__inner">
+      <div class="hero__content">
+        <div class="pill">38350 Helmstedt • Umkreis 100 km</div>
+        <h1>Reinigung & Entrümpelung, <span class="accent">die wirklich abliefert</span>.</h1>
+        <p class="lead">
+          Schnell. Zuverlässig. Fair. Für Privatkunden & Hausverwaltungen.
+          <strong>Jetzt anrufen & Angebot sichern!</strong>
+        </p>
+
+        <div class="hero__actions">
+          <button class="btn btn--primary" id="angebotSichernBtn" type="button">Angebot sichern</button>
+          <a class="btn" href="#leistungen">Leistungen ansehen</a>
         </div>
-      </a>
 
-      <nav class="nav" aria-label="Hauptnavigation">
-        <a href="#leistungen">Leistungen</a>
-        <a href="#preise">Preise</a>
-        <a href="#galerie">Galerie</a>
-        <a href="#bewertungen">Bewertungen</a>
-        <a href="#kontakt">Kontakt</a>
-      </nav>
+        <div class="hero__proof">
+          <div class="proof">
+            <div class="proof__big" id="avgRating">4.8</div>
+            <div class="proof__small">Ø Bewertung</div>
+          </div>
+          <div class="proof">
+            <div class="proof__big" id="reviewCount">6</div>
+            <div class="proof__small">Rezensionen</div>
+          </div>
+          <div class="proof">
+            <div class="proof__big">100%</div>
+            <div class="proof__small">Fokus auf Qualität</div>
+          </div>
+        </div>
+      </div>
 
-      <div class="header__cta">
-        <a class="btn btn--ghost" href="https://wa.me/49REPLACE" rel="noopener">WhatsApp</a>
-        <a class="btn btn--primary" href="tel:+49REPLACE">Jetzt anrufen</a>
+      <!-- Formular Card (landing/offer) -->
+      <div class="offerCard" id="offerCard">
+        <div class="offerCard__head">
+          <h2>In 60 Sekunden zum Angebot</h2>
+          <p>Kurz ausfüllen, wir melden uns schnell.</p>
+        </div>
+
+        <form name="lead" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="form">
+          <input type="hidden" name="form-name" value="lead" />
+          <p class="hidden"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+
+          <label>Name* <input name="fullName" required minlength="2" placeholder="Max Mustermann" /></label>
+          <label>Telefon* <input name="phone" required inputmode="tel" placeholder="0151 12345678" /></label>
+          <label>PLZ / Ort* <input name="zipOrCity" required placeholder="38350 Helmstedt" /></label>
+
+          <label>Service*
+            <select name="service" required>
+              <option value="" disabled selected>Bitte auswählen</option>
+              <option>Grundreinigung</option>
+              <option>Unterhaltsreinigung</option>
+              <option>Büroreinigung</option>
+              <option>Treppenhausreinigung</option>
+              <option>Bauendreinigung</option>
+              <option>Wohnungs-/Hausreinigung</option>
+              <option>Umzugsreinigung mit Abnahme</option>
+              <option>Entrümpelung</option>
+            </select>
+          </label>
+
+          <label>Nachricht* <textarea name="message" required minlength="10" placeholder="Kurz beschreiben: Größe, Zustand, Terminwunsch…"></textarea></label>
+
+          <button class="btn btn--primary btn--full" type="submit">Angebot anfragen</button>
+
+          <div class="form__meta">
+            <a href="tel:+49REPLACE">Oder direkt anrufen</a><span class="dot">•</span>
+            <a href="https://wa.me/49REPLACE" rel="noopener">WhatsApp schreiben</a>
+          </div>
+        </form>
       </div>
     </div>
-  </header>
+  </section>
 
-  <main id="main">
-    <section id="top" class="hero">
-      <div class="container hero__grid">
-        <div>
-          <p class="pill">38350 Helmstedt • Umkreis 100 km</p>
-          <h1>Reinigung & Entrümpelung, die wirklich abliefert.</h1>
-          <p class="lead">
-            Schnell. Zuverlässig. Fair. Für Privatkunden & Hausverwaltungen.
-            <strong>Jetzt anrufen & Angebot sichern!</strong>
-          </p>
+  <!-- FEATURE ROW (exact ca template) -->
+  <section class="features">
+    <div class="container features__grid">
+      <article class="feature">
+        <div class="feature__icon">✓</div>
+        <h3>Sauber & gründlich</h3>
+        <p>Detailfokus statt “schnell schnell”.</p>
+      </article>
 
-          <div class="hero__badges">
-            <span class="badge">Kurzfristige Termine</span>
-            <span class="badge">Abnahme-ready</span>
-            <span class="badge">Sauber & strukturiert</span>
-          </div>
+      <article class="feature">
+        <div class="feature__icon">⚡</div>
+        <h3>Kurzfristige Termine</h3>
+        <p>Wenn’s brennt, sind wir da.</p>
+      </article>
 
-          <div class="hero__actions">
-            <button class="btn btn--primary" id="angebotBtn" type="button">Angebot sichern</button>
-            <a class="btn btn--soft" href="#leistungen">Leistungen ansehen</a>
-          </div>
+      <article class="feature">
+        <div class="feature__icon">🏢</div>
+        <h3>B2B & Hausverwaltung</h3>
+        <p>Planbar. Termintreu. Abnahme-ready.</p>
+      </article>
 
-          <div class="trust">
-            <div class="trust__item">
-              <div class="trust__big" id="avgRating">—</div>
-              <div class="trust__small">Ø Bewertung</div>
-            </div>
-            <div class="trust__item">
-              <div class="trust__big" id="reviewCount">—</div>
-              <div class="trust__small">Rezensionen</div>
-            </div>
-            <div class="trust__item">
-              <div class="trust__big">100%</div>
-              <div class="trust__small">Fokus auf Qualität</div>
-            </div>
-          </div>
-        </div>
+      <article class="feature">
+        <div class="feature__icon">📦</div>
+        <h3>Entrümpelung</h3>
+        <p>Keller, Dachboden, Wohnung, Garage.</p>
+      </article>
+    </div>
+  </section>
 
-        <div>
-          <div class="heroCard" id="kontaktCard">
-            <div class="heroCard__top">
-              <h2 class="h3">In 60 Sekunden zum Angebot</h2>
-              <p class="muted">Kurz ausfüllen, wir melden uns schnell.</p>
-            </div>
-
-            <!-- Netlify Forms -->
-            <form name="lead" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="form">
-              <input type="hidden" name="form-name" value="lead" />
-              <p class="hidden">
-                <label>Don’t fill this out: <input name="bot-field" /></label>
-              </p>
-
-              <label>
-                Name*
-                <input name="fullName" required minlength="2" placeholder="Max Mustermann" />
-              </label>
-
-              <label>
-                Telefon*
-                <input name="phone" required placeholder="0151 12345678" inputmode="tel" />
-              </label>
-
-              <label>
-                PLZ / Ort*
-                <input name="zipOrCity" required placeholder="38350 Helmstedt" />
-              </label>
-
-              <label>
-                Service*
-                <select name="service" required>
-                  <option value="" disabled selected>Bitte auswählen</option>
-                  <option>Grundreinigung</option>
-                  <option>Unterhaltsreinigung</option>
-                  <option>Büroreinigung</option>
-                  <option>Treppenhausreinigung</option>
-                  <option>Bauendreinigung</option>
-                  <option>Wohnungs-/Hausreinigung</option>
-                  <option>Umzugsreinigung mit Abnahme</option>
-                  <option>Entrümpelung</option>
-                </select>
-              </label>
-
-              <label>
-                Nachricht*
-                <textarea name="message" required minlength="10" placeholder="Kurz beschreiben: Größe, Zustand, Terminwunsch…"></textarea>
-              </label>
-
-              <label>
-                Wunschtermin (optional)
-                <input name="preferredDate" placeholder="z.B. Freitag, 10:00" />
-              </label>
-
-              <button class="btn btn--primary btn--full" type="submit">Angebot anfragen</button>
-
-              <div class="form__meta">
-                <a class="link" href="tel:+49REPLACE">Oder direkt anrufen</a>
-                <span class="dot">•</span>
-                <a class="link" href="https://wa.me/49REPLACE" rel="noopener">WhatsApp schreiben</a>
-              </div>
-            </form>
-          </div>
-
-          <div class="heroVisual" aria-hidden="true">
-            <div class="heroVisual__content">
-              <div class="miniCard">
-                <strong>Sauber. Schnell. Strukturiert.</strong>
-                <div class="miniRow"><span class="dotOk"></span> Abnahme-ready</div>
-                <div class="miniRow"><span class="dotBlue"></span> Kurzfristige Termine</div>
-              </div>
-              <div class="miniCard">
-                <strong>Helmstedt + 100 km</strong>
-                <div class="miniRow">Wolfsburg • Braunschweig • Magdeburg</div>
-              </div>
-            </div>
-          </div>
-        </div>
+  <!-- LEISTUNGEN -->
+  <section id="leistungen" class="section">
+    <div class="container">
+      <div class="section__head">
+        <h2>Leistungen</h2>
+        <p>Wir lösen Probleme – nicht nur „putzen“.</p>
       </div>
-    </section>
 
-    <section id="leistungen" class="section">
-      <div class="container">
-        <div class="section__head">
-          <h2>Leistungen</h2>
-          <p class="muted">Wir lösen Probleme – nicht nur “putzen”. Sauber, schnell, zuverlässig.</p>
-        </div>
-
-        <div class="services">
-          <article class="serviceCard">
-            <div class="serviceIcon" aria-hidden="true">
-              <!-- sparkle icon -->
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-                <path d="M12 2l1.2 4.2L17.5 8l-4.3 1.8L12 14l-1.2-4.2L6.5 8l4.3-1.8L12 2z" fill="rgba(14,165,233,.9)"/>
-                <path d="M19 12l.8 2.8L22 16l-2.2.9L19 20l-.8-3.1L16 16l2.2-1.2L19 12z" fill="rgba(14,165,233,.55)"/>
-              </svg>
-            </div>
-            <div>
-              <h3>Grundreinigung</h3>
-              <p class="muted">Für Neustart-Feeling: Küche, Bad, Böden, Details.</p>
-              <button class="link" data-jump="kontakt" type="button">Angebot anfragen →</button>
-            </div>
-          </article>
-
-          <article class="serviceCard">
-            <div class="serviceIcon" aria-hidden="true">
-              <!-- office icon -->
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-                <path d="M4 21V3h10v6h6v12H4z" stroke="rgba(11,106,166,.9)" stroke-width="2"/>
-                <path d="M7 8h4M7 12h4M7 16h10" stroke="rgba(14,165,233,.9)" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div>
-              <h3>Büroreinigung</h3>
-              <p class="muted">Professionell, diskret, zuverlässig. Für Teams, die liefern müssen.</p>
-              <button class="link" data-jump="kontakt" type="button">Angebot anfragen →</button>
-            </div>
-          </article>
-
-          <article class="serviceCard">
-            <div class="serviceIcon" aria-hidden="true">
-              <!-- moving/keys icon -->
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-                <path d="M10 14a4 4 0 1 1 2.8-6.8" stroke="rgba(11,106,166,.9)" stroke-width="2" stroke-linecap="round"/>
-                <path d="M13 11l8-8 2 2-8 8h-2v2h-2v-2h2v-2h2z" fill="rgba(14,165,233,.35)" stroke="rgba(14,165,233,.9)" stroke-width="1.5"/>
-              </svg>
-            </div>
-            <div>
-              <h3>Umzugsreinigung mit Abnahme</h3>
-              <p class="muted">Übergabe sauber. Stress runter. Risiko runter.</p>
-              <button class="link" data-jump="kontakt" type="button">Angebot anfragen →</button>
-            </div>
-          </article>
-
-          <article class="serviceCard serviceCard--highlight">
-            <div class="serviceIcon" aria-hidden="true">
-              <!-- box icon -->
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-                <path d="M3 7l9-4 9 4v10l-9 4-9-4V7z" stroke="rgba(11,106,166,.9)" stroke-width="2" />
-                <path d="M3 7l9 4 9-4" stroke="rgba(14,165,233,.9)" stroke-width="2" />
-                <path d="M12 11v10" stroke="rgba(14,165,233,.9)" stroke-width="2" />
-              </svg>
-            </div>
-            <div>
-              <h3>Entrümpelung</h3>
-              <p class="muted">Keller, Dachboden, Wohnung, Garage – wir räumen sauber auf.</p>
-              <button class="link" data-jump="kontakt" type="button">Angebot anfragen →</button>
-            </div>
-          </article>
-        </div>
-
-        <div class="b2b">
+      <div class="services">
+        <article class="serviceCard">
+          <img src="images/service-1.jpg" alt="Grundreinigung" loading="lazy" />
           <div>
-            <h3>Für Hausverwaltungen & B2B</h3>
-            <p class="muted">Kurzfristig. Abnahme-orientiert. Weniger Aufwand für euch.</p>
+            <h3>Grundreinigung</h3>
+            <p>Für Neustart-Feeling: Küche, Bad, Böden, Details.</p>
+            <button class="linkBtn" data-scroll="offerCard" type="button">Angebot anfragen →</button>
           </div>
-          <ul class="checklist">
-            <li>Turnaround bei Übergaben</li>
-            <li>Fixe Ansprechpartner</li>
+        </article>
+
+        <article class="serviceCard">
+          <img src="images/service-2.jpg" alt="Büroreinigung" loading="lazy" />
+          <div>
+            <h3>Büroreinigung</h3>
+            <p>Professionell, diskret, zuverlässig.</p>
+            <button class="linkBtn" data-scroll="offerCard" type="button">Angebot anfragen →</button>
+          </div>
+        </article>
+
+        <article class="serviceCard">
+          <img src="images/service-3.jpg" alt="Umzugsreinigung mit Abnahme" loading="lazy" />
+          <div>
+            <h3>Umzugsreinigung mit Abnahme</h3>
+            <p>Übergabe sauber. Stress runter. Risiko runter.</p>
+            <button class="linkBtn" data-scroll="offerCard" type="button">Angebot anfragen →</button>
+          </div>
+        </article>
+
+        <article class="serviceCard serviceCard--highlight">
+          <img src="images/service-4.jpg" alt="Entrümpelung" loading="lazy" />
+          <div>
+            <h3>Entrümpelung</h3>
+            <p>Keller, Dachboden, Wohnung, Garage – wir räumen sauber auf.</p>
+            <button class="linkBtn" data-scroll="offerCard" type="button">Angebot anfragen →</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAKETE -->
+  <section id="servicepakete" class="section section--soft">
+    <div class="container">
+      <div class="section__head">
+        <h2>Pakete</h2>
+        <p>Fair kalkuliert. Transparent. Ohne Märchen.</p>
+      </div>
+
+      <div class="packages">
+        <article class="package">
+          <h3>Basic</h3>
+          <ul>
+            <li>Kurzer Einsatz</li>
+            <li>1–2 Räume</li>
+            <li>Ideal für Auffrischung</li>
+          </ul>
+          <button class="btn btn--primary btn--full" data-scroll="offerCard" type="button">Angebot sichern</button>
+        </article>
+
+        <article class="package package--best">
+          <div class="tag">Beliebt</div>
+          <h3>Standard</h3>
+          <ul>
+            <li>Wohnung / Haus</li>
+            <li>Gründlich + Details</li>
+            <li>Perfekt vor Besuch / Übergabe</li>
+          </ul>
+          <button class="btn btn--primary btn--full" data-scroll="offerCard" type="button">Angebot sichern</button>
+        </article>
+
+        <article class="package">
+          <h3>B2B / Abnahme</h3>
+          <ul>
+            <li>Büro / Treppenhaus</li>
+            <li>Abnahme-ready</li>
             <li>Planbar & termintreu</li>
           </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="preise" class="section section--soft">
-      <div class="container pricing">
-        <div>
-          <h2>Preise</h2>
-          <p class="muted">Keine Fantasiepreise. Wir kalkulieren fair – basierend auf Aufwand.</p>
-          <div class="chips">
-            <span class="chip">m²</span>
-            <span class="chip">Zustand</span>
-            <span class="chip">Material</span>
-            <span class="chip">Anfahrt</span>
-            <span class="chip">Zeitfenster</span>
-          </div>
-        </div>
-
-        <div class="pricingBox">
-          <h3>Kostenloses Angebot in 60 Sekunden</h3>
-          <p class="muted">Formular ausfüllen oder direkt anrufen.</p>
-          <div class="pricingBox__btns">
-            <button class="btn btn--primary" id="angebotBtn2" type="button">Jetzt Angebot sichern</button>
-            <a class="btn btn--ghost" href="tel:+49REPLACE">Anrufen</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="galerie" class="section">
-      <div class="container">
-        <div class="section__head">
-          <h2>Galerie</h2>
-          <p class="muted">Platzhalter bis du echte Vorher/Nachher-Fotos hast.</p>
-        </div>
-
-        <div class="gallery">
-          <div class="gTile"><div class="gLabel">Küche</div></div>
-          <div class="gTile"><div class="gLabel">Bad</div></div>
-          <div class="gTile"><div class="gLabel">Büro</div></div>
-          <div class="gTile"><div class="gLabel">Treppenhaus</div></div>
-          <div class="gTile"><div class="gLabel">Abnahme</div></div>
-          <div class="gTile"><div class="gLabel">Entrümpelung</div></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="bewertungen" class="section section--soft">
-      <div class="container">
-        <div class="section__head">
-          <h2>Bewertungen</h2>
-          <p class="muted">Echte Stimmen. Keine Märchen.</p>
-        </div>
-
-        <div class="reviewsTop">
-          <div class="ratingBox">
-            <div class="ratingBox__big"><span id="avgRating2">—</span> / 5</div>
-            <div class="ratingBox__small"><span id="reviewCount2">—</span> Rezensionen</div>
-          </div>
-          <button class="btn btn--primary" id="angebotBtn3" type="button">Angebot anfragen</button>
-        </div>
-
-        <div class="reviews" id="reviews"></div>
-      </div>
-    </section>
-
-    <section id="kontakt" class="section">
-      <div class="container contact">
-        <div>
-          <h2>Kontakt</h2>
-          <p class="muted">Schnellster Weg: Anruf oder WhatsApp. Oder Formular – wir melden uns.</p>
-
-          <div class="contactCards">
-            <a class="contactCard" href="tel:+49REPLACE">
-              <div class="contactCard__title">Telefon</div>
-              <div class="contactCard__value">+49 REPLACE</div>
-              <div class="contactCard__meta">Click-to-call</div>
-            </a>
-
-            <a class="contactCard" href="https://wa.me/49REPLACE" rel="noopener">
-              <div class="contactCard__title">WhatsApp</div>
-              <div class="contactCard__value">Chat starten</div>
-              <div class="contactCard__meta">Schnelle Antwort</div>
-            </a>
-
-            <div class="contactCard">
-              <div class="contactCard__title">Einsatzgebiet</div>
-              <div class="contactCard__value">38350 Helmstedt + 100 km</div>
-              <div class="contactCard__meta">z.B. Wolfsburg, Braunschweig, Magdeburg</div>
-            </div>
-          </div>
-
-          <div class="legalLinks">
-            <!-- Static placeholders; you can add extra pages later -->
-            <span class="muted">Impressum & Datenschutz kannst du später ergänzen.</span>
-          </div>
-        </div>
-
-        <div class="contactForm" id="kontaktForm">
-          <h3>Jetzt kostenloses Angebot sichern</h3>
-          <p class="muted">Fülle kurz aus – wir melden uns schnell.</p>
-
-          <form name="lead-bottom" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="form">
-            <input type="hidden" name="form-name" value="lead-bottom" />
-            <p class="hidden">
-              <label>Don’t fill this out: <input name="bot-field" /></label>
-            </p>
-
-            <label>Name* <input name="fullName" required minlength="2" /></label>
-            <label>Telefon* <input name="phone" required inputmode="tel" /></label>
-            <label>PLZ / Ort* <input name="zipOrCity" required /></label>
-            <label>Service*
-              <select name="service" required>
-                <option value="" disabled selected>Bitte auswählen</option>
-                <option>Grundreinigung</option>
-                <option>Unterhaltsreinigung</option>
-                <option>Büroreinigung</option>
-                <option>Treppenhausreinigung</option>
-                <option>Bauendreinigung</option>
-                <option>Wohnungs-/Hausreinigung</option>
-                <option>Umzugsreinigung mit Abnahme</option>
-                <option>Entrümpelung</option>
-              </select>
-            </label>
-            <label>Nachricht* <textarea name="message" required minlength="10"></textarea></label>
-
-            <button class="btn btn--primary btn--full" type="submit">Angebot anfragen</button>
-          </form>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="container footer__inner">
-      <div>
-        <div class="footer__brand">REVO Reinigung & Entrümpelung</div>
-        <div class="muted">38350 Helmstedt + Umkreis 100 km</div>
-      </div>
-      <div class="footer__links">
-        <a href="#top">Nach oben</a>
-        <a href="#kontakt">Kontakt</a>
+          <button class="btn btn--primary btn--full" data-scroll="offerCard" type="button">Angebot sichern</button>
+        </article>
       </div>
     </div>
-  </footer>
+  </section>
 
-  <script>
-    // --- Reviews (local, no external files) ---
-    const REVIEWS = [
-      { name:"M. Krüger", stars:5, city:"Helmstedt", date:"2026-02-10", text:"Schnell reagiert, pünktlich da, Ergebnis top. Genau so muss es laufen." },
-      { name:"S. Neumann", stars:5, city:"Wolfsburg", date:"2026-01-28", text:"Umzugsreinigung mit Abnahme – ohne Stress. Sehr gründlich." },
-      { name:"Hausverwaltung B.", stars:5, city:"Braunschweig", date:"2026-01-17", text:"Zuverlässig, sauber, termintreu. Kommunikation professionell." },
-      { name:"T. Brandt", stars:4, city:"Königslutter", date:"2026-01-05", text:"Gute Arbeit, fairer Preis. Würde wieder buchen." },
-      { name:"A. Weber", stars:5, city:"Schöningen", date:"2025-12-18", text:"Entrümpelung im Keller – schnell erledigt und sauber hinterlassen." },
-      { name:"N. Richter", stars:5, city:"Gifhorn", date:"2025-12-04", text:"Büro wurde richtig sauber. Sehr angenehm und diskret." }
-    ];
+  <!-- GALERIE -->
+  <section id="galerie" class="section">
+    <div class="container">
+      <div class="section__head">
+        <h2>Galerie</h2>
+        <p>Echte Fotos verkaufen. Platzhalter bis du sie hast.</p>
+      </div>
 
-    function starString(n){
-      const full="★★★★★", empty="☆☆☆☆☆";
-      return full.slice(0,n) + empty.slice(0,5-n);
-    }
-    function formatDate(iso){
-      const d=new Date(iso);
-      return d.toLocaleDateString("de-DE",{day:"2-digit",month:"2-digit",year:"numeric"});
-    }
+      <div class="gallery">
+        <img src="images/gallery-1.jpg" alt="Galerie 1" loading="lazy" />
+        <img src="images/gallery-2.jpg" alt="Galerie 2" loading="lazy" />
+        <img src="images/gallery-3.jpg" alt="Galerie 3" loading="lazy" />
+        <img src="images/gallery-4.jpg" alt="Galerie 4" loading="lazy" />
+      </div>
+    </div>
+  </section>
 
-    function renderReviews(){
-      const count = REVIEWS.length;
-      const avg = count ? (REVIEWS.reduce((s,r)=>s+r.stars,0)/count) : 0;
-      const avgTxt = count ? avg.toFixed(1) : "—";
+  <!-- BEWERTUNGEN -->
+  <section id="bewertungen" class="section section--soft">
+    <div class="container">
+      <div class="section__head">
+        <h2>Bewertungen</h2>
+        <p>Echte Stimmen. Keine Märchen.</p>
+      </div>
 
-      const avgEls = [document.getElementById("avgRating"), document.getElementById("avgRating2")];
-      const countEls = [document.getElementById("reviewCount"), document.getElementById("reviewCount2")];
-      avgEls.forEach(el => el && (el.textContent = avgTxt));
-      countEls.forEach(el => el && (el.textContent = String(count)));
+      <div class="reviews" id="reviews"></div>
+    </div>
+  </section>
 
-      const wrap = document.getElementById("reviews");
-      wrap.innerHTML = REVIEWS
-        .slice().sort((a,b)=> new Date(b.date) - new Date(a.date))
-        .slice(0, 6)
-        .map(r => `
-          <article class="review">
-            <div class="review__top">
-              <div>
-                <div class="review__name">${r.name}</div>
-                <div class="review__meta">${r.city} • ${formatDate(r.date)}</div>
-              </div>
-              <div class="stars" aria-label="${r.stars} von 5 Sternen">${starString(r.stars)}</div>
-            </div>
-            <p class="muted">${r.text}</p>
-          </article>
-        `).join("");
-    }
+  <!-- KONTAKT -->
+  <section id="kontakt" class="section">
+    <div class="container contact">
+      <div>
+        <h2>Kontakt</h2>
+        <p>Schnellster Weg: Anruf oder WhatsApp.</p>
 
-    // --- CTA jump: Angebot sichern -> scroll + pulse highlight ---
-    function jumpToForm(){
-      const card = document.getElementById("kontaktCard");
-      const firstInput = card.querySelector("input[name='fullName']");
-      card.scrollIntoView({behavior:"smooth", block:"center"});
-      card.classList.add("pulse");
-      setTimeout(()=>card.classList.remove("pulse"), 4200);
-      setTimeout(()=>firstInput && firstInput.focus(), 650);
-    }
+        <div class="contactCards">
+          <a class="contactCard" href="tel:+49REPLACE">
+            <div class="k">Telefon</div><div class="v">+49 REPLACE</div><div class="m">Click-to-call</div>
+          </a>
+          <a class="contactCard" href="https://wa.me/49REPLACE" rel="noopener">
+            <div class="k">WhatsApp</div><div class="v">Chat starten</div><div class="m">Schnelle Antwort</div>
+          </a>
+          <div class="contactCard">
+            <div class="k">Einsatzgebiet</div><div class="v">Helmstedt + 100 km</div><div class="m">WOB • BS • MD</div>
+          </div>
+        </div>
+      </div>
 
-    document.addEventListener("DOMContentLoaded", ()=>{
-      renderReviews();
-      document.getElementById("angebotBtn")?.addEventListener("click", jumpToForm);
-      document.getElementById("angebotBtn2")?.addEventListener("click", jumpToForm);
-      document.getElementById("angebotBtn3")?.addEventListener("click", jumpToForm);
+      <div class="contact__cta">
+        <h3>Jetzt Angebot sichern</h3>
+        <p>Ein Klick – Formular ausfüllen – fertig.</p>
+        <button class="btn btn--primary btn--full" data-scroll="offerCard" type="button">Zum Formular</button>
+      </div>
+    </div>
+  </section>
 
-      document.querySelectorAll("[data-jump='kontakt']").forEach(btn=>{
-        btn.addEventListener("click", jumpToForm);
-      });
-    });
-  </script>
+</main>
 
-  <script>
-    // --- LOGO injection (keeps HTML clean if you replace later) ---
-    // If you want to use a normal file instead: replace DATA_URI_LOGO_HERE with "images/logo.jpg"
-    const LOGO_DATA_URI = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAErA+gDASIAAhEBAxEB/8QAHQAAAQUBAQEAAAAAAAAAAAAABQIDBAYHCAkB/8QARhAAAQMDAgQDBgQEBgEFAAAAAQACEQMEBSExBhJBUWEHInGBkQcjMqGxwdHwFCNSYnKS4RUzQ7LSJDRDc6Lx/8QAGQEBAQEBAQEAAAAAAAAAAAAAAAECAwQF/8QAIxEBAQEBAAICAgMBAAAAAAAAAAERAhIhMQQTQVEiMmGBof/aAAwDAQACEQMRAD8A/f8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"; 
-    // NOTE: This is intentionally truncated for chat safety/size.
-    // Replace with your file logo for best result:
-    // In HTML: <img class="brand__logo" src="images/logo.jpg" ... >
-    // Easiest: set image src now:
-    const logoImg = document.querySelector(".brand__logo");
-    if (logoImg && logoImg.getAttribute("src") === "DATA_URI_LOGO_HERE") {
-      // Use file-based logo by default (recommended)
-      logoImg.setAttribute("src", "images/logo.jpg");
-    }
-  </script>
+<footer class="footer">
+  <div class="container footer__inner">
+    <div>
+      <strong>REVO Reinigung & Entrümpelung</strong>
+      <div class="muted">38350 Helmstedt + Umkreis 100 km</div>
+    </div>
+    <div class="footer__links">
+      <a href="#top">Nach oben</a>
+      <a href="#kontakt">Kontakt</a>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js" defer></script>
 </body>
 </html>
