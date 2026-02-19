@@ -1,294 +1,246 @@
-:root{
-  --bg:#fff;
-  --text:#0b1220;
-  --muted:#5b6b85;
-  --line:rgba(11,18,32,.12);
-  --soft:#f6f8fc;
-  --blue:#0ea5e9;
-  --blue2:#0b6aa6;
-  --shadow:0 16px 50px rgba(11,18,32,.12);
-  --shadow2:0 10px 26px rgba(11,18,32,.08);
-  --r:16px;
-  --r2:22px;
-  --max:1120px;
-}
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>REVO Reinigung & Entrümpelung | Helmstedt + Umkreis 100 km</title>
+  <meta name="description" content="Reinigung & Entrümpelung in Helmstedt + Umkreis 100 km. Schnell. Zuverlässig. Fair. Jetzt Angebot sichern." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
 
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-  color:var(--text);
-  background:
-    radial-gradient(900px 380px at 18% -10%, rgba(14,165,233,.18), transparent 60%),
-    radial-gradient(900px 380px at 95% 0%, rgba(14,165,233,.10), transparent 55%),
-    var(--bg);
-}
-a{text-decoration:none;color:inherit}
-.container{max-width:var(--max);margin:0 auto;padding:0 18px}
-.section{padding:72px 0}
-.section--soft{background:linear-gradient(180deg,var(--soft),#fff)}
-.muted{color:var(--muted)}
-.dot{margin:0 8px;opacity:.65}
+<header class="topbar">
+  <div class="container topbar__inner">
+    <a class="brand" href="#top" aria-label="REVO Startseite">
+      <img class="brand__logo" src="images/logo.png" alt="REVO Logo" />
+      <div class="brand__text">
+        <div class="brand__name">REVO</div>
+        <div class="brand__sub">Reinigung & Entrümpelung</div>
+      </div>
+    </a>
 
-.topbar{
-  position:sticky;top:0;z-index:50;
-  background:rgba(255,255,255,.88);
-  backdrop-filter: blur(10px);
-  border-bottom:1px solid var(--line);
-}
-.topbar__inner{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0}
-.brand{display:flex;align-items:center;gap:10px}
-.brand__logo{width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:#fff;object-fit:contain;box-shadow:0 8px 20px rgba(11,18,32,.10)}
-.brand__name{font-weight:950;letter-spacing:.5px}
-.brand__sub{font-size:.86rem;color:var(--muted);font-weight:800}
-.nav{display:flex;gap:14px}
-.nav a{color:var(--muted);font-weight:900;font-size:.95rem}
-.nav a:hover{color:var(--text)}
-.topbar__cta{display:flex;gap:10px}
+    <nav class="nav" aria-label="Navigation">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#bewertungen">Bewertungen</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
 
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;
-  padding:10px 14px;border-radius:14px;
-  border:1px solid var(--line);
-  background:#fff;
-  font-weight:950;
-  box-shadow:0 10px 25px rgba(11,18,32,.06);
-  cursor:pointer;
-  transition: transform .12s ease, box-shadow .12s ease;
-}
-.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow2)}
-.btn--primary{
-  background:linear-gradient(135deg,var(--blue),rgba(14,165,233,.65));
-  border-color:rgba(14,165,233,.35);
-  color:#fff;
-}
-.btn--ghost{background:var(--soft)}
-.btn--full{width:100%}
+    <div class="topbar__cta">
+      <a class="btn btn--ghost" href="https://wa.me/49REPLACE" rel="noopener">WhatsApp</a>
+      <a class="btn btn--primary" href="tel:+49REPLACE">Jetzt anrufen</a>
+    </div>
+  </div>
+</header>
 
-.hero{position:relative;min-height:560px}
-.hero__bg{
-  position:absolute;inset:0;
-  background:
-    linear-gradient(90deg, rgba(11,18,32,.80), rgba(11,18,32,.40), rgba(11,18,32,.18)),
-    url("images/hero.jpg");
-  background-size:cover;
-  background-position:center;
-}
-.hero__bg::after{
-  content:"";
-  position:absolute;inset:0;
-  background:radial-gradient(900px 400px at 20% 30%, rgba(14,165,233,.20), transparent 60%);
-}
-.hero__inner{
-  position:relative;
-  padding:56px 0;
-  display:grid;
-  grid-template-columns:1.08fr .92fr;
-  gap:22px;
-  align-items:start;
-}
+<main id="top">
 
-.pill{
-  display:inline-block;
-  padding:7px 11px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.22);
-  background:rgba(255,255,255,.10);
-  color:#fff;
-  font-weight:900;
-  font-size:.92rem;
-}
-.hero h1{margin:12px 0 10px;color:#fff;font-size:clamp(2rem,4vw,3.1rem);letter-spacing:-.02em}
-.accent{color:#bfeaff}
-.lead{color:rgba(255,255,255,.86);font-size:1.05rem;max-width:58ch}
-.hero__actions{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 10px}
+  <!-- HERO SLIDER (exact ca template) -->
+  <section class="hero" aria-label="Hero Slider">
+    <div class="hero__slides" id="slides">
+      <div class="hero__slide is-active" style="background-image:url('images/hero-1.jpg')"></div>
+      <div class="hero__slide" style="background-image:url('images/hero-2.jpg')"></div>
+      <div class="hero__slide" style="background-image:url('images/hero-3.jpg')"></div>
+    </div>
 
-.hero__proof{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
-.proof{
-  min-width:160px;
-  background:rgba(255,255,255,.10);
-  border:1px solid rgba(255,255,255,.18);
-  border-radius:var(--r);
-  padding:12px 14px;
-  color:#fff;
-  backdrop-filter: blur(8px);
-}
-.proof__big{font-size:1.35rem;font-weight:950}
-.proof__small{font-size:.9rem;opacity:.9;font-weight:800}
+    <div class="hero__overlay" aria-hidden="true"></div>
 
-.offerCard{
-  background:#fff;
-  border:1px solid rgba(255,255,255,.25);
-  border-radius:var(--r2);
-  box-shadow:var(--shadow);
-  overflow:hidden;
-}
-.offerCard__head{padding:18px 18px 0}
-.offerCard__head h2{margin:0;font-size:1.25rem}
-.offerCard__head p{margin:8px 0 0;color:var(--muted);font-weight:700}
+    <div class="container hero__content">
+      <div class="hero__kicker">38350 Helmstedt • Umkreis 100 km</div>
 
-.form{padding:18px;display:grid;gap:12px}
-.form label{display:grid;gap:6px;font-weight:950}
-.form input,.form select,.form textarea{
-  width:100%;
-  padding:11px 12px;
-  border-radius:14px;
-  border:1px solid var(--line);
-  background:#fff;
-  font-weight:750;
-  outline:none;
-}
-.form textarea{min-height:110px;resize:vertical}
-.form input:focus,.form select:focus,.form textarea:focus{
-  border-color:rgba(14,165,233,.60);
-  box-shadow:0 0 0 4px rgba(14,165,233,.18);
-}
-.form__meta{display:flex;justify-content:center;gap:8px;color:var(--muted);font-weight:800;flex-wrap:wrap}
-.form__meta a{color:var(--blue2)}
-.hidden{display:none}
-.dot{opacity:.7}
+      <h1 class="hero__title">
+        Reinigung & Entrümpelung <span class="accent">auf Top-Niveau</span>
+      </h1>
 
-.features{background:#fff;border-bottom:1px solid var(--line)}
-.features__grid{
-  padding:26px 0;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:14px;
-}
-.feature{
-  background:#fff;border:1px solid var(--line);border-radius:var(--r);
-  padding:16px;box-shadow:0 10px 22px rgba(11,18,32,.05);
-  text-align:center;
-}
-.feature__icon{
-  width:54px;height:54px;border-radius:16px;
-  margin:0 auto 10px;
-  display:grid;place-items:center;
-  background:linear-gradient(135deg,rgba(14,165,233,.18),#fff);
-  border:1px solid rgba(14,165,233,.25);
-  font-weight:950;color:var(--blue2);
-}
-.feature h3{margin:0 0 6px}
-.feature p{margin:0;color:var(--muted);font-weight:700}
+      <p class="hero__text">
+        Schnell. Zuverlässig. Fair. Für Privatkunden & Hausverwaltungen.
+        <strong>Jetzt Angebot sichern.</strong>
+      </p>
 
-.section__head{margin-bottom:22px}
-.section__head p{margin:8px 0 0;color:var(--muted);font-weight:750}
+      <div class="hero__actions">
+        <button class="btn btn--primary" id="ctaOffer" type="button">Angebot sichern</button>
+        <a class="btn btn--light" href="#leistungen">Leistungen ansehen</a>
+      </div>
 
-.services{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-}
-.serviceCard{
-  display:grid;
-  grid-template-columns:160px 1fr;
-  gap:14px;
-  background:#fff;border:1px solid var(--line);border-radius:var(--r2);
-  padding:14px;box-shadow:0 10px 26px rgba(11,18,32,.06);
-}
-.serviceCard img{
-  width:160px;height:120px;object-fit:cover;
-  border-radius:18px;border:1px solid var(--line);
-  background:var(--soft);
-}
-.serviceCard--highlight{border-color:rgba(14,165,233,.35)}
-.serviceCard h3{margin:0 0 6px}
-.serviceCard p{margin:0 0 10px;color:var(--muted);font-weight:700}
-.linkBtn{background:none;border:none;padding:0;color:var(--blue2);font-weight:950;cursor:pointer}
+      <div class="hero__dots" id="dots" aria-label="Slider Punkte">
+        <button class="dot is-active" type="button" aria-label="Slide 1"></button>
+        <button class="dot" type="button" aria-label="Slide 2"></button>
+        <button class="dot" type="button" aria-label="Slide 3"></button>
+      </div>
+    </div>
 
-.packages{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-}
-.package{
-  background:#fff;border:1px solid var(--line);border-radius:var(--r2);
-  padding:16px;box-shadow:var(--shadow2);
-  position:relative;
-}
-.package--best{border-color:rgba(14,165,233,.35);box-shadow:var(--shadow)}
-.tag{
-  position:absolute;top:14px;right:14px;
-  background:linear-gradient(135deg,var(--blue),rgba(14,165,233,.65));
-  color:#fff;font-weight:950;
-  padding:6px 10px;border-radius:999px;
-}
-.package ul{margin:10px 0 14px;padding-left:18px;color:var(--muted);font-weight:800}
-.package li{margin:6px 0}
+    <button class="arrow arrow--left" id="prev" aria-label="Vorheriger Slide" type="button">‹</button>
+    <button class="arrow arrow--right" id="next" aria-label="Nächster Slide" type="button">›</button>
+  </section>
 
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-}
-.gallery img{
-  width:100%;
-  height:180px;
-  object-fit:cover;
-  border-radius:18px;
-  border:1px solid var(--line);
-  box-shadow:var(--shadow2);
-  background:var(--soft);
-}
+  <!-- 4 FEATURES (exact ca template) -->
+  <section class="features" aria-label="Highlights">
+    <div class="container features__grid">
+      <article class="feature">
+        <div class="feature__icon" aria-hidden="true">🧼</div>
+        <h3>Grundreinigung</h3>
+        <p>Küche, Bad, Böden, Details – gründlich & sauber.</p>
+      </article>
 
-.reviews{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-}
-.review{
-  background:#fff;border:1px solid var(--line);border-radius:var(--r2);
-  padding:14px;box-shadow:var(--shadow2);
-}
-.review__top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
-.review__name{font-weight:950}
-.review__meta{color:var(--muted);font-weight:800;font-size:.9rem}
-.stars{color:#f59e0b;font-weight:950;letter-spacing:1px}
-.review p{margin:10px 0 0;color:var(--muted);font-weight:700}
+      <article class="feature">
+        <div class="feature__icon" aria-hidden="true">🏢</div>
+        <h3>Büroreinigung</h3>
+        <p>Professionell, diskret, zuverlässig – für B2B.</p>
+      </article>
 
-.contact{
-  display:grid;
-  grid-template-columns:1.05fr .95fr;
-  gap:16px;
-  align-items:start;
-}
-.contactCards{display:grid;gap:10px;margin-top:12px}
-.contactCard{
-  display:block;
-  background:#fff;border:1px solid var(--line);border-radius:var(--r2);
-  padding:14px;box-shadow:var(--shadow2);
-}
-.contactCard .k{color:var(--muted);font-weight:900;font-size:.92rem}
-.contactCard .v{font-weight:950;margin-top:2px}
-.contactCard .m{color:var(--muted);font-weight:800;font-size:.9rem;margin-top:2px}
-.contact__cta{
-  background:linear-gradient(135deg,rgba(14,165,233,.14),#fff);
-  border:1px solid rgba(14,165,233,.25);
-  border-radius:var(--r2);
-  padding:16px;
-  box-shadow:var(--shadow2);
-}
-.contact__cta h3{margin:0 0 6px}
-.contact__cta p{margin:0 0 12px;color:var(--muted);font-weight:750}
+      <article class="feature">
+        <div class="feature__icon" aria-hidden="true">🗝️</div>
+        <h3>Abnahme-ready</h3>
+        <p>Umzugsreinigung mit Abnahme – stressfrei übergeben.</p>
+      </article>
 
-.footer{border-top:1px solid var(--line);padding:22px 0;background:#fff}
-.footer__inner{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.footer__links{display:flex;gap:12px;color:var(--muted);font-weight:900}
+      <article class="feature">
+        <div class="feature__icon" aria-hidden="true">📦</div>
+        <h3>Entrümpelung</h3>
+        <p>Keller, Dachboden, Wohnung, Garage – sauber geräumt.</p>
+      </article>
+    </div>
+  </section>
 
-@media (max-width: 980px){
-  .hero__inner,.contact{grid-template-columns:1fr}
-  .nav{display:none}
-  .features__grid{grid-template-columns:repeat(2,1fr)}
-  .services{grid-template-columns:1fr}
-  .packages{grid-template-columns:1fr}
-  .gallery{grid-template-columns:repeat(2,1fr)}
-  .reviews{grid-template-columns:repeat(2,1fr)}
-}
-@media (max-width: 520px){
-  .topbar__cta{flex-direction:column}
-  .reviews{grid-template-columns:1fr}
-  .gallery{grid-template-columns:1fr}
-  .serviceCard{grid-template-columns:1fr}
-  .serviceCard img{width:100%;height:180px}
-}
+  <!-- LEISTUNGEN -->
+  <section id="leistungen" class="section">
+    <div class="container">
+      <div class="section__head">
+        <h2>Leistungen</h2>
+        <p>Wir lösen Probleme – nicht nur „putzen“.</p>
+      </div>
+
+      <div class="serviceGrid">
+        <div class="serviceCard">
+          <h3>Unterhaltsreinigung</h3>
+          <p>Regelmäßig sauber – planbar und stressfrei.</p>
+        </div>
+        <div class="serviceCard">
+          <h3>Treppenhausreinigung</h3>
+          <p>Der erste Eindruck zählt – sauber & termintreu.</p>
+        </div>
+        <div class="serviceCard">
+          <h3>Bauendreinigung</h3>
+          <p>Staub, Schmutz, Rückstände weg – abnahmebereit.</p>
+        </div>
+        <div class="serviceCard">
+          <h3>Wohnungs-/Hausreinigung</h3>
+          <p>Gründlich, strukturiert, mit Blick fürs Detail.</p>
+        </div>
+      </div>
+
+      <div class="ctaBand" id="offerBand">
+        <div>
+          <h3>Kostenloses Angebot in 60 Sekunden</h3>
+          <p>Kurzes Formular – wir melden uns schnell.</p>
+        </div>
+        <button class="btn btn--primary" id="ctaOffer2" type="button">Zum Formular</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIE -->
+  <section id="galerie" class="section section--soft">
+    <div class="container">
+      <div class="section__head">
+        <h2>Galerie</h2>
+        <p>Ersetze Platzhalter später mit echten Vorher/Nachher Fotos.</p>
+      </div>
+
+      <div class="gallery">
+        <img src="images/gallery-1.jpg" alt="Galerie 1" loading="lazy" />
+        <img src="images/gallery-2.jpg" alt="Galerie 2" loading="lazy" />
+        <img src="images/gallery-3.jpg" alt="Galerie 3" loading="lazy" />
+        <img src="images/gallery-4.jpg" alt="Galerie 4" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- BEWERTUNGEN -->
+  <section id="bewertungen" class="section">
+    <div class="container">
+      <div class="section__head">
+        <h2>Bewertungen</h2>
+        <p>Echte Stimmen. Keine Märchen.</p>
+      </div>
+
+      <div class="reviews" id="reviews"></div>
+    </div>
+  </section>
+
+  <!-- KONTAKT + FORMULAR -->
+  <section id="kontakt" class="section section--soft">
+    <div class="container contact">
+      <div>
+        <h2>Kontakt</h2>
+        <p>Helmstedt + 100 km • Privat & Hausverwaltung</p>
+
+        <div class="contactCards">
+          <a class="contactCard" href="tel:+49REPLACE">
+            <div class="k">Telefon</div><div class="v">+49 REPLACE</div><div class="m">Click-to-call</div>
+          </a>
+          <a class="contactCard" href="https://wa.me/49REPLACE" rel="noopener">
+            <div class="k">WhatsApp</div><div class="v">Chat starten</div><div class="m">Schnelle Antwort</div>
+          </a>
+          <div class="contactCard">
+            <div class="k">Einsatzgebiet</div><div class="v">38350 Helmstedt</div><div class="m">+ Umkreis 100 km</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="formCard" id="offerForm">
+        <h3>In 60 Sekunden zum Angebot</h3>
+        <p class="muted">Kurz ausfüllen – wir melden uns schnell.</p>
+
+        <form name="lead" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="form">
+          <input type="hidden" name="form-name" value="lead" />
+          <p class="hidden"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+
+          <label>Name* <input name="fullName" required minlength="2" /></label>
+          <label>Telefon* <input name="phone" required inputmode="tel" /></label>
+          <label>PLZ / Ort* <input name="zipOrCity" required /></label>
+
+          <label>Service*
+            <select name="service" required>
+              <option value="" disabled selected>Bitte auswählen</option>
+              <option>Grundreinigung</option>
+              <option>Unterhaltsreinigung</option>
+              <option>Büroreinigung</option>
+              <option>Treppenhausreinigung</option>
+              <option>Bauendreinigung</option>
+              <option>Wohnungs-/Hausreinigung</option>
+              <option>Umzugsreinigung mit Abnahme</option>
+              <option>Entrümpelung</option>
+            </select>
+          </label>
+
+          <label>Nachricht* <textarea name="message" required minlength="10" placeholder="Größe, Zustand, Terminwunsch…"></textarea></label>
+
+          <button class="btn btn--primary btn--full" type="submit">Angebot anfragen</button>
+          <div class="form__meta">
+            <a href="tel:+49REPLACE">Oder anrufen</a><span class="sep">•</span>
+            <a href="https://wa.me/49REPLACE" rel="noopener">WhatsApp</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <div>
+      <strong>REVO Reinigung & Entrümpelung</strong>
+      <div class="muted">38350 Helmstedt + Umkreis 100 km</div>
+    </div>
+    <div class="footer__links">
+      <a href="#top">Nach oben</a>
+      <a href="#kontakt">Kontakt</a>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js" defer></script>
+</body>
+</html>
